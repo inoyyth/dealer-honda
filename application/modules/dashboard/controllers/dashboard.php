@@ -1,5 +1,5 @@
 <?php     
-class Dashboard extends MX_Controller 
+class Dashboard extends MX_Controller
 {
    /*  $autoload = array(
         'helper'    => array('url', 'form'),
