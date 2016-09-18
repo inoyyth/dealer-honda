@@ -8,9 +8,12 @@ class Dashboard extends MX_Controller
 	
 	 public function __construct() {
         parent::__construct();
+		//set breadcrumb
+		//$this->breadcrumbs->push('Section', '/section');
     }
 	
 	public function index(){
+		
 		$this->load->view('default');
 	}
 }

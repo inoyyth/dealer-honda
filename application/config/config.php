@@ -518,3 +518,5 @@ $config['proxy_ips'] = '';
 $config['modules_locations'] = array(
     APPPATH.'modules/' => '../modules/',
 );
+
+$config['project_title']="Dealer Apps";

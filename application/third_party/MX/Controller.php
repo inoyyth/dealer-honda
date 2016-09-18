@@ -52,6 +52,7 @@ class MX_Controller
 		
 		/* autoload module items */
 		$this->load->_autoloader($this->autoload);
+		$this->breadcrumbs->unshift('Home','/');
 	}
 	
 	public function __get($class) 
