@@ -7,9 +7,7 @@
         </div>-->
         <div class="pull-right">
           <ol class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">DASHBOARD</a></li>
-            <li class="active">Dashboard</li>
+		  <?php echo $this->breadcrumbs->show();?>
           </ol>
         </div>
       </div>
