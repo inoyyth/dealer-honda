@@ -16,18 +16,18 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`dealer_db` /*!40100 DEFAULT CHARACTER S
 
 USE `dealer_db`;
 
-/*Table structure for table `m_motor` */
+/*Table structure for table `m_jabatan` */
 
-DROP TABLE IF EXISTS `m_motor`;
+DROP TABLE IF EXISTS `m_jabatan`;
 
-CREATE TABLE `m_motor` (
-  `no_motor` int(11) NOT NULL AUTO_INCREMENT,
-  `tipe` varchar(75) DEFAULT NULL,
-  `warna` varchar(75) DEFAULT NULL,
-  PRIMARY KEY (`no_motor`)
+CREATE TABLE `m_jabatan` (
+  `no_jabatan` varchar(15) NOT NULL,
+  `jabatan` varchar(100) DEFAULT NULL,
+  `keterangan` text,
+  PRIMARY KEY (`no_jabatan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `m_motor` */
+/*Data for the table `m_jabatan` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
