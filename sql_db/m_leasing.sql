@@ -16,18 +16,19 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`dealer_db` /*!40100 DEFAULT CHARACTER S
 
 USE `dealer_db`;
 
-/*Table structure for table `m_motor` */
+/*Table structure for table `m_leasing` */
 
-DROP TABLE IF EXISTS `m_motor`;
+DROP TABLE IF EXISTS `m_leasing`;
 
-CREATE TABLE `m_motor` (
-  `no_motor` int(11) NOT NULL AUTO_INCREMENT,
-  `tipe` varchar(75) DEFAULT NULL,
-  `warna` varchar(75) DEFAULT NULL,
-  PRIMARY KEY (`no_motor`)
+CREATE TABLE `m_leasing` (
+  `no_leasing` varchar(15) NOT NULL,
+  `leasing` varchar(75) DEFAULT NULL,
+  `alamat` text,
+  `pic` int(11) DEFAULT NULL,
+  PRIMARY KEY (`no_leasing`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `m_motor` */
+/*Data for the table `m_leasing` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
