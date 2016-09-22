@@ -181,6 +181,7 @@
 
 <script src="<?php echo base_url();?>themes/js/jquery-2.1.0.js"></script>
 <script src="<?php echo base_url();?>themes/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url();?>themes/plugins/validation/parsley.min.js"></script>
 <script src="<?php echo base_url();?>themes/js/common-script.js"></script>
 <script src="<?php echo base_url();?>themes/js/jquery.slimscroll.min.js"></script>
 <script src="<?php echo base_url();?>themes/js/jquery.sparkline.js"></script>
@@ -204,6 +205,7 @@
 
 <script src="<?php echo base_url();?>themes/plugins/demo-slider/demo-slider.js"></script>
 <script src="<?php echo base_url();?>themes/plugins/knob/jquery.knob.min.js"></script> 
+
 
 
 
