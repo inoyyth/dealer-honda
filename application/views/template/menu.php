@@ -1,6 +1,5 @@
- <div class="inner">
+<div class="inner">
     <!--\\\\\\\ inner start \\\\\\--><div class="left_nav">
-
       <!--\\\\\\\left_nav start \\\\\\-->
       <div class="search_bar"> <i class="fa fa-search"></i>
         <input name="" type="text" class="search" placeholder="Search Dashboard..." />
@@ -34,7 +33,7 @@
             </ul>
           </li>
           <li> <a href="javascript:void(0);"> <i class="fa fa-users icon"></i> Leasing <span class="plus"><i class="fa fa-plus"></i></span> </a>
-            <ul>
+			<ul>
               <li> <a href="todo.html"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Import Sisa Penagihan</b> </a> </li>
               <li> <a href="task.html"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Invoice Sisa Penagihan</b> </a> </li>
             </ul>
@@ -46,8 +45,6 @@
               <li> <a href="readmail.html"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Sisa Kredit / Piutang</b> </a> </li>
 			  <li> <a href="compose.html"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Stok</b> </a> </li>
             </ul>
-          </li>
-        </ul>
-      </div>
+        </div>
     </div>
     <!--\\\\\\\left_nav end \\\\\\-->

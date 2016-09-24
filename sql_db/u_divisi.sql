@@ -16,18 +16,26 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`dealer_db` /*!40100 DEFAULT CHARACTER S
 
 USE `dealer_db`;
 
-/*Table structure for table `m_motor` */
+/*Table structure for table `u_divisi` */
 
-DROP TABLE IF EXISTS `m_motor`;
+DROP TABLE IF EXISTS `u_divisi`;
 
-CREATE TABLE `m_motor` (
-  `no_motor` int(11) NOT NULL AUTO_INCREMENT,
-  `tipe` varchar(75) DEFAULT NULL,
-  `warna` varchar(75) DEFAULT NULL,
-  PRIMARY KEY (`no_motor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `u_divisi` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `divisi` varchar(50) DEFAULT NULL,
+  `ket_divisi` varchar(200) DEFAULT NULL,
+  `access_divisi` text,
+  `u_create` int(11) DEFAULT NULL,
+  `u_modif` int(11) DEFAULT NULL,
+  `u_delete` int(11) DEFAULT NULL,
+  `u_date_create` datetime DEFAULT NULL,
+  `u_date_modif` datetime DEFAULT NULL,
+  `u_date_delete` datetime DEFAULT NULL,
+  `u_status` varchar(2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
-/*Data for the table `m_motor` */
+/*Data for the table `u_divisi` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

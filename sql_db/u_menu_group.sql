@@ -16,18 +16,30 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`dealer_db` /*!40100 DEFAULT CHARACTER S
 
 USE `dealer_db`;
 
-/*Table structure for table `m_motor` */
+/*Table structure for table `u_menu_group` */
 
-DROP TABLE IF EXISTS `m_motor`;
+DROP TABLE IF EXISTS `u_menu_group`;
 
-CREATE TABLE `m_motor` (
-  `no_motor` int(11) NOT NULL AUTO_INCREMENT,
-  `tipe` varchar(75) DEFAULT NULL,
-  `warna` varchar(75) DEFAULT NULL,
-  PRIMARY KEY (`no_motor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `u_menu_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_group` int(11) DEFAULT NULL,
+  `id_menu` int(11) DEFAULT NULL,
+  `id_account` int(11) DEFAULT NULL,
+  `u_menu_group_access` text,
+  `u_menu_group_status` varchar(3) DEFAULT NULL,
+  `u_create` int(11) DEFAULT NULL,
+  `u_modif` int(11) DEFAULT NULL,
+  `u_delete` int(11) DEFAULT NULL,
+  `u_date_create` datetime NOT NULL,
+  `u_date_modif` datetime NOT NULL,
+  `u_date_delete` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_group` (`id_group`),
+  KEY `id_menu` (`id_menu`),
+  KEY `id_account` (`id_account`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
-/*Data for the table `m_motor` */
+/*Data for the table `u_menu_group` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -1,9 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><?php echo $this->config->item('project_title');?></title>
-<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 
 <link href="<?php echo base_url();?>themes/css/font-awesome.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url();?>themes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -120,9 +116,9 @@
         </div>
 
         <!--<a href="javascript:;" class="toggle-menu menu-right push-body jPushMenuBtn rightbar-switch"><i class="fa fa-comment chat"></i></a>-->
-        
-      </div>
-    </div>
-    <!--\\\\\\\ header top bar end \\\\\\-->
-  </div>
-  <!--\\\\\\\ header end \\\\\\-->
+
+                                        </div>
+                                    </div>
+                                    <!--\\\\\\\ header top bar end \\\\\\-->
+                                </div>
+                                <!--\\\\\\\ header end \\\\\\-->
