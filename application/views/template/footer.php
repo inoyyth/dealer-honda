@@ -214,7 +214,11 @@
 <script src="<?php echo base_url();?>themes/js/side-chats.js"></script>
 <script src="<?php echo base_url();?>themes/js/jquery.slimscroll.min.js"></script>
 <script src="<?php echo base_url();?>themes/plugins/scroll/jquery.nanoscroller.js"></script>
-
+<script>
+	function submit_search(form1){
+		document.getElementById(form1).submit();
+	}
+</script>
 
 
 </body>

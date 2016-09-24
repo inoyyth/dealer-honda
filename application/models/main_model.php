@@ -19,4 +19,12 @@ Class Main_model extends CI_Model{
 			return $this->db->count_all($table);
 		}
 	}
+	
+	public function getall($table,$where,$limit){
+		$this->db->select('*');
+		$this->db->from($table);
+		$this->db->where($where);
+		$this->db->limit($limit);
+		$this->db->get();
+	}
 }

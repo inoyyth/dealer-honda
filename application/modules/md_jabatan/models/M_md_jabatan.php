@@ -16,9 +16,11 @@ Class M_md_jabatan extends CI_Model{
 		return false;
 	}
 	
-	public function getdata($table,$limit,$pg){ 
+	public function getdata($table,$limit,$pg,$like=array()){ 
+		unset($like['page']);
 		$this->db->select("*");
 		$this->db->from($table);
+		$this->db->like($like);
 		$this->db->limit($pg,$limit);
 		return $this->db->get()->result_array();
 	}
