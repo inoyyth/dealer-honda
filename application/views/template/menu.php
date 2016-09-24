@@ -8,7 +8,7 @@
         <ul>
           <li class="left_nav_active theme_border"><a href="javascript:void(0);"><i class="fa fa-home"></i> Master <span class="left_nav_pointer"></span> <span class="plus"><i class="fa fa-plus"></i></span> </a>
             <ul>
-              <li> <a href="<?php echo base_url();?>master-jabatan"> <span>&nbsp;</span> <i class="fa fa-circle theme_color"></i> <b class="theme_color">Master Jabatan</b> </a> </li>
+              <li> <a href="<?php echo base_url();?>master-level"> <span>&nbsp;</span> <i class="fa fa-circle theme_color"></i> <b class="theme_color">Master Level</b> </a> </li>
               <li> <a href="<?php echo base_url();?>master-karyawan"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Master Karyawan</b> </a> </li>
               <li> <a href="<?php echo base_url();?>master-customer"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Master Customer</b> </a> </li>
               <li> <a href="<?php echo base_url();?>master-motor"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Master Motor</b> </a> </li>

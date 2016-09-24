@@ -3,11 +3,12 @@
 		<section class="panel default blue_title h4">
 			<div class="panel-heading">
 				<div class="row">
-					<div class="col-md-6 pull-left">Master Jabatan</div>
+					<div class="col-md-6 pull-left">Master Level
+					</div>
 					<div class="col-md-6 pull-right text-right">
-						<a href="<?php echo base_url();?>master-jabatan-tambah" class="btn btn-primary btn-sm"><i class="fa fa-plus-square"></i> Tambah</a> 
-						<a href="<?php echo base_url('master-jabatan-pdf/?template=table_pdf&name=master_jabatan');?>" target="__blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
-						<a href="<?php echo base_url('master-jabatan-excel/?template=table_excel&name=master_jabatan');?>" target="__blank" class="btn btn-default btn-sm"><i class="fa fa-file-excel-o"></i> Excel</a>
+						<a href="<?php echo base_url();?>master-level-tambah" class="btn btn-primary btn-sm"><i class="fa fa-plus-square"></i> Tambah</a> 
+						<a href="<?php echo base_url('master-level-pdf/?template=table_pdf&name=master_jabatan');?>" target="__blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
+						<a href="<?php echo base_url('master-level-excel/?template=table_excel&name=master_jabatan');?>" target="__blank" class="btn btn-default btn-sm"><i class="fa fa-file-excel-o"></i> Excel</a>
 					</div> 
 				</div>
 			</div>
@@ -17,7 +18,7 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Nama Jabatan</th>
+								<th>Nama Level</th>
 								<th>Keterangan</th>
 								<th>Status</th>
 								<th class="text-center">Action</th>
@@ -35,14 +36,14 @@
 								<td><?php echo $v['keterangan'];?></td>
 								<td><?php echo get_status($v['status']);?></td>
 								<td class="text-center">
-									<a class="btn btn-sm btn-warning" href="<?php echo base_url("master-jabatan-edit-".$v['id']);?>">Edit</a> 
+									<a class="btn btn-sm btn-warning" href="<?php echo base_url("master-level-edit-".$v['id']);?>">Edit</a> 
 									<a class="btn btn-sm btn-danger" href="<?php echo base_url("master-jabatan-delete-".$v['id']);?>" onclick="return confirm('Yakin Hapus Data ?');">Delete</a> 
 								</td>
 							</tr>
 						<?php }} ?>
 						</tbody>
 						<tfoot>
-							<form id="form1" method="post" action="<?php echo base_url('master-jabatan');?>">
+							<form id="form1" method="post" action="<?php echo base_url('master-level');?>">
 							<tr>
 								<td>#</td>
 								<td>
