@@ -7,12 +7,12 @@ class Md_jabatan extends MX_Controller
 		$this->load->model(array('M_md_jabatan'=>'m_jabatan'));
 		$this->load->library('Printpdf');
 		//set breadcrumb
-		$this->breadcrumbs->push('Master Jabatan', '/master-jabatan');
+		$this->breadcrumbs->push('Master Jabatan', '/master-level');
     }
 	
 	public function index(){
 		$data_session = $this->__getSession();
-		$config['base_url'] = base_url().'master-jabatan-page';
+		$config['base_url'] = base_url().'master-level-page';
         $config['total_rows'] = $this->main_model->countdata($this->table,$where=array());
         $config['per_page'] = (!empty($data_session['page'])?$data_session['page']:10);
         $config['uri_segment'] = 2;
@@ -38,12 +38,12 @@ class Md_jabatan extends MX_Controller
 	}
 	
 	function delete($id){
-        if($this->db->delete('jabatan',array('id'=>$id))){
+        if($this->db->delete($this->table,array('id'=>$id))){
             $this->session->set_flashdata('success', 'Data Berhasil Di Hapus !');
         }else{
             $this->session->set_flashdata('error', 'Data Gagal Di Hapus !');
         }
-        redirect("master-jabatan");
+        redirect("master-level");
     }
     
     function save(){
@@ -53,7 +53,7 @@ class Md_jabatan extends MX_Controller
             }else{
                 $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
             }
-            redirect("master-jabatan");
+            redirect("master-level");
         }else{
             show_404();
         }
