@@ -1,7 +1,7 @@
 <?php     
 class Md_jabatan extends MX_Controller
 {
-	var $table = "jabatan";
+	var $table = "m_jabatan";
 	 public function __construct() {
         parent::__construct();
 		$this->load->model(array('M_md_jabatan'=>'m_jabatan'));
@@ -13,7 +13,7 @@ class Md_jabatan extends MX_Controller
 	public function index(){
 		$data_session = $this->__getSession();
 		$config['base_url'] = base_url().'master-jabatan-page';
-        $config['total_rows'] = $this->main_model->countdata('jabatan',$where=array());
+        $config['total_rows'] = $this->main_model->countdata($this->table,$where=array());
         $config['per_page'] = (!empty($data_session['page'])?$data_session['page']:10);
         $config['uri_segment'] = 2;
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0 ;
@@ -32,7 +32,7 @@ class Md_jabatan extends MX_Controller
 	
 	public function edit($id){
 		//var_dump($id);die;
-		$data['detail'] = $this->db->get_where('jabatan',array('id'=>$id))->row_array();
+		$data['detail'] = $this->db->get_where($this->table,array('id'=>$id))->row_array();
 		$data['view'] = 'md_jabatan/edit';
 		$this->load->view('default',$data);
 	}
@@ -79,14 +79,14 @@ class Md_jabatan extends MX_Controller
 	
 	public function print_pdf(){
 		$data['template'] = array("template"=>"md_jabatan/".$_GET['template'],"filename"=>$_GET['name']);
-		$data['list'] = $this->db->get('jabatan')->result_array();
+		$data['list'] = $this->db->get($this->table)->result_array();
 		$this->printpdf->create_pdf($data);
 	}
 	
 	public function print_excel(){
 		 $data['template_excel'] = "md_jabatan/".$_GET['template'];
 		 $data['file_name'] = $_GET['name'];
-		 $data['data'] = $this->db->get('jabatan')->result_array();
+		 $data['data'] = $this->db->get($this->table)->result_array();
 		 $this->load->view('template_excel',$data);
 	}
 	

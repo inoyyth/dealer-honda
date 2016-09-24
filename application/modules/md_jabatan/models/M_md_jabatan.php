@@ -1,5 +1,6 @@
 <?php
 Class M_md_jabatan extends CI_Model{
+	var $table = "m_jabatan";
 	public function save(){
 		$id = $this->input->post('id');
 		$data = array('jabatan'=>$this->input->post('jabatan'),
@@ -7,10 +8,10 @@ Class M_md_jabatan extends CI_Model{
 					  'status'=>$this->input->post('status')
 					  );
 		if(empty($id)){
-			$this->db->insert('jabatan',$data);
+			$this->db->insert($this->table,$data);
 			return true;
 		}else{
-			$this->db->update('jabatan',$data,array('id'=>$id));
+			$this->db->update($this->table,$data,array('id'=>$id));
 			return true;
 		}
 		return false;
