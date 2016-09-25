@@ -64,3 +64,15 @@ $route['master-level-pdf'] = 'md_jabatan/print_pdf';
 $route['master-level-pdf/(:any)'] = 'md_jabatan/print_pdf/$1';
 $route['master-level-excel'] = 'md_jabatan/print_excel';
 $route['master-level-excel/(:any)'] = 'md_jabatan/print_excel/$1';
+
+$route['user-management'] = 'account';
+$route['user-management-tambah'] = 'account/add';
+$route['user-management-edit-(:num)'] = 'account/edit/$1';
+$route['user-management-delete-(:num)'] = 'account/delete/$1';
+$route['user-management-save'] = 'account/save';
+$route['user-management-page'] = 'account/index';
+$route['user-management-page/(:any)'] = 'account/index/$1';
+$route['user-management-pdf'] = 'account/print_pdf';
+$route['user-management-pdf/(:any)'] = 'account/print_pdf/$1';
+$route['user-management-excel'] = 'account/print_excel';
+$route['user-management-excel/(:any)'] = 'account/print_excel/$1';

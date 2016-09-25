@@ -1,6 +1,6 @@
 <?php
-Class M_md_jabatan extends CI_Model{
-	var $table = "m_jabatan";
+Class M_account extends CI_Model{
+	var $table = "account";
 	public function save(){
 		$id = $this->input->post('id');
 		$data = array('jabatan'=>$this->input->post('jabatan'),
@@ -25,5 +25,14 @@ Class M_md_jabatan extends CI_Model{
 		$this->db->limit($pg,$limit);
 		return $this->db->get()->result_array();
 	}
+    
+    public function get_active_menu(){
+        $this->db->select('*');
+        $this->db->from('menus');
+        $this->db->where(array('status'=>2,'parent !='=>null));
+        $this->db->order_by('parent','ASC');
+        $this->db->order_by('number','ASC');
+        return $this->db->get()->result_array();
+    }
 	
 }

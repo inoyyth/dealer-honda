@@ -3,12 +3,12 @@
 		<section class="panel default blue_title h4">
 			<div class="panel-heading">
 				<div class="row">
-					<div class="col-md-6 pull-left">Master Level
+					<div class="col-md-6 pull-left">User Management
 					</div>
 					<div class="col-md-6 pull-right text-right">
-						<a href="<?php echo base_url();?>master-level-tambah" class="btn btn-primary btn-sm"><i class="fa fa-plus-square"></i> Tambah</a> 
-						<a href="<?php echo base_url('master-level-pdf/?template=table_pdf&name=master_jabatan');?>" target="__blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
-						<a href="<?php echo base_url('master-level-excel/?template=table_excel&name=master_jabatan');?>" target="__blank" class="btn btn-default btn-sm"><i class="fa fa-file-excel-o"></i> Excel</a>
+						<a href="<?php echo base_url();?>user-management-tambah" class="btn btn-primary btn-sm"><i class="fa fa-plus-square"></i> Tambah</a> 
+						<a href="<?php echo base_url('user-management-pdf/?template=table_pdf&name=account');?>" target="__blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
+						<a href="<?php echo base_url('user-management-excel/?template=table_excel&name=account');?>" target="__blank" class="btn btn-default btn-sm"><i class="fa fa-file-excel-o"></i> Excel</a>
 					</div> 
 				</div>
 			</div>
@@ -18,8 +18,9 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Nama Level</th>
-								<th>Keterangan</th>
+								<th>Nama</th>
+								<th>Telepon</th>
+                                <th>Email</th>
 								<th>Status</th>
 								<th class="text-center">Action</th>
 							</tr>
@@ -32,25 +33,29 @@
 								foreach($data as $k=>$v){ ?>
 							<tr>
 								<td><?php echo intval($this->uri->segment(2)+($k+1));?></td>
-								<td><?php echo $v['jabatan'];?></td>
-								<td><?php echo $v['keterangan'];?></td>
+								<td><?php echo $v['nama_lengkap'];?></td>
+								<td><?php echo $v['no_telp'];?></td>
+                                <td><?php echo $v['email'];?></td>
 								<td><?php echo get_status($v['status']);?></td>
 								<td class="text-center">
-									<a class="btn btn-sm btn-warning" href="<?php echo base_url("master-level-edit-".$v['id']);?>">Edit</a> 
-									<a class="btn btn-sm btn-danger" href="<?php echo base_url("master-level-delete-".$v['id']);?>" onclick="return confirm('Yakin Hapus Data ?');">Delete</a> 
+									<a class="btn btn-sm btn-warning" href="<?php echo base_url("user-management-edit-".$v['id']);?>">Edit</a> 
+									<a class="btn btn-sm btn-danger" href="<?php echo base_url("user-management-delete-".$v['id']);?>" onclick="return confirm('Yakin Hapus Data ?');">Delete</a> 
 								</td>
 							</tr>
 						<?php }} ?>
 						</tbody>
 						<tfoot>
-							<form id="form1" method="post" action="<?php echo base_url('master-level');?>">
+							<form id="form1" method="post" action="<?php echo base_url('user-management');?>">
 							<tr>
 								<td>#</td>
 								<td>
-									<input class="form-control input-sm" name="jabatan" class="form-control" value="<?php echo (isset($sr_data['jabatan'])?$sr_data['jabatan']:"");?>" type="text" onkeyup="javascript:if(event.keyCode == 13){submit_search('form1');}else{return false;};"/>
+									<input class="form-control input-sm" name="nama_lengkap" class="form-control" value="<?php echo (isset($sr_data['nama_lengkap'])?$sr_data['nama_lengkap']:"");?>" type="text" onkeyup="javascript:if(event.keyCode == 13){submit_search('form1');}else{return false;};"/>
 								</td>
 								<td>
-									<input class="form-control input-sm" name="keterangan" value="<?php echo (isset($sr_data['keterangan'])?$sr_data['keterangan']:"");?>" style="width: 100%;" type="text" onkeyup="javascript:if(event.keyCode == 13){submit_search('form1');}else{return false;};"/>
+									<input class="form-control input-sm" name="no_telp" value="<?php echo (isset($sr_data['no_telp'])?$sr_data['no_telp']:"");?>" style="width: 100%;" type="text" onkeyup="javascript:if(event.keyCode == 13){submit_search('form1');}else{return false;};"/>
+								</td>
+                                <td>
+									<input class="form-control input-sm" name="email" value="<?php echo (isset($sr_data['email'])?$sr_data['email']:"");?>" style="width: 100%;" type="text" onkeyup="javascript:if(event.keyCode == 13){submit_search('form1');}else{return false;};"/>
 								</td>
 								<td>
 									<select class="form-control input-sm" name="status" onchange="submit_search('form1');"/>                         
