@@ -53,6 +53,9 @@ class MX_Controller
 		/* autoload module items */
 		$this->load->_autoloader($this->autoload);
 		$this->breadcrumbs->unshift('Home','/');
+
+		$this->load->library("multi_menu");
+		$this->multi_menu->set_items($this->main_model->menu_all());
 	}
 	
 	public function __get($class) 

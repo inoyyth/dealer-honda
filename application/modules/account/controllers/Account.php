@@ -7,7 +7,7 @@ class Md_jabatan extends MX_Controller
 		$this->load->model(array('M_md_jabatan'=>'m_jabatan'));
 		$this->load->library('Printpdf');
 		//set breadcrumb
-		$this->breadcrumbs->push('Master Level', '/master-level');
+		$this->breadcrumbs->push('Master Jabatan', '/master-level');
     }
 	
 	public function index(){
