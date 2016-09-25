@@ -1,5 +1,10 @@
 <?php
 Class Main_model extends CI_Model{
+    
+    public function menu_all(){
+        return $this->db->get("menus")->result_array();
+	}
+    
 	public function save($table,$primary,$data){
 		if(empty($data[0])){
 			$this->db->insert($table,$data);
