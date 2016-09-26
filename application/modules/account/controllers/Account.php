@@ -4,7 +4,8 @@ class Account extends MX_Controller
 	var $table = "account";
 	 public function __construct() {
         parent::__construct();
-		$this->load->model(array('M_account'=>'m_account'));;
+		$this->load->model(array('M_account'=>'m_account'));
+        $this->load->library(array('upload','encrypt'));
 		//set breadcrumb
 		$this->breadcrumbs->push('User Management', '/user-management');
     }
@@ -33,6 +34,7 @@ class Account extends MX_Controller
 	public function edit($id){
 		//var_dump($id);die;
 		$data['detail'] = $this->db->get_where($this->table,array('id'=>$id))->row_array();
+        $data['list_menu'] = $this->m_account->get_active_menu();
 		$data['view'] = 'account/edit';
 		$this->load->view('default',$data);
 	}
@@ -47,6 +49,7 @@ class Account extends MX_Controller
     }
     
     function save(){
+        //var_dump(serialize($_POST['menu']));die;
         if($_POST){
             if($this->m_account->save()){
                 $this->session->set_flashdata('success', 'Data Berhasil Di Simpan !');
