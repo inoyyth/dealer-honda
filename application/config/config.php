@@ -520,3 +520,4 @@ $config['modules_locations'] = array(
 );
 
 $config['project_title']="Dealer Apps";
+$config['image_path']="assets/images/";

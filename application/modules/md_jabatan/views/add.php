@@ -7,10 +7,10 @@
             </div>
             <div class="porlets-content">
 				<form action="<?php echo base_url("master-level-save");?>" method="post" parsley-validate novalidate>
-					<input type="hidden" name="id" value="<?php echo (isset($detail->id)?$detail->id:"");?>">
+					<input type="hidden" name="id">
 					<div class="form-group">
 						<label>Nama Level</label>
-						<input type="text" name="jabatan" value="<?php echo (isset($detail->jabatan)?$detail->jabatan:"");?>" parsley-trigger="change" required placeholder="Isi Nama Jabatan" class="form-control">
+						<input type="text" name="jabatan" parsley-trigger="change" required placeholder="Isi Nama Jabatan" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>Keterangan</label>
@@ -19,8 +19,8 @@
 					<div class="form-group">
 						<label>Status</label>
 						<select name="status" placeholder="Pilih Status" required class="form-control">
-							<option value="1" <?php echo (isset($detail->status)&&$detail->status=='0'?"selected":"selected");?>>Non Aktif</option>
-							<option value="2" <?php echo (isset($detail->status)&&$detail->status=='1'?"selected":"");?>>Aktif</option>
+							<option value="1">Non Aktif</option>
+							<option value="2">Aktif</option>
 						</select>
 					</div>
 					<button class="btn btn-primary" type="submit">Submit</button>
