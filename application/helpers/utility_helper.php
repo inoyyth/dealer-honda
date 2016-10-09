@@ -18,7 +18,7 @@ if ( ! function_exists('get_status'))
 {
 	function get_status($status)
 	{
-		return ($status=="2"?"Aktif":"Non Aktif");
+		return ($status=="1"?"Aktif":"Non Aktif");
 	}
 }
 
