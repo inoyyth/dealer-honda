@@ -9,7 +9,7 @@
 			<tr>
 				<td><?php echo $vList['jabatan'];?></td>
 				<td><?php echo $vList['keterangan'];?></td>
-				<td><?php echo get_status($vList['status']);?></td>
+				<td><?php echo get_status($vList['status_jabatan']);?></td>
 			</tr>
 		<?php } ?>
     </table>

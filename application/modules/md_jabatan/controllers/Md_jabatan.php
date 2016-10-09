@@ -7,21 +7,21 @@ class Md_jabatan extends MX_Controller
 		$this->load->model(array('M_md_jabatan'=>'m_jabatan'));
 		$this->load->library('Printpdf');
 		//set breadcrumb
-		$this->breadcrumbs->push('Master Level', '/master-level');
+		$this->breadcrumbs->push('Master Jabatan', '/master-jabatan');
     }
 	
 	public function index(){
 		$data_session = $this->__getSession();
-		$config['base_url'] = base_url().'master-level-page';
+		$config['base_url'] = base_url().'master-jabatan-page';
         $config['total_rows'] = $this->main_model->countdata($this->table,$where=array());
         $config['per_page'] = (!empty($data_session['page'])?$data_session['page']:10);
         $config['uri_segment'] = 2;
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0 ;
         $this->pagination->initialize($config);
         $data['paging'] = $this->pagination->create_links();
-        $data['data'] = $this->m_jabatan->getdata($this->table,$limit,$config['per_page'],$like=$data_session);
+        $data['data'] = $this->m_jabatan->getdata($this->table,$limit,$config['per_page'],$like=$data_session,$where=array('status_jabatan!='=>'3'));
 		$data['sr_data'] = $data_session;
-		$data['view'] = 'md_jabatan/main';
+		$data['view'] = 'md_jabatan/main'; 
 		$this->load->view('default',$data);
 	}
 	
@@ -31,19 +31,14 @@ class Md_jabatan extends MX_Controller
 	}
 	
 	public function edit($id){
-		//var_dump($id);die;
 		$data['detail'] = $this->db->get_where($this->table,array('id'=>$id))->row_array();
 		$data['view'] = 'md_jabatan/edit';
 		$this->load->view('default',$data);
 	}
 	
 	function delete($id){
-        if($this->db->delete($this->table,array('id'=>$id))){
-            $this->session->set_flashdata('success', 'Data Berhasil Di Hapus !');
-        }else{
-            $this->session->set_flashdata('error', 'Data Gagal Di Hapus !');
-        }
-        redirect("master-level");
+        $this->main_model->delete('m_jabatan',array('id'=>$id),array('status_jabatan'=>'3'));
+        redirect("master-jabatan");
     }
     
     function save(){
@@ -53,7 +48,7 @@ class Md_jabatan extends MX_Controller
             }else{
                 $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
             }
-            redirect("master-level");
+            redirect("master-jabatan");
         }else{
             show_404();
         }
@@ -65,14 +60,14 @@ class Md_jabatan extends MX_Controller
 				'page'=>set_session_table_search('page',$this->input->get_post('page',TRUE)),
 				'jabatan'=>set_session_table_search('jabatan',$this->input->get_post('jabatan',TRUE)),
 				'keterangan'=>set_session_table_search('keterangan',$this->input->get_post('keterangan',TRUE)),
-				'status'=>set_session_table_search('status',$this->input->get_post('status',TRUE))
+				'status_jabatan'=>set_session_table_search('status_jabatan',$this->input->get_post('status_jabatan',TRUE))
 			 );
 		 }else{
                 return $data = array(
 				'page'=>$this->session->userdata('page'),
 				'jabatan'=>$this->session->userdata('jabatan'),
 				'keterangan'=>$this->session->userdata('keterangan'),
-				'status'=>$this->session->userdata('status')
+				'status_jabatan'=>$this->session->userdata('status_jabatan')
 			 );
 		}
 	}

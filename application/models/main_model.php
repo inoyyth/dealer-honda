@@ -32,4 +32,27 @@ Class Main_model extends CI_Model{
 		$this->db->limit($limit);
 		$this->db->get();
 	}
+    
+    public function delete($table,$where,$status){
+        if($this->db->update($table,$this->delete_sys($status),$where)){
+            $this->session->set_flashdata('success', 'Data Berhasil Di Hapus !');
+        }else{
+            $this->session->set_flashdata('error', 'Data Gagal Di Hapus !');
+        }
+    }
+    
+    public function delete_sys($status){
+        $data = array_merge($status,array('sys_delete_user'=>1,'sys_delete_date'=>date('Y-m-d H:i:s')));
+        return $data;
+    }
+    
+    public function create_sys($data){
+        $data = array_merge($data,array('sys_create_user'=>1,'sys_create_date'=>date('Y-m-d H:i:s')));
+        return $data;
+    }
+    
+    public function update_sys($data){
+        $data = array_merge($data,array('sys_update_user'=>1,'sys_update_date'=>date('Y-m-d H:i:s')));
+        return $data;
+    }
 }

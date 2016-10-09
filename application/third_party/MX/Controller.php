@@ -42,6 +42,7 @@ class MX_Controller
 	
 	public function __construct() 
 	{
+        date_default_timezone_set('Asia/Jakarta');
 		$class = str_replace(CI::$APP->config->item('controller_suffix'), '', get_class($this));
 		log_message('debug', $class." MX_Controller Initialized");
 		Modules::$registry[strtolower($class)] = $this;	

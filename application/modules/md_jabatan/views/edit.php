@@ -6,7 +6,7 @@
 				<h3 class="content-header">Master Level</h3>
             </div>
             <div class="porlets-content">
-				<form action="<?php echo base_url("master-level-save");?>" method="post" parsley-validate novalidate>
+				<form action="<?php echo base_url("master-jabatan-save");?>" method="post" parsley-validate novalidate>
 					<input type="hidden" name="id" value="<?php echo (isset($detail['id'])?$detail['id']:"");?>">
 					<div class="form-group">
 						<label>Nama Level</label>
@@ -18,13 +18,13 @@
 					</div>
 					<div class="form-group">
 						<label>Status</label>
-						<select name="status" placeholder="Pilih Status" required class="form-control">
-							<option value="1" <?php echo (isset($detail['status'])&&$detail['status']=='1'?"selected":"selected");?>>Non Aktif</option>
-							<option value="2" <?php echo (isset($detail['status'])&&$detail['status']=='2'?"selected":"");?>>Aktif</option>
+						<select name="status_jabatan" placeholder="Pilih Status" required class="form-control">
+							<option value="1" <?php echo (isset($detail['status_jabatan'])&&$detail['status_jabatan']=='1'?"selected":"selected");?>>Aktif</option>
+							<option value="2" <?php echo (isset($detail['status_jabatan'])&&$detail['status_jabatan']=='2'?"selected":"");?>>Non Aktif</option>
 						</select>
 					</div>
 					<button class="btn btn-primary" type="submit">Submit</button>
-					<a href="<?php echo base_url('master-level');?>" class="btn btn-default">Cancel</a>
+					<a href="<?php echo base_url('master-jabatan');?>" class="btn btn-default">Cancel</a>
               </form>
             </div>
 		</div>
