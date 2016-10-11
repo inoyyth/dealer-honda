@@ -89,7 +89,7 @@ class Md_karyawan extends MX_Controller
 	public function print_excel(){
 		 $data['template_excel'] = "md_karyawan/".$_GET['template'];
 		 $data['file_name'] = $_GET['name'];
-		 $data['data'] = $this->m_karyawan->getdata($this->table,0,1000,$like=array(),$where=array('status_karyawan!='=>'3'));
+		 $data['list'] = $this->m_karyawan->getdata($this->table,0,1000,$like=array(),$where=array('status_karyawan!='=>'3'));
 		 $this->load->view('template_excel',$data);
 	}
 }
