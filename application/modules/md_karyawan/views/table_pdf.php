@@ -12,7 +12,7 @@
 			<tr>
 				<td><?php echo $vList['kd_karyawan'];?></td>
 				<td><?php echo $vList['karyawan'];?></td>
-                <td><?php echo $vList['kd_jabatan_karyawan'];?></td>
+                <td><?php echo $vList['jabatan'];?></td>
                 <td><?php echo $vList['tgl_masuk'];?></td>
                 <td><?php echo $vList['tgl_keluar'];?></td>
 				<td><?php echo get_status($vList['status_karyawan']);?></td>
