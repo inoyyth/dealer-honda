@@ -91,7 +91,7 @@ class Account extends MX_Controller
 	public function print_excel(){
 		 $data['template_excel'] = "account/".$_GET['template'];
 		 $data['file_name'] = $_GET['name'];
-		 $data['data'] = $this->db->get($this->table)->result_array();
+		 $data['list'] = $this->db->get($this->table)->result_array();
 		 $this->load->view('template_excel',$data);
 	}
 	

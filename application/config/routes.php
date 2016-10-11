@@ -90,3 +90,14 @@ $route['user-management-pdf/(:any)'] = 'account/print_pdf/$1';
 $route['user-management-excel'] = 'account/print_excel';
 $route['user-management-excel/(:any)'] = 'account/print_excel/$1';
 
+$route['master-gudang'] = 'md_gudang';
+$route['master-gudang-tambah'] = 'md_gudang/add';
+$route['master-gudang-edit-(:num)'] = 'md_gudang/edit/$1';
+$route['master-gudang-delete-(:num)'] = 'md_gudang/delete/$1';
+$route['master-gudang-save'] = 'md_gudang/save';
+$route['master-gudang-page'] = 'md_gudang/index';
+$route['master-gudang-page/(:any)'] = 'md_gudang/index/$1';
+$route['master-gudang-pdf'] = 'md_gudang/print_pdf';
+$route['master-gudang-pdf/(:any)'] = 'md_gudang/print_pdf/$1';
+$route['master-gudang-excel'] = 'md_gudang/print_excel';
+$route['master-gudang-excel/(:any)'] = 'md_gudang/print_excel/$1';
