@@ -66,6 +66,18 @@ $route['master-jabatan-pdf/(:any)'] = 'md_jabatan/print_pdf/$1';
 $route['master-jabatan-excel'] = 'md_jabatan/print_excel';
 $route['master-jabatan-excel/(:any)'] = 'md_jabatan/print_excel/$1';
 
+$route['master-karyawan'] = 'md_karyawan';
+$route['master-karyawan-tambah'] = 'md_karyawan/add';
+$route['master-karyawan-edit-(:num)'] = 'md_karyawan/edit/$1';
+$route['master-karyawan-delete-(:num)'] = 'md_karyawan/delete/$1';
+$route['master-karyawan-save'] = 'md_karyawan/save';
+$route['master-karyawan-page'] = 'md_karyawan/index';
+$route['master-karyawan-page/(:any)'] = 'md_karyawan/index/$1';
+$route['master-karyawan-pdf'] = 'md_karyawan/print_pdf';
+$route['master-karyawan-pdf/(:any)'] = 'md_karyawan/print_pdf/$1';
+$route['master-karyawan-excel'] = 'md_karyawan/print_excel';
+$route['master-karyawan-excel/(:any)'] = 'md_karyawan/print_excel/$1';
+
 $route['user-management'] = 'account';
 $route['user-management-tambah'] = 'account/add';
 $route['user-management-edit-(:num)'] = 'account/edit/$1';
@@ -77,3 +89,4 @@ $route['user-management-pdf'] = 'account/print_pdf';
 $route['user-management-pdf/(:any)'] = 'account/print_pdf/$1';
 $route['user-management-excel'] = 'account/print_excel';
 $route['user-management-excel/(:any)'] = 'account/print_excel/$1';
+

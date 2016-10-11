@@ -55,4 +55,28 @@ Class Main_model extends CI_Model{
         $data = array_merge($data,array('sys_update_user'=>1,'sys_update_date'=>date('Y-m-d H:i:s')));
         return $data;
     }
+    
+    public function getMaster($table,$like,$where){
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->like($like);
+        $this->db->where($where);
+        return $this->db->get()->result_array();
+    }
+    
+    public function generate_code($tables,$prefix,$separator,$digit=null){
+        $this->db->select_max('id','max_id');
+        $maxi = $this->db->get($tables)->row('max_id');
+        $maxs = intval($maxi + 1);
+        if ($maxs < 9 ) {
+            $hsl = "000".$maxs;
+        } else if ($max < 99 ) {
+            $hsl = "00".$maxs;
+        }else if ($max < 999 ) {
+            $hsl = "0".$maxs;
+        }else if ($max < 9999 ) {
+            $hsl = $maxs;
+        }
+        return $prefix.$separator.$hsl;
+    }
 }
