@@ -3,12 +3,11 @@
 <title><?php echo $this->config->item('project_title');?></title>
 <link href="<?php echo base_url();?>themes/css/font-awesome.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url();?>themes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url();?>themes/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
 <link href="<?php echo base_url();?>themes/css/animate.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url();?>themes/css/admin.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url();?>themes/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-<link href="<?php echo base_url();?>themes/plugins/kalendar/kalendar.css" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo base_url();?>themes/plugins/scroll/nanoscroller.css">
-<link href="<?php echo base_url();?>themes/plugins/morris/morris.css" rel="stylesheet" />
 </head>
 <body class="light_theme  fixed_header left_nav_fixed">
 <div class="wrapper">
