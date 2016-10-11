@@ -82,14 +82,14 @@ class Md_karyawan extends MX_Controller
 	
 	public function print_pdf(){
 		$data['template'] = array("template"=>"md_karyawan/".$_GET['template'],"filename"=>$_GET['name']);
-		$data['list'] = $this->db->get($this->table)->result_array();
+		$data['list'] = $this->m_karyawan->getdata($this->table,0,1000,$like=array(),$where=array('status_karyawan!='=>'3'));
 		$this->printpdf->create_pdf($data);
 	}
 	
 	public function print_excel(){
 		 $data['template_excel'] = "md_karyawan/".$_GET['template'];
 		 $data['file_name'] = $_GET['name'];
-		 $data['data'] = $this->db->get($this->table)->result_array();
+		 $data['data'] = $this->m_karyawan->getdata($this->table,0,1000,$like=array(),$where=array('status_karyawan!='=>'3'));
 		 $this->load->view('template_excel',$data);
 	}
 }
