@@ -101,3 +101,15 @@ $route['master-gudang-pdf'] = 'md_gudang/print_pdf';
 $route['master-gudang-pdf/(:any)'] = 'md_gudang/print_pdf/$1';
 $route['master-gudang-excel'] = 'md_gudang/print_excel';
 $route['master-gudang-excel/(:any)'] = 'md_gudang/print_excel/$1';
+
+$route['master-leasing'] = 'md_leasing';
+$route['master-leasing-tambah'] = 'md_leasing/add';
+$route['master-leasing-edit-(:num)'] = 'md_leasing/edit/$1';
+$route['master-leasing-delete-(:num)'] = 'md_leasing/delete/$1';
+$route['master-leasing-save'] = 'md_leasing/save';
+$route['master-leasing-page'] = 'md_leasing/index';
+$route['master-leasing-page/(:any)'] = 'md_leasing/index/$1';
+$route['master-leasing-pdf'] = 'md_leasing/print_pdf';
+$route['master-leasing-pdf/(:any)'] = 'md_leasing/print_pdf/$1';
+$route['master-leasing-excel'] = 'md_leasing/print_excel';
+$route['master-leasing-excel/(:any)'] = 'md_leasing/print_excel/$1';
