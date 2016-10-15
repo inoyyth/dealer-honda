@@ -107,5 +107,33 @@ if ( ! function_exists('terbilang')){
         }     
         return $hasil;
     }
+}
 
+if ( ! function_exists('date_range_no_weekend')){
+    function date_range_no_weekend($tglx,$hari){
+        $hr = substr($tglx,-2,2);
+        $bl = substr($tglx,-5,2);
+        $th = substr($tglx,0,4);
+        //$hari = 10;
+        $waktu = $hari * 2;
+        $jum_libur = 0;
+        $jum_hari = 0;
+        for ($i=0; $i <= $waktu; $i++) {
+            $tgl =mktime(0,0,0,$bl,$hr+ $i,$th);
+            // Mengecek hari minggu
+            if(date("l", $tgl)=="Sunday" || date("l", $tgl)=="Saturday") {
+                $jum_libur++;
+            }else {
+                // Apablia jumlah hari sudah memenuhi// program berhenti
+                if ($jum_hari==$hari) {
+                    break;
+                } else {
+                    $jum_hari++; 
+                }
+            }
+        }
+        $jumhari = $jum_hari + $jum_libur;
+        $nextday = mktime(0,0,0,$bl,$hr+$jumhari,$th);
+        return date('Y-m-d', $nextday);
+    }
 }
