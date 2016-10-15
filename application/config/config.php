@@ -523,3 +523,4 @@ $config['project_title']="Dealer Apps";
 $config['image_path']="assets/images/";
 $config['default_date_range_bpkb'] = 14;
 $config['default_date_range_bpkb'] = 90;
+$config['kwitansi_code'] = array('dp'=>'KWTD-KD-','fee'=>'KWTD-KD-','diskon'=>'KWTD-KDS-');
