@@ -521,3 +521,5 @@ $config['modules_locations'] = array(
 
 $config['project_title']="Dealer Apps";
 $config['image_path']="assets/images/";
+$config['default_date_range_bpkb'] = 14;
+$config['default_date_range_bpkb'] = 90;
