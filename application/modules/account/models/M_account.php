@@ -1,11 +1,15 @@
 <?php
 Class M_account extends CI_Model{
-	var $table = "account";
-	public function save(){
-		$id = $this->input->post('id');
+    var $table = "account";
+    public function save(){
+        $id = $this->input->post('id');
         $image_hidden = $this->input->post('image_hidden');
-        $image_config = array('upload_path'=>'./assets/images/account/',
-                              'upload_url'=>'./assets/images/account/',
+        $folder = "account";
+        if (!is_dir('./assets/images/'.$folder)) {
+            mkdir('./assets/images/'.$folder, 0777, TRUE);
+        }
+        $image_config = array('upload_path'=>'./assets/images/'.$folder,
+                              'upload_url'=>'./assets/images/'.$folder,
                               'encrypt_name'=>true,
                               'detect_mime'=>true,
                               'allowed_types'=>'gif|jpg|png','max_size'=>3000);
@@ -38,7 +42,7 @@ Class M_account extends CI_Model{
 			return true;
 		}
 		return false;
-	}
+    }
 	
 	public function getdata($table,$limit,$pg,$like=array()){ 
 		unset($like['page']);

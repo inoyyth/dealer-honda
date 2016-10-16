@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+date_default_timezone_set('Asia/Jakarta');
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -521,3 +522,6 @@ $config['modules_locations'] = array(
 
 $config['project_title']="Dealer Apps";
 $config['image_path']="assets/images/";
+$config['default_date_range_bpkb'] = 14;
+$config['default_date_range_bpkb'] = 90;
+$config['kwitansi_code'] = array('dp'=>'KWTD-KD-','fee'=>'KWTD-KD-','diskon'=>'KWTD-KDS-');

@@ -114,7 +114,6 @@ if ( ! function_exists('date_range_no_weekend')){
         $hr = substr($tglx,-2,2);
         $bl = substr($tglx,-5,2);
         $th = substr($tglx,0,4);
-        //$hari = 10;
         $waktu = $hari * 2;
         $jum_libur = 0;
         $jum_hari = 0;
