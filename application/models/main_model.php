@@ -67,23 +67,28 @@ Class Main_model extends CI_Model{
     public function generate_code($tables,$prefix,$separator,$digit=4){
         $this->db->select_max('id','max_id');
         $maxi = $this->db->get($tables)->row('max_id');
-        $hsl = str_pad(($maxi==0?1:$maxi), $digit, '0', STR_PAD_LEFT);
+        $hsl = str_pad(($maxi==0?1:intval($maxi)+1), $digit, '0', STR_PAD_LEFT);
         return $prefix.$separator.$hsl;
     }
     
     public function generate_code_kwitansi($tables,$prefix,$digit=4){
-        $this->db->select_max('id','max_id');
-        $maxi = $this->db->get($tables)->row('max_id');
-        $maxs = intval($maxi + 1);
-        if ($maxs < 9 ) {
-            $hsl = "000".$maxs;
-        } else if ($max < 99 ) {
-            $hsl = "00".$maxs;
-        }else if ($max < 999 ) {
-            $hsl = "0".$maxs;
-        }else if ($max < 9999 ) {
-            $hsl = $maxs;
+        $this->db->select('kd_kwitansi');
+        $this->db->order_by('id','DESC');
+        $this->db->limit(1);
+        $maxi = $this->db->get($tables);
+        if($maxi->num_rows() < 1){
+            $val = 1;
+        }else{
+            $kd_last = $maxi->row('kd_kwitansi');
+            if($prefix.$date("Y-m-d") == $prefix.$date("Y-m-")."1"){
+                if(intval(substr($maxi->row('kd_kwitansi'),0,$digit)) < 1){
+                    $val = 1;
+                }else{
+                    $val = intval($maxi->num_rows('kd_kwitans'))+1;
+                }
+            }
         }
-        return $prefix.$separator.$hsl;
+        $hsl = str_pad(($val), $digit, '0', STR_PAD_LEFT);
+        return $prefix.$hsl;
     }
 }

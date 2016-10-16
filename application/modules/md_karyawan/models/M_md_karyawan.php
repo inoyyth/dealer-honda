@@ -2,10 +2,14 @@
 Class M_md_karyawan extends CI_Model{
 	var $table = "m_karyawan";
 	public function save(){
-		$id = $this->input->post('id');
+        $id = $this->input->post('id');
         $image_hidden = $this->input->post('image_hidden');
-        $image_config = array('upload_path'=>'./assets/images/karyawan/',
-                              'upload_url'=>'./assets/images/karyawan/',
+        $folder = "karyawan";
+        if (!is_dir('./assets/images/'.$folder)) {
+            mkdir('./assets/images/'.$folder, 0777, TRUE);
+        }
+        $image_config = array('upload_path'=>'./assets/images/'.$folder,
+                              'upload_url'=>'./assets/images/'.$folder,
                               'encrypt_name'=>true,
                               'detect_mime'=>true,
                               'allowed_types'=>'gif|jpg|png','max_size'=>3000);
