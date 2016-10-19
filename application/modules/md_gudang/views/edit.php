@@ -25,6 +25,10 @@
                     <input type="tel" name="telepon" parsley-trigger="change" parsley-type="digits" required placeholder="Isi Tanggal Telepon" class="form-control" value="<?php echo $detail['telepon'];?>">
                 </div>
                 <div class="form-group">
+                    <label>Pic</label>
+                    <input type="text" name="pic" parsley-trigger="change" required placeholder="Isi Nama PIC Gudang" class="form-control" value="<?php echo $detail['pic'];?>">
+                </div>
+                <div class="form-group">
                     <label>Status</label>
                     <select name="status_gudang" placeholder="Pilih Status" required class="form-control">
                         <option value="1" <?php echo (isset($detail['status_gudang'])&&$detail['status_gudang']=='1'?"selected":"selected");?>>Aktif</option>
