@@ -9,6 +9,9 @@ Class M_md_leasing extends CI_Model{
                       'telepon'=>$this->input->post('telepon'),
                       'email'=>$this->input->post('email'),
                       'pic'=>$this->input->post('pic'),
+                      'hp'=>$this->input->post('hp'),
+                      'kalimat_kw_1'=>$this->input->post('kalimat_kw_1'),
+                      'kalimat_kw_2'=>$this->input->post('kalimat_kw_2'),
                       'status_leasing'=>$this->input->post('status_leasing')
                        );
 		if(empty($id)){
