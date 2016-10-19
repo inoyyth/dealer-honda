@@ -7,6 +7,7 @@ Class M_md_gudang extends CI_Model{
 					  'gudang'=>$this->input->post('gudang'),
 					  'alamat'=>$this->input->post('alamat'),
                       'telepon'=>$this->input->post('telepon'),
+                      'pic'=>$this->input->post('pic'),
                       'status_gudang'=>$this->input->post('status_gudang')
                        );
 		if(empty($id)){
