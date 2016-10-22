@@ -53,10 +53,10 @@ Class M_account extends CI_Model {
             'access_menu' => serialize($menu)
         );
         if (empty($id)) {
-            $this->db->insert($this->table, $data);
+            $this->db->insert($this->table, $this->main_model->create_sys($data));
             return true;
         } else {
-            $this->db->update($this->table, $data, array('id' => $id));
+            $this->db->update($this->table, $this->main_model->update_sys($data), array('id' => $id));
             return true;
         }
         return false;

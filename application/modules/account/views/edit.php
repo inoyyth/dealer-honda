@@ -38,8 +38,8 @@
                             <div class="form-group">
                                 <label>Status</label>
                                 <select name="status" placeholder="Pilih Status" required class="form-control">
-                                    <option value="1" <?php echo (isset($detail['status']) && $detail['status'] == '1' ? "selected" : "selected"); ?>>Non Aktif</option>
-                                    <option value="2" <?php echo (isset($detail['status']) && $detail['status'] == '2' ? "selected" : ""); ?>>Aktif</option>
+                                    <option value="1" <?php echo (isset($detail['status']) && $detail['status'] == '1' ? "selected" : "selected"); ?>>Aktif</option>
+                                    <option value="2" <?php echo (isset($detail['status']) && $detail['status'] == '2' ? "selected" : ""); ?>>Non Aktif</option>
                                 </select>
                             </div>
                         </div>
