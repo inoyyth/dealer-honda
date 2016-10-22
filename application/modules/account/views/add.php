@@ -37,8 +37,8 @@
                             <div class="form-group">
                                 <label>Status</label>
                                 <select name="status" placeholder="Pilih Status" required class="form-control">
-                                    <option value="1">Non Aktif</option>
-                                    <option value="2">Aktif</option>
+                                    <option value="1">Aktif</option>
+                                    <option value="2">Non Aktif</option>
                                 </select>
                             </div>
                         </div>
