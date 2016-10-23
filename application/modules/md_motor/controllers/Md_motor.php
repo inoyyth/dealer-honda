@@ -2,10 +2,10 @@
 class Md_motor extends MX_Controller
 {
 	var $table = "m_motor";
-	 public function __construct() {
+	public function __construct() {
         parent::__construct();
 		$this->load->model(array('M_md_motor'=>'m_motor'));
-		$this->load->library(array('upload','encrypt','Printpdf'));
+		$this->load->library(array('upload','encrypt','Printpdf','Auth_log'));
 		//set breadcrumb
 		$this->breadcrumbs->push('Master Motor', '/master-motor');
     }

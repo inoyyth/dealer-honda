@@ -5,7 +5,7 @@ class Md_jabatan extends MX_Controller
 	 public function __construct() {
         parent::__construct();
 		$this->load->model(array('M_md_jabatan'=>'m_jabatan'));
-		$this->load->library('Printpdf');
+		$this->load->library('Printpdf','Auth_log');
 		//set breadcrumb
 		$this->breadcrumbs->push('Master Jabatan', '/master-jabatan');
     }

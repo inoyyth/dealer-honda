@@ -7,7 +7,7 @@ class Md_karyawan extends MX_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model(array('M_md_karyawan' => 'm_karyawan'));
-        $this->load->library(array('upload', 'encrypt', 'Printpdf'));
+        $this->load->library(array('upload', 'encrypt', 'Printpdf','Auth_log'));
         //set breadcrumb
         $this->breadcrumbs->push('Master Karyawan', '/master-karyawan');
     }
