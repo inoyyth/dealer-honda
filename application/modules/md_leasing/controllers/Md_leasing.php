@@ -5,7 +5,7 @@ class Md_leasing extends MX_Controller
 	 public function __construct() {
         parent::__construct();
 		$this->load->model(array('M_md_leasing'=>'m_leasing'));
-		$this->load->library(array('upload','encrypt','Printpdf'));
+		$this->load->library(array('upload','encrypt','Printpdf','Auth_log'));
 		//set breadcrumb
 		$this->breadcrumbs->push('Master Leasing', '/master-leasing');
     }

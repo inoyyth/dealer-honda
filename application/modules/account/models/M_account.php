@@ -8,13 +8,15 @@ Class M_account extends CI_Model {
         //var_dump($this->input->post('menu'));die;
         $menu = array();
         foreach($this->input->post('menu') as $k=>$v){
+            $explodeMenu = explode("|", $v);
             $menu[] = array(
-                        'menu'=>$v,
+                        'menu'=>$explodeMenu[0],
+                        'slug'=>$explodeMenu[1],
                         'child'=>array(
-                            'add'=>($this->input->post('sub_add'.$v)==""?0:1),
-                            'upd'=>($this->input->post('sub_upd'.$v)==""?0:1),
-                            'del'=>($this->input->post('sub_del'.$v)==""?0:1),
-                            'prt'=>($this->input->post('sub_prt'.$v)==""?0:1)
+                            'add'=>($this->input->post('sub_add'.$explodeMenu[0])==""?0:1),
+                            'upd'=>($this->input->post('sub_upd'.$explodeMenu[0])==""?0:1),
+                            'del'=>($this->input->post('sub_del'.$explodeMenu[0])==""?0:1),
+                            'prt'=>($this->input->post('sub_prt'.$explodeMenu[0])==""?0:1)
                         )
                 ); 
         }

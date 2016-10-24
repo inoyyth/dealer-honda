@@ -107,7 +107,7 @@
                                     }
                                 ?>
                                     <tr>
-                                        <td><input type="checkbox" id="parent<?php echo $vMenu['id']; ?>" <?php echo $cek; ?> name="menu[]" value="<?php echo $vMenu['id']; ?>" onclick="checkParent(<?php echo $vMenu['id']; ?>);"></td>
+                                        <td><input type="checkbox" id="parent<?php echo $vMenu['id']; ?>" <?php echo $cek; ?> name="menu[]" value="<?php echo $vMenu['id']."|".$vMenu['slug']; ?>" onclick="checkParent(<?php echo $vMenu['id']; ?>);"></td>
                                         <td><?php echo $vMenu['name']; ?></td>
                                         <td><?php echo get_status($vMenu['status']); ?></td>
                                         <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_add<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $addChk." ".$act;?>></td>
