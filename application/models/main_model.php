@@ -7,18 +7,35 @@ Class Main_model extends CI_Model {
     }
 
     public function menu_all() {
-        $session = $this->session->userdata('logged_in_admin');
-        $menu = unserialize($session['access_menu']);
-        $menuResult = array();
-        foreach($menu as $k=>$v){
-            $menuResult[] = $v['menu'];
+        if ($this->session->userdata('logged_in_admin')!=FALSE){
+            $session = $this->session->userdata('logged_in_admin');
+            $menu = unserialize($session['access_menu']);
+            $menuResult = array();
+            foreach($menu as $k=>$v){
+                $menuResult[] = $v['menu'];
+            }
+            //echo "<pre>";var_dump($query);die;
+            //get parent
+            $this->db->select('parent');
+            $this->db->from('menus');
+            $this->db->where_in('id', $menuResult);
+            $this->db->group_by('parent');
+            $query_parent = $this->db->get()->result_array();
+            
+            $menuResult2 = array();
+            foreach($query_parent as $k=>$v){
+                $menuResult2[] = $v['parent'];
+            }
+            //get child
+            $this->db->select('*');
+            $this->db->from('menus');
+            $this->db->where_in('id', array_merge($menuResult,$menuResult2));
+            $query = $this->db->get()->result_array();
+            return $query;
+            //echo "<pre>";var_dump($query);die;
+        }else{
+            return FALSE;
         }
-        
-        $this->db->select('*');
-        $this->db->from('menus');
-        $this->db->where_in('id', $menuResult);
-        $query = $this->db->get()->result_array();
-        echo "<pre>";var_dump($query);die;
     }
 
     public function save($table, $primary, $data) {

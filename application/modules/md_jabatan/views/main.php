@@ -6,9 +6,9 @@
 					<div class="col-md-6 pull-left">Master Jabatan
 					</div>
 					<div class="col-md-6 pull-right text-right">
-						<a href="<?php echo base_url();?>master-jabatan-tambah" class="btn btn-primary btn-sm"><i class="fa fa-plus-square"></i> Tambah</a> 
-						<a href="<?php echo base_url('master-jabatan-pdf/?template=table_pdf&name=master_jabatan');?>" target="__blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
-						<a href="<?php echo base_url('master-jabatan-excel/?template=table_excel&name=master_jabatan');?>" target="__blank" class="btn btn-default btn-sm"><i class="fa fa-file-excel-o"></i> Excel</a>
+                                                <?php echo $this->button_lib->render(array('anchor'=>'add','url'=>'master-jabatan-tambah','text'=>'Tambah'));?>
+                                                <?php echo $this->button_lib->render(array('anchor'=>'prt','url'=>'master-jabatan-pdf/?template=table_pdf&name=master_jabatan','text'=>'Print'));?>
+                                                <?php echo $this->button_lib->render(array('anchor'=>'prt','url'=>'master-jabatan-excel/?template=table_excel&name=master_jabatan','text'=>'Excel'));?>
 					</div> 
 				</div>
 			</div>
@@ -36,9 +36,9 @@
 								<td><?php echo $v['keterangan'];?></td>
 								<td><?php echo get_status($v['status_jabatan']);?></td>
 								<td class="text-center">
-									<a class="btn btn-sm btn-warning" href="<?php echo base_url("master-jabatan-edit-".$v['id']);?>">Edit</a> 
-									<a class="btn btn-sm btn-danger" href="<?php echo base_url("master-jabatan-delete-".$v['id']);?>" onclick="return confirm('Yakin Hapus Data ?');">Delete</a> 
-								</td>
+                                                                    <?php echo $this->button_lib->render(array('anchor'=>'upd','url'=>'master-jabatan-edit-'.$v['id'],'text'=>'Edit'));?>
+                                                                    <?php echo $this->button_lib->render(array('anchor'=>'del','url'=>'master-jabatan-delete-'.$v['id'],'text'=>'Delete'));?>
+                                                                </td>
 							</tr>
 						<?php }} ?>
 						</tbody>
