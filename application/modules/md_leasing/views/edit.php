@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <input type="hidden" name="id" value="<?php echo $detail['id']; ?>">
                         <label>Kode Leasing</label>
-                        <input type="text" name="kd_leasing" parsley-trigger="change" required readonly="true" value="<?php echo $detail['kd_leasing']; ?>" class="form-control">
+                        <input type="text" name="kd_leasing" parsley-trigger="change" required style="text-transform: uppercase;" value="<?php echo $detail['kd_leasing']; ?>" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Nama Leasing</label>

@@ -124,5 +124,12 @@ Class Main_model extends CI_Model {
         $hsl = str_pad(($val), $digit, '0', STR_PAD_LEFT);
         return $prefix . $hsl;
     }
+    
+    public function cekExistCode($data=array()){
+        $this->db->select('*');
+        $this->db->from($data['table']);
+        $this->db->where(array($data['field']=>$data['value']));
+        return $this->db->get();
+    }
 
 }
