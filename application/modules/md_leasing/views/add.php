@@ -9,7 +9,7 @@
                 <div class="porlets-content">
                     <div class="form-group">
                         <label>Kode Leasing</label>
-                        <input type="text" name="kd_leasing" parsley-trigger="change" required readonly="true" value="<?php echo $code; ?>" class="form-control">
+                        <input type="text" name="kd_leasing" style="text-transform: uppercase;" parsley-trigger="change" required class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Nama Leasing</label>
