@@ -6,9 +6,9 @@
 					<div class="col-md-6 pull-left">Master Jabatan
 					</div>
 					<div class="col-md-6 pull-right text-right">
-                                                <?php echo $this->button_lib->render(array('anchor'=>'add','url'=>'master-jabatan-tambah','text'=>'Tambah'));?>
-                                                <?php echo $this->button_lib->render(array('anchor'=>'prt','url'=>'master-jabatan-pdf/?template=table_pdf&name=master_jabatan','text'=>'Print'));?>
-                                                <?php echo $this->button_lib->render(array('anchor'=>'prt','url'=>'master-jabatan-excel/?template=table_excel&name=master_jabatan','text'=>'Excel'));?>
+                                            <?php echo $this->button_lib->render(array('anchor'=>'add','url'=>'master-jabatan-tambah','text'=>'Tambah'));?>
+                                            <?php echo $this->button_lib->render(array('anchor'=>'prt','url'=>'master-jabatan-pdf/?template=table_pdf&name=master_jabatan','text'=>'Print'));?>
+                                            <?php echo $this->button_lib->render(array('anchor'=>'prt','url'=>'master-jabatan-excel/?template=table_excel&name=master_jabatan','text'=>'Excel'));?>
 					</div> 
 				</div>
 			</div>

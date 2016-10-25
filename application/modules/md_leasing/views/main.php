@@ -6,9 +6,9 @@
 					<div class="col-md-6 pull-left">Master Leasing
 					</div>
 					<div class="col-md-6 pull-right text-right">
-						<a href="<?php echo base_url();?>master-leasing-tambah" class="btn btn-primary btn-sm"><i class="fa fa-plus-square"></i> Tambah</a> 
-						<a href="<?php echo base_url('master-leasing-pdf/?template=table_pdf&name=master_leasing');?>" target="__blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
-						<a href="<?php echo base_url('master-leasing-excel/?template=table_excel&name=master_leasing');?>" target="__blank" class="btn btn-default btn-sm"><i class="fa fa-file-excel-o"></i> Excel</a>
+                                            <?php echo $this->button_lib->render(array('anchor'=>'add','url'=>'master-leasing-tambah','text'=>'Tambah'));?>
+                                            <?php echo $this->button_lib->render(array('anchor'=>'prt','url'=>'master-leasing-pdf/?template=table_pdf&name=master_leasing','text'=>'Print'));?>
+                                            <?php echo $this->button_lib->render(array('anchor'=>'prt','url'=>'master-leasing-excel/?template=table_excel&name=master_leasing','text'=>'Excel'));?>
 					</div> 
 				</div>
 			</div>
@@ -42,8 +42,8 @@
                                 <td><?php echo $v['kd_karyawan']." ".$v['karyawan'];?></td>
 								<td><?php echo get_status($v['status_leasing']);?></td>
 								<td class="text-center">
-									<a class="btn btn-sm btn-warning" href="<?php echo base_url("master-leasing-edit-".$v['id']);?>">Edit</a> 
-									<a class="btn btn-sm btn-danger" href="<?php echo base_url("master-leasing-delete-".$v['id']);?>" onclick="return confirm('Yakin Hapus Data ?');">Delete</a> 
+									<?php echo $this->button_lib->render(array('anchor'=>'upd','url'=>'master-leasing-edit-'.$v['id'],'text'=>'Edit'));?>
+                                                                    <?php echo $this->button_lib->render(array('anchor'=>'del','url'=>'master-leasing-delete-'.$v['id'],'text'=>'Delete'));?>
 								</td>
 							</tr>
 						<?php }} ?>
