@@ -174,6 +174,8 @@
 <script src="<?php echo base_url();?>themes/js/jquery-2.1.0.js"></script>
 <script src="<?php echo base_url();?>themes/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>themes/plugins/validation/parsley.min.js"></script>
+<script src="<?php echo base_url();?>themes/plugins/input-mask/demo-mask.js"></script>
+<script src="<?php echo base_url();?>themes/plugins/input-mask/jquery.inputmask.min.js"></script>
 <script src="<?php echo base_url();?>themes/js/common-script.js"></script>
 <script src="<?php echo base_url();?>themes/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>  
 <script>

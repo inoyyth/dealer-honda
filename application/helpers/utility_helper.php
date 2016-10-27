@@ -136,3 +136,13 @@ if ( ! function_exists('date_range_no_weekend')){
         return date('Y-m-d', $nextday);
     }
 }
+
+if ( ! function_exists('formatrp')){
+    function formatrp($angka){
+
+        $rupiah=number_format($angka,0,',','.'); // membentuk tanda pemisah seperti (.)
+
+        return $rupiah;
+
+    }
+}
