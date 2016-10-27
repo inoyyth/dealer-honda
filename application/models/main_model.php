@@ -75,17 +75,20 @@ Class Main_model extends CI_Model {
     }
 
     public function delete_sys($status) {
-        $data = array_merge($status, array('sys_delete_user' => 1, 'sys_delete_date' => date('Y-m-d H:i:s')));
+        $session = $this->session->userdata('logged_in_admin');
+        $data = array_merge($status, array('sys_delete_user' => $session['id'], 'sys_delete_date' => date('Y-m-d H:i:s')));
         return $data;
     }
 
     public function create_sys($data) {
-        $data = array_merge($data, array('sys_create_user' => 1, 'sys_create_date' => date('Y-m-d H:i:s')));
+        $session = $this->session->userdata('logged_in_admin');
+        $data = array_merge($data, array('sys_create_user' => $session['id'], 'sys_create_date' => date('Y-m-d H:i:s')));
         return $data;
     }
 
     public function update_sys($data) {
-        $data = array_merge($data, array('sys_update_user' => 1, 'sys_update_date' => date('Y-m-d H:i:s')));
+        $session = $this->session->userdata('logged_in_admin');
+        $data = array_merge($data, array('sys_update_user' => $session['id'], 'sys_update_date' => date('Y-m-d H:i:s')));
         return $data;
     }
 
