@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2016-10-27 12:21:17
+Date: 2016-10-28 01:11:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -210,7 +210,6 @@ CREATE TABLE `m_motor` (
   `nama_foto` text,
   `url_foto` text,
   `m_status` enum('1','2','3') DEFAULT NULL,
-  `status_leasing` enum('1','2','3') DEFAULT NULL COMMENT '1(Aktif), 2(In-Aktif), 3(Delete)',
   `sys_create_user` int(11) DEFAULT NULL,
   `sys_update_user` int(11) DEFAULT NULL,
   `sys_delete_user` int(11) DEFAULT NULL,
@@ -218,8 +217,10 @@ CREATE TABLE `m_motor` (
   `sys_update_date` datetime DEFAULT NULL,
   `sys_delete_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of m_motor
 -- ----------------------------
+INSERT INTO `m_motor` VALUES ('1', 'NC11D1D', 'Honda Spacy Helm-in Karburator', 'Matic', 'Honda', '17500000', '540c68bbd5f7db6c48b2d24c9a80f615.jpg', '/assets/images//540c68bbd5f7db6c48b2d24c9a80f615.jpg', '1', '1', '6', null, '2016-10-28 00:36:07', '2016-10-28 01:08:24', null);
+INSERT INTO `m_motor` VALUES ('2', 'NC10D1D', 'Supra X 125', 'Manual Transmission', 'Honda', '16000000', '2e92629163c16161b44a301620535d41.jpg', '/assets/images//2e92629163c16161b44a301620535d41.jpg', '1', '1', null, '1', '2016-10-28 00:56:14', null, '2016-10-28 01:01:46');
