@@ -1,20 +1,24 @@
 <div style="font-size:  10px;">
     <table border="1" cellpadding="2">
-    <tr>
-        <td align="center">Kode</td>
-        <td align="center">Nama</td>
-        <td align="center">Alamat</td>
-        <td align="center">Telepon</td>
-        <td align="center">Status</td>
-    </tr>
-    <?php foreach($list as $kList=>$vList){ ?>
         <tr>
-            <td><?php echo $vList['kd_gudang'];?></td>
-            <td><?php echo $vList['gudang'];?></td>
-            <td><?php echo $vList['alamat'];?></td>
-            <td><?php echo $vList['telepon'];?></td>
-            <td><?php echo get_status($vList['status_gudang']);?></td>
+            <td align="center">KTP</td>
+            <td align="center">Nama</td>
+            <td align="center">TTL</td>
+            <td align="center">Kelamin</td>
+            <td align="center">Alamat</td>
+            <td align="center">Telp</td>
+            <td align="center">HP</td>
         </tr>
-    <?php } ?>
-</table>
+        <?php foreach ($list as $kList => $vList) { ?>
+            <tr>
+                <td><?php echo $vList['no_ktp']; ?></td>
+                <td><?php echo $vList['nama_customer']; ?></td>
+                <td><?php echo $vList['tempat_lahir_customer'] . ", " . $vList['tanggal_lahir_customer']; ?></td>
+                <td><?php echo ($vList['kelamin_customer'] == "P" ? "Pria" : "Wanita"); ?></td>
+                <td><?php echo $vList['alamat_customer']; ?></td>
+                <td><?php echo $vList['telepon_customer']; ?></td>
+                <td><?php echo $vList['handphone_customer']; ?></td>
+            </tr>
+        <?php } ?>
+    </table>
 </div>
