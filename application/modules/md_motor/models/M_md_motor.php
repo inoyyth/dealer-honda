@@ -18,15 +18,20 @@ Class M_md_motor extends CI_Model {
                               'detect_mime'=>true,
                               'allowed_types'=>'gif|jpg|png','max_size'=>3000);
         $this->upload->initialize($image_config);
-        if($this->upload->do_upload('foto')){
-            $image = $this->upload->data();  
-            $image_name = $image['file_name'];
-        }else{
-            if(isset($image_hidden) && !empty($image_hidden)){
-                 $image_name = $image_hidden;
-            }else{
-                $this->session->set_flashdata('error',  $this->upload->display_errors());
-                redirect("master-karyawan-tambah");
+        if ($this->upload->do_upload('foto')) {
+            $image = $this->upload->data();
+            $image_name = 'assets/images/' . $folder ."/". $image['file_name'];
+        } else {
+            if (isset($image_hidden) && !empty($image_hidden)) {
+                $image_name = $image_hidden;
+            } else {
+                $error = array('error' => $this->upload->display_errors());
+                if(strpos($error['error'],"You did not select a file to upload.")==true){
+                    $image_name = 'assets/images/' . $folder . '/motor_icon.png';
+                }else{
+                    $this->session->set_flashdata('error', $this->upload->display_errors());
+                    redirect("master-karyawan-tambah");
+                }
             }
         }
         

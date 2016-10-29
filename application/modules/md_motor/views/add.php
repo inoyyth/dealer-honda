@@ -46,7 +46,7 @@
                     <h3 class="content-header">Foto Motor</h3>
                 </div>
                 <div class="porlets-content text-center">
-                    <img id="image1" src="<?php echo base_url('assets/images/user_icon.png'); ?>" style="height: 300px;" alt="..." class="img-rounded img-responsive">
+                    <img id="image1" src="<?php echo base_url('assets/images/motor/motor_icon.png'); ?>" style="height: 300px;" alt="..." class="img-rounded img-responsive">
                     <input type="file" onchange="readURL(this);" class="form-control input-sm" name="foto" id="foto">
                 </div>
             </div>

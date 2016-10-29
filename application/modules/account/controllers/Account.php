@@ -28,13 +28,14 @@ class Account extends MX_Controller {
     }
 
     public function add() {
+        $this->breadcrumbs->push('Add', '/user-management-add');
         $data['list_menu'] = $this->m_account->get_active_menu();
         $data['view'] = "account/add";
         $this->load->view('default', $data);
     }
 
     public function edit($id) {
-        //var_dump($id);die;
+        $this->breadcrumbs->push('Edit', '/user-management-edit');
         $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
         $data['list_menu'] = $this->m_account->get_active_menu();
         $data['view'] = 'account/edit';

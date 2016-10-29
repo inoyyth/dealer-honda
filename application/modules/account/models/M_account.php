@@ -36,13 +36,18 @@ Class M_account extends CI_Model {
         $this->upload->initialize($image_config);
         if ($this->upload->do_upload('path_foto')) {
             $image = $this->upload->data();
-            $image_name = $image['file_name'];
+            $image_name = 'assets/images/' . $folder ."/". $image['file_name'];
         } else {
             if (isset($image_hidden) && !empty($image_hidden)) {
                 $image_name = $image_hidden;
             } else {
-                $this->session->set_flashdata('error', $this->upload->display_errors());
-                redirect("user-management-tambah");
+                $error = array('error' => $this->upload->display_errors());
+                if(strpos($error['error'],"You did not select a file to upload.")==true){
+                    $image_name = 'assets/images/' . $folder . '/user_icon.png';
+                }else{
+                    $this->session->set_flashdata('error', $this->upload->display_errors());
+                    redirect("user-management-tambah");
+                }
             }
         }
         $data = array('username' => $this->input->post('username'),

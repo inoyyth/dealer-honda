@@ -20,8 +20,6 @@
                                 <th>#</th>
                                 <th>Kode Leasing</th>
                                 <th>Leasing</th>
-                                <th>Telepon</th>
-                                <th>Email</th>
                                 <th>Pic</th>
                                 <th class="text-center" style="width: 150px;">Action</th>
                             </tr>
@@ -37,12 +35,11 @@
                                         <td><?php echo intval($this->uri->segment(2) + ($k + 1)); ?></td>
                                         <td><?php echo $v['kd_leasing']; ?></td>
                                         <td><?php echo $v['leasing']; ?></td>
-                                        <td><?php echo $v['telepon']; ?></td>
-                                        <td><?php echo $v['email']; ?></td>
                                         <td><?php echo $v['kd_karyawan'] . " " . $v['karyawan']; ?></td>
                                         <td class="text-center">
                                             <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'master-leasing-edit-' . $v['id'], 'text' => 'Edit')); ?>
                                             <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'master-leasing-delete-' . $v['id'], 'text' => 'Delete')); ?>
+                                            <!--<a href="<?php echo base_url('master-leasing-detail-'.$v['id']);?>" class="btn btn-sm btn-success"><i class="fa fa-info-circle"></i> Detail</a>-->
                                         </td>
                                     </tr>
     <?php }
@@ -62,22 +59,6 @@
                                 </td>
                                 <td>
                                     <input class="form-control input-sm" name="leasing" value="<?php echo (isset($sr_data['leasing']) ? $sr_data['leasing'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
-                                                submit_search('form1');
-                                            } else {
-                                                return false;
-                                            }
-                                            ;"/>
-                                </td>
-                                <td>
-                                    <input class="form-control input-sm" name="telepon" value="<?php echo (isset($sr_data['telepon']) ? $sr_data['alamat'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
-                                                submit_search('form1');
-                                            } else {
-                                                return false;
-                                            }
-                                            ;"/>
-                                </td>
-                                <td>
-                                    <input class="form-control input-sm" name="email" value="<?php echo (isset($sr_data['email']) ? $sr_data['email'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;

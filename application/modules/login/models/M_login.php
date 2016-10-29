@@ -17,5 +17,13 @@ class M_login extends CI_Model {
             return false; //if data is wrong
         }
     }
+    
+    public function last_login($id){
+        $data = array('last_login'=>date('Y-m-d H:i:s'));
+        $key = array('id' => $id);
+        $this->db->where($key);
+        $this->db->update($this->table,$data,$key);
+        return true;
+    }
 
 }

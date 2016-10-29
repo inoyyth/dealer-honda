@@ -9,7 +9,7 @@
                 <div class="porlets-content">
                     <div class="row">
                         <div class="col-md-4">
-                            <img id="image1" src="<?php echo base_url('assets/images/user_icon.png'); ?>" alt="..." class="img-circle img-responsive">
+                            <img id="image1" src="<?php echo base_url('assets/images/account/user_icon.png'); ?>" alt="..." class="img-circle img-responsive">
                             <input type="file" onchange="readURL(this);" class="form-control input-sm" name="path_foto" id="path_foto">
                         </div>
                         <div class="col-md-8">

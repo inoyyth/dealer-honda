@@ -28,11 +28,13 @@ class Md_motor extends MX_Controller {
     }
 
     public function add() {
+        $this->breadcrumbs->push('Add', '/master-motor-tambah');
         $data['view'] = "md_motor/add";
         $this->load->view('default', $data);
     }
 
     public function edit($id) {
+        $this->breadcrumbs->push('Edit', '/master-motor-edit');
         $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
         $data['view'] = 'md_motor/edit';
         $this->load->view('default', $data);

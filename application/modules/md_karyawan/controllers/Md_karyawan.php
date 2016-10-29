@@ -29,6 +29,7 @@ class Md_karyawan extends MX_Controller {
     }
 
     public function add() {
+        $this->breadcrumbs->push('Add', '/master-karyawan-tambah');
         $data['code'] = $this->main_model->generate_code($this->table, 'EMP', '-');
         $data['list_jabatan'] = $this->main_model->getMaster('m_jabatan', $like = array(), $where = array('status_jabatan' => '1'));
         $data['view'] = "md_karyawan/add";
@@ -36,6 +37,7 @@ class Md_karyawan extends MX_Controller {
     }
 
     public function edit($id) {
+        $this->breadcrumbs->push('Edit', '/master-karyawan-edit');
         $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
         $data['list_jabatan'] = $this->main_model->getMaster('m_jabatan', $like = array(), $where = array('status_jabatan' => '1'));
         $data['view'] = 'md_karyawan/edit';
