@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2016-10-28 01:11:16
+Date: 2016-10-29 15:17:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,13 +37,38 @@ CREATE TABLE `account` (
   `last_login` datetime NOT NULL,
   `status` enum('1','2') DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of account
 -- ----------------------------
-INSERT INTO `account` VALUES ('6', 'inoy@sportix.com', 'inoy ajah', 'V4+12xYhTQoWUW/x1YiZa4X79eZXdW6yVcjCxo3KqBeulvzco+5rrCeMbF1SX/aM6csWWwJm/Eh7L7v11Ky8IA==', '909090909', 'supri170845@gmail.com', '64a020e0c210b5004d2ce50c21240d71.jpg', 'a:13:{i:0;a:3:{s:4:\"menu\";s:2:\"23\";s:4:\"slug\";s:14:\"master-jabatan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:1;a:3:{s:4:\"menu\";s:2:\"24\";s:4:\"slug\";s:15:\"master-karyawan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:2;a:3:{s:4:\"menu\";s:2:\"26\";s:4:\"slug\";s:15:\"master-customer\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:3;a:3:{s:4:\"menu\";s:2:\"27\";s:4:\"slug\";s:12:\"master-motor\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:4;a:3:{s:4:\"menu\";s:2:\"28\";s:4:\"slug\";s:16:\"master-aksesoris\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:5;a:3:{s:4:\"menu\";s:2:\"29\";s:4:\"slug\";s:13:\"master-gudang\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:6;a:3:{s:4:\"menu\";s:2:\"30\";s:4:\"slug\";s:14:\"master-leasing\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:7;a:3:{s:4:\"menu\";s:2:\"31\";s:4:\"slug\";s:15:\"master-supplier\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:8;a:3:{s:4:\"menu\";s:2:\"36\";s:4:\"slug\";s:15:\"user-management\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:9;a:3:{s:4:\"menu\";s:2:\"32\";s:4:\"slug\";s:9:\"penjualan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:10;a:3:{s:4:\"menu\";s:2:\"33\";s:4:\"slug\";s:10:\"pembayaran\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:11;a:3:{s:4:\"menu\";s:2:\"34\";s:4:\"slug\";s:12:\"return-motor\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:12;a:3:{s:4:\"menu\";s:2:\"35\";s:4:\"slug\";s:3:\"pdi\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}}', null, '1', null, '0000-00-00 00:00:00', '2016-10-24 10:31:20', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+INSERT INTO `account` VALUES ('6', 'inoy@sportix.com', 'inoy ajah wkwkw wkwkwk', '7IwnMWeYLdxrqchp9KrxL7hPViFn4l0Kh7ZJZKshTqPnIW8yTJ8N+moVcE8UXxxfchx0qgfVr22H4voNLcBttg==', '909090909', 'supri170845@gmail.com', 'assets/images/account/3e15e47695fe78a92a28313a79875c23.jpg', 'a:13:{i:0;a:3:{s:4:\"menu\";s:2:\"23\";s:4:\"slug\";s:14:\"master-jabatan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:1;a:3:{s:4:\"menu\";s:2:\"24\";s:4:\"slug\";s:15:\"master-karyawan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:2;a:3:{s:4:\"menu\";s:2:\"26\";s:4:\"slug\";s:15:\"master-customer\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:3;a:3:{s:4:\"menu\";s:2:\"27\";s:4:\"slug\";s:12:\"master-motor\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:4;a:3:{s:4:\"menu\";s:2:\"28\";s:4:\"slug\";s:16:\"master-aksesoris\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:5;a:3:{s:4:\"menu\";s:2:\"29\";s:4:\"slug\";s:13:\"master-gudang\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:6;a:3:{s:4:\"menu\";s:2:\"30\";s:4:\"slug\";s:14:\"master-leasing\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:7;a:3:{s:4:\"menu\";s:2:\"31\";s:4:\"slug\";s:15:\"master-supplier\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:8;a:3:{s:4:\"menu\";s:2:\"36\";s:4:\"slug\";s:15:\"user-management\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:9;a:3:{s:4:\"menu\";s:2:\"32\";s:4:\"slug\";s:9:\"penjualan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:10;a:3:{s:4:\"menu\";s:2:\"33\";s:4:\"slug\";s:10:\"pembayaran\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:11;a:3:{s:4:\"menu\";s:2:\"34\";s:4:\"slug\";s:12:\"return-motor\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:12;a:3:{s:4:\"menu\";s:2:\"35\";s:4:\"slug\";s:3:\"pdi\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}}', null, '6', null, '0000-00-00 00:00:00', '2016-10-29 07:28:35', '0000-00-00 00:00:00', '2016-10-29 11:39:57', '1');
 INSERT INTO `account` VALUES ('7', 'sapta@gmail.com', 'Sapta', 'GsMxDWTIw95OSkBGV7MjIrA4muCNpIzN9Mm74/Z92hYzlyKeoHtM3Z5u2bAi/UVKTplMlUztEy4wXAI2aHnOYw==', '879979797979', 'supri170845@gmail.com', '667fa1e720b199d98293f0eec4086ebe.jpg', 'a:10:{i:0;a:3:{s:4:\"menu\";s:2:\"23\";s:4:\"slug\";s:14:\"master-jabatan\";s:5:\"child\";a:4:{s:3:\"add\";i:0;s:3:\"upd\";i:0;s:3:\"del\";i:0;s:3:\"prt\";i:1;}}i:1;a:3:{s:4:\"menu\";s:2:\"24\";s:4:\"slug\";s:15:\"master-karyawan\";s:5:\"child\";a:4:{s:3:\"add\";i:0;s:3:\"upd\";i:0;s:3:\"del\";i:0;s:3:\"prt\";i:1;}}i:2;a:3:{s:4:\"menu\";s:2:\"26\";s:4:\"slug\";s:15:\"master-customer\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:3;a:3:{s:4:\"menu\";s:2:\"27\";s:4:\"slug\";s:12:\"master-motor\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:0;s:3:\"prt\";i:1;}}i:4;a:3:{s:4:\"menu\";s:2:\"28\";s:4:\"slug\";s:16:\"master-aksesoris\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:5;a:3:{s:4:\"menu\";s:2:\"29\";s:4:\"slug\";s:13:\"master-gudang\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:6;a:3:{s:4:\"menu\";s:2:\"30\";s:4:\"slug\";s:14:\"master-leasing\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:7;a:3:{s:4:\"menu\";s:2:\"31\";s:4:\"slug\";s:15:\"master-supplier\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:8;a:3:{s:4:\"menu\";s:2:\"32\";s:4:\"slug\";s:9:\"penjualan\";s:5:\"child\";a:4:{s:3:\"add\";i:0;s:3:\"upd\";i:0;s:3:\"del\";i:0;s:3:\"prt\";i:0;}}i:9;a:3:{s:4:\"menu\";s:2:\"33\";s:4:\"slug\";s:10:\"pembayaran\";s:5:\"child\";a:4:{s:3:\"add\";i:0;s:3:\"upd\";i:0;s:3:\"del\";i:0;s:3:\"prt\";i:0;}}}', null, '1', null, '0000-00-00 00:00:00', '2016-10-26 01:27:10', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+
+-- ----------------------------
+-- Table structure for `global_data`
+-- ----------------------------
+DROP TABLE IF EXISTS `global_data`;
+CREATE TABLE `global_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_data` varchar(50) NOT NULL,
+  `value` varchar(100) DEFAULT NULL,
+  `global_data_status` enum('1','2','3') DEFAULT NULL COMMENT '1(Aktif), 2(In-Aktif), 3(Delete)',
+  `sys_create_user` int(11) DEFAULT NULL,
+  `sys_update_user` int(11) DEFAULT NULL,
+  `sys_delete_user` int(11) DEFAULT NULL,
+  `sys_create_date` datetime DEFAULT NULL,
+  `sys_update_date` datetime DEFAULT NULL,
+  `sys_delete_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of global_data
+-- ----------------------------
+INSERT INTO `global_data` VALUES ('1', 'aksesoris', 'aki', '1', null, null, null, null, null, null);
+INSERT INTO `global_data` VALUES ('2', 'aksesoris', 'spion', '1', null, null, null, null, null, null);
+INSERT INTO `global_data` VALUES ('3', 'aksesoris', 'helm', '1', null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `menus`
@@ -84,6 +109,61 @@ INSERT INTO `menus` VALUES ('33', '2', 'pembayaran', 'Pembayaran', 'fa fa-circle
 INSERT INTO `menus` VALUES ('34', '3', 'retur_motor', 'Retur Motor', 'fa fa-circle', 'return-motor', '1', '2');
 INSERT INTO `menus` VALUES ('35', '3', 'pdi', 'PDI', 'fa fa-circle', 'pdi', '3', '2');
 INSERT INTO `menus` VALUES ('36', '1', 'account', 'Users Management', 'fa fa-circle', 'user-management', '9', '2');
+
+-- ----------------------------
+-- Table structure for `m_aksesoris`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_aksesoris`;
+CREATE TABLE `m_aksesoris` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kd_aksesoris` varchar(20) NOT NULL,
+  `aksesoris` varchar(35) NOT NULL,
+  `kategori` int(11) NOT NULL,
+  `url_foto` text NOT NULL,
+  `m_status` enum('1','2','3') NOT NULL DEFAULT '1',
+  `sys_create_user` int(11) DEFAULT NULL,
+  `sys_update_user` int(11) DEFAULT NULL,
+  `sys_delete_user` int(11) DEFAULT NULL,
+  `sys_create_date` datetime DEFAULT NULL,
+  `sys_update_date` datetime DEFAULT NULL,
+  `sys_delete_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of m_aksesoris
+-- ----------------------------
+INSERT INTO `m_aksesoris` VALUES ('1', 'AKS-20161029-0001', 'Aki GS Batere 220 V', '2', 'assets/images/aksesoris/65291c319eeaf8cc3164c0746af0ab80.png', '1', '6', '6', '6', '2016-10-29 11:57:08', '2016-10-29 12:32:04', '2016-10-29 12:23:08');
+INSERT INTO `m_aksesoris` VALUES ('2', 'AKS-20161029-0002', 'Aki GS Batere 230 V', '2', 'assets/images/aksesoris/3f457ace3b1860ad92a2c9a53a7b0693.png', '1', '6', null, null, '2016-10-29 14:21:11', null, null);
+
+-- ----------------------------
+-- Table structure for `m_customer`
+-- ----------------------------
+DROP TABLE IF EXISTS `m_customer`;
+CREATE TABLE `m_customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `no_ktp` varchar(30) DEFAULT NULL,
+  `nama_customer` varchar(100) DEFAULT NULL,
+  `tempat_lahir_customer` varchar(50) DEFAULT NULL,
+  `tanggal_lahir_customer` date DEFAULT NULL,
+  `kelamin_customer` enum('P','W') DEFAULT NULL,
+  `alamat_customer` text,
+  `telepon_customer` varchar(20) DEFAULT NULL,
+  `handphone_customer` varchar(20) DEFAULT NULL,
+  `m_status` enum('1','2','3') DEFAULT NULL,
+  `sys_create_user` int(11) DEFAULT NULL,
+  `sys_update_user` int(11) DEFAULT NULL,
+  `sys_delete_user` int(11) DEFAULT NULL,
+  `sys_create_date` datetime DEFAULT NULL,
+  `sys_update_date` datetime DEFAULT NULL,
+  `sys_delete_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of m_customer
+-- ----------------------------
+INSERT INTO `m_customer` VALUES ('1', '0909090909', 'Isyana', 'jakarta', '2016-10-22', 'W', 'jl. jagakarsa jakarta selatan', '0211234567', '087776666777', '1', null, '6', '6', null, '2016-10-29 15:03:31', '2016-10-29 15:03:49');
 
 -- ----------------------------
 -- Table structure for `m_gudang`
@@ -157,13 +237,15 @@ CREATE TABLE `m_karyawan` (
   `sys_update_date` datetime DEFAULT NULL,
   `sys_delete_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`,`kd_karyawan`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of m_karyawan
 -- ----------------------------
-INSERT INTO `m_karyawan` VALUES ('1', 'EMP-0001', 'Inoy', '7', '2016-10-10', '2016-10-26', 'a.jpg', '1', null, null, '1', null, null, '2016-10-11 08:01:28');
-INSERT INTO `m_karyawan` VALUES ('2', 'EMP-0002', 'Karyawan 1', '4', '2016-10-11', '2016-10-14', '2d583279ca69596f66fd094f98e829c4.jpg', '1', '1', '1', null, '2016-10-11 07:54:05', '2016-10-11 07:59:42', null);
+INSERT INTO `m_karyawan` VALUES ('1', 'EMP-0001', 'Inoy', '4', '2016-10-10', '2017-12-13', 'assets/images/karyawan/56a1db0151a39a719963cfa193d9b448.jpg', '1', null, '6', '1', null, '2016-10-28 23:35:27', '2016-10-11 08:01:28');
+INSERT INTO `m_karyawan` VALUES ('2', 'EMP-0002', 'Karyawan 1', '4', '2016-10-11', '2016-11-03', 'assets/images/karyawan/4a7930fd0cfce40ee43741b4d0c0321f.jpg', '1', '1', '6', null, '2016-10-11 07:54:05', '2016-10-28 23:35:43', null);
+INSERT INTO `m_karyawan` VALUES ('7', 'EMP-0003', 'coba', '7', '2016-10-06', '2016-10-07', 'assets/images/karyawan/assets/images/karyawan/user_icon.png', '2', '6', '6', null, '2016-10-28 23:29:39', '2016-10-29 14:17:08', null);
+INSERT INTO `m_karyawan` VALUES ('8', 'EMP-0008', 'coba', '4', '2016-10-28', '2017-09-19', 'assets/images/karyawan/user_icon.png', '1', '6', '6', null, '2016-10-28 23:36:07', '2016-10-28 23:36:16', null);
 
 -- ----------------------------
 -- Table structure for `m_leasing`
@@ -217,10 +299,11 @@ CREATE TABLE `m_motor` (
   `sys_update_date` datetime DEFAULT NULL,
   `sys_delete_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of m_motor
 -- ----------------------------
-INSERT INTO `m_motor` VALUES ('1', 'NC11D1D', 'Honda Spacy Helm-in Karburator', 'Matic', 'Honda', '17500000', '540c68bbd5f7db6c48b2d24c9a80f615.jpg', '/assets/images//540c68bbd5f7db6c48b2d24c9a80f615.jpg', '1', '1', '6', null, '2016-10-28 00:36:07', '2016-10-28 01:08:24', null);
-INSERT INTO `m_motor` VALUES ('2', 'NC10D1D', 'Supra X 125', 'Manual Transmission', 'Honda', '16000000', '2e92629163c16161b44a301620535d41.jpg', '/assets/images//2e92629163c16161b44a301620535d41.jpg', '1', '1', null, '1', '2016-10-28 00:56:14', null, '2016-10-28 01:01:46');
+INSERT INTO `m_motor` VALUES ('1', 'NC11D1D', 'Honda Spacy Helm-in Karburator', 'Matic', 'Honda', '17500000', 'assets/images/motor/e8053f7ca1ad68bc81544a656c96a56a.jpg', '/assets/images//assets/images/motor/e8053f7ca1ad68bc81544a656c96a56a.jpg', '1', '1', '6', null, '2016-10-28 00:36:07', '2016-10-28 23:42:07', null);
+INSERT INTO `m_motor` VALUES ('2', 'NC10D1D', 'Supra X 125', 'Manual Transmission', 'Honda', '16000000', 'assets/images/motor/f41f35a57a7bbe416ddd3dc9caf324cd.jpg', '/assets/images//assets/images/motor/f41f35a57a7bbe416ddd3dc9caf324cd.jpg', '1', '1', '6', '1', '2016-10-28 00:56:14', '2016-10-28 23:42:15', '2016-10-28 01:01:46');
+INSERT INTO `m_motor` VALUES ('3', 'uyhuyu', 'jhjh', 'xx', 'Honda', '90000000', 'assets/images/motor/motor_icon.png', '/assets/images//assets/images/motor/motor_icon.png', '3', '6', '6', '6', '2016-10-28 23:45:50', '2016-10-28 23:48:44', '2016-10-28 23:48:49');
