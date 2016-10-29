@@ -1,13 +1,13 @@
 <?php
 
-Class M_md_karyawan extends CI_Model {
+Class M_md_aksesoris extends CI_Model {
 
-    var $table = "m_karyawan";
+    var $table = "m_aksesoris";
 
     public function save() {
         $id = $this->input->post('id');
         $image_hidden = $this->input->post('image_hidden');
-        $folder = "karyawan";
+        $folder = "aksesoris";
         if (!is_dir('./assets/images/' . $folder)) {
             mkdir('./assets/images/' . $folder, 0777, TRUE);
         }
@@ -30,19 +30,17 @@ Class M_md_karyawan extends CI_Model {
                     $image_name = 'assets/images/' . $folder . '/icon.png';
                 }else{
                     $this->session->set_flashdata('error', $this->upload->display_errors());
-                    redirect("master-karyawan-tambah");
+                    redirect("master-aksesoris-tambah");
                 }
             }
         }
-        $date = strtotime(date('Y-m-d'));
+
         $data = array(
-            'kd_karyawan' => $this->input->post('kd_karyawan'),
-            'karyawan' => $this->input->post('karyawan'),
-            'kd_jabatan_karyawan' => $this->input->post('kd_jabatan_karyawan'),
-            'tgl_masuk' => $this->input->post('tgl_masuk'),
-            'tgl_keluar' => $this->input->post('tgl_keluar'),
-            'foto' => $image_name,
-            'status_karyawan' => (strtotime($this->input->post('tgl_keluar')) < $date?"2":$this->input->post('status_karyawan'))
+            'kd_aksesoris' => $this->input->post('kd_aksesoris'),
+            'aksesoris' => $this->input->post('aksesoris'),
+            'kategori' => $this->input->post('kategori'),
+            'url_foto' => $image_name,
+            'm_status' => $this->input->post('m_status')
         );
         if (empty($id)) {
             $this->db->insert($this->table, $this->main_model->create_sys($data));
@@ -56,9 +54,9 @@ Class M_md_karyawan extends CI_Model {
 
     public function getdata($table, $limit, $pg, $like = array(), $where = array()) {
         unset($like['page']);
-        $this->db->select("m_karyawan.*,m_jabatan.jabatan");
+        $this->db->select($this->table.".*,global_data.value");
         $this->db->from($table);
-        $this->db->join('m_jabatan', 'm_karyawan.kd_jabatan_karyawan=m_jabatan.id', 'left');
+        $this->db->join('global_data', $this->table.'.kategori=global_data.id', 'left');
         $this->db->like($like);
         $this->db->where($where);
         $this->db->limit($pg, $limit);
