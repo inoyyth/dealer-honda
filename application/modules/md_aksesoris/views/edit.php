@@ -43,7 +43,7 @@
 				<h3 class="content-header">Foto Aksesoris</h3>
             </div>
             <div class="porlets-content">
-                <img id="image1" src="<?php echo (!empty($detail['url_foto'])?base_url($detail['url_foto']):base_url('assets/images/aksesoris/icon.png'));?>" alt="..." class="img-circle img-responsive">
+                <img onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/aksesoris/icon.png');?>';" id="image1" src="<?php echo (!empty($detail['url_foto'])?base_url($detail['url_foto']):base_url('assets/images/aksesoris/icon.png'));?>" alt="..." class="img-circle img-responsive">
                 <input type="file" onchange="readURL(this);" class="form-control input-sm" name="foto" id="foto">
                 <input type="hidden" name="image_hidden" value="<?php echo $detail['url_foto'];?>">
             </div>
