@@ -12,7 +12,7 @@ class Md_leasing extends MX_Controller {
         $this->breadcrumbs->push('Master Leasing', '/master-leasing');
     }
 
-    public function index() {
+    public function index() {       
         $data_session = $this->__getSession();
         $config['base_url'] = base_url() . 'master-leasing-page';
         $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
@@ -28,6 +28,7 @@ class Md_leasing extends MX_Controller {
     }
 
     public function add() {
+        $this->breadcrumbs->push('Add', '/master-leasing-add');
         $data['list_karyawan'] = $this->main_model->getMaster('m_karyawan', $like = array(), $where = array('status_karyawan' => '1'));
         //$data['code'] = $this->main_model->generate_code($this->table, 'LSN', '-');
         $data['view'] = "md_leasing/add";
@@ -35,6 +36,7 @@ class Md_leasing extends MX_Controller {
     }
 
     public function edit($id) {
+        $this->breadcrumbs->push('Edit', '/master-leasing-edit');
         $data['list_karyawan'] = $this->main_model->getMaster('m_karyawan', $like = array(), $where = array('status_karyawan' => '1'));
         $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
         $data['view'] = 'md_leasing/edit';

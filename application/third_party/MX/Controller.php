@@ -58,6 +58,7 @@ class MX_Controller
 		$this->load->library("multi_menu");
                 $this->load->library("button_lib");
 		$this->multi_menu->set_items($this->main_model->menu_all());
+                $this->sessionGlobal = $this->session->userdata('logged_in_admin');
 	}
 	
 	public function __get($class) 

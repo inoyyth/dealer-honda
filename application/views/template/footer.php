@@ -177,6 +177,7 @@
 <script src="<?php echo base_url();?>themes/plugins/input-mask/demo-mask.js"></script>
 <script src="<?php echo base_url();?>themes/plugins/input-mask/jquery.inputmask.min.js"></script>
 <script src="<?php echo base_url();?>themes/js/common-script.js"></script>
+<script src="<?php echo base_url();?>themes/js/jquery.slimscroll.min.js"></script>
 <script src="<?php echo base_url();?>themes/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>  
 <script>
     $(document).ready(function(){

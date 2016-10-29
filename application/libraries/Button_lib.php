@@ -60,6 +60,10 @@ class Button_lib {
             $style = "btn btn-default btn-sm";
             $icon = "fa fa-print";
         }
+        if($config['anchor']=="det"){
+            $style = "btn btn-succes btn-sm";
+            $icon = "fa fa-info-circle";
+        }
         echo "<a href='".base_url($config['url'])."' ".$event." class='".$style."'><i class='".$icon."'></i> ".$config['text']."</a>";
     }
 

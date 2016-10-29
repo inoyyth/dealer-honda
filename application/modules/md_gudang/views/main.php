@@ -20,10 +20,7 @@
                                 <th>#</th>
                                 <th>Kode Gudang</th>
                                 <th>Nama Gudang</th>
-                                <th>Alamat</th>
-                                <th>Telepon</th>
-                                <th>Status</th>
-                                <th class="text-center" style="width: 120px;">Action</th>
+                                <th class="text-center" style="width: 150px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,12 +34,10 @@
                                         <td><?php echo intval($this->uri->segment(2) + ($k + 1)); ?></td>
                                         <td><?php echo $v['kd_gudang']; ?></td>
                                         <td><?php echo $v['gudang']; ?></td>
-                                        <td><?php echo $v['alamat']; ?></td>
-                                        <td><?php echo $v['telepon']; ?></td>
-                                        <td><?php echo get_status($v['status_gudang']); ?></td>
                                         <td class="text-center">
                                             <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'master-gudang-edit-' . $v['id'], 'text' => 'Edit')); ?>
-                                            <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'master-gudang-delete-' . $v['id'], 'text' => 'Delete')); ?>
+                                            <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'master-gudang-delete-' . $v['id'], 'text' => 'Delete')); ?> 
+                                            <!--<a href="<?php echo base_url('master-gudang-detail-'.$v['id']);?>" class="btn btn-sm btn-success"><i class="fa fa-info-circle"></i> Detail</a>-->
                                         </td>
                                     </tr>
     <?php }
@@ -67,29 +62,6 @@
                                                 return false;
                                             }
                                             ;"/>
-                                </td>
-                                <td>
-                                    <input class="form-control input-sm" name="alamat" value="<?php echo (isset($sr_data['alamat']) ? $sr_data['alamat'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
-                                                submit_search('form1');
-                                            } else {
-                                                return false;
-                                            }
-                                            ;"/>
-                                </td>
-                                <td>
-                                    <input class="form-control input-sm" name="telepon" value="<?php echo (isset($sr_data['telepon']) ? $sr_data['telepon'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
-                                                submit_search('form1');
-                                            } else {
-                                                return false;
-                                            }
-                                            ;"/>
-                                </td>
-                                <td>
-                                    <select class="form-control input-sm" name="status_gudang" onchange="submit_search('form1');">                         
-                                        <option value=""></option>
-                                        <option value="1" <?php echo (isset($sr_data['status_gudang']) && $sr_data['status_gudang'] == "1" ? "selected" : ""); ?>>Aktif</option>
-                                        <option value="2" <?php echo (isset($sr_data['status_gudang']) && $sr_data['status_gudang'] == "2" ? "selected" : ""); ?>>Non Aktif</option>
-                                    </select>
                                 </td>
                             </tr>
                             </tfoot>

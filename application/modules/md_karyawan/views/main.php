@@ -6,9 +6,9 @@
                     <div class="col-md-6 pull-left">Master Karyawan
                     </div>
                     <div class="col-md-6 pull-right text-right">
-                        <?php echo $this->button_lib->render(array('anchor'=>'add','url'=>'master-karyawan-tambah','text'=>'Tambah'));?>
-                                                <?php echo $this->button_lib->render(array('anchor'=>'prt','url'=>'master-karyawan-pdf/?template=table_pdf&name=master_karyawan','text'=>'Print'));?>
-                                                <?php echo $this->button_lib->render(array('anchor'=>'prt','url'=>'master-karyawan-excel/?template=table_excel&name=master_karyawan','text'=>'Excel'));?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'master-karyawan-tambah', 'text' => 'Tambah')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'master-karyawan-pdf/?template=table_pdf&name=master_karyawan', 'text' => 'Print')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'master-karyawan-excel/?template=table_excel&name=master_karyawan', 'text' => 'Excel')); ?>
                     </div> 
                 </div>
             </div>
@@ -46,7 +46,8 @@
                                         </td>
                                     </tr>
                                 <?php }
-                            } ?>
+                            }
+                            ?>
                         </tbody>
                         <tfoot>
                         <form id="form1" method="post" action="<?php echo base_url('master-karyawan'); ?>">
@@ -71,7 +72,7 @@
                                 <td>
                                     <select class="form-control input-sm" name="kd_jabatan_karyawan" onchange="submit_search('form1');"> 
                                         <option value=""></option>
-<?php foreach ($list_jabatan as $kListJabatan => $vListJabatan) { ?>
+                                        <?php foreach ($list_jabatan as $kListJabatan => $vListJabatan) { ?>
                                             <option value="<?php echo $vListJabatan['id']; ?>" <?php echo ($vListJabatan['id'] == $sr_data['kd_jabatan_karyawan'] ? "selected" : ""); ?>><?php echo $vListJabatan['jabatan']; ?></option>
 <?php } ?>
                                     </select>

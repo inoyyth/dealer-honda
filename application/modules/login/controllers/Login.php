@@ -46,6 +46,7 @@ class Login extends MX_Controller {
                     //set session with value from database
                     $this->session->set_userdata('logged_in_admin', $sess_arrayx);
                 }
+                $this->m_login->last_login($sess_arrayx['id']);
                 $this->session->set_flashdata('success', 'Login is Success');
                 redirect('login');
             } else {
