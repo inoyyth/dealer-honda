@@ -50,7 +50,7 @@
 				<h3 class="content-header">Foto Karyawan</h3>
             </div>
             <div class="porlets-content">
-                <img id="image1" src="<?php echo base_url('assets/images/karyawan/icon.png');?>" alt="..." class="img-circle img-responsive">
+                <img id="image1" onerror="this.onerror=null;this.src='<?php echo base_url('assets/images/karyawan/icon.png');?>';" src="<?php echo base_url('assets/images/karyawan/icon.png');?>" alt="..." class="img-circle img-responsive">
                 <input type="file" onchange="readURL(this);" class="form-control input-sm" name="foto" id="foto">
             </div>
         </div>
