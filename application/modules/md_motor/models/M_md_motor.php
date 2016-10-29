@@ -27,7 +27,7 @@ Class M_md_motor extends CI_Model {
             } else {
                 $error = array('error' => $this->upload->display_errors());
                 if(strpos($error['error'],"You did not select a file to upload.")==true){
-                    $image_name = 'assets/images/' . $folder . '/motor_icon.png';
+                    $image_name = 'assets/images/' . $folder . '/icon.png';
                 }else{
                     $this->session->set_flashdata('error', $this->upload->display_errors());
                     redirect("master-karyawan-tambah");

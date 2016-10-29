@@ -8,31 +8,30 @@
             </div>
             <div class="porlets-content">
                 <div class="form-group">
-                    <input type="hidden" name="id" value="<?php echo $detail['id'];?>">
                     <label>Kode Gudang</label>
-                    <input type="text" name="kd_gudang" parsley-trigger="change" required readonly="true" value="<?php echo $detail['kd_gudang'];?>" class="form-control">
+                    <input type="text" name="kd_gudang" parsley-trigger="change" required readonly="true" value="<?php echo $code;?>" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Nama Gudang</label>
-                    <input type="text" name="gudang" parsley-trigger="change" required placeholder="Isi Nama Gudang" class="form-control" value="<?php echo $detail['gudang'];?>">
+                    <input type="text" name="gudang" parsley-trigger="change" required placeholder="Isi Nama Gudang" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Nama Gudang</label>
-                    <textarea name="alamat" parsley-trigger="change" required placeholder="Isi Alamat Gudang" class="form-control"><?php echo $detail['alamat'];?></textarea>
+                    <textarea name="alamat" parsley-trigger="change" required placeholder="Isi Alamat Gudang" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
                     <label>Telepon</label>
-                    <input type="tel" name="telepon" parsley-trigger="change" parsley-type="digits" required placeholder="Isi Tanggal Telepon" class="form-control" value="<?php echo $detail['telepon'];?>">
+                    <input type="tel" name="telepon" parsley-trigger="change" parsley-type="digits" required placeholder="Isi Tanggal Telepon" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Pic</label>
-                    <input type="text" name="pic" parsley-trigger="change" required placeholder="Isi Nama PIC Gudang" class="form-control" value="<?php echo $detail['pic'];?>">
+                    <input type="text" name="pic" parsley-trigger="change" required placeholder="Isi Nama PIC Gudang" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Status</label>
                     <select name="status_gudang" placeholder="Pilih Status" required class="form-control">
-                        <option value="1" <?php echo (isset($detail['status_gudang'])&&$detail['status_gudang']=='1'?"selected":"selected");?>>Aktif</option>
-                        <option value="2" <?php echo (isset($detail['status_gudang'])&&$detail['status_gudang']=='2'?"selected":"");?>>Non Aktif</option>
+                        <option value="1">Aktif</option>
+                        <option value="2">Non Aktif</option>
                     </select>
                 </div>
                 <button class="btn btn-primary" type="submit">Submit</button>

@@ -3,13 +3,13 @@
 		<div class="block-web">
 			<div class="header">
 				<div class="actions"> </div>
-				<h3 class="content-header">Master Level</h3>
+				<h3 class="content-header">Master Jabatan</h3>
             </div>
             <div class="porlets-content">
 				<form action="<?php echo base_url("master-jabatan-save");?>" method="post" parsley-validate novalidate>
 					<input type="hidden" name="id">
 					<div class="form-group">
-						<label>Nama Level</label>
+						<label>Nama Jabatan</label>
 						<input type="text" name="jabatan" parsley-trigger="change" required placeholder="Isi Nama Jabatan" class="form-control">
 					</div>
 					<div class="form-group">

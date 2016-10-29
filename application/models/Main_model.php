@@ -100,11 +100,15 @@ Class Main_model extends CI_Model {
         return $this->db->get()->result_array();
     }
 
-    public function generate_code($tables, $prefix, $separator, $digit = 4) {
+    public function generate_code($tables, $prefix, $separator, $digit = 4, $date=true) {
         $this->db->select_max('id', 'max_id');
         $maxi = $this->db->get($tables)->row('max_id');
         $hsl = str_pad(($maxi == 0 ? 1 : intval($maxi) + 1), $digit, '0', STR_PAD_LEFT);
-        return $prefix . $separator . $hsl;
+        if($date==true){
+            return $prefix . $separator . date('Ymd') . $separator . $hsl;
+        }else{
+            return $prefix . $separator . $hsl;
+        }
     }
 
     public function generate_code_kwitansi($tables, $prefix, $digit = 4) {
