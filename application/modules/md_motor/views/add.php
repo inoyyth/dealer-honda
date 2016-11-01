@@ -12,6 +12,14 @@
                         <input type="text" name="tipe_motor" parsley-trigger="change" required placeholder="Isi Tipe Motor" class="form-control">
                     </div>
                     <div class="form-group">
+                        <label>No Rangka</label>
+                        <input type="text" name="norangka" parsley-trigger="change" required placeholder="Isi No Rangka" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>No Mesin</label>
+                        <input type="text" name="nomsn" parsley-trigger="change" required placeholder="Isi No Mesin" class="form-control">
+                    </div>
+                    <div class="form-group">
                         <label>Nama Motor</label>
                         <input type="text" name="nama_motor" parsley-trigger="change" required placeholder="Isi Nama Motor" class="form-control">
                     </div>
@@ -22,6 +30,20 @@
                     <div class="form-group">
                         <label>Merk</label>
                         <input type="text" name="merk" parsley-trigger="change" required placeholder="Isi Merk" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Warna</label>
+                        <input type="text" name="warna" parsley-trigger="change" required placeholder="Isi Nama Warna" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Tahun Produksi</label>
+                        <select name="tahun" parsley-trigger="change" required placeholder="Pilih Tahun Produksi" class="form-control">
+                            <?php 
+                            for($i=intval(date('Y')-5);$i<=intval(date('Y')+5);$i++){
+                            ?>
+                            <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Harga OTR</label>

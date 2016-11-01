@@ -100,9 +100,14 @@ Class Main_model extends CI_Model {
         return $this->db->get()->result_array();
     }
 
-    public function generate_code($tables, $prefix, $separator, $digit = 4, $date=true) {
+    public function generate_code($tables, $prefix, $separator, $digit = 4, $date=true, $loop=false) {
+        $tgl =date('y');
         $this->db->select_max('id', 'max_id');
-        $maxi = $this->db->get($tables)->row('max_id');
+        if($loop==false){
+            $maxi = $this->db->get($tables)->row('max_id');
+        }else{
+            $maxi = $this->db->get_where($tables,array('DATE(sys_create_date)'=>date('Y-m-d')))->row('max_id');
+        }
         $hsl = str_pad(($maxi == 0 ? 1 : intval($maxi) + 1), $digit, '0', STR_PAD_LEFT);
         if($date==true){
             return $prefix . $separator . date('Ymd') . $separator . $hsl;
@@ -138,5 +143,4 @@ Class Main_model extends CI_Model {
         $this->db->where(array($data['field']=>$data['value']));
         return $this->db->get();
     }
-
 }

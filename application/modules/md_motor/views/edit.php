@@ -13,6 +13,14 @@
                         <input type="text" name="tipe_motor" value="<?php echo $detail['tipe_motor'];?>" parsley-trigger="change" required placeholder="Isi Tipe Motor" class="form-control">
                     </div>
                     <div class="form-group">
+                        <label>No Rangka</label>
+                        <input type="text" name="norangka" value="<?php echo $detail['norangka'];?>" parsley-trigger="change" required placeholder="Isi No Rangka" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>No Mesin</label>
+                        <input type="text" name="nomsn" value="<?php echo $detail['nomsn'];?>" parsley-trigger="change" required placeholder="Isi No Mesin" class="form-control">
+                    </div>
+                    <div class="form-group">
                         <label>Nama Motor</label>
                         <input type="text" name="nama_motor" value="<?php echo $detail['nama_motor'];?>" parsley-trigger="change" required placeholder="Isi Nama Motor" class="form-control">
                     </div>
@@ -23,6 +31,14 @@
                     <div class="form-group">
                         <label>Merk</label>
                         <input type="text" name="merk" value="<?php echo $detail['merk'];?>" parsley-trigger="change" required placeholder="Isi Merk" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Warna</label>
+                        <input type="text" name="warna" value="<?php echo $detail['warna'];?>" parsley-trigger="change" required placeholder="Isi Nama Warna" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Tahun Produksi</label>
+                        <input type="text" name="tahun" value="<?php echo $detail['tahun'];?>" parsley-trigger="change" required placeholder="Isi Tahun Produksi" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Harga OTR</label>
