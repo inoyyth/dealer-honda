@@ -150,3 +150,16 @@ $route['master-customer-pdf'] = 'md_customer/print_pdf';
 $route['master-customer-pdf/(:any)'] = 'md_customer/print_pdf/$1';
 $route['master-customer-excel'] = 'md_customer/print_excel';
 $route['master-customer-excel/(:any)'] = 'md_customer/print_excel/$1';
+
+$route['penjualan'] = 't_penjualan/add';
+$route['penjualan-tambah'] = 't_penjualan/add';
+$route['penjualan-edit-(:num)'] = 't_penjualan/edit/$1';
+$route['penjualan-detail-(:num)'] = 't_penjualan/detail/$1';
+$route['penjualan-delete-(:num)'] = 't_penjualan/delete/$1';
+$route['penjualan-save'] = 't_penjualan/save';
+$route['penjualan-page'] = 't_penjualan/index';
+$route['penjualan-page/(:any)'] = 't_penjualan/index/$1';
+$route['penjualan-pdf'] = 't_penjualan/print_pdf';
+$route['penjualan-pdf/(:any)'] = 't_penjualan/print_pdf/$1';
+$route['penjualan-excel'] = 't_penjualan/print_excel';
+$route['penjualan-excel/(:any)'] = 't_penjualan/print_excel/$1';

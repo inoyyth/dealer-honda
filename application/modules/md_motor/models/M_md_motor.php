@@ -43,6 +43,10 @@ Class M_md_motor extends CI_Model {
             'harga_otr' => preg_replace('/[^0-9]+/', '',$this->input->post('harga_otr')),
             'nama_foto' => $image_name,
             'url_foto' => '/assets/images/'.$folde."/".$image_name,
+            'warna' => $this->input->post('warna'),
+            'tahun' => $this->input->post('tahun'),
+            'norangka' => $this->input->post('norangka'),
+            'nomsn' => $this->input->post('nomsn'),
             'm_status' => $this->input->post('m_status')
         );
         if (empty($id)) {

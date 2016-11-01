@@ -8,6 +8,9 @@
     <link href="<?php echo base_url(); ?>themes/css/admin.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>themes/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="<?php echo base_url(); ?>themes/plugins/scroll/nanoscroller.css"/>
+    <link href="<?php echo base_url(); ?>themes/plugins/new-datatables/jquery.dataTables.min.css" rel="stylesheet"/>
+    <link href="<?php echo base_url(); ?>themes/plugins/new-datatables/jquery.dataTables.select.min.css" rel="stylesheet"/>
+    <script src="<?php echo base_url();?>themes/js/jquery-2.1.0.js"></script>
 </head>
 <body class="light_theme  fixed_header left_nav_fixed">
     <div class="wrapper">
@@ -17,7 +20,7 @@
             <div class="brand">
                 <!--\\\\\\\ brand Start \\\\\\-->
                 <div class="logo" style="display:block"><span class="theme_color"><a href="<?php echo base_url(); ?>"><?php echo $this->config->item('project_title'); ?></span> Admin</a></div>
-                <div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
+                <!--<div class="small_logo" style="display:none"><img src="images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="images/r-logo.png" width="122" height="20" alt="r-logo" /></div>-->
             </div>
             <!--\\\\\\\ brand end \\\\\\-->
             <div class="header_top_bar">
