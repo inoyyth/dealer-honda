@@ -163,3 +163,16 @@ $route['penjualan-pdf'] = 't_penjualan/print_pdf';
 $route['penjualan-pdf/(:any)'] = 't_penjualan/print_pdf/$1';
 $route['penjualan-excel'] = 't_penjualan/print_excel';
 $route['penjualan-excel/(:any)'] = 't_penjualan/print_excel/$1';
+
+$route['import-penerimaan-motor'] = 'motor_terima';
+$route['import-penerimaan-motor-tambah'] = 'motor_terima/add';
+$route['import-penerimaan-motor-edit-(:num)'] = 'motor_terima/edit/$1';
+$route['import-penerimaan-motor-detail-(:num)'] = 'motor_terima/detail/$1';
+$route['import-penerimaan-motor-delete-(:num)'] = 'motor_terima/delete/$1';
+$route['import-penerimaan-motor-save'] = 'motor_terima/save';
+$route['import-penerimaan-motor-page'] = 'motor_terima/index';
+$route['import-penerimaan-motor-page/(:any)'] = 'motor_terima/index/$1';
+$route['import-penerimaan-motor-pdf'] = 'motor_terima/print_pdf';
+$route['import-penerimaan-motor-pdf/(:any)'] = 'motor_terima/print_pdf/$1';
+$route['import-penerimaan-motor-excel'] = 'motor_terima/print_excel';
+$route['import-penerimaan-motor-excel/(:any)'] = 'motor_terima/print_excel/$1';
