@@ -116,5 +116,66 @@ class Motor_terima extends MX_Controller {
         $data['list'] = $this->penerimaan_motor->getdata($this->table, 0, 1000, $like = array(), $where = array('status_gudang!=' => '3'));
         $this->load->view('template_excel', $data);
     }
+    
+    public function upload_excel(){
+        if(!isset($_POST['save'])){	
+        show_404();
+        }else{
+        $this->load->library("phpexcel/PHPExcel");
+        $this->load->library("phpexcel/PHPExcel/IOFactory");
+        $folder = "excel";
+        if (!is_dir('./assets/' . $folder)) {
+            mkdir('./assets/' . $folder, 0777, TRUE);
+        }
+        $fileName = $_FILES['excel_file']['name'];
+
+        $config['upload_path']	= "./assets/".$folder;
+        $config['upload_url']	= "./assets/".$folder;
+        $config['file_name'] = $fileName;
+        $config['allowed_types'] = 'xls|xlsx';
+        $config['max_size']     = '20000';
+        $this->load->library('upload');
+        $this->upload->initialize($config);
+
+        if($this->upload->do_upload('excel_file')){
+            $this->upload->data();    
+         }
+
+        $media = $this->upload->data('excel_file');
+        $inputFileName = "./assets/".$folder."/".$media['file_name'];
+
+        //  Read your Excel workbook
+        try {
+            $inputFileType = IOFactory::identify($inputFileName);
+            $objReader = IOFactory::createReader($inputFileType);
+            $objPHPExcel = $objReader->load($inputFileName);
+        } catch(Exception $e) {
+            die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+        }
+
+        //  Get worksheet dimensions
+        $sheet = $objPHPExcel->getSheet(0);
+        $highestRow = $sheet->getHighestRow();
+        $highestColumn = $sheet->getHighestColumn();
+
+        //  Loop through each row of the worksheet in turn
+        for ($row = 2; $row <= $highestRow; $row++){                  //  Read a row of data into an array                 
+                    $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row,
+                                            NULL,
+                                            TRUE,
+                                            FALSE);
+            //  Insert row data array into your database of choice here
+            $data = array(
+                "brand_name"=> $rowData[0][0],
+                "brand_description"=> $rowData[0][1],
+                "brand_images"=> $rowData[0][2],
+                "status"=>$rowData[0][3],
+                "brand_child_id"=>$rowData[0][4],
+            );
+            $this->db->insert("brand",$data);
+        }
+        redirect("product_management/batchimport");
+        }
+    }
 
 }

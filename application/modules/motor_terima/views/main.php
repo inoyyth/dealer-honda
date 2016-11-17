@@ -12,7 +12,7 @@
                         <section class="panel default red_border vertical_border h1">
                             <div class="block-web">
                                 <div class="header">
-                                    <h3>Form Import</h3>
+                                    <h3>Information</h3>
                                 </div>
                                 <div class="porlets-content">
                                     <div class="form-group">
@@ -20,36 +20,42 @@
                                         <input type="text" class="form-control datepicker">
                                     </div>
                                     <div class="form-group">
-                                        <label>Excel File</label>
-                                        <input type="file" class="form-control">
+                                        <label>Gudang</label>
+                                        <select name="kdgudang" id="kdgudang" class="form-control">
+                                            <?php foreach ($list_gudang as $kGudang => $vGudang) { ?>
+                                                <option value="<?php echo $vGudang['id']; ?>"><?php echo $vGudang['kd_gudang'] . " - " . $vGudang['gudang']; ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn-primary btn-sm" id="generateExcel">Generate</button> 
-                                        <button class="btn btn-warning btn-sm" id="cancelExcel">Cancel</button>
+                                        <button class="btn btn-primary btn-sm">Save</button> 
+                                        <button class="btn btn-danger btn-sm">Discard</button>
                                     </div>
                                 </div>
                             </div>
                         </section>
                     </div>
                     <div class="col-lg-6">
-                    <section class="panel default red_border vertical_border h1">
-                        <div class="block-web">
-                            <div class="header">
-                                <h3>Gudang</h3>
-                            </div>
-                            <div class="porlets-content">
-                                <div class="form-group">
-                                    <label>Gudang</label>
-                                    <select name="kdgudang" id="kdgudang" class="form-control">
-                                        <?php foreach($list_gudang as $kGudang=>$vGudang){ ?>
-                                        <option value="<?php echo $vGudang['id'];?>"><?php echo $vGudang['kd_gudang']. " - ".$vGudang['gudang'];?></option>
-                                        <?php } ?>
-                                    </select>
+                        <section class="panel default red_border vertical_border h1">
+                            <div class="block-web">
+                                <div class="header">
+                                    <h3>Upload Form</h3>
+                                </div>
+                                <div class="porlets-content">
+                                    <form method="post" name="frmGroupUser" id="frmGroupUser" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label>Excel File</label>
+                                            <input type="file" name="excel_file" id="excel_file" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-sm">Generate</button> 
+                                            <button type="button" class="btn btn-warning btn-sm" id="cancel-form">Cancel</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
-                    </section>
-                </div>
+                        </section>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
@@ -86,44 +92,59 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () { 
-        $("#generateExcel").click(function(){
-            table.ajax.reload();
-        });
-        table = $('#listmotor').DataTable({ 
-
+    $(document).ready(function () {
+        $("#frmGroupUser").on("submit", function(event){
+            event.preventDefault();
+            var formData = new FormData(this);
+            //console.log(formData);
+             $.ajax({
+                url : "<?php echo base_url('motor_terima/upload_excel'); ?>",
+                type : "post",
+                data : formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                //dataType : "json",
+                success: function(e){
+                    table.ajax.reload();
+                },
+                error: function(e){
+                    alert('fail');
+                }
+           });
+       });
+        table = $('#listmotor').DataTable({
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.
             "order": [], //Initial no order.
 
             // Load data for the table's content from an Ajax source
             "ajax": {
-                "url": "<?php echo base_url('motor_terima/get_list_temp')?>",
+                "url": "<?php echo base_url('motor_terima/get_list_temp'); ?>",
                 "type": "POST"
             },
-
             //Set column definition initialisation properties.
             "columnDefs": [
-                { 
-                    "targets": [ 0 ], //first column / numbering column
+                {
+                    "targets": [0], //first column / numbering column
                     "orderable": false, //set not orderable
                     "className": 'select-checkbox',
                 },
                 {
-                    "targets": [ 1 ],
+                    "targets": [1],
                     "visible": false
                 }
             ],
             select: {
                 style: 'single'
-            },                
+            },
         });
-    
+
         $('#listmotor tbody').on('click', 'tr', function () {
             var row = $(this).closest('tr');
             var data = $('#listmotor').dataTable().fnGetData(row);
             //console.log(data[3]);
-            
+
         });
     });
 </script>
