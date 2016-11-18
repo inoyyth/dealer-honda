@@ -65,6 +65,7 @@
                                     <h3>Data Excel</h3>
                                 </div>
                                 <div class="porlets-content">
+                                    <button id="deleteTriger">Delete</button>
                                     <table style="width: 100%;" class="display table table-bordered table-hover" id="listmotor">
                                         <thead>
                                             <tr>
@@ -98,7 +99,7 @@
             var formData = new FormData(this);
             //console.log(formData);
              $.ajax({
-                url : "<?php echo base_url('motor_terima/upload_excel'); ?>",
+                url : "<?php echo base_url('import-penerimaan-motor-upload'); ?>",
                 type : "post",
                 data : formData,
                 cache: false,
@@ -144,7 +145,27 @@
             var row = $(this).closest('tr');
             var data = $('#listmotor').dataTable().fnGetData(row);
             //console.log(data[3]);
-
         });
+        
+        $('#deleteTriger').on("click", function(event){ // triggering delete one by one
+        if( $('.deleteRow:checked').length > 0 ){  // at-least one checkbox checked
+            var ids = [];
+            $('.deleteRow').each(function(){
+                if($(this).is(':checked')) { 
+                    ids.push($(this).val());
+                }
+            });
+            var ids_string = ids.toString();  // array to string conversion 
+            $.ajax({
+                type: "POST",
+                url: "employee-delete.php",
+                data: {data_ids:ids_string},
+                success: function(result) {
+                    dataTable.draw(); // redrawing datatable
+                },
+                async:false
+            });
+        }
+    }); 
     });
 </script>
