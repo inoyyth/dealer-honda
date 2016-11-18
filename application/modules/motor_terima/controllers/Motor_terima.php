@@ -118,7 +118,7 @@ class Motor_terima extends MX_Controller {
     }
     
     public function upload_excel(){
-        if(!isset($_POST['save'])){	
+        if(!isset($_POST)){	
         show_404();
         }else{
         $this->load->library("phpexcel/PHPExcel");
@@ -138,10 +138,10 @@ class Motor_terima extends MX_Controller {
         $this->upload->initialize($config);
 
         if($this->upload->do_upload('excel_file')){
-            $this->upload->data();    
+            $media = $this->upload->data();
          }
 
-        $media = $this->upload->data('excel_file');
+        //$media = $this->upload->data('excel_file');
         $inputFileName = "./assets/".$folder."/".$media['file_name'];
 
         //  Read your Excel workbook
@@ -166,15 +166,19 @@ class Motor_terima extends MX_Controller {
                                             FALSE);
             //  Insert row data array into your database of choice here
             $data = array(
-                "brand_name"=> $rowData[0][0],
-                "brand_description"=> $rowData[0][1],
-                "brand_images"=> $rowData[0][2],
-                "status"=>$rowData[0][3],
-                "brand_child_id"=>$rowData[0][4],
+                "nopolisi"=> $rowData[0][0],
+                "tgl_sj"=> $rowData[0][1],
+                "no_sj"=> $rowData[0][2],
+                "no_so"=>$rowData[0][3],
+                "nomesin"=>$rowData[0][4],
+                "norangka"=>$rowData[0][5],
+                "tipe"=>$rowData[0][6],
+                "warna"=>$rowData[0][7],
+                "kdgudang"=>$rowData[0][8],
             );
-            $this->db->insert("brand",$data);
+            $this->db->insert("penerimaan_motor_temp",$data);
         }
-        redirect("product_management/batchimport");
+        return true;
         }
     }
 

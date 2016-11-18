@@ -176,3 +176,4 @@ $route['import-penerimaan-motor-pdf'] = 'motor_terima/print_pdf';
 $route['import-penerimaan-motor-pdf/(:any)'] = 'motor_terima/print_pdf/$1';
 $route['import-penerimaan-motor-excel'] = 'motor_terima/print_excel';
 $route['import-penerimaan-motor-excel/(:any)'] = 'motor_terima/print_excel/$1';
+$route['import-penerimaan-motor-upload'] = 'motor_terima/upload_excel';
