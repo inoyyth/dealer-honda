@@ -1,7 +1,15 @@
 <?php
 Class Datatable_model extends CI_Model {
-    private function _get_datatables_query($table,$column_order,$column_search,$order){
+    private function _get_datatables_query($table,$column_order,$column_search,$order,$where,$joint){
+        $this->db->select($column_search);
         $this->db->from($table);
+        $this->db->where($where); //dump($joint,true);
+        if(isset($joint)){
+            foreach($joint as $kJoin=>$vJoin){
+                $this->db->join($vJoin['table'],$vJoin['where'],$vJoin['join']);
+            }
+        }
+        
         $i = 0;
         foreach ($column_search as $item) // loop column 
         {
@@ -34,22 +42,23 @@ Class Datatable_model extends CI_Model {
         }
     }
  
-    function get_datatables($table,$column_order=array(),$column_search=array(),$order=array('id'=>'asc')){
-        $this->_get_datatables_query($table,$column_order,$column_search,$order);
+    function get_datatables($table,$column_order=array(),$column_search=array(),$order=array('id'=>'asc'),$where=array(),$join=array()){
+        $this->_get_datatables_query($table,$column_order,$column_search,$order,$where,$join);
         if($_POST['length'] != -1)
         $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
     }
  
-    function count_filtered($table,$column_order=array(),$column_search=array(),$order=array('id'=>'asc')){
-        $this->_get_datatables_query($table,$column_order,$column_search,$order);
+    function count_filtered($table,$column_order=array(),$column_search=array(),$order=array('id'=>'asc'),$where=array(),$join=array()){
+        $this->_get_datatables_query($table,$column_order,$column_search,$order,$where,$join);
         $query = $this->db->get();
         return $query->num_rows();
     }
  
-    public function count_all($table){
+    public function count_all($table,$where=array()){
         $this->db->from($table);
+        $this->db->where($where);
         return $this->db->count_all_results();
     }
 }
