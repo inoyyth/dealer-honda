@@ -8,7 +8,7 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <!--<div class="col-lg-6">
                         <section class="panel default red_border vertical_border h1">
                             <div class="block-web">
                                 <div class="header">
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                         </section>
-                    </div>
+                    </div>-->
                     <div class="col-lg-6">
                         <section class="panel default red_border vertical_border h1">
                             <div class="block-web">
@@ -46,6 +46,7 @@
                                         <div class="form-group">
                                             <label>Excel File</label>
                                             <input type="file" name="excel_file" id="excel_file" class="form-control">
+                                            <input type="hidden" name="exel_name" id="exel_name">
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary btn-sm">Generate</button> 
@@ -65,11 +66,13 @@
                                     <h3>Data Excel</h3>
                                 </div>
                                 <div class="porlets-content">
-                                    <button id="deleteTriger">Delete</button>
+                                    <button class="btn btn-warning btn-sm" id="deleteTriger" style="margin-bottom: 5px;">Delete</button> 
+                                    <button class="btn btn-danger btn-sm" id="deleteTrigerAll" style="margin-bottom: 5px;">Delete All</button>
+                                    <button class="btn btn-primary btn-sm" id="saveTriger" style="margin-bottom: 5px;">Save Selected</button>
                                     <table style="width: 100%;" class="display table table-bordered table-hover" id="listmotor">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
+                                                <th><input type="checkbox"  id="bulkDelete"  /></th>
                                                 <th>No.</th>
                                                 <th>No.SJ</th>
                                                 <th>Tgl.SJ</th>
@@ -77,6 +80,7 @@
                                                 <th>No.Rangka</th>
                                                 <th>Tipe</th>
                                                 <th>Warna</th>
+                                                <th>Gudang</th>
                                             </tr>
                                         </thead>
                                         <tbody id="mesinList">
@@ -129,16 +133,13 @@
                 {
                     "targets": [0], //first column / numbering column
                     "orderable": false, //set not orderable
-                    "className": 'select-checkbox',
+                    //"className": 'select-checkbox',
                 },
                 {
                     "targets": [1],
                     "visible": false
                 }
-            ],
-            select: {
-                style: 'single'
-            },
+            ]
         });
 
         $('#listmotor tbody').on('click', 'tr', function () {
@@ -147,25 +148,70 @@
             //console.log(data[3]);
         });
         
-        $('#deleteTriger').on("click", function(event){ // triggering delete one by one
-        if( $('.deleteRow:checked').length > 0 ){  // at-least one checkbox checked
-            var ids = [];
-            $('.deleteRow').each(function(){
-                if($(this).is(':checked')) { 
-                    ids.push($(this).val());
-                }
+        $("#bulkDelete").on('click',function() { // bulk checked
+            var status = this.checked;
+            $(".deleteRow").each( function() {
+                $(this).prop("checked",status);
             });
-            var ids_string = ids.toString();  // array to string conversion 
+        });
+     
+        $('#deleteTriger').on("click", function(event){ // triggering delete one by one
+            if( $('.deleteRow:checked').length > 0 ){  // at-least one checkbox checked
+                var ids = [];
+                $('.deleteRow').each(function(){
+                    if($(this).is(':checked')) { 
+                        ids.push($(this).val());
+                    }
+                });
+                var ids_string = ids.toString();  // array to string conversion
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url('motor_terima/datatable_bulk_delete'); ?>",
+                    data: {data_ids:ids},
+                    success: function(result) {
+                        table.draw(); // redrawing datatable
+                    },
+                    async:false
+                });
+            }
+        }); 
+        
+        $('#saveTriger').on("click", function(event){ // triggering delete one by one
+            if( $('.deleteRow:checked').length > 0 ){  // at-least one checkbox checked
+                var ids = [];
+                $('.deleteRow').each(function(){
+                    if($(this).is(':checked')) { 
+                        ids.push($(this).val());
+                    }
+                });
+                var ids_string = ids.toString();  // array to string conversion
+                var file_name = $("#exel_name").val();
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url('motor_terima/datatable_bulk_save'); ?>",
+                    data: {data_ids:ids,file_name:file_name},
+                    success: function(result) {
+                        table.draw(); // redrawing datatable
+                    },
+                    async:false
+                });
+            }
+        }); 
+        
+        $('#deleteTrigerAll').on("click", function(event){ // triggering delete one by one
             $.ajax({
                 type: "POST",
-                url: "employee-delete.php",
-                data: {data_ids:ids_string},
+                url: "<?php echo base_url('motor_terima/datatable_bulk_delete_all'); ?>",
+                //data: {data_ids:ids},
                 success: function(result) {
-                    dataTable.draw(); // redrawing datatable
+                    table.draw(); // redrawing datatable
                 },
                 async:false
             });
-        }
-    }); 
+        });
+        
+        document.getElementById('excel_file').onchange = function () {
+            $("#exel_name").val(this.value);
+        };
     });
 </script>

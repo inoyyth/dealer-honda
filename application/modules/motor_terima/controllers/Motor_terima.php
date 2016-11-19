@@ -20,94 +20,38 @@ class Motor_terima extends MX_Controller {
     
     public function get_list_temp(){
         $table = 'penerimaan_motor_temp';
-        $column_order = array(null,'id','no_sj','tgl_sj','nomesin','norangka','tipe','warna');
-        $column_search = array('id','no_sj','tgl_sj','nomesin','norangka','tipe','warna');
-        $list = $this->m_datatable->get_datatables($table,$column_order,$column_search,$order=array('id'=>'asc'));
+        $join = array(
+                    array('table'=>'m_gudang','where'=>'penerimaan_motor_temp.kdgudang=m_gudang.id','join'=>'left')
+                );
+        $column_order = array(null,'id_temp','no_sj','tgl_sj','nomesin','norangka','tipe','warna','gudang');
+        $column_search = array('id_temp','no_sj','tgl_sj','nomesin','norangka','tipe','warna','gudang');
+        $list = $this->m_datatable->get_datatables($table,$column_order,$column_search,$order=array('id_temp'=>'asc'),$where=array($table.'.sys_create_user'=>$this->sessionGlobal['id']),$join);
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $result) {
             $no++;
             $row = array();
-            $row[] = '';
-            $row[] = $result->id;
+            $row[] = "<input type='checkbox'  class='deleteRow' value='".$result->id_temp."'  /> ".$no ;
+            $row[] = $result->id_temp;
             $row[] = $result->no_sj;
             $row[] = $result->tgl_sj;
             $row[] = $result->nomesin;
             $row[] = $result->norangka;
             $row[] = $result->tipe;
             $row[] = $result->warna;
+            $row[] = $result->gudang;
  
             $data[] = $row;
         }
  
         $output = array(
                         "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->m_datatable->count_all($table),
-                        "recordsFiltered" => $this->m_datatable->count_filtered($table,$column_order,$column_search,$order=array('id'=>'asc')),
+                        "recordsTotal" => $this->m_datatable->count_all($table,$where=array($table.'.sys_create_user'=>$this->sessionGlobal['id'])),
+                        "recordsFiltered" => $this->m_datatable->count_filtered($table,$column_order,$column_search,$order=array('id_temp'=>'asc'),$where=array($table.'.sys_create_user'=>$this->sessionGlobal['id']),$join),
                         "data" => $data,
                 );
         //output to json format
         echo json_encode($output);
-    }
-
-    public function add() {
-        $this->breadcrumbs->push('Add', '/import-penerimaan-baru-tambah');
-        $data['code'] = $this->main_model->generate_code($this->table, 'WRH', '-');
-        $data['view'] = "motor_terima/add";
-        $this->load->view('default', $data);
-    }
-
-    public function edit($id) {
-        $this->breadcrumbs->push('Edit', '/import-penerimaan-baru-edit');
-        $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
-        $data['view'] = 'motor_terima/edit';
-        $this->load->view('default', $data);
-    }
-
-    function delete($id) {
-        $this->main_model->delete('penerimaan_motor', array('id' => $id), array('status_gudang' => '3'));
-        redirect("import-penerimaan-baru");
-    }
-
-    function save() {
-        if ($_POST) {
-            if ($this->penerimaan_motor->save()) {
-                $this->session->set_flashdata('success', 'Data Berhasil Di Simpan !');
-            } else {
-                $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
-            }
-            redirect("import-penerimaan-baru");
-        } else {
-            show_404();
-        }
-    }
-
-    public function __getSession() {
-        if ($_POST) {
-            return $data = array(
-                'page' => set_session_table_search('page', $this->input->get_post('page', TRUE)),
-                'kd_gudang' => set_session_table_search('kd_gudang', $this->input->get_post('kd_gudang', TRUE)),
-                'gudang' => set_session_table_search('gudang', $this->input->get_post('gudang', TRUE)),
-                'alamat' => set_session_table_search('alamat', $this->input->get_post('alamat', TRUE)),
-                'telepon' => set_session_table_search('telepon', $this->input->get_post('telepon', TRUE)),
-                'status_gudang' => set_session_table_search('status_gudang', $this->input->get_post('status_gudang', TRUE))
-            );
-        } else {
-            return $data = array(
-                'page' => $this->session->userdata('page'),
-                'kd_gudang' => $this->session->userdata('kd_gudang'),
-                'gudang' => $this->session->userdata('gudang'),
-                'alamat' => $this->session->userdata('alamat'),
-                'telepon' => $this->session->userdata('telepon'),
-                'status_gudang' => $this->session->userdata('status_gudang')
-            );
-        }
-    }
-
-    public function print_pdf() {
-        $data['template'] = array("template" => "motor_terima/" . $_GET['template'], "filename" => $_GET['name']);
-        $data['list'] = $this->penerimaan_motor->getdata($this->table, 0, 1000, $like = array(), $where = array('status_gudang!=' => '3'));
-        $this->printpdf->create_pdf($data);
     }
 
     public function print_excel() {
@@ -117,6 +61,47 @@ class Motor_terima extends MX_Controller {
         $this->load->view('template_excel', $data);
     }
     
+    public function datatable_bulk_save(){
+        $id_array = $this->input->post('data_ids');
+        $this->db->where_in('id_temp', $id_array);
+        $query = $this->db->get('penerimaan_motor_temp')->result_array();
+        $dt = array();
+        foreach($query as $kQuery=>$vQuery){
+            $dt[] = array(
+                'nopolisi'=>$vQuery['nopolisi'],
+                'tgl_sj'=>$vQuery['tgl_sj'],
+                'no_sj'=>$vQuery['no_sj'],
+                'no_so'=>$vQuery['no_so'],
+                'nomesin'=>$vQuery['nomesin'],
+                'norangka'=>$vQuery['norangka'],
+                'tipe'=>$vQuery['tipe'],
+                'warna'=>$vQuery['warna'],
+                'kdgudang'=>$vQuery['kdgudang'],
+                'tglupload'=>date('Y-m-d H:i:s'),
+                'sys_create_user' => $this->sessionGlobal['id'], 
+                'sys_create_date' => date('Y-m-d H:i:s'),
+                'namafile'=>$vQuery['namafile']
+            );
+        }
+
+        $this->penerimaan_motor->insertData($dt);
+        $this->db->where_in('id_temp', $id_array);
+        $this->db->delete('penerimaan_motor_temp');
+        return true;
+    }
+    
+    public function datatable_bulk_delete(){
+        $id_array = $this->input->post('data_ids'); 
+        $this->db->where_in('id_temp', $id_array);
+        $this->db->delete('penerimaan_motor_temp');
+        return true;
+    }
+    
+    public function datatable_bulk_delete_all(){
+        $this->db->delete('penerimaan_motor_temp',array('sys_create_user'=>$this->sessionGlobal['id']));
+        return true;
+    }
+
     public function upload_excel(){
         if(!isset($_POST)){	
         show_404();
@@ -141,7 +126,6 @@ class Motor_terima extends MX_Controller {
             $media = $this->upload->data();
          }
 
-        //$media = $this->upload->data('excel_file');
         $inputFileName = "./assets/".$folder."/".$media['file_name'];
 
         //  Read your Excel workbook
@@ -152,7 +136,9 @@ class Motor_terima extends MX_Controller {
         } catch(Exception $e) {
             die('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
         }
-
+        
+        $this->db->delete('penerimaan_motor_temp',array('sys_create_user'=>$this->sessionGlobal['id']));
+        
         //  Get worksheet dimensions
         $sheet = $objPHPExcel->getSheet(0);
         $highestRow = $sheet->getHighestRow();
@@ -175,6 +161,8 @@ class Motor_terima extends MX_Controller {
                 "tipe"=>$rowData[0][6],
                 "warna"=>$rowData[0][7],
                 "kdgudang"=>$rowData[0][8],
+                "sys_create_user"=>$this->sessionGlobal['id'],
+                "namafile"=>$media['file_name']
             );
             $this->db->insert("penerimaan_motor_temp",$data);
         }
