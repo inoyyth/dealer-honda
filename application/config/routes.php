@@ -177,3 +177,16 @@ $route['import-penerimaan-motor-pdf/(:any)'] = 'motor_terima/print_pdf/$1';
 $route['import-penerimaan-motor-excel'] = 'motor_terima/print_excel';
 $route['import-penerimaan-motor-excel/(:any)'] = 'motor_terima/print_excel/$1';
 $route['import-penerimaan-motor-upload'] = 'motor_terima/upload_excel';
+
+$route['input-penerimaan-aksesoris'] = 'aksesoris_terima';
+$route['input-penerimaan-aksesoris-tambah'] = 'aksesoris_terima/add';
+$route['input-penerimaan-aksesoris-edit-(:num)'] = 'aksesoris_terima/edit/$1';
+$route['input-penerimaan-aksesoris-detail-(:num)'] = 'aksesoris_terima/detail/$1';
+$route['input-penerimaan-aksesoris-delete-(:num)'] = 'aksesoris_terima/delete/$1';
+$route['input-penerimaan-aksesoris-save'] = 'aksesoris_terima/save';
+$route['input-penerimaan-aksesoris-page'] = 'aksesoris_terima/index';
+$route['input-penerimaan-aksesoris-page/(:any)'] = 'aksesoris_terima/index/$1';
+$route['input-penerimaan-aksesoris-pdf'] = 'aksesoris_terima/print_pdf';
+$route['input-penerimaan-aksesoris-pdf/(:any)'] = 'aksesoris_terima/print_pdf/$1';
+$route['input-penerimaan-aksesoris-excel'] = 'aksesoris_terima/print_excel';
+$route['input-penerimaan-aksesoris-excel/(:any)'] = 'aksesoris_terima/print_excel/$1';
