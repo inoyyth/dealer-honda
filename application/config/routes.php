@@ -114,6 +114,18 @@ $route['master-leasing-pdf/(:any)'] = 'md_leasing/print_pdf/$1';
 $route['master-leasing-excel'] = 'md_leasing/print_excel';
 $route['master-leasing-excel/(:any)'] = 'md_leasing/print_excel/$1';
 
+$route['master-supplier'] = 'md_supplier';
+$route['master-supplier-tambah'] = 'md_supplier/add';
+$route['master-supplier-edit-(:num)'] = 'md_supplier/edit/$1';
+$route['master-supplier-delete-(:num)'] = 'md_supplier/delete/$1';
+$route['master-supplier-save'] = 'md_supplier/save';
+$route['master-supplier-page'] = 'md_supplier/index';
+$route['master-supplier-page/(:any)'] = 'md_supplier/index/$1';
+$route['master-supplier-pdf'] = 'md_supplier/print_pdf';
+$route['master-supplier-pdf/(:any)'] = 'md_supplier/print_pdf/$1';
+$route['master-supplier-excel'] = 'md_supplier/print_excel';
+$route['master-supplier-excel/(:any)'] = 'md_supplier/print_excel/$1';
+
 $route['master-motor'] = 'md_motor';
 $route['master-motor-tambah'] = 'md_motor/add';
 $route['master-motor-edit-(:num)'] = 'md_motor/edit/$1';
