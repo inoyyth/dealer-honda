@@ -6,6 +6,9 @@ class Md_jabatan extends MX_Controller {
 
     public function __construct() {
         parent::__construct();
+        if(!$this->session->userdata('logged_in_admin')){
+            redirect(base_url());
+        }
         $this->load->model(array('M_md_jabatan' => 'm_jabatan'));
         $this->load->library('Printpdf', 'Auth_log');
         //set breadcrumb
