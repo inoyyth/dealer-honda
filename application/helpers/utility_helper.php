@@ -140,10 +140,17 @@ if (!function_exists('date_range_no_weekend')) {
 if (!function_exists('formatrp')) {
 
     function formatrp($angka) {
-
         $rupiah = number_format($angka, 0, ',', '.'); // membentuk tanda pemisah seperti (.)
-
         return $rupiah;
+    }
+
+}
+
+if (!function_exists('currency_to_normal')) {
+
+    function currency_to_normal($string) {
+        $num = (float) str_replace('.', '', $string);
+        return $num;
     }
 
 }
@@ -162,19 +169,19 @@ if (!function_exists('romanic_number')) {
                 }
             }
         }
-
         return $return;
     }
 
-    if (!function_exists('dump')) {
+}
 
-        function dump($var, $die = FALSE) {
-            echo '<pre>';
-            var_dump($var);
-            echo '</pre>';
-            if ($die)
-                die;
-        }
+if (!function_exists('dump')) {
 
+    function dump($var, $die = FALSE) {
+        echo '<pre>';
+        var_dump($var);
+        echo '</pre>';
+        if ($die)
+            die;
     }
+
 }
