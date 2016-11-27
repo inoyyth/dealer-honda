@@ -203,5 +203,4 @@ $route['input-penerimaan-aksesoris-pdf/(:any)'] = 'aksesoris_terima/print_pdf/$1
 $route['input-penerimaan-aksesoris-excel'] = 'aksesoris_terima/print_excel';
 $route['input-penerimaan-aksesoris-excel/(:any)'] = 'aksesoris_terima/print_excel/$1';
 
-
 $route['kwitansi-dp-add'] = 't_kwitansi/add';

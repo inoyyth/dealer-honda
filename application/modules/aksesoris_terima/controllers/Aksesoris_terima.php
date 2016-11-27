@@ -6,7 +6,7 @@ class Aksesoris_terima extends MX_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('M_aksesoris_terima' => 'm_aksesoris_terima'));
+        $this->load->model(array('M_aksesoris_terima' => 'm_aksesoris_terima', 'Datatable_model' => 'm_datatable'));
         $this->load->library(array('upload', 'encrypt', 'Printpdf','Auth_log'));
         //set breadcrumb
         $this->breadcrumbs->push('Input Aksesoris', '/input-penerimaan-aksesoris');
@@ -23,6 +23,9 @@ class Aksesoris_terima extends MX_Controller {
         $data['paging'] = $this->pagination->create_links();
         $data['data'] = $this->m_aksesoris_terima->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array('aksesoris_status!=' => '3'));
         $data['sr_data'] = $data_session;
+        
+        $data['gudang'] = $this->main_model->getMaster('m_gudang', $like = array(), $where = array('status_gudang' => '1'));
+        
         $data['view'] = 'aksesoris_terima/main';
         $this->load->view('default', $data);
     }
@@ -30,18 +33,15 @@ class Aksesoris_terima extends MX_Controller {
     public function add() {
         $this->breadcrumbs->push('Add', '/input-penerimaan-aksesoris-tambah');
         //$data['code'] = $this->main_model->generate_code($this->table, 'AKS', '-');
-        $data['global_data'] = $this->main_model->getMaster('global_data', $like = array(), $where = array('global_data_status' => '1','group_data'=>'aksesoris'));
+        $data['gudang'] = $this->main_model->getMaster('m_gudang', $like = array(), $where = array('status_gudang' => '1'));
         $data['view'] = "aksesoris_terima/add";
         $this->load->view('default', $data);
     }
 
-    public function edit($id) {
-        $this->breadcrumbs->push('Edit', '/input-penerimaan-aksesoris-edit');
-        $data['code'] = $this->main_model->generate_code($this->table, 'AKS', '-',4,true);
-        $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
-        $data['global_data'] = $this->main_model->getMaster('global_data', $like = array(), $where = array('global_data_status' => '1','group_data'=>'aksesoris'));
-        $data['view'] = 'aksesoris_terima/edit';
-        $this->load->view('default', $data);
+    public function edit() {
+        $id = $this->input->post('id');
+        $data = $this->m_aksesoris_terima->getEdit($id)->row_array();
+        echo json_encode($data,true);
     }
 
     function delete($id) {
@@ -68,12 +68,14 @@ class Aksesoris_terima extends MX_Controller {
                 'page' => set_session_table_search('page', $this->input->get_post('page', TRUE)),
                 'kd_aksesoris' => set_session_table_search('kd_aksesoris', $this->input->get_post('kd_aksesoris', TRUE)),
                 'aksesoris' => set_session_table_search('aksesoris', $this->input->get_post('aksesoris', TRUE)),
+                'gudang' => set_session_table_search('gudang', $this->input->get_post('gudang', TRUE)),
             );
         } else {
             return $data = array(
                 'page' => $this->session->userdata('page'),
                 'kd_aksesoris' => $this->session->userdata('kd_aksesoris'),
-                'aksesoris' => $this->session->userdata('aksesoris')
+                'aksesoris' => $this->session->userdata('aksesoris'),
+                'gudang' => $this->session->userdata('gudang')
             );
         }
     }
@@ -90,5 +92,34 @@ class Aksesoris_terima extends MX_Controller {
         $data['list'] = $this->m_aksesoris_terima->getdata($this->table, 0, 1000, $like = array(), $where = array('m_status!=' => '3'));
         $this->load->view('template_excel', $data);
     }
+    
+    public function get_list_aksesoris() {
+        $table = 'm_aksesoris';
+        $join = array();
+        $column_order = array(null, 'id', 'url_foto', 'kd_aksesoris', 'aksesoris');
+        $column_search = array('id', 'url_foto', 'kd_aksesoris', 'aksesoris');
+        $list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('id' => 'asc'),$where=array(),$join);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $result) {
+            $no++;
+            $row = array();
+            $row[] = '';
+            $row[] = $result->id;
+            $row[] = $result->url_foto;
+            $row[] = $result->kd_aksesoris;
+            $row[] = $result->aksesoris;
 
+            $data[] = $row;
+        }
+    
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->m_datatable->count_all($table),
+            "recordsFiltered" => $this->m_datatable->count_filtered($table, $column_order, $column_search, $order = array('id' => 'asc'),$where=array(),$join),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
 }

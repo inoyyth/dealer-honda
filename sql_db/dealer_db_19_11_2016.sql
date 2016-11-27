@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2016-11-19 13:01:36
+Date: 2016-11-19 13:43:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -108,7 +108,7 @@ INSERT INTO `menus` VALUES ('33', '2', 'pembayaran', 'Pembayaran', 'fa fa-circle
 INSERT INTO `menus` VALUES ('34', '3', 'stock_baru', 'Stock (Baru)', 'fa fa-circle', 'stock-baru', '1', '2');
 INSERT INTO `menus` VALUES ('35', '3', 'motor_terima', 'Import Penerimaan Motor', 'fa fa-circle', 'import-penerimaan-motor', '2', '2');
 INSERT INTO `menus` VALUES ('36', '1', 'account', 'Users Management', 'fa fa-circle', 'user-management', '8', '2');
-INSERT INTO `menus` VALUES ('37', '3', 'aksesoris_terima', 'Import Penerimaan Aksesoris', 'fa fa-circle', 'import-penerimaan-aksesoris', '3', '2');
+INSERT INTO `menus` VALUES ('37', '3', 'aksesoris_terima', 'Input Penerimaan Aksesoris', 'fa fa-circle', 'input-penerimaan-aksesoris', '3', '2');
 INSERT INTO `menus` VALUES ('38', '3', 'barang-keluar', 'Barang Keluar', 'fa fa-circle', 'barang-keluar', '4', '2');
 INSERT INTO `menus` VALUES ('39', '3', 'barang-masuk', 'Barang Masuk', 'fa fa-circle', 'barang-masuk', '5', '2');
 
@@ -316,6 +316,28 @@ INSERT INTO `m_motor` VALUES ('3', 'MSN7767686', 'RGK7676851', 'uyhuyu', 'jhjh',
 INSERT INTO `m_motor` VALUES ('4', 'RGK909090', 'MSN989898', 'DHC096767', 'Karisma', 'Manual', '', '', 'Honda', '20000000', 'assets/images/motor/131c97dd4d5f1a6cf6a6271cdb67bbe4.jpg', '/assets/images//assets/images/motor/131c97dd4d5f1a6cf6a6271cdb67bbe4.jpg', '1', '6', null, null, '2016-11-01 13:11:36', null, null);
 
 -- ----------------------------
+-- Table structure for `penerimaan_aksesoris`
+-- ----------------------------
+DROP TABLE IF EXISTS `penerimaan_aksesoris`;
+CREATE TABLE `penerimaan_aksesoris` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `kd_aksesoris` int(11) DEFAULT NULL,
+  `jumlah` float DEFAULT NULL,
+  `kd_gudang` int(11) DEFAULT NULL,
+  `sys_create_user` int(11) DEFAULT NULL,
+  `sys_update_user` int(11) DEFAULT NULL,
+  `sys_delete_user` int(11) DEFAULT NULL,
+  `sys_create_date` datetime DEFAULT NULL,
+  `sys_update_date` datetime DEFAULT NULL,
+  `sys_delete_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of penerimaan_aksesoris
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `penerimaan_motor`
 -- ----------------------------
 DROP TABLE IF EXISTS `penerimaan_motor`;
@@ -379,35 +401,6 @@ CREATE TABLE `penerimaan_motor_temp` (
 -- ----------------------------
 -- Records of penerimaan_motor_temp
 -- ----------------------------
-INSERT INTO `penerimaan_motor_temp` VALUES ('799', 'B08080VND6', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('800', 'B08080VND7', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('801', 'B08080VND8', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('802', 'B08080VND9', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('803', 'B08080VND10', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('804', 'B08080VND11', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('805', 'B08080VND12', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('806', 'B08080VND13', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('807', 'B08080VND14', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('808', 'B08080VND15', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('809', 'B08080VND16', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('810', 'B08080VND17', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('811', 'B08080VND18', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('812', 'B08080VND19', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('813', 'B08080VND20', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('814', 'B08080VND21', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('815', 'B08080VND22', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('816', 'B08080VND23', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('817', 'B08080VND24', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('818', 'B08080VND25', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('819', 'B08080VND26', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('820', 'B08080VND27', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('821', 'B08080VND28', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('822', 'B08080VND29', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('823', 'B08080VND30', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('824', 'B08080VND31', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('825', 'B08080VND32', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('826', 'B08080VND33', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
-INSERT INTO `penerimaan_motor_temp` VALUES ('827', 'B08080VND34', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '2', null, 'excel_penerimaan_motor38.xlsx', null, '6', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `t_penjualan`
