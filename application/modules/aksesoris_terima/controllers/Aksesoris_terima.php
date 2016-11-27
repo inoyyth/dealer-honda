@@ -45,7 +45,7 @@ class Aksesoris_terima extends MX_Controller {
     }
 
     function delete($id) {
-        $this->main_model->delete('m_aksesoris_terima', array('id' => $id), array('aksesoris_status' => '3'));
+        $this->main_model->delete($this->table, array('id' => $id), array('aksesoris_status' => '3'));
         redirect("input-penerimaan-aksesoris");
     }
 
@@ -82,14 +82,14 @@ class Aksesoris_terima extends MX_Controller {
 
     public function print_pdf() {
         $data['template'] = array("template" => "aksesoris_terima/" . $_GET['template'], "filename" => $_GET['name']);
-        $data['list'] = $this->m_aksesoris_terima->getdata($this->table, 0, 1000, $like = array(), $where = array('m_status!=' => '3'));
+        $data['list'] = $this->m_aksesoris_terima->getdata($this->table, 0, 1000, $like = array(), $where = array('aksesoris_status!=' => '3'));
         $this->printpdf->create_pdf($data);
     }
 
     public function print_excel() {
         $data['template_excel'] = "aksesoris_terima/" . $_GET['template'];
         $data['file_name'] = $_GET['name'];
-        $data['list'] = $this->m_aksesoris_terima->getdata($this->table, 0, 1000, $like = array(), $where = array('m_status!=' => '3'));
+        $data['list'] = $this->m_aksesoris_terima->getdata($this->table, 0, 1000, $like = array(), $where = array('aksesoris_status!=' => '3'));
         $this->load->view('template_excel', $data);
     }
     
