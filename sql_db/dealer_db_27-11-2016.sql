@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2016-11-27 09:54:50
+Date: 2016-11-27 20:02:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,8 +42,38 @@ CREATE TABLE `account` (
 -- ----------------------------
 -- Records of account
 -- ----------------------------
-INSERT INTO `account` VALUES ('6', 'inoy@sportix.com', 'inoy', 'FDogfBOoHk1jAjmngLXpY5/zXfLwiHygfUYIaFQDtDyUxlWX0CoR924OkSA2QnvYQyxaLzDDMkRxQfxaOrKK4A==', '909090909', 'supri170845@gmail.com', 'assets/images/account/3e15e47695fe78a92a28313a79875c23.jpg', 'a:33:{i:0;a:3:{s:4:\"menu\";s:2:\"23\";s:4:\"slug\";s:14:\"master-jabatan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:1;a:3:{s:4:\"menu\";s:2:\"24\";s:4:\"slug\";s:15:\"master-karyawan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:2;a:3:{s:4:\"menu\";s:2:\"26\";s:4:\"slug\";s:15:\"master-customer\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:3;a:3:{s:4:\"menu\";s:2:\"27\";s:4:\"slug\";s:12:\"master-motor\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:4;a:3:{s:4:\"menu\";s:2:\"28\";s:4:\"slug\";s:16:\"master-aksesoris\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:5;a:3:{s:4:\"menu\";s:2:\"29\";s:4:\"slug\";s:13:\"master-gudang\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:6;a:3:{s:4:\"menu\";s:2:\"30\";s:4:\"slug\";s:14:\"master-leasing\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:7;a:3:{s:4:\"menu\";s:2:\"37\";s:4:\"slug\";s:15:\"master-supplier\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:8;a:3:{s:4:\"menu\";s:2:\"36\";s:4:\"slug\";s:15:\"user-management\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:9;a:3:{s:4:\"menu\";s:2:\"32\";s:4:\"slug\";s:9:\"penjualan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:10;a:3:{s:4:\"menu\";s:2:\"38\";s:4:\"slug\";s:11:\"kwitansi-dp\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:11;a:3:{s:4:\"menu\";s:2:\"39\";s:4:\"slug\";s:12:\"kwitansi-fee\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:12;a:3:{s:4:\"menu\";s:2:\"40\";s:4:\"slug\";s:15:\"kwitansi-diskon\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:13;a:3:{s:4:\"menu\";s:2:\"33\";s:4:\"slug\";s:10:\"pembayaran\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:14;a:3:{s:4:\"menu\";s:2:\"41\";s:4:\"slug\";s:3:\"pdi\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:15;a:3:{s:4:\"menu\";s:2:\"42\";s:4:\"slug\";s:4:\"stnk\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:16;a:3:{s:4:\"menu\";s:2:\"43\";s:4:\"slug\";s:4:\"void\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:17;a:3:{s:4:\"menu\";s:2:\"44\";s:4:\"slug\";s:11:\"surat-jalan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:18;a:3:{s:4:\"menu\";s:2:\"34\";s:4:\"slug\";s:12:\"return-motor\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:19;a:3:{s:4:\"menu\";s:2:\"45\";s:4:\"slug\";s:4:\"stok\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:20;a:3:{s:4:\"menu\";s:2:\"46\";s:4:\"slug\";s:17:\"import-penerimaan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:21;a:3:{s:4:\"menu\";s:2:\"35\";s:4:\"slug\";s:3:\"pdi\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:22;a:3:{s:4:\"menu\";s:2:\"47\";s:4:\"slug\";s:26:\"input-penerimaan-aksesoris\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:23;a:3:{s:4:\"menu\";s:2:\"48\";s:4:\"slug\";s:12:\"motor-keluar\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:24;a:3:{s:4:\"menu\";s:2:\"49\";s:4:\"slug\";s:11:\"motor-masuk\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:25;a:3:{s:4:\"menu\";s:2:\"50\";s:4:\"slug\";s:14:\"cetak-kwitansi\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:26;a:3:{s:4:\"menu\";s:2:\"51\";s:4:\"slug\";s:13:\"rekap-tagihan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:27;a:3:{s:4:\"menu\";s:2:\"52\";s:4:\"slug\";s:16:\"surat-pernyataan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:28;a:3:{s:4:\"menu\";s:2:\"53\";s:4:\"slug\";s:17:\"pencairan-leasing\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:29;a:3:{s:4:\"menu\";s:2:\"54\";s:4:\"slug\";s:17:\"laporan-penjualan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:30;a:3:{s:4:\"menu\";s:2:\"55\";s:4:\"slug\";s:13:\"laporan-saldo\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:31;a:3:{s:4:\"menu\";s:2:\"56\";s:4:\"slug\";s:10:\"print-stok\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:32;a:3:{s:4:\"menu\";s:2:\"57\";s:4:\"slug\";s:10:\"print-stnk\";s:5:\"child\";a:4:{s:3:\"add\";i:0;s:3:\"upd\";i:0;s:3:\"del\";i:0;s:3:\"prt\";i:0;}}}', null, '6', null, '0000-00-00 00:00:00', '2016-11-26 22:33:48', '0000-00-00 00:00:00', '2016-11-27 05:42:38', '1');
+INSERT INTO `account` VALUES ('6', 'inoy@sportix.com', 'inoy', '7lJoHyJbQEFPmZvycvd1jj4oegRmeRMibzqBYezD9jWL0zIrxQps/pQFsibtrojiBgwTP4TPbQYILqxFDEbbOw==', '909090909', 'supri170845@gmail.com', 'assets/images/account/3e15e47695fe78a92a28313a79875c23.jpg', 'a:33:{i:0;a:3:{s:4:\"menu\";s:2:\"23\";s:4:\"slug\";s:14:\"master-jabatan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:1;a:3:{s:4:\"menu\";s:2:\"24\";s:4:\"slug\";s:15:\"master-karyawan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:2;a:3:{s:4:\"menu\";s:2:\"26\";s:4:\"slug\";s:15:\"master-customer\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:3;a:3:{s:4:\"menu\";s:2:\"27\";s:4:\"slug\";s:12:\"master-motor\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:4;a:3:{s:4:\"menu\";s:2:\"28\";s:4:\"slug\";s:16:\"master-aksesoris\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:5;a:3:{s:4:\"menu\";s:2:\"29\";s:4:\"slug\";s:13:\"master-gudang\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:6;a:3:{s:4:\"menu\";s:2:\"30\";s:4:\"slug\";s:14:\"master-leasing\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:7;a:3:{s:4:\"menu\";s:2:\"37\";s:4:\"slug\";s:15:\"master-supplier\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:8;a:3:{s:4:\"menu\";s:2:\"36\";s:4:\"slug\";s:15:\"user-management\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:9;a:3:{s:4:\"menu\";s:2:\"32\";s:4:\"slug\";s:9:\"penjualan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:10;a:3:{s:4:\"menu\";s:2:\"38\";s:4:\"slug\";s:11:\"kwitansi-dp\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:11;a:3:{s:4:\"menu\";s:2:\"39\";s:4:\"slug\";s:12:\"kwitansi-fee\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:12;a:3:{s:4:\"menu\";s:2:\"40\";s:4:\"slug\";s:15:\"kwitansi-diskon\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:13;a:3:{s:4:\"menu\";s:2:\"33\";s:4:\"slug\";s:10:\"pembayaran\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:14;a:3:{s:4:\"menu\";s:2:\"41\";s:4:\"slug\";s:3:\"pdi\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:15;a:3:{s:4:\"menu\";s:2:\"42\";s:4:\"slug\";s:4:\"stnk\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:16;a:3:{s:4:\"menu\";s:2:\"43\";s:4:\"slug\";s:4:\"void\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:17;a:3:{s:4:\"menu\";s:2:\"44\";s:4:\"slug\";s:11:\"surat-jalan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:18;a:3:{s:4:\"menu\";s:2:\"34\";s:4:\"slug\";s:12:\"return-motor\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:19;a:3:{s:4:\"menu\";s:2:\"45\";s:4:\"slug\";s:4:\"stok\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:20;a:3:{s:4:\"menu\";s:2:\"46\";s:4:\"slug\";s:17:\"import-penerimaan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:21;a:3:{s:4:\"menu\";s:2:\"35\";s:4:\"slug\";s:3:\"pdi\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:22;a:3:{s:4:\"menu\";s:2:\"47\";s:4:\"slug\";s:26:\"input-penerimaan-aksesoris\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:23;a:3:{s:4:\"menu\";s:2:\"48\";s:4:\"slug\";s:12:\"motor-keluar\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:24;a:3:{s:4:\"menu\";s:2:\"49\";s:4:\"slug\";s:11:\"motor-masuk\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:25;a:3:{s:4:\"menu\";s:2:\"50\";s:4:\"slug\";s:14:\"cetak-kwitansi\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:26;a:3:{s:4:\"menu\";s:2:\"51\";s:4:\"slug\";s:13:\"rekap-tagihan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:27;a:3:{s:4:\"menu\";s:2:\"52\";s:4:\"slug\";s:16:\"surat-pernyataan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:28;a:3:{s:4:\"menu\";s:2:\"53\";s:4:\"slug\";s:17:\"pencairan-leasing\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:29;a:3:{s:4:\"menu\";s:2:\"54\";s:4:\"slug\";s:17:\"laporan-penjualan\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:30;a:3:{s:4:\"menu\";s:2:\"55\";s:4:\"slug\";s:13:\"laporan-saldo\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:31;a:3:{s:4:\"menu\";s:2:\"56\";s:4:\"slug\";s:10:\"print-stok\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:32;a:3:{s:4:\"menu\";s:2:\"57\";s:4:\"slug\";s:10:\"print-stnk\";s:5:\"child\";a:4:{s:3:\"add\";i:0;s:3:\"upd\";i:0;s:3:\"del\";i:0;s:3:\"prt\";i:0;}}}', null, '6', null, '0000-00-00 00:00:00', '2016-11-27 10:34:07', '0000-00-00 00:00:00', '2016-11-27 18:34:21', '1');
 INSERT INTO `account` VALUES ('7', 'sapta@gmail.com', 'Sapta', 'GsMxDWTIw95OSkBGV7MjIrA4muCNpIzN9Mm74/Z92hYzlyKeoHtM3Z5u2bAi/UVKTplMlUztEy4wXAI2aHnOYw==', '879979797979', 'supri170845@gmail.com', '667fa1e720b199d98293f0eec4086ebe.jpg', 'a:10:{i:0;a:3:{s:4:\"menu\";s:2:\"23\";s:4:\"slug\";s:14:\"master-jabatan\";s:5:\"child\";a:4:{s:3:\"add\";i:0;s:3:\"upd\";i:0;s:3:\"del\";i:0;s:3:\"prt\";i:1;}}i:1;a:3:{s:4:\"menu\";s:2:\"24\";s:4:\"slug\";s:15:\"master-karyawan\";s:5:\"child\";a:4:{s:3:\"add\";i:0;s:3:\"upd\";i:0;s:3:\"del\";i:0;s:3:\"prt\";i:1;}}i:2;a:3:{s:4:\"menu\";s:2:\"26\";s:4:\"slug\";s:15:\"master-customer\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:3;a:3:{s:4:\"menu\";s:2:\"27\";s:4:\"slug\";s:12:\"master-motor\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:0;s:3:\"prt\";i:1;}}i:4;a:3:{s:4:\"menu\";s:2:\"28\";s:4:\"slug\";s:16:\"master-aksesoris\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:5;a:3:{s:4:\"menu\";s:2:\"29\";s:4:\"slug\";s:13:\"master-gudang\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:6;a:3:{s:4:\"menu\";s:2:\"30\";s:4:\"slug\";s:14:\"master-leasing\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:7;a:3:{s:4:\"menu\";s:2:\"31\";s:4:\"slug\";s:15:\"master-supplier\";s:5:\"child\";a:4:{s:3:\"add\";i:1;s:3:\"upd\";i:1;s:3:\"del\";i:1;s:3:\"prt\";i:1;}}i:8;a:3:{s:4:\"menu\";s:2:\"32\";s:4:\"slug\";s:9:\"penjualan\";s:5:\"child\";a:4:{s:3:\"add\";i:0;s:3:\"upd\";i:0;s:3:\"del\";i:0;s:3:\"prt\";i:0;}}i:9;a:3:{s:4:\"menu\";s:2:\"33\";s:4:\"slug\";s:10:\"pembayaran\";s:5:\"child\";a:4:{s:3:\"add\";i:0;s:3:\"upd\";i:0;s:3:\"del\";i:0;s:3:\"prt\";i:0;}}}', null, '1', null, '0000-00-00 00:00:00', '2016-10-26 01:27:10', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1');
+
+-- ----------------------------
+-- Table structure for `detail_motor_keluar`
+-- ----------------------------
+DROP TABLE IF EXISTS `detail_motor_keluar`;
+CREATE TABLE `detail_motor_keluar` (
+  `id_detail_motor_keluar` int(11) NOT NULL,
+  `no_mesin` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of detail_motor_keluar
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `detail_motor_keluar_temp`
+-- ----------------------------
+DROP TABLE IF EXISTS `detail_motor_keluar_temp`;
+CREATE TABLE `detail_motor_keluar_temp` (
+  `id_detail_motor_keluar` int(11) NOT NULL AUTO_INCREMENT,
+  `no_mesin` varchar(50) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_detail_motor_keluar`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of detail_motor_keluar_temp
+-- ----------------------------
+INSERT INTO `detail_motor_keluar_temp` VALUES ('10', 'MSN4576467', '6');
+INSERT INTO `detail_motor_keluar_temp` VALUES ('11', 'MSN4576465', '6');
 
 -- ----------------------------
 -- Table structure for `global_data`
@@ -119,9 +149,9 @@ INSERT INTO `menus` VALUES ('42', '2', 'kwitansi', 'STNK & BPKB', 'fa fa-circle'
 INSERT INTO `menus` VALUES ('43', '2', 'kwitansi', 'Void', 'fa fa-circle', 'void', '6', '2');
 INSERT INTO `menus` VALUES ('44', '2', 'kwitansi', 'Surat Jalan', 'fa fa-circle', 'surat-jalan', '7', '2');
 INSERT INTO `menus` VALUES ('45', '3', 'stok', 'Stok', 'fa fa-circle', 'stok', '1', '2');
-INSERT INTO `menus` VALUES ('46', '3', 'import_penerimaan', 'Penerimaan Motor', 'fa fa-circle', 'import-penerimaan', '2', '2');
+INSERT INTO `menus` VALUES ('46', '3', 'motor_terima', 'Penerimaan Motor', 'fa fa-circle', 'import-penerimaan-motor', '2', '2');
 INSERT INTO `menus` VALUES ('47', '3', 'input_penerimaan', 'Penerimaan Aksesoris', 'fa fa-circle', 'input-penerimaan-aksesoris', '3', '2');
-INSERT INTO `menus` VALUES ('48', '3', 'barang_keluar', 'Motor Keluar', 'fa fa-circle', 'motor-keluar', '4', '2');
+INSERT INTO `menus` VALUES ('48', '3', 'motor_keluar', 'Motor Keluar', 'fa fa-circle', 'motor-keluar', '4', '2');
 INSERT INTO `menus` VALUES ('49', '3', 'barang_masuk', 'Motor Masuk', 'fa fa-circle', 'motor-masuk', '5', '2');
 INSERT INTO `menus` VALUES ('50', '4', 'cetak_kwitansi', 'Cetak Kwitansi', 'fa fa-circle', 'cetak-kwitansi', '1', '2');
 INSERT INTO `menus` VALUES ('51', '4', 'rekap_tagihan', 'Rekap Tagihan', 'fa fa-circle', 'rekap-tagihan', '2', '2');
@@ -131,6 +161,34 @@ INSERT INTO `menus` VALUES ('54', '5', 'laporan', 'Penjualan', 'fa fa-circle', '
 INSERT INTO `menus` VALUES ('55', '5', 'laporan', 'Saldo', 'fa fa-circle', 'laporan-saldo', '2', '2');
 INSERT INTO `menus` VALUES ('56', '5', 'laporan', 'Print Stok', 'fa fa-circle', 'print-stok', '3', '2');
 INSERT INTO `menus` VALUES ('57', '5', 'laporan', 'STNK & BPKB', 'fa fa-circle', 'print-stnk', '4', '2');
+
+-- ----------------------------
+-- Table structure for `motor_keluar`
+-- ----------------------------
+DROP TABLE IF EXISTS `motor_keluar`;
+CREATE TABLE `motor_keluar` (
+  `id_motor_keluar` int(11) NOT NULL AUTO_INCREMENT,
+  `kode_motor_keluar` varchar(20) DEFAULT NULL,
+  `id_gudang_in` int(11) DEFAULT NULL,
+  `id_gudang_out` int(11) DEFAULT NULL,
+  `tgl_motor_keluar` date DEFAULT NULL,
+  `kode_po_motor_keluar` varchar(20) DEFAULT NULL,
+  `kode_do_motor_keluar` varchar(20) DEFAULT NULL,
+  `pic_motor_keluar` varchar(30) DEFAULT NULL,
+  `keterangan_motor_keluar` text,
+  `status_motor_keluar` enum('1','2','3') DEFAULT '1',
+  `sys_create_user` int(11) DEFAULT NULL,
+  `sys_update_user` int(11) DEFAULT NULL,
+  `sys_delete_user` int(11) DEFAULT NULL,
+  `sys_create_date` datetime DEFAULT NULL,
+  `sys_update_date` datetime DEFAULT NULL,
+  `sys_delete_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id_motor_keluar`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of motor_keluar
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `m_aksesoris`
@@ -338,8 +396,8 @@ CREATE TABLE `m_motor` (
 -- ----------------------------
 INSERT INTO `m_motor` VALUES ('1', 'MSN0101010', 'RGK9009090', 'NC11D1D', 'Honda Spacy Helm-in Karburator', 'Matic', 'WH', '2016', 'Honda', '17500000', 'assets/images/motor/icon.png', '/assets/images//assets/images/motor/icon.png', '1', '1', '6', null, '2016-10-28 00:36:07', '2016-11-16 02:49:28', null);
 INSERT INTO `m_motor` VALUES ('2', 'MSN0909090', 'RGK0989797', 'NC10D1D', 'Supra X 125', 'Manual Transmission', 'BLC', '2016', 'Honda', '16000000', 'assets/images/motor/icon.png', '/assets/images//assets/images/motor/icon.png', '1', '1', '6', '1', '2016-10-28 00:56:14', '2016-11-16 02:49:41', '2016-10-28 01:01:46');
-INSERT INTO `m_motor` VALUES ('3', 'MSN7767686', 'RGK7676851', 'uyhuyu', 'jhjh', 'xx', null, null, 'Honda', '90000000', '', '/assets/images//assets/images/motor/motor_icon.png', '3', '6', '6', '6', '2016-10-28 23:45:50', '2016-10-28 23:48:44', '2016-10-28 23:48:49');
-INSERT INTO `m_motor` VALUES ('4', 'RGK909090', 'MSN989898', 'DHC096767', 'Karisma', 'Manual', 'RD', '2016', 'Honda', '20000000', 'assets/images/motor/131c97dd4d5f1a6cf6a6271cdb67bbe4.jpg', '/assets/images//assets/images/motor/131c97dd4d5f1a6cf6a6271cdb67bbe4.jpg', '1', '6', '6', null, '2016-11-01 13:11:36', '2016-11-16 02:49:57', null);
+INSERT INTO `m_motor` VALUES ('3', 'MSN7767686', 'RGK7676851', 'NC12D1D', 'jhjh', 'xx', null, null, 'Honda', '90000000', '', '/assets/images//assets/images/motor/motor_icon.png', '3', '6', '6', '6', '2016-10-28 23:45:50', '2016-10-28 23:48:44', '2016-10-28 23:48:49');
+INSERT INTO `m_motor` VALUES ('4', 'RGK909090', 'MSN989898', 'NC13D1D', 'Karisma', 'Manual', 'RD', '2016', 'Honda', '20000000', 'assets/images/motor/131c97dd4d5f1a6cf6a6271cdb67bbe4.jpg', '/assets/images//assets/images/motor/131c97dd4d5f1a6cf6a6271cdb67bbe4.jpg', '1', '6', '6', null, '2016-11-01 13:11:36', '2016-11-16 02:49:57', null);
 
 -- ----------------------------
 -- Table structure for `m_supplier`
@@ -410,13 +468,14 @@ CREATE TABLE `penerimaan_aksesoris` (
   `sys_update_date` datetime DEFAULT NULL,
   `sys_delete_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of penerimaan_aksesoris
 -- ----------------------------
-INSERT INTO `penerimaan_aksesoris` VALUES ('1', '1', '6', '1', '1', '6', '6', null, '2016-11-20 22:44:00', '2016-11-27 09:40:50', null);
-INSERT INTO `penerimaan_aksesoris` VALUES ('2', '2', '34', '2', '1', '6', '6', null, '2016-11-27 07:32:04', '2016-11-27 09:42:03', null);
+INSERT INTO `penerimaan_aksesoris` VALUES ('1', '1', '6', '1', '3', '6', '6', '6', '2016-11-20 22:44:00', '2016-11-27 09:40:50', '2016-11-27 09:59:02');
+INSERT INTO `penerimaan_aksesoris` VALUES ('2', '2', '34', '2', '3', '6', '6', '6', '2016-11-27 07:32:04', '2016-11-27 09:42:03', '2016-11-27 10:03:01');
+INSERT INTO `penerimaan_aksesoris` VALUES ('3', '2', '45', '2', '1', '6', null, null, '2016-11-27 10:03:20', null, null);
 
 -- ----------------------------
 -- Table structure for `penerimaan_motor`
@@ -432,6 +491,7 @@ CREATE TABLE `penerimaan_motor` (
   `norangka` varchar(25) DEFAULT NULL,
   `tipe` varchar(25) DEFAULT NULL,
   `warna` varchar(10) DEFAULT NULL,
+  `tahun` varchar(10) DEFAULT NULL,
   `kdgudang` int(11) DEFAULT NULL,
   `tglupload` datetime DEFAULT NULL,
   `namafile` varchar(200) DEFAULT NULL,
@@ -443,14 +503,45 @@ CREATE TABLE `penerimaan_motor` (
   `sys_update_date` datetime DEFAULT NULL,
   `sys_delete_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of penerimaan_motor
 -- ----------------------------
-INSERT INTO `penerimaan_motor` VALUES ('5', 'B08080VND3', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', '2016-11-19 13:00:18', 'excel_penerimaan_motor38.xlsx', '1', '6', null, null, '2016-11-19 13:00:18', null, null);
-INSERT INTO `penerimaan_motor` VALUES ('6', 'B08080VND4', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', '2016-11-19 13:00:18', 'excel_penerimaan_motor38.xlsx', '1', '6', null, null, '2016-11-19 13:00:18', null, null);
-INSERT INTO `penerimaan_motor` VALUES ('7', 'B08080VND5', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'Skutik', 'Merah', '1', '2016-11-19 13:00:18', 'excel_penerimaan_motor38.xlsx', '1', '6', null, null, '2016-11-19 13:00:18', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('42', 'B08080VND1', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576464', 'RK5446464', 'NC11D1D', 'Merah', '2015', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('43', 'B08080VND2', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576465', 'RK5446464', 'NC10D1D', 'Merah', '2015', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('44', 'B08080VND3', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576466', 'RK5446464', 'NC12D1D', 'Merah', '2015', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('45', 'B08080VND4', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576467', 'RK5446464', 'NC13D1D', 'Merah', '2015', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('46', 'B08080VND5', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576468', 'RK5446464', 'NC11D1D', 'Merah', '2015', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('47', 'B08080VND6', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576469', 'RK5446464', 'NC10D1D', 'Merah', '2015', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('48', 'B08080VND7', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576470', 'RK5446464', 'NC12D1D', 'Merah', '2015', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('49', 'B08080VND8', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576471', 'RK5446464', 'NC13D1D', 'Merah', '2015', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('50', 'B08080VND9', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576472', 'RK5446464', 'NC11D1D', 'Merah', '2015', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('51', 'B08080VND10', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576473', 'RK5446464', 'NC10D1D', 'Merah', '2015', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('52', 'B08080VND11', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576474', 'RK5446464', 'NC12D1D', 'Merah', '2015', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('53', 'B08080VND12', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576475', 'RK5446464', 'NC13D1D', 'Merah', '2015', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('54', 'B08080VND13', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576476', 'RK5446464', 'NC11D1D', 'Merah', '2015', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('55', 'B08080VND14', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576477', 'RK5446464', 'NC10D1D', 'Merah', '2015', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('56', 'B08080VND15', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576478', 'RK5446464', 'NC12D1D', 'Merah', '2015', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('57', 'B08080VND16', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576479', 'RK5446464', 'NC13D1D', 'Merah', '2015', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('58', 'B08080VND17', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576480', 'RK5446464', 'NC11D1D', 'Merah', '2015', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('59', 'B08080VND18', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576481', 'RK5446464', 'NC10D1D', 'Merah', '2015', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('60', 'B08080VND19', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576482', 'RK5446464', 'NC12D1D', 'Merah', '2015', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('61', 'B08080VND20', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576483', 'RK5446464', 'NC13D1D', 'Merah', '2015', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('62', 'B08080VND21', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576484', 'RK5446464', 'NC11D1D', 'Merah', '2015', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('63', 'B08080VND22', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576485', 'RK5446464', 'NC10D1D', 'Merah', '2016', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('64', 'B08080VND23', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576486', 'RK5446464', 'NC12D1D', 'Merah', '2016', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('65', 'B08080VND24', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576487', 'RK5446464', 'NC13D1D', 'Merah', '2016', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('66', 'B08080VND25', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576488', 'RK5446464', 'NC11D1D', 'Merah', '2016', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('67', 'B08080VND26', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576489', 'RK5446464', 'NC10D1D', 'Merah', '2016', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('68', 'B08080VND27', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576490', 'RK5446464', 'NC12D1D', 'Merah', '2016', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('69', 'B08080VND28', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576491', 'RK5446464', 'NC13D1D', 'Merah', '2016', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('70', 'B08080VND29', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576492', 'RK5446464', 'NC11D1D', 'Merah', '2016', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('71', 'B08080VND30', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576493', 'RK5446464', 'NC10D1D', 'Merah', '2016', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('72', 'B08080VND31', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576494', 'RK5446464', 'NC12D1D', 'Merah', '2016', '1', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('73', 'B08080VND32', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576495', 'RK5446464', 'NC13D1D', 'Merah', '2016', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('74', 'B08080VND33', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576496', 'RK5446464', 'NC11D1D', 'Merah', '2016', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
+INSERT INTO `penerimaan_motor` VALUES ('75', 'B08080VND34', '2016-11-11', 'SJ00854545', 'SO5487545', 'MSN4576497', 'RK5446464', 'NC10D1D', 'Merah', '2016', '2', '2016-11-27 19:08:32', 'excel_penerimaan_motor40.xlsx', '1', '6', null, null, '2016-11-27 19:08:32', null, null);
 
 -- ----------------------------
 -- Table structure for `penerimaan_motor_temp`
@@ -466,6 +557,7 @@ CREATE TABLE `penerimaan_motor_temp` (
   `norangka` varchar(25) DEFAULT NULL,
   `tipe` varchar(25) DEFAULT NULL,
   `warna` varchar(10) DEFAULT NULL,
+  `tahun` varchar(10) DEFAULT NULL,
   `kdgudang` int(11) DEFAULT NULL,
   `tglupload` datetime DEFAULT NULL,
   `namafile` varchar(200) DEFAULT NULL,
@@ -477,7 +569,7 @@ CREATE TABLE `penerimaan_motor_temp` (
   `sys_update_date` datetime DEFAULT NULL,
   `sys_delete_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id_temp`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of penerimaan_motor_temp
