@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <title><?php echo $this->config->item('project_title'); ?></title>
+    
     <link href="<?php echo base_url(); ?>themes/css/font-awesome.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>themes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>themes/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
@@ -10,7 +11,12 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>themes/plugins/scroll/nanoscroller.css"/>
     <link href="<?php echo base_url(); ?>themes/plugins/new-datatables/jquery.dataTables.min.css" rel="stylesheet"/>
     <link href="<?php echo base_url(); ?>themes/plugins/new-datatables/jquery.dataTables.select.min.css" rel="stylesheet"/>
+    
     <script src="<?php echo base_url();?>themes/js/jquery-2.1.0.js"></script>
+    <script src="<?php echo base_url();?>themes/js/jquery.form.js"></script>
+    
+    <script src="<?php echo base_url();?>assets/js/jstools.js"></script>
+    
 </head>
 <body class="light_theme  fixed_header left_nav_fixed">
     <div class="wrapper">

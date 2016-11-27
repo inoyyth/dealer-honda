@@ -7,11 +7,11 @@ Class Main_model extends CI_Model {
     }
 
     public function menu_all() {
-        if ($this->session->userdata('logged_in_admin')!=FALSE){
+        if ($this->session->userdata('logged_in_admin') != FALSE) {
             $session = $this->session->userdata('logged_in_admin');
             $menu = unserialize($session['access_menu']);
             $menuResult = array();
-            foreach($menu as $k=>$v){
+            foreach ($menu as $k => $v) {
                 $menuResult[] = $v['menu'];
             }
             //echo "<pre>";var_dump($query);die;
@@ -21,19 +21,19 @@ Class Main_model extends CI_Model {
             $this->db->where_in('id', $menuResult);
             $this->db->group_by('parent');
             $query_parent = $this->db->get()->result_array();
-            
+
             $menuResult2 = array();
-            foreach($query_parent as $k=>$v){
+            foreach ($query_parent as $k => $v) {
                 $menuResult2[] = $v['parent'];
             }
             //get child
             $this->db->select('*');
             $this->db->from('menus');
-            $this->db->where_in('id', array_merge($menuResult,$menuResult2));
+            $this->db->where_in('id', array_merge($menuResult, $menuResult2));
             $query = $this->db->get()->result_array();
             return $query;
             //echo "<pre>";var_dump($query);die;
-        }else{
+        } else {
             return FALSE;
         }
     }
@@ -100,18 +100,18 @@ Class Main_model extends CI_Model {
         return $this->db->get()->result_array();
     }
 
-    public function generate_code($tables, $prefix, $separator, $digit = 4, $date=true, $loop=false) {
-        $tgl =date('y');
+    public function generate_code($tables, $prefix, $separator, $digit = 4, $date = true, $loop = false) {
+        $tgl = date('y');
         $this->db->select_max('id', 'max_id');
-        if($loop==false){
+        if ($loop == false) {
             $maxi = $this->db->get($tables)->row('max_id');
-        }else{
-            $maxi = $this->db->get_where($tables,array('DATE(sys_create_date)'=>date('Y-m-d')))->row('max_id');
+        } else {
+            $maxi = $this->db->get_where($tables, array('YEAR(sys_create_date)' => date('Y'),'MONTH(sys_create_date)' => date('m')))->row('max_id');
         }
         $hsl = str_pad(($maxi == 0 ? 1 : intval($maxi) + 1), $digit, '0', STR_PAD_LEFT);
-        if($date==true){
+        if ($date == true) {
             return $prefix . $separator . date('Ymd') . $separator . $hsl;
-        }else{
+        } else {
             return $prefix . $separator . $hsl;
         }
     }
@@ -136,11 +136,19 @@ Class Main_model extends CI_Model {
         $hsl = str_pad(($val), $digit, '0', STR_PAD_LEFT);
         return $prefix . $hsl;
     }
-    
-    public function cekExistCode($data=array()){
+
+    public function cekExistCode($data = array()) {
         $this->db->select('*');
         $this->db->from($data['table']);
-        $this->db->where(array($data['field']=>$data['value']));
+        $this->db->where(array($data['field'] => $data['value']));
         return $this->db->get();
     }
+    
+    public function get_global_data($group_data)
+    {
+        $this->db->where('group_data',$group_data);
+        $query = $this->db->get('global_data');
+        return $query->result();
+    }
+
 }
