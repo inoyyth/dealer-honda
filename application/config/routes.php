@@ -203,4 +203,17 @@ $route['input-penerimaan-aksesoris-pdf/(:any)'] = 'aksesoris_terima/print_pdf/$1
 $route['input-penerimaan-aksesoris-excel'] = 'aksesoris_terima/print_excel';
 $route['input-penerimaan-aksesoris-excel/(:any)'] = 'aksesoris_terima/print_excel/$1';
 
+$route['motor-keluar'] = 'motor_keluar';
+$route['motor-keluar-tambah'] = 'motor_keluar/add';
+$route['motor-keluar-edit-(:num)'] = 'motor_keluar/edit/$1';
+$route['motor-keluar-detail-(:num)'] = 'motor_keluar/detail/$1';
+$route['motor-keluar-delete-(:num)'] = 'motor_keluar/delete/$1';
+$route['motor-keluar-save'] = 'motor_keluar/save';
+$route['motor-keluar-page'] = 'motor_keluar/index';
+$route['motor-keluar-page/(:any)'] = 'motor_keluar/index/$1';
+$route['motor-keluar-pdf'] = 'motor_keluar/print_pdf';
+$route['motor-keluar-pdf/(:any)'] = 'motor_keluar/print_pdf/$1';
+$route['motor-keluar-excel'] = 'motor_keluar/print_excel';
+$route['motor-keluar-excel/(:any)'] = 'motor_keluar/print_excel/$1';
+
 $route['kwitansi-dp-add'] = 't_kwitansi/add';
