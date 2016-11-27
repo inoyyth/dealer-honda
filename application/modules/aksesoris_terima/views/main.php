@@ -61,9 +61,8 @@
             </div>
             <div class="porlets-content">
                 <div style="padding-bottom: 10px;">
-                    <!--<button class="btn btn-sm btn-primary"><i class="fa fa-plus-square-o"></i> Add</button>-->
-                    <button class="btn btn-sm btn-primary"><i class="fa fa-print"></i> Print</button>
-                    <button class="btn btn-sm btn-primary"><i class="fa fa-excel"></i>  Excel</button> 
+                    <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'input-penerimaan-aksesoris-pdf/?template=table_pdf&name=master_motor', 'text' => 'Print')); ?>
+                    <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'input-penerimaan-aksesoris-excel/?template=table_excel&name=master_motor', 'text' => 'Excel')); ?>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -92,7 +91,7 @@
                                         <td><?php echo $v['gudang']; ?></td>
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-warning" onclick="editList(<?php echo $v['id']; ?>);"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-sm btn-danger" onclick="deleteList(<?php echo $v['id']; ?>);"><i class="fa fa-remove"></i> </button> 
+                                            <a href="<?php echo base_url('input-penerimaan-aksesoris-delete-'.$v['id']);?>" onclick="return confirm('yakin hapus data?');" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i> </a> 
                                         </td>
                                     </tr>
                                 <?php
