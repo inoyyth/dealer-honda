@@ -3,12 +3,11 @@
         <section class="panel default blue_title h4">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-md-6 pull-left">Master Jabatan
-                    </div>
+                    <div class="col-md-6 pull-left">Barang Keluar</div>
                     <div class="col-md-6 pull-right text-right">
-                        <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'master-jabatan-tambah', 'text' => 'Tambah')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'master-jabatan-pdf/?template=table_pdf&name=master_jabatan', 'text' => 'Print')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'master-jabatan-excel/?template=table_excel&name=master_jabatan', 'text' => 'Excel')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'motor-keluar-tambah', 'text' => 'Tambah')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'motor-keluar-pdf/?template=table_pdf&name=master_jabatan', 'text' => 'Print')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'motor-keluar-excel/?template=table_excel&name=master_jabatan', 'text' => 'Excel')); ?>
                     </div> 
                 </div>
             </div>
@@ -18,8 +17,11 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nama Level</th>
-                                <th>Keterangan</th>
+                                <th>Kode</th>
+                                <th>Gudang In</th>
+                                <th>Gudang Out</th>
+                                <th>No. PO</th>
+                                <th>No. DO</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -32,11 +34,14 @@
                                     ?>
                                     <tr>
                                         <td><?php echo intval($this->uri->segment(2) + ($k + 1)); ?></td>
-                                        <td><?php echo $v['jabatan']; ?></td>
-                                        <td><?php echo $v['keterangan']; ?></td>
+                                        <td><?php echo $v['kode_motor_keluar']; ?></td>
+                                        <td><?php echo $v['gudang_keluar']; ?></td>
+                                        <td><?php echo $v['gudang_masuk']; ?></td>
+                                        <td><?php echo $v['kode_po_motor_keluar']; ?></td>
+                                        <td><?php echo $v['kode_do_motor_keluar']; ?></td>
                                         <td class="text-center">
-                                            <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'master-jabatan-edit-' . $v['id'], 'text' => 'Edit')); ?>
-                                            <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'master-jabatan-delete-' . $v['id'], 'text' => 'Delete')); ?>
+                                            <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'motor-keluar-edit-' . $v['id'], 'text' => 'Edit')); ?>
+                                            <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'motor-keluar-delete-' . $v['id'], 'text' => 'Delete')); ?>
                                         </td>
                                     </tr>
                                 <?php }
@@ -44,7 +49,7 @@
                             ?>
                         </tbody>
                         <tfoot>
-                        <form id="form1" method="post" action="<?php echo base_url('master-jabatan'); ?>">
+                        <form id="form1" method="post" action="<?php echo base_url('motor-keluar'); ?>">
                             <tr>
                                 <td>#</td>
                                 <td>
