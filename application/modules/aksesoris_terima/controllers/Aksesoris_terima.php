@@ -45,7 +45,7 @@ class Aksesoris_terima extends MX_Controller {
     }
 
     function delete($id) {
-        $this->main_model->delete('m_aksesoris_terima', array('id' => $id), array('m_status' => '3'));
+        $this->main_model->delete('m_aksesoris_terima', array('id' => $id), array('aksesoris_status' => '3'));
         redirect("input-penerimaan-aksesoris");
     }
 
