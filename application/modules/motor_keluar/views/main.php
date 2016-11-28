@@ -3,7 +3,7 @@
         <section class="panel default blue_title h4">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-md-6 pull-left">Barang Keluar</div>
+                    <div class="col-md-6 pull-left">Barang Keluar Gudang</div>
                     <div class="col-md-6 pull-right text-right">
                         <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'motor-keluar-tambah', 'text' => 'Tambah')); ?>
                         <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'motor-keluar-pdf/?template=table_pdf&name=master_jabatan', 'text' => 'Print')); ?>
@@ -18,8 +18,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Kode</th>
-                                <th>Gudang In</th>
-                                <th>Gudang Out</th>
+                                <th>From</th>
+                                <th>To</th>
                                 <th>No. PO</th>
                                 <th>No. DO</th>
                                 <th class="text-center">Action</th>
