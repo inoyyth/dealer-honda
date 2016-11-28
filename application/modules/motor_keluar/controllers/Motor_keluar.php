@@ -49,7 +49,7 @@ class Motor_keluar extends MX_Controller {
     }
 
     function delete($id) {
-        $this->main_model->update('m_motor_keluar', array('id' => $id), array('status_jabatan' => '3'));
+        $this->main_model->update('motor_keluar', array('id' => $id), array('status_motor_keluar' => '3'));
         redirect("motor-keluar");
     }
 
