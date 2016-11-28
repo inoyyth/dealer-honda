@@ -32,7 +32,7 @@ class Motor_keluar extends MX_Controller {
 
     public function add() {
         $this->breadcrumbs->push('Add', '/motor-keluar-tambah');
-        $this->db->delete('detail_motor_keluar_temp',array('id_user'=>$this->sessionGlobal['id']));
+        //$this->db->delete('detail_motor_keluar_temp',array('id_user'=>$this->sessionGlobal['id']));
         $data['code'] = $this->main_model->generate_code($this->table, 'MKA-SJL/BK/'.date('Y'), '/',5,false,true,'id_motor_keluar');
         $data['gudang'] = $this->main_model->getMaster('m_gudang', $like=array(), $where=array('status_gudang'=>'1'));
         $data['view'] = "motor_keluar/add";
@@ -41,7 +41,9 @@ class Motor_keluar extends MX_Controller {
 
     public function edit($id) {
         $this->breadcrumbs->push('Edit', '/motor-keluar-edit');
-        $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
+        $this->db->delete('detail_motor_keluar_temp',array('id_user'=>$this->sessionGlobal['id']));
+        $data['detail'] = $this->db->get_where($this->table, array('id_motor_keluar' => $id))->row_array();
+        $data['gudang'] = $this->main_model->getMaster('m_gudang', $like=array(), $where=array('status_gudang'=>'1'));
         $data['view'] = 'motor_keluar/edit';
         $this->load->view('default', $data);
     }
@@ -54,6 +56,7 @@ class Motor_keluar extends MX_Controller {
     function save() {
         if ($_POST) {
             if ($this->m_motor_keluar->save()) {
+                $this->db->delete('detail_motor_keluar_temp',array('id_user'=>$this->sessionGlobal['id']));
                 $this->session->set_flashdata('success', 'Data Berhasil Di Simpan !');
             } else {
                 $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
@@ -104,16 +107,16 @@ class Motor_keluar extends MX_Controller {
         $join = array(
                     array('table'=>'penerimaan_motor','where'=>'penerimaan_motor.nomesin=detail_motor_keluar_temp.no_mesin','join'=>'left')
                 );
-        $column_order = array(null, 'id', 'nomesin', 'norangka', 'tipe','warna','tahun');
-        $column_search = array('id', 'nomesin', 'norangka', 'tipe','warna','tahun');
-        $list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('id' => 'asc'),$where=array('id_user'=>$this->sessionGlobal['id']),$join);
+        $column_order = array(null, 'id_detail_motor_keluar', 'nomesin', 'norangka', 'tipe','warna','tahun');
+        $column_search = array('id_detail_motor_keluar', 'nomesin', 'norangka', 'tipe','warna','tahun');
+        $list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('id_detail_motor_keluar' => 'asc'),$where=array('id_user'=>$this->sessionGlobal['id']),$join);
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $result) {
             $no++;
             $row = array();
-            $row[] = "<input type='checkbox'  class='deleteRow' value='".$result->id."'  /> ".$no ;
-            $row[] = $result->id;
+            $row[] = "<input type='checkbox'  class='deleteRow' value='".$result->id_detail_motor_keluar."'  /> ".$no ;
+            $row[] = $result->id_detail_motor_keluar;
             $row[] = $result->nomesin;
             $row[] = $result->norangka;
             $row[] = $result->tipe;
@@ -127,6 +130,40 @@ class Motor_keluar extends MX_Controller {
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->m_datatable->count_all($table),
             "recordsFiltered" => $this->m_datatable->count_filtered($table, $column_order, $column_search, $order = array('id' => 'asc'),$where=array('id_user'=>$this->sessionGlobal['id']),$join),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+    
+    public function get_list_motor_keluar(){
+        $table = 'detail_motor_keluar';
+        $join = array(
+                    array('table'=>'penerimaan_motor','where'=>'penerimaan_motor.nomesin=detail_motor_keluar.no_mesin','join'=>'left')
+                );
+        $column_order = array(null, 'id_motor_keluar', 'nomesin', 'norangka', 'tipe','warna','tahun');
+        $column_search = array('id_motor_keluar', 'nomesin', 'norangka', 'tipe','warna','tahun');
+        $list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('id_detail_motor_keluar' => 'asc'),$where=array('id_detail_motor_keluar'=>$this->input->post('id_motor_keluar')),$join);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $result) {
+            $no++;
+            $row = array();
+            $row[] = "<input type='checkbox'  class='deleteRow' value='".$result->id_motor_keluar."'  /> ".$no ;
+            $row[] = $result->id_motor_keluar;
+            $row[] = $result->nomesin;
+            $row[] = $result->norangka;
+            $row[] = $result->tipe;
+            $row[] = $result->warna;
+            $row[] = $result->tahun;
+ 
+            $data[] = $row;
+        }
+    
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->m_datatable->count_all($table),
+            "recordsFiltered" => $this->m_datatable->count_filtered($table, $column_order, $column_search, $order = array('id' => 'asc'),$where=array('id_detail_motor_keluar'=>$this->input->post('id_motor_keluar')),$join),
             "data" => $data,
         );
         //output to json format
@@ -150,6 +187,33 @@ class Motor_keluar extends MX_Controller {
         } else {
             show_404();
         }
+    }
+    
+    public function inputMotorList(){
+        if ($_POST) {
+            if ($this->m_motor_keluar->saveInputMotorList()) {
+                $this->session->set_flashdata('success', 'Data Berhasil Di Tambah !');
+            } else {
+                $this->session->set_flashdata('error', 'Data Gagal Di Tambah !');
+            }
+            redirect("motor-keluar");
+        } else {
+            show_404();
+        }
+    }
+    
+    public function datatable_bulk_delete(){
+       $id_array = $this->input->post('data_ids'); 
+       $this->db->where_in('id_detail_motor_keluar', $id_array);
+       $this->db->delete('detail_motor_keluar_temp');
+        return true;
+    }
+    
+    public function datatable_bulk_deletelistmotor(){
+       $id_array = $this->input->post('data_ids'); 
+       $this->db->where_in('id_motor_keluar', $id_array);
+       $this->db->delete('detail_motor_keluar');
+        return true;
     }
 
 }

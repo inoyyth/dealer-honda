@@ -4,7 +4,7 @@
             <div class="block-web">
                 <div class="header">
                     <div class="actions"> </div>
-                    <h3 class="content-header">Barang Keluar</h3>
+                    <h3 class="content-header">Barang Keluar (Add)</h3>
                 </div>
                 <div class="porlets-content">
                     <input type="hidden" name="id">
@@ -77,9 +77,9 @@
                             <tr>
                                 <th><input type="checkbox"  id="bulkDelete"  /></th>
                                 <th>No.</th>
-                                <th>Type</th>
+                                <th>No. Mesin</th>
                                 <th>No. Rangka</th>
-                                <th>No.Mesin</th>
+                                <th>Type</th>
                                 <th>Warna</th>
                                 <th>Tahun</th>
                             </tr>
@@ -198,7 +198,7 @@
                 var ids_string = ids.toString();  // array to string conversion
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url('motor_terima/datatable_bulk_delete'); ?>",
+                    url: "<?php echo base_url('motor_keluar/datatable_bulk_delete'); ?>",
                     data: {data_ids:ids},
                     success: function(result) {
                         table.draw(); // redrawing datatable

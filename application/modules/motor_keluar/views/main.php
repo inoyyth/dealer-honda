@@ -39,9 +39,9 @@
                                         <td><?php echo $v['gudang_masuk']; ?></td>
                                         <td><?php echo $v['kode_po_motor_keluar']; ?></td>
                                         <td><?php echo $v['kode_do_motor_keluar']; ?></td>
-                                        <td class="text-center">
-                                            <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'motor-keluar-edit-' . $v['id'], 'text' => 'Edit')); ?>
-                                            <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'motor-keluar-delete-' . $v['id'], 'text' => 'Delete')); ?>
+                                        <td class="text-center" style="width: 150px;">
+                                            <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'motor-keluar-edit-' . $v['id_motor_keluar'], 'text' => 'Edit')); ?>
+                                            <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'motor-keluar-delete-' . $v['id_motor_keluar'], 'text' => 'Delete')); ?>
                                         </td>
                                     </tr>
                                 <?php }
@@ -53,7 +53,7 @@
                             <tr>
                                 <td>#</td>
                                 <td>
-                                    <input class="form-control input-sm" name="jabatan" class="form-control" value="<?php echo (isset($sr_data['jabatan']) ? $sr_data['jabatan'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="kode_motor_keluar" class="form-control" value="<?php echo (isset($sr_data['kode_motor_keluar']) ? $sr_data['kode_motor_keluar'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;
@@ -61,13 +61,38 @@
                                             ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="keterangan" value="<?php echo (isset($sr_data['keterangan']) ? $sr_data['keterangan'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="gudang_keluar" value="<?php echo (isset($sr_data['gudang_masuk.gudang.gudang']) ? $sr_data['gudang_masuk.gudang'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;
                                             }
                                             ;"/>
                                 </td>
+                                <td>
+                                    <input class="form-control input-sm" name="gudang_masuk" value="<?php echo (isset($sr_data['gudang_masuk.gudang']) ? $sr_data['gudang_masuk.gudang'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                                submit_search('form1');
+                                            } else {
+                                                return false;
+                                            }
+                                            ;"/>
+                                </td>
+                                <td>
+                                    <input class="form-control input-sm" name="kode_po_motor_keluar" value="<?php echo (isset($sr_data['kode_po_motor_keluar']) ? $sr_data['kode_po_motor_keluar'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                                submit_search('form1');
+                                            } else {
+                                                return false;
+                                            }
+                                            ;"/>
+                                </td>
+                                <td>
+                                    <input class="form-control input-sm" name="kode_do_motor_keluar" value="<?php echo (isset($sr_data['kode_do_motor_keluar']) ? $sr_data['kode_do_motor_keluar'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                                submit_search('form1');
+                                            } else {
+                                                return false;
+                                            }
+                                            ;"/>
+                                </td>
+                                <td>&nbsp;</td>
                             </tr>
                             </tfoot>
                     </table>
