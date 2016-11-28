@@ -81,7 +81,7 @@ Class M_account extends CI_Model {
     public function get_active_menu() {
         $this->db->select('*');
         $this->db->from('menus');
-        $this->db->where(array('status !=' => 3, 'parent !=' => null));
+        $this->db->where(array('status =' => 1, 'parent !=' => null));
         $this->db->order_by('parent', 'ASC');
         $this->db->order_by('number', 'ASC');
         return $this->db->get()->result_array();
