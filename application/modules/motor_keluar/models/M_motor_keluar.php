@@ -57,4 +57,13 @@ Class M_motor_keluar extends CI_Model{
         $this->db->insert('detail_motor_keluar_temp',$data);
         return true;
     }
+    
+    public function saveInputMotorList(){
+        $data = array(
+                'no_mesin'=>$this->input->post('nomesin'),
+                'id_detail_motor_keluar'=>$this->input->post('id'),
+            );
+        $this->db->insert('detail_motor_keluar',$data);
+        return true;
+    }
 }
