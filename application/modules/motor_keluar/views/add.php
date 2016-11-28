@@ -13,7 +13,7 @@
                         <input type="text" readonly="true" value="<?php echo $code; ?>" name="kode_motor_keluar" parsley-trigger="change" required placeholder="Isi Kode" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Gudang In</label>
+                        <label>Gudang To</label>
                         <select name="id_gudang_in" class="form-control"  parsley-trigger="change" required="true">
                             <?php foreach ($gudang as $kGudang => $vGudang) { ?>
                                 <option value="<?php echo $vGudang['id']; ?>"><?php echo $vGudang['gudang']; ?></option>
@@ -21,7 +21,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Gudang Out</label>
+                        <label>Gudang From</label>
                         <select name="id_gudang_out" class="form-control"  parsley-trigger="change" required="true">
                             <?php foreach ($gudang as $kGudang => $vGudang) { ?>
                                 <option value="<?php echo $vGudang['id']; ?>"><?php echo $vGudang['gudang']; ?></option>
