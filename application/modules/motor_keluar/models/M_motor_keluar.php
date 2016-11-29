@@ -31,11 +31,11 @@ Class M_motor_keluar extends CI_Model{
                     $dtUpdate=array();
                     foreach($query as $kQuery=>$vQuery){
                         $dtUpdate[] = array(
-                            'no_mesin'=>$vQuery['no_mesin'],
-                            'kd_gudang'=>$this->input->post('id_gudang_in')
+                            'nomesin'=>$vQuery['no_mesin'],
+                            'kdgudang'=>$this->input->post('id_gudang_in')
                         );
                     }
-                    $this->db->update_batch('penerimaan_motor',$dtUpdate, 'no_mesin'); 
+                    $this->db->update_batch('penerimaan_motor',$dtUpdate, 'nomesin'); 
                     return true;
             }else{
                     $this->db->update($this->table,$this->main_model->update_sys($data),array('id_motor_keluar'=>$id));
