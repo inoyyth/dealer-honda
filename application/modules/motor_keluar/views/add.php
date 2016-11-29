@@ -13,19 +13,18 @@
                         <input type="text" readonly="true" value="<?php echo $code; ?>" name="kode_motor_keluar" parsley-trigger="change" required placeholder="Isi Kode" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Gudang To</label>
-                        <select name="id_gudang_in" class="form-control"  parsley-trigger="change" required="true">
+                        <label>Gudang From</label>
+                        <select name="id_gudang_out" class="form-control" onchange="getGudangTo(this.value);"  parsley-trigger="change" required="true">
+                            <option value="" disabled="true" selected="true">Choose...</option>
                             <?php foreach ($gudang as $kGudang => $vGudang) { ?>
                                 <option value="<?php echo $vGudang['id']; ?>"><?php echo $vGudang['gudang']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Gudang From</label>
-                        <select name="id_gudang_out" class="form-control"  parsley-trigger="change" required="true">
-                            <?php foreach ($gudang as $kGudang => $vGudang) { ?>
-                                <option value="<?php echo $vGudang['id']; ?>"><?php echo $vGudang['gudang']; ?></option>
-                            <?php } ?>
+                        <label>Gudang To</label>
+                        <select name="id_gudang_in" class="form-control" id="id_gudang_in"  parsley-trigger="change" required="true">
+                            
                         </select>
                     </div>
                     <div class="form-group">
@@ -234,4 +233,20 @@
            });
        });
     });
+    
+    function getGudangTo(id){
+        $("#id_gudang_in").html("<option value=''>Wait ...</option>")
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('motor_keluar/get_gudang_to'); ?>",
+            data: {id:id},
+            dataType:'html',
+            success: function(result) {
+                $("#id_gudang_in").html(result);
+            },
+            error: function(result){
+                alert(result);
+            }
+        });
+    }
 </script>
