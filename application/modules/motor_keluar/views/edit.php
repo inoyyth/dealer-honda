@@ -14,17 +14,19 @@
                     </div>
                     <div class="form-group">
                         <label>Gudang From</label>
-                        <select name="id_gudang_out" class="form-control" onchange="getGudangTo(this.value);" parsley-trigger="change" required="true">
+                        <input type="hidden" name="id_gudang_out" value="<?php echo $detail['id_gudang_out'];?>"/>
+                        <select name="id_gudang_outx" class="form-control" onchange="getGudangTo(this.value);">
                             <?php foreach ($gudang as $kGudang => $vGudang) { ?>
-                                <option value="<?php echo $vGudang['id']; ?>" <?php echo ($detail['id_gudang_out']==$vGudang['id']?"selected":"");?>><?php echo $vGudang['gudang']; ?></option>
+                                <option value="<?php echo $vGudang['id']; ?>" disabled="true" <?php echo ($detail['id_gudang_out']==$vGudang['id']?"selected":"");?>><?php echo $vGudang['gudang']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Gudang To</label>
-                        <select name="id_gudang_in" class="form-control" id="id_gudang_in" parsley-trigger="change" required="true">
+                        <input type="hidden" name="id_gudang_in" value="<?php echo $detail['id_gudang_in'];?>"/>
+                        <select name="id_gudang_inx" class="form-control" id="id_gudang_in">
                             <?php foreach ($gudang as $kGudang => $vGudang) { ?>
-                                <option value="<?php echo $vGudang['id']; ?>" <?php echo ($detail['id_gudang_in']==$vGudang['id']?"selected":"");?>><?php echo $vGudang['gudang']; ?></option>
+                                <option value="<?php echo $vGudang['id']; ?>" disabled="true" <?php echo ($detail['id_gudang_in']==$vGudang['id']?"selected":"");?>><?php echo $vGudang['gudang']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
