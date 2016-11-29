@@ -71,7 +71,9 @@ Class M_motor_keluar extends CI_Model{
                 'no_mesin'=>$this->input->post('nomesin'),
                 'id_detail_motor_keluar'=>$this->input->post('id'),
             );
+        $this->db->update('penerimaan_motor',array('kdgudang'=>$this->input->post('gudang')),array('nomesin'=>$this->input->post('nomesin')));
         $this->db->insert('detail_motor_keluar',$data);
+        
         return true;
     }
 }
