@@ -108,6 +108,7 @@
                     <div class="form-group" id="remote">
                         <label>No Mesin</label>
                         <input type="hidden" name="id" value="<?php echo $detail['id_motor_keluar'];?>"/>
+                        <input type="hidden" name="gudang" value="<?php echo $detail['id_gudang_in'];?>"/>
                         <input class="typeahead form-control" parsley-trigger="change" required name="nomesin" id="nomesin" type="text" placeholder="Type No Mesin">
                     </div>
                     <div class="form-group">
