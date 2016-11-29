@@ -215,5 +215,13 @@ class Motor_keluar extends MX_Controller {
        $this->db->delete('detail_motor_keluar');
         return true;
     }
+    
+    public function get_gudang_to(){
+        $id = $this->input->post('id');
+        $gudang = $this->main_model->getMaster('m_gudang', $like=array(), $where=array('status_gudang'=>'1','id !='=>$id));
+        foreach($gudang as $k=>$v){
+            echo "<option value='".$v['id']."'>".$v['gudang']."</option>";
+        }
+    }
 
 }
