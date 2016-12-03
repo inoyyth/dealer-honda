@@ -102,7 +102,7 @@ if (!function_exists('terbilang')) {
                 $hasil = ucfirst($hasil);
                 break;
         }
-        return $hasil;
+        return $hasil. " rupiah";
     }
 
 }

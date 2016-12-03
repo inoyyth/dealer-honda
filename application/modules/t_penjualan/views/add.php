@@ -31,7 +31,7 @@
                         <div class="col-sm-9">
                             <div class="input-group">
                                 <input type="hidden" name="id_motor" id="id_motor">
-                                <input type="text" readonly="true" name="nomsn" id="nomsn" parsley-trigger="change" required placeholder="Pilih No Mesin" class="form-control">
+                                <input type="text" readonly="true" name="nomsn" id="nomsn" parsley-trigger="change" placeholder="Pilih No Mesin" class="form-control">
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalBrowse">Browse</button>
                                 </div>
@@ -41,31 +41,31 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">No. Rangka</label>
                         <div class="col-sm-9">
-                            <input type="text" name="norangka" id="norangka" parsley-trigger="change" required readonly="true" placeholder="No Rangka" class="form-control">
+                            <input type="text" name="norangka" id="norangka" parsley-trigger="change" readonly="true" placeholder="No Rangka" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Nama Motor</label>
                         <div class="col-sm-9">
-                            <input type="text" name="nama_motor" id="nama_motor" parsley-trigger="change" required readonly="true" placeholder="Nama Motor" class="form-control">
+                            <input type="text" name="nama_motor" id="nama_motor" parsley-trigger="change" readonly="true" placeholder="Nama Motor" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Warna</label>
                         <div class="col-sm-9">
-                            <input type="text" name="warna" id="warna" parsley-trigger="change" required readonly="true" placeholder="Warna" class="form-control">
+                            <input type="text" name="warna" id="warna" parsley-trigger="change" readonly="true" placeholder="Warna" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Tahun</label>
                         <div class="col-sm-9">
-                            <input type="text" name="tahun" id="tahun" parsley-trigger="change" required readonly="true" placeholder="Tahun" class="form-control">
+                            <input type="text" name="tahun" id="tahun" parsley-trigger="change" readonly="true" placeholder="Tahun" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Varian</label>
                         <div class="col-sm-9">
-                            <input type="text" name="varian" id="varian" parsley-trigger="change" required readonly="true" placeholder="Warna" class="form-control">
+                            <input type="text" name="varian" id="varian" parsley-trigger="change" readonly="true" placeholder="Warna" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">

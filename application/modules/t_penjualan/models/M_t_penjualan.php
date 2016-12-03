@@ -26,12 +26,12 @@ Class M_t_penjualan extends CI_Model {
                     'cara_pembelian' => $this->input->post('cara_pembelian'),
                     'marketing' => $this->input->post('marketing'),
                     'leasing' => $this->input->post('leasing'),
-                    'dp_system' => $this->input->post('dp_system'),
-                    'diskon' => $this->input->post('diskon'),
-                    'tagih' => $this->input->post('tagih'),
-                    'dp' => $this->input->post('dp'),
-                    'sisa_hutang' => $this->input->post('sisa_hutang'),
-                    'fee' => $this->input->post('fee'),
+                    'dp_system' => currency_to_normal($this->input->post('dp_system')),
+                    'diskon' => currency_to_normal($this->input->post('diskon')),
+                    'tagih' => currency_to_normal($this->input->post('tagih')),
+                    'dp' => currency_to_normal($this->input->post('dp')),
+                    'sisa_hutang' => currency_to_normal($this->input->post('sisa_hutang')),
+                    'fee' => currency_to_normal($this->input->post('fee')),
                     'm_status' => 1
                 );
                 break;
@@ -39,11 +39,11 @@ Class M_t_penjualan extends CI_Model {
                 $data_harga_motor = array(
                     'cara_pembelian' => $this->input->post('cara_pembelian'),
                     'marketing' => $this->input->post('marketing'),
-                    'diskon' => $this->input->post('diskon'),
-                    'tagih' => $this->input->post('tagih'),
-                    'dp' => $this->input->post('dp'),
-                    'sisa_hutang' => $this->input->post('sisa_hutang'),
-                    'fee' => $this->input->post('fee'),
+                    'diskon' => currency_to_normal($this->input->post('diskon')),
+                    'tagih' => currency_to_normal($this->input->post('tagih')),
+                    'dp' => currency_to_normal($this->input->post('dp')),
+                    'sisa_hutang' => currency_to_normal($this->input->post('sisa_hutang')),
+                    'fee' => currency_to_normal($this->input->post('fee')),
                     'm_status' => 1
                 );
                 break;

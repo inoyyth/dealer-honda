@@ -176,6 +176,114 @@ $route['penjualan-pdf/(:any)'] = 't_penjualan/print_pdf/$1';
 $route['penjualan-excel'] = 't_penjualan/print_excel';
 $route['penjualan-excel/(:any)'] = 't_penjualan/print_excel/$1';
 
+/* Start Kwitansi DP */
+$route['kwitansi-dp'] = 't_kwitansi/t_kwitansidp';
+$route['kwitansi-dp/(:any)/(:num)'] = 't_kwitansi/t_kwitansidp/$1/$2';
+
+$route['kwitansi-dp-tambah'] = 't_kwitansi/t_kwitansidp/add';
+$route['kwitansi-dp-edit-(:num)'] = 't_kwitansi/t_kwitansidp/edit/$1';
+$route['kwitansi-dp-detail-(:num)'] = 't_kwitansi/t_kwitansidp/detail/$1';
+$route['kwitansi-dp-delete-(:num)'] = 't_kwitansi/t_kwitansidp/delete/$1';
+$route['kwitansi-dp-save'] = 't_kwitansi/t_kwitansidp/save';
+$route['kwitansi-dp-page'] = 't_kwitansi/t_kwitansidp/index';
+$route['kwitansi-dp-page/(:any)'] = 't_kwitansi/t_kwitansidp/index/$1';
+$route['kwitansi-dp-pdf'] = 't_kwitansi/t_kwitansidp/print_pdf';
+$route['kwitansi-dp-pdf/(:any)'] = 't_kwitansi/t_kwitansidp/print_pdf/$1';
+$route['kwitansi-dp-excel'] = 't_kwitansi/t_kwitansidp/print_excel';
+$route['kwitansi-dp-excel/(:any)'] = 't_kwitansi/t_kwitansidp/print_excel/$1';
+
+/* Start Kwitansi Fee */
+$route['kwitansi-fee'] = 't_kwitansi/t_kwitansi_fee/add';
+$route['kwitansi-fee-tambah'] = 't_kwitansi/t_kwitansi_fee/add';
+$route['kwitansi-fee-edit-(:num)'] = 't_kwitansi/t_kwitansi_dp/edit/$1';
+$route['kwitansi-fee-detail-(:num)'] = 't_kwitansi/t_kwitansi_dp/detail/$1';
+$route['kwitansi-fee-delete-(:num)'] = 't_kwitansi/t_kwitansi_dp/delete/$1';
+$route['kwitansi-fee-save'] = 't_kwitansi/t_kwitansi_dp/save';
+$route['kwitansi-fee-page'] = 't_kwitansi/t_kwitansi_dp/index';
+$route['kwitansi-fee-page/(:any)'] = 't_kwitansi/t_kwitansi_dp/index/$1';
+$route['kwitansi-fee-pdf'] = 't_kwitansi/t_kwitansi_dp/print_pdf';
+$route['kwitansi-fee-pdf/(:any)'] = 't_kwitansi/t_kwitansi_dp/print_pdf/$1';
+$route['kwitansi-fee-excel'] = 't_kwitansi/t_kwitansi_dp/print_excel';
+$route['kwitansi-fee-excel/(:any)'] = 't_kwitansi/t_kwitansi_dp/print_excel/$1';
+/* Kwitansi Fee */
+
+/* Start Kwitansi Diskon */
+$route['kwitansi-diskon'] = 't_kwitansi/t_kwitansi_diskon/add';
+$route['kwitansi-diskon-tambah'] = 't_kwitansi/t_kwitansi_diskon/add';
+$route['kwitansi-diskon-edit-(:num)'] = 't_kwitansi/t_kwitansi_diskon/edit/$1';
+$route['kwitansi-diskon-detail-(:num)'] = 't_kwitansi/t_kwitansi_diskon/detail/$1';
+$route['kwitansi-diskon-delete-(:num)'] = 't_kwitansi/t_kwitansi_diskon/delete/$1';
+$route['kwitansi-diskon-save'] = 't_kwitansi/t_kwitansi_diskon/save';
+$route['kwitansi-diskon-page'] = 't_kwitansi/t_kwitansi_diskon/index';
+$route['kwitansi-diskon-page/(:any)'] = 't_kwitansi/t_kwitansi_diskon/index/$1';
+$route['kwitansi-diskon-pdf'] = 't_kwitansi/t_kwitansi_diskon/print_pdf';
+$route['kwitansi-diskon-pdf/(:any)'] = 't_kwitansi/t_kwitansi_diskon/print_pdf/$1';
+$route['kwitansi-diskon-excel'] = 't_kwitansi/t_kwitansi_diskon/print_excel';
+$route['kwitansi-diskon-excel/(:any)'] = 't_kwitansi/t_kwitansi_diskon/print_excel/$1';
+/* Kwitansi Diskon */
+
+/* Start PDI */
+$route['pdi'] = 't_pdi/t_pdi/add';
+$route['pdi-tambah'] = 't_pdi/t_pdi/add';
+$route['pdi-edit-(:num)'] = 't_pdi/t_pdi/edit/$1';
+$route['pdi-detail-(:num)'] = 't_pdi/t_pdi/detail/$1';
+$route['pdi-delete-(:num)'] = 't_pdi/t_pdi/delete/$1';
+$route['pdi-save'] = 't_pdi/t_pdi/save';
+$route['pdi-page'] = 't_pdi/t_pdi/index';
+$route['pdi-page/(:any)'] = 't_pdi/t_pdi/index/$1';
+$route['pdi-pdf'] = 't_pdi/t_pdi/print_pdf';
+$route['pdi-pdf/(:any)'] = 't_pdi/t_pdi/print_pdf/$1';
+$route['pdi-excel'] = 't_pdi/t_pdi/print_excel';
+$route['pdi-excel/(:any)'] = 't_pdi/t_pdi/print_excel/$1';
+/* End PDI */
+
+
+
+/* Start STNK BPKB */
+$route['stnk-bpkb'] = 't_stnk_bpkb/add';
+$route['stnk-bpkb-tambah'] = 't_stnk_bpkb/add';
+$route['stnk-bpkb-edit-(:num)'] = 't_stnk_bpkb/edit/$1';
+$route['stnk-bpkb-detail-(:num)'] = 't_stnk_bpkb/detail/$1';
+$route['stnk-bpkb-delete-(:num)'] = 't_stnk_bpkb/delete/$1';
+$route['stnk-bpkb-save'] = 't_stnk_bpkb/save';
+$route['stnk-bpkb-page'] = 't_stnk_bpkb/index';
+$route['stnk-bpkb-page/(:any)'] = 't_stnk_bpkb/index/$1';
+$route['stnk-bpkb-pdf'] = 't_stnk_bpkb/print_pdf';
+$route['stnk-bpkb-pdf/(:any)'] = 't_stnk_bpkb/t_stnk_bpkb/$1';
+$route['stnk-bpkb-excel'] = 't_stnk_bpkb/print_excel';
+$route['stnk-bpkb-excel/(:any)'] = 't_stnk_bpkb/print_excel/$1';
+/* End STNK BPKB */
+
+/* Start Void */
+$route['void'] = 't_void/add';
+$route['void-tambah'] = 't_void/add';
+$route['void-edit-(:num)'] = 't_void/edit/$1';
+$route['void-detail-(:num)'] = 't_void/detail/$1';
+$route['void-delete-(:num)'] = 't_void/delete/$1';
+$route['void-save'] = 't_void/save';
+$route['void-page'] = 't_void/index';
+$route['void-page/(:any)'] = 't_void/index/$1';
+$route['void-pdf'] = 't_void/print_pdf';
+$route['void-pdf/(:any)'] = 't_void/print_pdf/$1';
+$route['void-excel'] = 't_void/print_excel';
+$route['void-excel/(:any)'] = 't_void/print_excel/$1';
+/* End Void */
+
+/* Start Surat Jalan */
+$route['Surat-jalan'] = 't_surat_jalan/index';
+$route['surat-jalan-tambah'] = 't_surat_jalan/add';
+$route['surat-jalan-edit-(:num)'] = 't_surat_jalan/edit/$1';
+$route['surat-jalan-detail-(:num)'] = 't_surat_jalan/detail/$1';
+$route['surat-jalan-delete-(:num)'] = 't_surat_jalan/delete/$1';
+$route['surat-jalan-save'] = 't_surat_jalan/save';
+$route['surat-jalan-page'] = 't_surat_jalan/index';
+$route['surat-jalan-page/(:any)'] = 't_surat_jalan/index/$1';
+$route['surat-jalan-pdf'] = 't_surat_jalan/print_pdf';
+$route['surat-jalan-pdf/(:any)'] = 't_surat_jalan/print_pdf/$1';
+$route['surat-jalan-excel'] = 't_surat_jalan/print_excel';
+$route['surat-jalan-excel/(:any)'] = 't_surat_jalan/print_excel/$1';
+/* End Surat Jalan */
+
 $route['import-penerimaan-motor'] = 'motor_terima';
 $route['import-penerimaan-motor-tambah'] = 'motor_terima/add';
 $route['import-penerimaan-motor-edit-(:num)'] = 'motor_terima/edit/$1';
