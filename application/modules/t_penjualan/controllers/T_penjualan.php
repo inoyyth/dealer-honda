@@ -6,6 +6,7 @@ class T_penjualan extends MX_Controller {
 
     public function __construct() {
         parent::__construct();
+        
         $this->load->model(array('M_t_penjualan' => 't_penjualan', 'Datatable_model' => 'm_datatable'));
         $this->load->library(array('upload', 'encrypt', 'Printpdf', 'Auth_log'));
         //set breadcrumb

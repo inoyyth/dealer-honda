@@ -4,7 +4,6 @@
     <label class="col-sm-3 control-label">Diskon</label>
     <div class="col-sm-9">
         <input type="text" name="diskon" id="diskon" parsley-trigger="change" required placeholder="Diskon" class="form-control mask" data-inputmask="'mask':'Rp. 99.999.999', 'greedy' : false, 'rightAlignNumerics' : false">
-        <input type="text" onkeyup="Comma(this.value);" class="form-control mask" data-inputmask="'mask':'$ 999,999,999.99', 'greedy' : false, 'rightAlignNumerics' : false">
     </div>
 </div>
 <div class="form-group">

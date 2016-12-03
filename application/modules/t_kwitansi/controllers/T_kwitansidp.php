@@ -1,12 +1,14 @@
 <?php
 
-class T_kwitansi extends MX_Controller {
+class T_kwitansidp extends MX_Controller {
     //put your code here
     
     var $table = "t_pembayaran";
 
     public function __construct() {
-        $this->load->model(array('M_t_kwitansi' => 't_kwitansi', 'Datatable_model' => 'm_datatable'));
+        parent::__construct();
+        
+        $this->load->model(array('M_t_kwitansi' => 'mt_kwitansi', 'Datatable_model' => 'm_datatable'));
         $this->load->library(array('upload', 'encrypt', 'Printpdf', 'Auth_log'));
         
         //set breadcrumb
@@ -16,7 +18,7 @@ class T_kwitansi extends MX_Controller {
     public function index() {
         $data_session = $this->__getSession();
         
-        $config['base_url'] = base_url() . 'penjualan-page';
+        $config['base_url'] = base_url() . 'kwitansi-dp';
         $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
         $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
         $config['uri_segment'] = 2;
@@ -25,18 +27,17 @@ class T_kwitansi extends MX_Controller {
         $data['paging'] = $this->pagination->create_links();
         $data['data'] = $this->t_penjualan->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array('status_gudang!=' => '3'));
         $data['sr_data'] = $data_session;
-        $data['view'] = 't_penjualan/main';
+        $data['view'] = 't_kwitansi/kwitansi_dp/main';
         $this->load->view('default', $data);
     }
 
     public function add() {
-        $this->breadcrumbs->push('Add', '/penjualan-tambah');
-        $data['codesj'] = $this->main_model->generate_code($this->table, 'SJ/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true);
-        $data['codeso'] = $this->main_model->generate_code($this->table, 'SO/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true);
+        $this->breadcrumbs->push('Add', '/kwitansi-dp');
         
-        $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
+        $data['nokwitansi'] = $this->main_model->generate_code($this->table, 'KWT/KD/' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true);
+        $data['tpembayaran'] = $this->main_model->get_global_data("tpembayaran");
         
-        $data['view'] = "t_penjualan/add";
+        $data['view'] = "t_kwitansi/kwitansi_dp/add";
         $this->load->view('default', $data);
     }
 
@@ -51,20 +52,22 @@ class T_kwitansi extends MX_Controller {
         $this->main_model->delete('t_penjualan', array('id' => $id), array('status_gudang' => '3'));
         redirect("penjualan");
     }
-
+    
     function save() {
+        //print_r($_POST);die();
         if ($_POST) {
-            if ($this->t_penjualan->save()) {
+            if ($this->mt_kwitansi->save()) {
                 $this->session->set_flashdata('success', 'Data Berhasil Di Simpan !');
             } else {
                 $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
             }
-            redirect("penjualan");
+            redirect("kwitansi-dp-tambah");
         } else {
             show_404();
         }
+        
     }
-
+    
     public function __getSession() {
         if ($_POST) {
             return $data = array(
@@ -147,5 +150,28 @@ class T_kwitansi extends MX_Controller {
                 break;
         }
     }
+    
+    function load_transaction_by_noso(){
+        $noso = $this->input->post('noso');
+        
+        /*
+        $check_noso = $this->mt_kwitansi->getdata_transaction_price_by_noso($noso);
+        if($check_noso){
+            $result = $check_noso;
+        }else{
+            $result = $this->mt_kwitansi->getdata_transaction_by_noso($noso);
+        }
+        */
+        $result = $this->mt_kwitansi->getdata_transaction_by_noso($noso);
+        
+        echo json_encode($result);
+    }
+    
+    function terbilang(){
+        $nominal = $this->input->post('nominal');
+        $terbilang = terbilang($nominal);
+        echo $terbilang;
+    }
+    
     
 }
