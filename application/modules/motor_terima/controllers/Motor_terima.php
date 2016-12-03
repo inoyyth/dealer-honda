@@ -76,6 +76,7 @@ class Motor_terima extends MX_Controller {
                 'norangka'=>$vQuery['norangka'],
                 'tipe'=>$vQuery['tipe'],
                 'warna'=>$vQuery['warna'],
+                'tahun'=>$vQuery['tahun'],
                 'kdgudang'=>$vQuery['kdgudang'],
                 'tglupload'=>date('Y-m-d H:i:s'),
                 'sys_create_user' => $this->sessionGlobal['id'], 
@@ -160,7 +161,8 @@ class Motor_terima extends MX_Controller {
                 "norangka"=>$rowData[0][5],
                 "tipe"=>$rowData[0][6],
                 "warna"=>$rowData[0][7],
-                "kdgudang"=>$rowData[0][8],
+                "tahun"=>$rowData[0][8],
+                "kdgudang"=>$rowData[0][9],
                 "sys_create_user"=>$this->sessionGlobal['id'],
                 "namafile"=>$media['file_name']
             );

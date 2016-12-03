@@ -19,6 +19,7 @@ Class Main_model extends CI_Model {
             $this->db->select('parent');
             $this->db->from('menus');
             $this->db->where_in('id', $menuResult);
+            $this->db->where('status','1');
             $this->db->group_by('parent');
             $query_parent = $this->db->get()->result_array();
 
@@ -30,6 +31,7 @@ Class Main_model extends CI_Model {
             $this->db->select('*');
             $this->db->from('menus');
             $this->db->where_in('id', array_merge($menuResult, $menuResult2));
+            $this->db->where('status','1');
             $query = $this->db->get()->result_array();
             return $query;
             //echo "<pre>";var_dump($query);die;
@@ -100,9 +102,9 @@ Class Main_model extends CI_Model {
         return $this->db->get()->result_array();
     }
 
-    public function generate_code($tables, $prefix, $separator, $digit = 4, $date = true, $loop = false) {
+    public function generate_code($tables, $prefix, $separator, $digit = 4, $date = true, $loop = false,$field='id') {
         $tgl = date('y');
-        $this->db->select_max('id', 'max_id');
+        $this->db->select_max($field, 'max_id');
         if ($loop == false) {
             $maxi = $this->db->get($tables)->row('max_id');
         } else {
