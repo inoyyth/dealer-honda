@@ -194,11 +194,11 @@ $route['kwitansi-dp-excel/(:any)'] = 't_kwitansi/t_kwitansidp/print_excel/$1';
 
 /* Start Kwitansi Fee */
 $route['kwitansi-fee'] = 't_kwitansi/t_kwitansi_fee/add';
-$route['kwitansi-fee-tambah'] = 't_kwitansi/t_kwitansi_fee/add';
+$route['kwitansi-fee-tambah'] = 't_kwitansi/t_kwitansi_fee/add';//kwitansi-fee-save
 $route['kwitansi-fee-edit-(:num)'] = 't_kwitansi/t_kwitansi_dp/edit/$1';
 $route['kwitansi-fee-detail-(:num)'] = 't_kwitansi/t_kwitansi_dp/detail/$1';
 $route['kwitansi-fee-delete-(:num)'] = 't_kwitansi/t_kwitansi_dp/delete/$1';
-$route['kwitansi-fee-save'] = 't_kwitansi/t_kwitansi_dp/save';
+$route['kwitansi-fee-save'] = 't_kwitansi/t_kwitansi_fee/save';
 $route['kwitansi-fee-page'] = 't_kwitansi/t_kwitansi_dp/index';
 $route['kwitansi-fee-page/(:any)'] = 't_kwitansi/t_kwitansi_dp/index/$1';
 $route['kwitansi-fee-pdf'] = 't_kwitansi/t_kwitansi_dp/print_pdf';
@@ -236,8 +236,6 @@ $route['pdi-pdf/(:any)'] = 't_pdi/t_pdi/print_pdf/$1';
 $route['pdi-excel'] = 't_pdi/t_pdi/print_excel';
 $route['pdi-excel/(:any)'] = 't_pdi/t_pdi/print_excel/$1';
 /* End PDI */
-
-
 
 /* Start STNK BPKB */
 $route['stnk-bpkb'] = 't_stnk_bpkb/add';

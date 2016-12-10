@@ -17,7 +17,7 @@
                         <label class="col-sm-3 control-label">No Sales Order</label>
                         <div class="col-sm-9">
                             <input type="hidden" name="id" id="id" parsley-trigger="change" required readonly="true" class="form-control">
-                            <input type="text" name="noso" id="noso" parsley-trigger="change" required readonly="true" value="<?php echo $codeso; ?>" class="form-control">
+                            <input type="text" name="noso" id="noso" parsley-trigger="change"  readonly="true" value="<?php echo $codeso; ?>" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
@@ -296,12 +296,30 @@
                 data: dt,
                 dataType: "json",
                 success: function (hasil) {
+                    console.log(hasil);
+                    //alert(hasil.nama_customer);
+                    $('#no_ktp').val(hasil.no_ktp);
+                    $('#nama_customer').val(hasil.nama_customer);
+                    $('#tempat_lahir_customer').val(hasil.tempat_lahir_customer); 
+                    $('#tanggal_lahir_customer').val(hasil.tanggal_lahir_customer); 
+                    $('#kelamin_customer').val(hasil.kelamin_customer);
+                    $('#alamat_customer').val(hasil.alamat_customer); 
+                    $('#rt').val(hasil.rt); 
+                    $('#rw').val(hasil.rw); 
+                    $('#wilayah').val(hasil.wilayah); 
+                    $('#kelurahan').val(hasil.kelurahan); 
+                    $('#kecamatan').val(hasil.kecamatan); 
+                    $('#telepon_customer').val(hasil.telepon_customer); 
+                    $('#handphone_customer').val(hasil.handphone_customer); 
+                    
+                    /*
                     $.map(hasil, function (value, index) {
                         if (index != "no_ktp")
                             if (document.getElementById(index)) {
                                 $("#" + index).val(value);
                             }
                     });
+                    */
                 }
             });
             return false;

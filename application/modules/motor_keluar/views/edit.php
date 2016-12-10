@@ -95,7 +95,7 @@
         </section>
     </div>
 </div>
-<!-- Modal -->
+<!-- Modal saat add list--> 
 <div class="modal fade bs-example-modal-lg" id="modalBrowse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
