@@ -216,4 +216,10 @@ $route['motor-keluar-pdf/(:any)'] = 'motor_keluar/print_pdf/$1';
 $route['motor-keluar-excel'] = 'motor_keluar/print_excel';
 $route['motor-keluar-excel/(:any)'] = 'motor_keluar/print_excel/$1';
 
+$route['stock'] = 'stock';
+$route['stock-pdf'] = 'stock/print_pdf';
+$route['stock-pdf/(:any)'] = 'stock/print_pdf/$1';
+$route['stock-excel'] = 'stock/print_excel';
+$route['stock-excel/(:any)'] = 'stock/print_excel/$1';
+
 $route['kwitansi-dp-add'] = 't_kwitansi/add';

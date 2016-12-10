@@ -6,8 +6,8 @@
                     <div class="col-md-6 pull-left">Barang Keluar Gudang</div>
                     <div class="col-md-6 pull-right text-right">
                         <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'motor-keluar-tambah', 'text' => 'Tambah')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'motor-keluar-pdf/?template=table_pdf&name=master_jabatan', 'text' => 'Print')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'motor-keluar-excel/?template=table_excel&name=master_jabatan', 'text' => 'Excel')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'motor-keluar-pdf/?template=table_pdf&name=motor_keluar', 'text' => 'Print')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'motor-keluar-excel/?template=table_excel&name=motor_keluar', 'text' => 'Excel')); ?>
                     </div> 
                 </div>
             </div>
