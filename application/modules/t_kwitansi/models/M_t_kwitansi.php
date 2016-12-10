@@ -22,6 +22,40 @@ class M_t_kwitansi extends CI_Model {
         $this->db->limit($pg, $limit);
         return $this->db->get()->result_array();
     }
+    
+    public function getNOSO($query){
+        $data = $this->db->query('select a.*,b.nama_customer,c.fee,d.norangka,d.tipe_motor from t_penjualan a left join m_customer b on b.no_ktp = a.ktp 
+left join t_harga_motor c on c.noso = a.noso 
+left join m_motor d on d.nomsn = a.nomsn
+            WHERE a.noso LIKE "%'.$query.'%"');
+       $show = array();
+        foreach($data->result_array() as $list){
+           //echo "<br>".terbilang($list['fee'],3)."<br>";
+           //
+           $show[] = array('noso'=>$list['noso'],
+                         'fee'=>$list['fee'],
+                         'harga_otr'=>$list['harga_otr'],
+                         'nama_customer'=>$list['nama_customer'],
+                         'nomsn'=>$list['nomsn'],
+                         'warna_motor'=>$list['warna_motor'],
+                         'tipe_motor'=>$list['tipe_motor'],
+                         'norangka'=>$list['norangka'],
+                         'terbilang'=>terbilang($list['fee']));
+           //$aku = array('noso'=>$list['noso']);
+        }
+        return $show;
+          
+        //echo $show;
+        //echo $aku;
+        //return $data;
+        //$this->db->select('t_penjualan.*,m_customer.nama_customer');
+        //$this->db->from($table);
+        //$this->db->join($this->table_customer,$this->table_customer.".no_ktp=",$this->table_tpenjualan.".ktp",'left');
+        //$this->db->like($like);
+        //$this->db->where($where);
+        //return $this->db->get()->result_array();
+       
+    }
 
     public function getdata_transaction_price_by_noso($noso) {
         $this->db->where('noso', $noso);
@@ -40,6 +74,8 @@ m_customer.handphone_customer,m_customer.rt,m_customer.rw,m_customer.wilayah,m_c
 m_customer.kecamatan,m_motor.norangka,m_motor.tipe_motor,m_motor.nama_motor,m_motor.varian,m_motor.warna,
 m_motor.tahun,m_motor.merk,m_motor.harga_otr,m_motor.nama_foto,m_motor.url_foto", false);
         $this->db->from($this->table_tpenjualan);
+
+        
         $this->db->join($this->table_thargamotor, $this->table_thargamotor . ".noso = " . $this->table_tpenjualan . ".noso", "left");
         $this->db->join($this->table_customer, $this->table_customer . ".no_ktp = " . $this->table_tpenjualan . ".ktp", "left");
         $this->db->join($this->table_motor, $this->table_motor . ".nomsn = " . $this->table_tpenjualan . ".nomsn", "left");
@@ -58,18 +94,16 @@ m_motor.tahun,m_motor.merk,m_motor.harga_otr,m_motor.nama_foto,m_motor.url_foto"
         $data_pembayaran = array(
             'nokwitansi' => $this->input->post('nokwitansi'),
             'noso' => $this->input->post('noso'),
-            'dp' => currency_to_normal($this->input->post('dp')),
-            'transaksi' => $this->input->post('transaksi'),
-            'nominal' => $this->input->post('nominal'),
-            'sisa_pembayaran' => $this->input->post('sisa'),
+            'fee' => currency_to_normal($this->input->post('fee')),
+            
             'm_status' => 1
         );
 
         if (empty($id)) {
-            $this->db->insert($this->table_kwitansi_dp, $this->main_model->create_sys($data_pembayaran));
+            $this->db->insert($this->table_kwitansi_fee, $this->main_model->create_sys($data_pembayaran));
             return true;
         } else {
-            $this->db->update($this->table_kwitansi_dp, $this->main_model->update_sys($data_pembayaran), array('id' => $id));
+            $this->db->update($this->table_kwitansi_fee, $this->main_model->update_sys($data_pembayaran), array('id' => $id));
             return true;
         }
         return false;

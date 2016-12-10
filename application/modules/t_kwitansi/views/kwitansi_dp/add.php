@@ -26,21 +26,7 @@
         <div class="col-md-6">
             <div class="block-web">
                 <div class="porlets-content">
-                    
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Transaksi</label>
-                        <div class="col-sm-9">
-                            <select name="transaksi" id="transaksi" class="form-control">
-                                <?php
-                                foreach($tpembayaran as $pembayaran){
-                                    echo "<option value='".$pembayaran->id."'> ".$pembayaran->value." </option>";
-                                }
-                                ?>
-                            </select>
-
-                        </div>
-                    </div>
-                    
+                   
                     <div class="form-group">
                         <label class="col-sm-3 control-label">No Sales Order</label>
                         <div class="col-sm-9">
@@ -70,20 +56,30 @@
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Sudah Bayar</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="sdhbayar" id="sdhbayar" parsley-trigger="change" required   placeholder="Sudah Bayar" readonly="true" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
+                       <div class="form-group">
                         <label class="col-sm-3 control-label">Pembelian Secara</label>
                         <div class="col-sm-9">
                             <input type="text" name="cara_pembelian" id="cara_pembelian" parsley-trigger="change" readonly="true" required placeholder="Pembelian Secara" class="form-control">
                         </div>
                     </div>
                     
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Transaksi</label>
+                        <div class="col-sm-9">
+                            <select name="transaksi" id="transaksi" class="form-control">
+                                <option value="">DP 1</option>
+                                <option value="">DP 2</option>
+                                <option value="">DP 3</option>
+                                <option value="">DP 4</option>
+                                <option value="">Pelunasan </option>
+                                <option value="">Pelunasan DP</option>
+                            </select>
+                            
+                        </div>
+                    </div>
+
+                 
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Nominal</label>
                         <div class="col-sm-9">

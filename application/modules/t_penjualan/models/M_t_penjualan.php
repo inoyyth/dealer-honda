@@ -7,7 +7,13 @@ Class M_t_penjualan extends CI_Model {
     var $table_thargamotor = "t_harga_motor";
     var $table_motor = "m_motor";
 
+    public function simpan($noso){
+        $this->db->set('noso',$noso);
+        $this->db->insert('t_penjualan');
+    }
     public function save() {
+      
+       
         $id = $this->input->post('id');
 
         $data_penjualan = array('noso' => $this->input->post('noso'),
@@ -19,6 +25,10 @@ Class M_t_penjualan extends CI_Model {
             'harga_otr' => currency_to_normal($this->input->post('harga_otr')),
             'm_status' => 1
         );
+        //$this->db->insert($this->table_tpenjualan, $this->main_model->create_sys($data_penjualan));
+        //var_dump($data_penjualan);
+        //exit();
+        
 
         switch ($this->input->post('cara_pembelian')) {
             case 'kredit':
@@ -64,18 +74,40 @@ Class M_t_penjualan extends CI_Model {
             'kecamatan' => $this->input->post('kecamatan'),
             'm_status' => 1//$this->input->post('no_ktp')
         );
+        
+        //echo json_encode($data_penjualan);
+        //echo "<br>";
+        //echo json_encode($data_harga_motor);
+        //echo "<br>";
+        //echo json_encode($data_customer);
+        //exit();
         if (empty($id)) {
+            echo 'simpen';
+            exit();
+            /*
             $this->db->insert($this->table_customer, $this->main_model->create_sys($data_customer));
             $this->db->insert($this->table_tpenjualan, $this->main_model->create_sys($data_penjualan));
             $this->db->insert($this->table_thargamotor, $this->main_model->create_sys($data_harga_motor));
+            // exit();
+             * 
+             
             return true;
+             * 
+             */
+           
         } else {
+            echo 'ubah';
+            exit();
+            /*
             $this->db->update($this->table_customer, $this->main_model->update_sys($data_customer), array('no_ktp' => $this->input->post('no_ktp')));
             $this->db->update($this->table_tpenjualan, $this->main_model->update_sys($data_penjualan), array('noso' => $this->input->post('noso')));
             $this->db->update($this->table_thargamotor, $this->main_model->update_sys($data_harga_motor), array('noso' => $this->input->post('noso')));
             return true;
+             * 
+             */
         }
         return false;
+        
     }
 
     public function getdata($table, $limit, $pg, $like = array(), $where = array()) {

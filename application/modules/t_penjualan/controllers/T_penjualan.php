@@ -31,7 +31,8 @@ class T_penjualan extends MX_Controller {
     public function add() {
         $this->breadcrumbs->push('Add', '/penjualan-tambah');
         $data['codesj'] = $this->main_model->generate_code($this->table, 'SJ/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true);
-        $data['codeso'] = $this->main_model->generate_code($this->table, 'SO/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true);
+        $data['codeso'] = $this->main_model->generate_code($this->table, 'SO/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = false);
+        
         
         $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
         
@@ -53,6 +54,11 @@ class T_penjualan extends MX_Controller {
 
     function save() {
         if ($_POST) {
+            
+            //var_dump($_POST);
+            //exit();
+            //$noso = $this->input->post('noso');
+            //$this->t_penjualan->simpan($noso);
             if ($this->t_penjualan->save()) {
                 $this->session->set_flashdata('success', 'Data Berhasil Di Simpan !');
             } else {
