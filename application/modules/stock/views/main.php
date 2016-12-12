@@ -42,9 +42,8 @@
                     <h3>List Item</h3>
                 </div>
                 <div class="porlets-content">
-                    <button class="btn btn-success btn-sm" id="detailList" style="margin-bottom: 5px;">Detail</button>
-                    <button class="btn btn-default btn-sm" id="printPdf" style="margin-bottom: 5px;">PDF</button> 
-                    <button class="btn btn-default btn-sm" id="printExcel" style="margin-bottom: 5px;">Excel</button> 
+                    <button class="btn btn-default btn-sm" style="margin-bottom: 5px;" onclick="printList('pdf');">PDF</button> 
+                    <button class="btn btn-default btn-sm" style="margin-bottom: 5px;" onclick="printList('excel');">Excel</button> 
                     <!--<button class="btn btn-primary btn-sm" id="saveTriger" style="margin-bottom: 5px;">Save Selected</button>-->
                     <table style="width: 100%;" class="display table table-bordered table-hover" id="listmotor">
                         <thead>
@@ -76,12 +75,24 @@
                 <h4 class="modal-title" id="myModalLabel">List Motor</h4>
             </div>
             <div class="modal-body">
-                <button class="btn btn-default btn-sm" id="printPdf" style="margin-bottom: 5px;">PDF</button> 
-                <button class="btn btn-default btn-sm" id="printExcel" style="margin-bottom: 5px;">Excel</button> 
+                <div class="row">
+                    <input type="hidden" id="gudangX">
+                    <input type="hidden" id="tipeX">
+                    <div class="col-lg-3" id="md-gudang">Gudang : Master Dealer</div>
+                    <div class="col-lg-4" id="md-stock">Stock : 50 Motor</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3" id="md-tipe">Tipe : DSN09080</div>
+                    <!--<div class="col-lg-4" id="md-warna">Warna : Merah</div>-->
+                </div>
+                <br>
+                <button class="btn btn-default btn-sm" style="margin-bottom: 5px;" onclick="printDetail('pdf');">PDF</button> 
+                <button class="btn btn-default btn-sm" style="margin-bottom: 5px;" onclick="printDetail('excel');">Excel</button> 
                 <!--<button class="btn btn-primary btn-sm" id="saveTriger" style="margin-bottom: 5px;">Save Selected</button>-->
                 <table style="width: 100%;" class="display table table-bordered table-hover" id="detailmotor">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Tahun</th>
                             <th>No SJ</th>
                             <th>Tgl SJ</th>
@@ -175,50 +186,70 @@
                 "bInfo": false,
             });
         });
-        
-        $('#detailList').click(function(){ // triggering delete one by one
-            if( $('.deleteRow:checked').length > 0 ){  // at-least one checkbox checked
-                var ids = [];
-                $('.deleteRow').each(function(){
-                    if($(this).is(':checked')) { 
-                        ids.push($(this).val());
-                    }
-                });
-                var ids_string = ids.toString();  // array to string conversion;
-                
-                tableDetail = $('#detailmotor').DataTable({
-
-                "processing": true, //Feature control the processing indicator.
-                "serverSide": true, //Feature control DataTables' server-side processing mode.
-                "order": [], //Initial no order.
-
-                // Load data for the table's content from an Ajax source
-                "ajax": {
-                    "url": "<?php echo base_url('stock/get_list_motor/') ?>",
-                    "type": "POST",
-                    "data": {
-                                "tipe": tipe,
-                                "gudang": gudang
-                            }
-                },
-
-                //Set column definition initialisation properties.
-                "columnDefs": [
-                            {
-                                "targets": [0], //first column / numbering column
-                                "orderable": false, //set not orderable
-                                //"className": 'select-checkbox',
-                            }
-                        ],
-                "bDestroy": true,
-                "searching": false,
-                "bInfo": false,
-            });
-            }
-        }); 
     });
     
     function popDetail(gudang,tipe){
-        console.log(gudang+"-"+tipe);
+        $('#detailmotor').DataTable({
+            "processing": true, //Feature control the processing indicator.
+            "serverSide": true, //Feature control DataTables' server-side processing mode.
+            "order": [], //Initial no order.
+
+            // Load data for the table's content from an Ajax source
+            "ajax": {
+                "url": "<?php echo base_url('stock/get_list_detail_motor/') ?>",
+                "type": "POST",
+                "data": {
+                    "tipe": tipe,
+                    "gudang": gudang
+                },
+//                "success": function(data){
+//                    console.log(data);
+//                },
+            },
+            "fnDrawCallback" : function(data,item) {
+                console.log(data.json);
+                $("#md-gudang").html("Gudang : <b>"+data.json.gudang+"</b>");
+                $("#md-stock").html("Stok : <b>"+data.json.recordsFiltered+"</b>");
+                $("#md-tipe").html("Tipe : <b>"+data.json.tipe+"</b>");
+                $("#gudangX").val(data.json.gudang_id);
+                $("#tipeX").val(data.json.tipe);
+                $('#modalBrowse').modal('show');
+            },
+            //Set column definition initialisation properties.
+            "columnDefs": [
+                        {
+                        "targets": [0], //first column / numbering column
+                        "orderable": false, //set not orderable
+                        //"className": 'select-checkbox',
+                        }
+                    ],
+            "bDestroy": true,
+            "searching": false,
+            "bInfo": false,
+        });
+    }
+    
+    function printList(tipeFormat){
+        console.log(tipeFormat);
+        var gudang = $("#gudang").val();
+        var tipe = $("#tipe").val(); 
+        if(tipeFormat === "pdf"){
+            url = "stock-pdf/?template=table_pdf&name=stock&gudang="+gudang+"&tipe="+tipe;
+        }else{
+            url = "stock-excel/?template=table_excel&name=stock&gudang="+gudang+"&tipe="+tipe;
+        }
+        window.open(url,'_blank');
+    }
+    
+    function printDetail(tipeFormat){
+        console.log(tipeFormat);
+        var gudang = $("#gudangX").val();
+        var tipe = $("#tipeX").val(); 
+        if(tipeFormat === "pdf"){
+            url = "stock-pdf-detail/?template=table_pdf_detail&name=stock&gudang="+gudang+"&tipe="+tipe;
+        }else{
+            url = "stock-excel-detail/?template=table_excel_detail&name=stock&gudang="+gudang+"&tipe="+tipe;
+        }
+        window.open(url,'_blank');
     }
 </script>
