@@ -1,14 +1,16 @@
 <table border="1" cellpadding="2">
         <tr>
-            <td align="center">Jabatan</td>
-            <td align="center">Keterangan</td>
-            <td align="center">Status</td>
+            <td align="center">Gudang</td>
+            <td align="center">Tipe</td>
+            <td align="center">Warna</td>
+            <td align="center">Stock</td>
         </tr>
         <?php foreach ($list as $kList => $vList) { ?>
             <tr>
-                <td><?php echo $vList['jabatan']; ?></td>
-                <td><?php echo $vList['keterangan']; ?></td>
-                <td><?php echo get_status($vList['status_jabatan']); ?></td>
+                <td><?php echo $vList['gudang']; ?></td>
+                <td><?php echo $vList['tipe']; ?></td>
+                <td><?php echo $vList['warna']; ?></td>
+                <td><?php echo $vList['stok']; ?></td>
             </tr>
         <?php } ?>
     </table>

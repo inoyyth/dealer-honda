@@ -1,5 +1,5 @@
 <?php
-Class M_md_jabatan extends CI_Model{
+Class M_stock extends CI_Model{
 	var $table = "m_jabatan";
 	public function save(){
 		$id = $this->input->post('id');
@@ -18,12 +18,24 @@ Class M_md_jabatan extends CI_Model{
 	}
 	
 	public function getdata($table,$limit,$pg,$like=array(),$where=array()){ 
-		unset($like['page']);
-		$this->db->select("*");
-		$this->db->from($table);
-		$this->db->like($like);
-        $this->db->where($where);
-		$this->db->limit($pg,$limit);
-		return $this->db->get()->result_array();
+            unset($like['page']);
+            $this->db->select($table.".id AS idx,gudang,kdgudang,tipe,warna,count(*) as stok");
+            $this->db->from($table);
+            $this->db->join('m_gudang','penerimaan_motor.kdgudang=m_gudang.id','INNER');
+            $this->db->like($like);
+            $this->db->where($where);
+            $this->db->group_by(array('kdgudang','tipe'));
+            $this->db->limit($pg,$limit);
+            return $this->db->get()->result_array();
+	}
+        
+        public function getdata_detail($table,$limit,$pg,$like=array(),$where=array()){ 
+            unset($like['page']);
+            $this->db->select('*');
+            $this->db->from($table);
+            $this->db->like($like);
+            $this->db->where($where);
+            $this->db->limit($pg,$limit);
+            return $this->db->get()->result_array();
 	}
 }
