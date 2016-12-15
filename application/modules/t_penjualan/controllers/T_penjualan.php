@@ -55,7 +55,7 @@ class T_penjualan extends MX_Controller {
     function save() {
         if ($_POST) {
             
-            //var_dump($_POST);
+            var_dump($_POST);
             //exit();
             //$noso = $this->input->post('noso');
             //$this->t_penjualan->simpan($noso);

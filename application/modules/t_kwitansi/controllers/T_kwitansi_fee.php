@@ -15,7 +15,7 @@ class T_kwitansi_fee extends MX_Controller {
         $this->breadcrumbs->push('Transaksi Kwitansi', '/kwitansi-fee');
     }
     
-      public function getSO(){
+    public function getSO(){
         $query = $this->input->get('query');
         $data = $this->M_t_kwitansi->getNOSO($query);
         //echo $this->db->last_query();
@@ -45,6 +45,19 @@ class T_kwitansi_fee extends MX_Controller {
         //var_dump($data['codeso']);
         $data['view'] = "t_kwitansi/kwitansi_fee/add";
         $this->load->view('default', $data);
+    }
+    
+    public function printout() {
+        //var_dump($_POST);
+        
+        $id = $this->uri->segment(2);
+        $cek = str_replace("_","/",$id);
+        $data['list'] = $this->t_kwitansi->get_data_print_fee($cek);
+        //var_dump($data['list']);
+        $data['template'] = array("template" => "t_kwitansi/kwitansi_fee/" . $_GET['template'], "filename" => $_GET['name']);
+        //$data['list'] = $this->M_t_kwitansi->getdata($this->table, 0, 1000, $like = array());
+         $this->load->view('t_kwitansi/kwitansi_fee/table_html', $data);
+        //$this->printpdf->create_pdf($data);
     }
 
     public function edit($id) {
@@ -103,12 +116,7 @@ class T_kwitansi_fee extends MX_Controller {
         $this->printpdf->create_pdf($data);
     }
     
-    public function printout() {
-        $data['template'] = array("template" => "t_kwitansi/kwitansi_fee/" . $_GET['template'], "filename" => $_GET['name']);
-        //$data['list'] = $this->M_t_kwitansi->getdata($this->table, 0, 1000, $like = array());
-         $this->load->view('t_kwitansi/kwitansi_fee/table_html', $data);
-        //$this->printpdf->create_pdf($data);
-    }
+   
 
     public function print_excel() {
         $data['template_excel'] = "t_kwitansi_fee/" . $_GET['template'];
