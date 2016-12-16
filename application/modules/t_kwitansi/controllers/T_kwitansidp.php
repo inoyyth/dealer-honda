@@ -30,6 +30,13 @@ class T_kwitansidp extends MX_Controller {
         $data['view'] = 't_kwitansi/kwitansi_dp/main';
         $this->load->view('default', $data);
     }
+    
+    public function getSO(){
+        $query = $this->input->get('query');
+        $data = $this->mt_kwitansi->getNOSO($query);
+        //echo $this->db->last_query();
+        echo json_encode($data);
+    }
 
     public function add() {
         $this->breadcrumbs->push('Add', '/kwitansi-dp');
@@ -53,10 +60,31 @@ class T_kwitansidp extends MX_Controller {
         redirect("penjualan");
     }
     
+    public function printout() {
+        //$data['template'] = array("template" => "t_kwitansi/kwitansi_dp/" . $_GET['template'], "filename" => $_GET['name']);
+        //$data['list'] = $this->M_t_kwitansi->getdata($this->table, 0, 1000, $like = array());
+        //$this->load->view('t_kwitansi/kwitansi_dp/table_html', $data);
+        //$this->printpdf->create_pdf($data);
+          
+          //var_dump($_POST);
+        
+        $id = $this->uri->segment(2);
+        $cek = str_replace("_","/",$id);
+        $data['list'] = $this->mt_kwitansi->get_data_print_dp($cek);
+        //var_dump($data['list']);
+        $data['template'] = array("template" => "t_kwitansi/kwitansi_dp/" . $_GET['template'], "filename" => $_GET['name']);
+        //$data['list'] = $this->M_t_kwitansi->getdata($this->table, 0, 1000, $like = array());
+        $this->load->view('t_kwitansi/kwitansi_dp/table_html', $data);
+        //$this->printpdf->create_pdf($data);
+         
+    }
+    
     function save() {
         //print_r($_POST);die();
         if ($_POST) {
-            if ($this->mt_kwitansi->save()) {
+            //var_dump($_POST);
+            //exit();
+            if ($this->mt_kwitansi->save_dp()) {
                 $this->session->set_flashdata('success', 'Data Berhasil Di Simpan !');
             } else {
                 $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
