@@ -57,5 +57,11 @@ Class Datatable_model extends CI_Model {
         $this->db->where($where);
         return $this->db->count_all_results();
     }
+    
+    function get_datatablesoriginal($table,$column_order=array(),$column_search=array(),$order=array('id'=>'asc'),$where=array(),$join=array(),$group_by=array()){
+        $this->_get_datatables_query($table,$column_order,$column_search,$order,$where,$join,$group_by);
+        $query = $this->db->get();
+        return $query->result();
+    }
 
 }
