@@ -99,8 +99,7 @@
                     <button type="submit" name="save" id="save" class="btn btn-danger">Save</button>
                     <button type="submit" name="New" id="edit" class="btn btn-default">Edit</button>
                     <button type="submit" name="cancel" id="cancel" class="btn btn-default">Cancel</button>
-                    <button type="submit" name="print" id="print" class="btn btn-default">Print</button>
-                    <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'kwitansi-fee-printout/?template=table_html&name=kwitansi-fee-printout', 'text' => 'Print')); ?>
+                    <button type="button" name="print" id="print" onclick="cetak()" class="btn btn-default">Print</button>
                 </div>
             </div>
 
@@ -327,6 +326,20 @@
        });
     });
     
+    function cetak(){
+    var data = $('#noso').val();
+    //var res = data.replace("/,/","-");
+    
+    //var mystring = "SO/MKA-2016/XI/000001"  
+    var newchar = '_'
+    var res = data.split('/').join(newchar);
+
+
+    //alert(res);
+    //$.post( "<?php echo base_url();?>kwitansi-diskon-printout/?template=table_html&name=kwitansi-dp-printout", { noso: data } );
+    location.href="<?php echo base_url();?>kwitansi-fee-printout/"+res+"?template=table_html&name=kwitansi-fee-printout";
+    //alert(data);
+    }
     function getGudangTo(id){
         $("#id_gudang_in").html("<option value=''>Wait ...</option>")
         $.ajax({

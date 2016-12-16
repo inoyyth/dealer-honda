@@ -82,29 +82,26 @@ Class M_t_penjualan extends CI_Model {
         //echo json_encode($data_customer);
         //exit();
         if (empty($id)) {
-            echo 'simpen';
-            exit();
-            /*
+            //echo 'simpen';
+            //exit();
+            
             $this->db->insert($this->table_customer, $this->main_model->create_sys($data_customer));
             $this->db->insert($this->table_tpenjualan, $this->main_model->create_sys($data_penjualan));
             $this->db->insert($this->table_thargamotor, $this->main_model->create_sys($data_harga_motor));
             // exit();
-             * 
+              
              
             return true;
-             * 
-             */
-           
+              
         } else {
-            echo 'ubah';
-            exit();
-            /*
+             
+            
             $this->db->update($this->table_customer, $this->main_model->update_sys($data_customer), array('no_ktp' => $this->input->post('no_ktp')));
             $this->db->update($this->table_tpenjualan, $this->main_model->update_sys($data_penjualan), array('noso' => $this->input->post('noso')));
             $this->db->update($this->table_thargamotor, $this->main_model->update_sys($data_harga_motor), array('noso' => $this->input->post('noso')));
             return true;
-             * 
-             */
+             
+           
         }
         return false;
         
