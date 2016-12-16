@@ -194,7 +194,7 @@ class Motor_terima extends MX_Controller {
                     "sys_create_user" => $this->sessionGlobal['id'],
                     "namafile" => $media['file_name']
                 );
-                //$this->db->insert("penerimaan_motor_temp", $data);
+                //$this->db->insert("penerimaan_motor_temp", $data); 
                 $sql = $this->db->insert_string('penerimaan_motor_temp', $data) . ' ON DUPLICATE KEY UPDATE nomesin=nomesin,norangka=norangka';
                 $this->db->query($sql);
             }

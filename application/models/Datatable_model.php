@@ -41,7 +41,7 @@ Class Datatable_model extends CI_Model {
     function get_datatables($table,$column_order=array(),$column_search=array(),$order=array('id'=>'asc'),$where=array(),$join=array(),$group_by=array()){
         $this->_get_datatables_query($table,$column_order,$column_search,$order,$where,$join,$group_by);
         if($_POST['length'] != -1)
-        $this->db->limit($_POST['length'], $_POST['start']);
+        $this->db->limit($_POST['length'], $_POST['start']); 
         $query = $this->db->get();
         return $query->result();
     }
