@@ -103,7 +103,7 @@
             var formData = new FormData(this);
             //console.log(formData);
              $.ajax({
-                url : "<?php echo base_url('import-penerimaan-motor-upload'); ?>",
+                url : "<?php echo base_url('import-penerimaan-motor-upload'); ?>", 
                 type : "post",
                 data : formData,
                 cache: false,
