@@ -8,6 +8,7 @@ class Motor_terima extends MX_Controller {
         parent::__construct();
         $this->load->model(array('M_motor_terima' => 'penerimaan_motor', 'Datatable_model' => 'm_datatable'));
         $this->load->library(array('upload', 'encrypt', 'Printpdf', 'Auth_log'));
+        $this->load->helper('download');
         //set breadcrumb
         $this->breadcrumbs->push('Penerimaan Motor', '/import-penerimaan-baru');
     }
@@ -200,6 +201,59 @@ class Motor_terima extends MX_Controller {
             }
             return true;
         }
+    }
+    
+    public function template_excel(){
+        $this->load->library("phpexcel/PHPExcel");
+        $objPHPExcel = new PHPExcel();
+        
+        $objPHPExcel->getActiveSheet()->getStyle('A1:H1')->applyFromArray(
+            array(
+                'fill' => array(
+                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb' => 'B3FFb3')
+                )
+            )
+        );
+        
+        $objPHPExcel->getActiveSheet()->getStyle('J1:K1')->applyFromArray(
+            array(
+                'fill' => array(
+                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb' => 'B3FFb3')
+                )
+            )
+        );
+        
+        
+        $objPHPExcel->setActiveSheetIndex(0);
+        $HeaderTitle = array('No Surat Jalan','No Sales Order','No Mesin','No Rangka','Tipe','Warna','Tahun','ID Gudang');
+        $headerMulai = "A";
+            foreach($HeaderTitle as $headerTitleV){
+                $objPHPExcel->getActiveSheet()->SetCellValue($headerMulai."1", $headerTitleV);
+                $headerMulai ++;
+            }
+            $objPHPExcel->getActiveSheet()->SetCellValue('J1','ID Gudang');
+            $objPHPExcel->getActiveSheet()->SetCellValue('K1','Gudang');
+        $rowCount = 2;
+        $gudang = $this->db->get_where('m_gudang',array('status_gudang'=>1))->result_array();
+        foreach($gudang as $k=>$row){
+            $objPHPExcel->getActiveSheet()->SetCellValue('J'.$rowCount, $row['id']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('K'.$rowCount, $row['gudang']);
+            $rowCount++;
+        }
+        $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+        $fileName = 'assets/excelTemplate/templateTerimaMotor.xlsx';
+        $objWriter->save($fileName);
+        force_download('assets/excelTemplate/templateTerimaMotor.xlsx', NULL);
+//        header("Pragma: public");
+//        header("Expires: 0");
+//        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+//        header("Content-Type: application/force-download");
+//        header("Content-Type: application/octet-stream");
+//        header("Content-Type: application/download");;
+//        header("Content-Disposition: attachment;filename=$fileName");
+//        header("Content-Transfer-Encoding: binary ");
     }
 
 }

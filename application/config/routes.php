@@ -295,6 +295,7 @@ $route['import-penerimaan-motor-pdf/(:any)'] = 'motor_terima/print_pdf/$1';
 $route['import-penerimaan-motor-excel'] = 'motor_terima/print_excel';
 $route['import-penerimaan-motor-excel/(:any)'] = 'motor_terima/print_excel/$1';
 $route['import-penerimaan-motor-upload'] = 'motor_terima/upload_excel';
+$route['motor-terima-template-excel'] = 'motor_terima/template_excel';
 
 $route['input-penerimaan-aksesoris'] = 'aksesoris_terima';
 $route['input-penerimaan-aksesoris-tambah'] = 'aksesoris_terima/add';
@@ -321,6 +322,7 @@ $route['motor-keluar-pdf'] = 'motor_keluar/print_pdf';
 $route['motor-keluar-pdf/(:any)'] = 'motor_keluar/print_pdf/$1';
 $route['motor-keluar-excel'] = 'motor_keluar/print_excel';
 $route['motor-keluar-excel/(:any)'] = 'motor_keluar/print_excel/$1';
+
 
 $route['stock'] = 'stock';
 $route['stock-pdf'] = 'stock/print_pdf';
