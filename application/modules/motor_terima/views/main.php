@@ -45,12 +45,13 @@
                                     <form method="post" name="frmGroupUser" id="frmGroupUser" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label>Excel File</label>
-                                            <input type="file" name="excel_file" id="excel_file" class="form-control">
+                                            <input type="file" name="excel_file" id="excel_file" class="form-control" required="true">
                                             <input type="hidden" name="exel_name" id="exel_name">
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary btn-sm">Generate</button> 
                                             <button type="button" class="btn btn-warning btn-sm" id="cancel-form">Cancel</button>
+                                            <a href="<?php echo base_url('motor-terima-template-excel');?>" class="btn btn-success btn-sm">[Download Template]</a>
                                         </div>
                                     </form>
                                 </div>
@@ -98,6 +99,10 @@
 </div>
 <script>
     $(document).ready(function () {
+        $("#cancel-form").click(function(){
+            console.log('clear');
+           $('input').val(""); 
+        });
         $("#frmGroupUser").on("submit", function(event){
             event.preventDefault();
             var formData = new FormData(this);
