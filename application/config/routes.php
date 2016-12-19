@@ -268,7 +268,7 @@ $route['void-excel/(:any)'] = 't_void/print_excel/$1';
 /* End Void */
 
 /* Start Surat Jalan */
-$route['Surat-jalan'] = 't_surat_jalan/index';
+$route['surat-jalan'] = 't_surat_jalan/add';
 $route['surat-jalan-tambah'] = 't_surat_jalan/add';
 $route['surat-jalan-edit-(:num)'] = 't_surat_jalan/edit/$1';
 $route['surat-jalan-detail-(:num)'] = 't_surat_jalan/detail/$1';
