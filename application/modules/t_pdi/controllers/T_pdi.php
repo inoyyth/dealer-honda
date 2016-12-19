@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -7,27 +8,28 @@
  */
 
 /**
- * Description of t_stnk_bpkb
+ * Description of t_pdi
  *
  * @author Langit-Biru
  */
-class t_stnk_bpkb extends MX_Controller {
+class t_pdi extends MX_Controller {
     //put your code here
     
     function __construct() {
         parent::__construct();
         
-        $this->load->model(array('M_t_stnk_bpkb' => 't_stnk_bpkb', 'Datatable_model' => 'm_datatable'));
+        $this->load->model(array('M_t_pdi' => 't_pdi', 'Datatable_model' => 'm_datatable'));
         $this->load->library(array('upload', 'encrypt', 'Printpdf', 'Auth_log'));
         
         //set breadcrumb
-        $this->breadcrumbs->push('Transaksi STNK & BPKB', '/stnk-bpkb');
+        $this->breadcrumbs->push('Transaksi PDI', '/pdi');
     }
     
     public function add() {
-        $this->breadcrumbs->push('Add', '/t_stnk_bpkb');
+        $this->breadcrumbs->push('Add', '/pdi');
         
-        $data['view'] = "t_stnk_bpkb/add";
+        $data['view'] = "t_pdi/add";
         $this->load->view('default', $data);
     }
 }
+

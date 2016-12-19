@@ -1,3 +1,4 @@
+
 <div class="row">
     <form action="<?php echo base_url("pdi-save"); ?>" class="form-horizontal row-border" id="frmkwitansidp" method="post" enctype="multipart/form-data" parsley-validate novalidate>
         <div class="col-md-12">
@@ -79,7 +80,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">No. PDI</label>
                             <div class="col-sm-9">
-                                <input type="text" name="kdpdi" id="no_pdi" parsley-trigger="change" required   value="<?php echo $codeso; ?>" class="form-control">
+                                <input type="text" name="kdpdi" id="no_pdi" parsley-trigger="change" required   value="<?php echo @$codeso; ?>" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -447,4 +448,5 @@
             }
         });
     }
+
 </script>
