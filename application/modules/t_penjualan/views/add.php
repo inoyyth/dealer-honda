@@ -63,12 +63,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Varian</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="varian" id="varian" parsley-trigger="change" readonly="true" placeholder="Warna" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label class="col-sm-3 control-label">Harga OTR</label>
                         <div class="col-sm-9">
                             <input type="text" name="harga_otr" id="harga_otr" parsley-trigger="change" required readonly="true" placeholder="Harga OTR" class="form-control">
@@ -219,9 +213,8 @@
                             <th>ID</th>
                             <th>No. Mesin</th>
                             <th>No. Rangka</th>
-                            <th>Nama</th>
+                            <th>Tipe</th>
                             <th>Warna</th>
-                            <th>Tahun</th>
                             <th>Varian</th>
                             <th>Harga OTR</th>
                         </tr>
@@ -282,8 +275,7 @@
             $("#nama_motor").val(data[4]);
             $("#warna").val(data[5]);
             $("#tahun").val(data[6]);
-            $("#varian").val(data[7]);
-            $("#harga_otr").val(data[8]);
+            $("#harga_otr").val(data[7]);
         });
 
         $("#no_ktp").focusout(function () {
