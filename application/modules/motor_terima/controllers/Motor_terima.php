@@ -149,7 +149,7 @@ class Motor_terima extends MX_Controller {
 
             $config['upload_path'] = "./assets/" . $folder;
             $config['upload_url'] = "./assets/" . $folder;
-            $config['file_name'] = $fileName;
+            $config['file_name'] =  date('YmdHis') . "-" . $fileName;
             $config['allowed_types'] = 'xls|xlsx';
             $config['max_size'] = '20000';
             $this->load->library('upload');
@@ -180,6 +180,7 @@ class Motor_terima extends MX_Controller {
             //  Loop through each row of the worksheet in turn
             for ($row = 2; $row <= $highestRow; $row++) {                  //  Read a row of data into an array                 
                 $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
+                //insert new motor type if not existing
                 //  Insert row data array into your database of choice here
                 $data = array(
                     "nopolisi" => $rowData[0][0],
@@ -198,6 +199,9 @@ class Motor_terima extends MX_Controller {
                 //$this->db->insert("penerimaan_motor_temp", $data); 
                 $sql = $this->db->insert_string('penerimaan_motor_temp', $data) . ' ON DUPLICATE KEY UPDATE nomesin=nomesin,norangka=norangka';
                 $this->db->query($sql);
+                $dataType = array('tipe_motor'=>$rowData[0][6]);
+                $sqlType = $this->db->insert_string('m_motor', $dataType) . ' ON DUPLICATE KEY UPDATE tipe_motor=tipe_motor';
+                $this->db->query($sqlType);
             }
             return true;
         }
@@ -246,14 +250,6 @@ class Motor_terima extends MX_Controller {
         $fileName = 'assets/excelTemplate/templateTerimaMotor.xlsx';
         $objWriter->save($fileName);
         force_download('assets/excelTemplate/templateTerimaMotor.xlsx', NULL);
-//        header("Pragma: public");
-//        header("Expires: 0");
-//        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-//        header("Content-Type: application/force-download");
-//        header("Content-Type: application/octet-stream");
-//        header("Content-Type: application/download");;
-//        header("Content-Disposition: attachment;filename=$fileName");
-//        header("Content-Transfer-Encoding: binary ");
     }
 
 }

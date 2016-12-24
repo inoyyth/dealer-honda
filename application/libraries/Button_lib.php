@@ -28,7 +28,7 @@ class Button_lib {
         $itemx = array();
         foreach ($menu as $item) {
             if (is_array($item) && isset($item['slug'])) {
-                if ($item['slug'] == $segment) { // or other string comparison
+                if ($item['slug'] == str_replace('-page','',$segment)) { // or other string comparison
                     $itemx [] = $item;
                 }
             }
