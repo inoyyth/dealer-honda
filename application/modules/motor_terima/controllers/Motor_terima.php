@@ -211,7 +211,7 @@ class Motor_terima extends MX_Controller {
         $this->load->library("phpexcel/PHPExcel");
         $objPHPExcel = new PHPExcel();
         
-        $objPHPExcel->getActiveSheet()->getStyle('A1:H1')->applyFromArray(
+        $objPHPExcel->getActiveSheet()->getStyle('A1:J1')->applyFromArray(
             array(
                 'fill' => array(
                     'type' => PHPExcel_Style_Fill::FILL_SOLID,
@@ -220,7 +220,7 @@ class Motor_terima extends MX_Controller {
             )
         );
         
-        $objPHPExcel->getActiveSheet()->getStyle('J1:K1')->applyFromArray(
+        $objPHPExcel->getActiveSheet()->getStyle('L1:M1')->applyFromArray(
             array(
                 'fill' => array(
                     'type' => PHPExcel_Style_Fill::FILL_SOLID,
@@ -231,19 +231,19 @@ class Motor_terima extends MX_Controller {
         
         
         $objPHPExcel->setActiveSheetIndex(0);
-        $HeaderTitle = array('No Surat Jalan','No Sales Order','No Mesin','No Rangka','Tipe','Warna','Tahun','ID Gudang');
+        $HeaderTitle = array('No.Polisi','Tanggal SJ','No.Surat Jalan','No Sales Order','No Mesin','No Rangka','Tipe','Warna','Tahun','ID Gudang');
         $headerMulai = "A";
             foreach($HeaderTitle as $headerTitleV){
                 $objPHPExcel->getActiveSheet()->SetCellValue($headerMulai."1", $headerTitleV);
                 $headerMulai ++;
             }
-            $objPHPExcel->getActiveSheet()->SetCellValue('J1','ID Gudang');
-            $objPHPExcel->getActiveSheet()->SetCellValue('K1','Gudang');
+            $objPHPExcel->getActiveSheet()->SetCellValue('L1','ID Gudang');
+            $objPHPExcel->getActiveSheet()->SetCellValue('M1','Gudang');
         $rowCount = 2;
         $gudang = $this->db->get_where('m_gudang',array('status_gudang'=>1))->result_array();
         foreach($gudang as $k=>$row){
-            $objPHPExcel->getActiveSheet()->SetCellValue('J'.$rowCount, $row['id']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('K'.$rowCount, $row['gudang']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('L'.$rowCount, $row['id']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('M'.$rowCount, $row['gudang']);
             $rowCount++;
         }
         $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
