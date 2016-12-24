@@ -440,7 +440,7 @@ class Multi_menu {
 		        {
 		        	$tag_open    = $this->item_tag_open;
 					//$href        = site_url($slug);
-                    $href        = $slug;
+                    $href        = base_url().$slug;
 					$item_anchor = $this->item_anchor;
 		        }
 

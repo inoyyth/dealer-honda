@@ -49,7 +49,7 @@
                                             <input type="hidden" name="exel_name" id="exel_name">
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-sm">Generate</button> 
+                                            <button type="submit" id="myButton" data-loading-text="Loading..." class="btn btn-primary btn-sm">Generate</button> 
                                             <button type="button" class="btn btn-warning btn-sm" id="cancel-form">Cancel</button>
                                             <a href="<?php echo base_url('motor-terima-template-excel');?>" class="btn btn-success btn-sm">[Download Template]</a>
                                         </div>
@@ -104,6 +104,7 @@
            $('input').val(""); 
         });
         $("#frmGroupUser").on("submit", function(event){
+            var $btn = $("#myButton").button('loading');
             event.preventDefault();
             var formData = new FormData(this);
             //console.log(formData);
@@ -116,9 +117,11 @@
                 processData: false,
                 //dataType : "json",
                 success: function(e){
+                    $btn.button('reset')
                     table.ajax.reload();
                 },
                 error: function(e){
+                    $btn.button('reset')
                     alert('fail');
                 }
            });
