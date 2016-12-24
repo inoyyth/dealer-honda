@@ -19,6 +19,17 @@
     </div>
 </div>
 
+<!-- Alert Message modal -->
+<div id="myModalAlert" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header modal-alert-header"></div>
+      <div class="modal-body modal-alert-body"></div>
+      <div class="modal-footer modal-alert-footer"></div>
+    </div>
+  </div>
+</div>
+
 
 <!-- sidebar chats -->
 <nav class="atm-spmenu atm-spmenu-vertical atm-spmenu-right side-chat">

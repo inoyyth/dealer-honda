@@ -139,6 +139,7 @@ $route['master-motor-excel'] = 'md_motor/print_excel';
 $route['master-motor-excel/(:any)'] = 'md_motor/print_excel/$1';
 
 $route['master-aksesoris'] = 'md_aksesoris';
+$route['master-aksesoris-cek-kode'] = 'md_aksesoris/check_code';
 $route['master-aksesoris-tambah'] = 'md_aksesoris/add';
 $route['master-aksesoris-edit-(:num)'] = 'md_aksesoris/edit/$1';
 $route['master-aksesoris-delete-(:num)'] = 'md_aksesoris/delete/$1';
