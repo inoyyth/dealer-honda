@@ -34,11 +34,7 @@
             <div class="block-web">
                 <div class="form-group">
                     <label>PIC</label>
-                    <select name="pic" parsley-trigger="change" required placeholder="Pilih PIC" class="form-control">
-                        <?php foreach ($list_karyawan as $kListKaryawan => $vListKaryawan) { ?>
-                            <option value="<?php echo $vListKaryawan['id']; ?>"><?php echo $vListKaryawan['kd_karyawan'] . " " . $vListKaryawan['karyawan']; ?></option>
-                        <?php } ?>
-                    </select>
+                    <input type="text" name="pic" parsley-trigger="change" required placeholder="Isi Nama Karyawan Leasing" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Hp</label>

@@ -16,7 +16,7 @@
                 <td><?php echo $vList['alamat'];?></td>
                 <td><?php echo $vList['telepon'];?></td>
                 <td><?php echo $vList['email'];?></td>
-                <td><?php echo $vList['kd_karyawan']." ".$vList['karyawan'];?></td>
+                <td><?php echo $vList['pic'];?></td>
                 <td><?php echo get_status($vList['status_leasing']);?></td>
             </tr>
         <?php } ?>

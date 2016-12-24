@@ -35,7 +35,7 @@
                                         <td><?php echo intval($this->uri->segment(2) + ($k + 1)); ?></td>
                                         <td><?php echo $v['kd_leasing']; ?></td>
                                         <td><?php echo $v['leasing']; ?></td>
-                                        <td><?php echo $v['kd_karyawan'] . " " . $v['karyawan']; ?></td>
+                                        <td><?php echo $v['pic']; ?></td>
                                         <td class="text-center">
                                             <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'master-leasing-edit-' . $v['id'], 'text' => 'Edit')); ?>
                                             <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'master-leasing-delete-' . $v['id'], 'text' => 'Delete')); ?>
@@ -66,7 +66,7 @@
                                             ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="kd_karyawan" value="<?php echo (isset($sr_data['kd_karyawan']) ? $sr_data['kd_karyawan'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="pic" value="<?php echo (isset($sr_data['pic']) ? $sr_data['kd_karyawan'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;
