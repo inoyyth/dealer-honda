@@ -31,7 +31,7 @@
                         <div class="col-sm-9">
                             <div class="input-group">
                                 <input type="hidden" name="id_motor" id="id_motor">
-                                <input type="text" readonly="true" name="nomsn" id="nomsn" parsley-trigger="change" placeholder="Pilih No Mesin" class="form-control">
+                                <input type="text" readonly="true" name="nomsn" id="nomsn" required="true" parsley-trigger="change" placeholder="Pilih No Mesin" class="form-control">
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalBrowse">Browse</button>
                                 </div>
@@ -65,7 +65,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Harga OTR</label>
                         <div class="col-sm-9">
-                            <input type="text" name="harga_otr" id="harga_otr" parsley-trigger="change" required readonly="true" placeholder="Harga OTR" class="form-control">
+                            <input type="text" name="harga_otr" id="harga_otr" parsley-trigger="change" readonly="true" placeholder="Harga OTR" class="form-control">
                         </div>
                     </div>
 
@@ -112,19 +112,19 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Tempat Lahir</label>
                         <div class="col-sm-9">
-                            <input type="text" name="tempat_lahir_customer" id="tempat_lahir_customer" parsley-trigger="change" required placeholder="Tempat Lahir" class="form-control">
+                            <input type="text" name="tempat_lahir_customer" id="tempat_lahir_customer" parsley-trigger="change" placeholder="Tempat Lahir" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Tanggal Lahir</label>
                         <div class="col-sm-9">
-                            <input type="text" name="tanggal_lahir_customer" id="tanggal_lahir_customer" parsley-trigger="change" required placeholder="Tanggal Lahir" class="form-control datepicker">
+                            <input type="text" name="tanggal_lahir_customer" id="tanggal_lahir_customer" parsley-trigger="change" placeholder="Tanggal Lahir" class="form-control datepicker">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Jenis Kelamin</label>
                         <div class="col-sm-9">
-                            <select name="kelamin_customer" id="kelamin_customer" parsley-trigger="change" required class="form-control">
+                            <select name="kelamin_customer" id="kelamin_customer" parsley-trigger="change" class="form-control">
                                 <option value="">Jenis Kelamin</option>
                                 <option value="P">Pria</option>
                                 <option value="W">Wanita</option>
@@ -134,41 +134,41 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Alamat</label>
                         <div class="col-sm-9">
-                            <textarea name="alamat_customer" id="alamat_customer" parsley-trigger="change" required placeholder="Isi Alamat Customer" class="form-control"></textarea>
+                            <textarea name="alamat_customer" id="alamat_customer" parsley-trigger="change" placeholder="Isi Alamat Customer" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">RT / RW</label>
                         <div class="col-sm-4">
-                            <input type="text" name="rt" id="rt" parsley-trigger="change" required placeholder="RT Customer" class="form-control">
+                            <input type="text" name="rt" id="rt" parsley-trigger="change" placeholder="RT Customer" class="form-control">
                         </div>
                         <div class="col-sm-1"> / </div>
                         <div class="col-sm-4">
-                            <input type="text" name="rw" id="rw" parsley-trigger="change" required placeholder="RW Customer" class="form-control">
+                            <input type="text" name="rw" id="rw" parsley-trigger="change" placeholder="RW Customer" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Wilayah</label>
                         <div class="col-sm-9">
-                            <input type="text" name="wilayah" id="wilayah" parsley-trigger="change" required placeholder="Wilayah Customer" class="form-control">
+                            <input type="text" name="wilayah" id="wilayah" parsley-trigger="change" placeholder="Wilayah Customer" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Kelurahan</label>
                         <div class="col-sm-9">
-                            <input type="text" name="kelurahan" id="kelurahan" parsley-trigger="change" required placeholder="Kelurahan Customer" class="form-control">
+                            <input type="text" name="kelurahan" id="kelurahan" parsley-trigger="change" placeholder="Kelurahan Customer" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Kecamatan</label>
                         <div class="col-sm-9">
-                            <input type="text" name="kecamatan" id="kecamatan" parsley-trigger="change" required placeholder="Kecamatan Customer" class="form-control">
+                            <input type="text" name="kecamatan" id="kecamatan" parsley-trigger="change" placeholder="Kecamatan Customer" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Telp.</label>
                         <div class="col-sm-9">
-                            <input type="text" name="telepon_customer" id="telepon_customer" parsley-trigger="change" required placeholder="Telp. Cusomer" class="form-control">
+                            <input type="text" name="telepon_customer" id="telepon_customer" parsley-trigger="change" placeholder="Telp. Cusomer" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
