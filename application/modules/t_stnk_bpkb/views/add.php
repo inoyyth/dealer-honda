@@ -1,4 +1,3 @@
-
 <div class="col-md-12">
     <section class="panel default blue_title h2">
         <div class="panel-heading">Transaksi STNK & BPKB</div>
@@ -508,7 +507,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">No Bon Biro Jasa 2</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" name="bon_biro_jasa2" id="bon_biro_jasa2" placeholder="Tanggal Proses BPKB" class="form-control ">
+                                                    <input type="text" name="bon_biro_jasa2" id="bon_biro_jasa_2" placeholder="Tanggal Proses BPKB" class="form-control ">
                                                 </div>
                                             </div>
 
@@ -652,7 +651,7 @@
         
         $('#remotex #no_proses_tt').bind('typeahead:selected', function(obj, datumx, name) {
             console.log(datumx);
-            $('#no_proses_tt').val(datumx.noproses);
+            $('#no_proses_tt').val('okegan');
             $('#tgl_jadi_stnk').val(datumx.estimasi_stnk_selesai);
             alert(datumx.noproses);
         });

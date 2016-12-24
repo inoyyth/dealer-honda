@@ -31,4 +31,30 @@ class t_void extends MX_Controller {
     }
     
     
+    public function getSO(){ 
+        $query = $this->input->get('query');
+        $data = $this->t_void->getNOSO($query);
+        //echo $this->db->last_query();
+        echo json_encode($data);
+    }
+    
+    public function get_action(){
+        //echo "1";
+        $noso = $this->input->post('noso');
+        //var_dump($noso);
+        
+        $cancel = $this->t_void->get_action($noso);
+        if($cancel){
+            $this->session->set_flashdata('success', 'Void Berhasil di Eksekusi!');
+            echo json_encode("true");
+        }else{
+            $this->session->set_flashdata('failed', 'Void Berhasil di Eksekusi!');
+            echo json_encode("false");
+        }
+        
+        redirect("void");
+    }
+    
+    
+    
 }
