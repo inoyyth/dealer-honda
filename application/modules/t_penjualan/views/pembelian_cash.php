@@ -1,53 +1,52 @@
-
-
+<script src="<?php echo base_url();?>themes/plugins/input-mask/demo-mask.js"></script>
+<script src="<?php echo base_url();?>themes/plugins/input-mask/jquery.inputmask.min.js"></script>
 <div class="form-group">
     <label class="col-sm-3 control-label">Diskon</label>
     <div class="col-sm-9">
-        <input type="text" name="diskon" id="diskon" parsley-trigger="change" required placeholder="Diskon" class="form-control mask" data-inputmask="'mask':'Rp. 99.999.999', 'greedy' : false, 'rightAlignNumerics' : false">
+        <input type="text" name="diskon" id="diskon" parsley-trigger="change" required placeholder="Diskon" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-3 control-label">Tagih</label>
     <div class="col-sm-9">
-        <input type="text" name="tagih" id="tagih" parsley-trigger="change" required placeholder="Tagih" class="form-control mask" data-inputmask="'mask':'Rp. 99.999.999', 'greedy' : false, 'rightAlignNumerics' : false" readonly>
+        <input type="text" name="tagih" id="tagih" parsley-trigger="change" required placeholder="Tagih" readonly="true" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-3 control-label">DP / Uang Muka</label>
     <div class="col-sm-9">
-        <input type="text" name="dp" id="dp" parsley-trigger="change" required placeholder="Down Payment" class="form-control mask" data-inputmask="'mask':'Rp. 99.999.999', 'greedy' : false, 'rightAlignNumerics' : false">
+        <input type="text" name="dp" id="dp" parsley-trigger="change" required placeholder="Down Payment" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-3 control-label">Sisa Hutang</label>
     <div class="col-sm-9">
-        <input type="text" name="sisa_hutang" id="sisa_hutang" parsley-trigger="change" required placeholder="Sisa Hutang" class="form-control mask" data-inputmask="'mask':'Rp. 99.999.999', 'greedy' : false, 'rightAlignNumerics' : false" readonly>
+        <input type="text" name="sisa_hutang" id="sisa_hutang" parsley-trigger="change" required placeholder="Sisa Hutang" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;" readonly="true">
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-3 control-label">Fee</label>
     <div class="col-sm-9">
-        <input type="text" name="fee" id="fee" parsley-trigger="change" required placeholder="Fee Marketing" class="form-control mask" data-inputmask="'mask':'Rp. 99.999.999', 'greedy' : false, 'rightAlignNumerics' : false">
+        <input type="text" name="fee" id="fee" parsley-trigger="change" required placeholder="Fee Marketing" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
     </div>
 </div>
 
 <script type="text/javascript">
-
-    $("#diskon").focusout(function () {
-        var harga_otr = $("#harga_otr").val();
-        var diskon = $(this).val();
-        
-        harga_otr = parseFloat(harga_otr.split('.').join(''));
-        var tagih = harga_otr - diskon;
-        $("#tagih").val(tagih);
-    })
+    $(document).ready(function(){
+        $("#diskon").keyup(function () {
+            var harga_otr = $("#harga_otr").val().match(/\d/g);
+            var diskon = $(this).val().match(/\d/g);
+            console.log(harga_otr.join(""));
+            var hasil = parseInt(harga_otr.join("")) - parseInt(diskon.join(""));
+            $("#tagih").val(hasil.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+        });
     
-    $("#dp").focusout(function(){
-        var dp = parseFloat($(this).val());
-        var harga = parseFloat($("#tagih").val());
-        
-        var sisa_hutang = harga - dp;
-        $("#sisa_hutang").val(sisa_hutang);
-    })
-
+        $("#dp").keyup(function(){
+            var dp = $(this).val().match(/\d/g);
+            var harga = $("#tagih").val().match(/\d/g);;
+            console.log(dp);
+            var sisa_hutang = parseInt(harga.join("")) - parseInt(dp.join(""));
+            $("#sisa_hutang").val(sisa_hutang.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+        });
+    });
 </script>
