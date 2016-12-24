@@ -20,7 +20,8 @@ class M_t_surat_jalan extends CI_Model {
 left join t_harga_motor c on c.noso = a.noso 
 left join m_motor d on d.nomsn = a.nomsn
 left join t_kwitansi_fee e on e.noso = a.noso
-            WHERE a.noso LIKE "%'.$query.'%"');
+
+            WHERE a.noso LIKE "%'.$query.'%"  AND a.m_status =  "1" ');
        $show = array();
         foreach($data->result_array() as $list){
            //echo "<br>".terbilang($list['fee'],3)."<br>";

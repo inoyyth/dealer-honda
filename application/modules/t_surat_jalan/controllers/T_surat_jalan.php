@@ -76,7 +76,7 @@ class T_surat_jalan extends MX_Controller {
         //var_dump($data['list']);
         $data['template'] = array("template" => "t_surat_jalan/" . $_GET['template'], "filename" => $_GET['name']);
         //$data['list'] = $this->M_t_kwitansi->getdata($this->table, 0, 1000, $like = array());
-         $this->load->view('t_surat_jalan/table_html', $data);
+        $this->load->view('t_surat_jalan/table_html', $data);
         //$this->printpdf->create_pdf($data);
     }
     
