@@ -45,9 +45,8 @@ Class M_md_leasing extends CI_Model {
 
     public function getdata($table, $limit, $pg, $like = array(), $where = array()) {
         unset($like['page']);
-        $this->db->select($table . ".*,m_karyawan.karyawan,m_karyawan.kd_karyawan");
+        $this->db->select($table . ".*");
         $this->db->from($table);
-        $this->db->join('m_karyawan', 'm_karyawan.id=' . $table . '.pic', 'left');
         $this->db->like($like);
         $this->db->where($where);
         $this->db->limit($pg, $limit);

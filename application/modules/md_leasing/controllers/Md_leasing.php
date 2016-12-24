@@ -29,7 +29,7 @@ class Md_leasing extends MX_Controller {
 
     public function add() {
         $this->breadcrumbs->push('Add', '/master-leasing-add');
-        $data['list_karyawan'] = $this->main_model->getMaster('m_karyawan', $like = array(), $where = array('status_karyawan' => '1'));
+        //$data['list_karyawan'] = $this->main_model->getMaster('m_karyawan', $like = array(), $where = array('status_karyawan' => '1'));
         //$data['code'] = $this->main_model->generate_code($this->table, 'LSN', '-');
         $data['view'] = "md_leasing/add";
         $this->load->view('default', $data);
@@ -37,7 +37,7 @@ class Md_leasing extends MX_Controller {
 
     public function edit($id) {
         $this->breadcrumbs->push('Edit', '/master-leasing-edit');
-        $data['list_karyawan'] = $this->main_model->getMaster('m_karyawan', $like = array(), $where = array('status_karyawan' => '1'));
+        //$data['list_karyawan'] = $this->main_model->getMaster('m_karyawan', $like = array(), $where = array('status_karyawan' => '1'));
         $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
         $data['view'] = 'md_leasing/edit';
         $this->load->view('default', $data);
@@ -70,7 +70,7 @@ class Md_leasing extends MX_Controller {
                 'alamat' => set_session_table_search('alamat', $this->input->get_post('alamat', TRUE)),
                 'telepon' => set_session_table_search('telepon', $this->input->get_post('telepon', TRUE)),
                 'email' => set_session_table_search('email', $this->input->get_post('email', TRUE)),
-                'kd_karyawan' => set_session_table_search('kd_karyawan', $this->input->get_post('kd_karyawan', TRUE)),
+                'pic' => set_session_table_search('pic', $this->input->get_post('pic', TRUE)),
                 'status_leasing' => set_session_table_search('status_leasing', $this->input->get_post('status_leasing', TRUE))
             );
         } else {
@@ -81,7 +81,7 @@ class Md_leasing extends MX_Controller {
                 'alamat' => $this->session->userdata('alamat'),
                 'telepon' => $this->session->userdata('telepon'),
                 'email' => $this->session->userdata('email'),
-                'kd_karyawan' => $this->session->userdata('kd_karyawan'),
+                'pic' => $this->session->userdata('pic'),
                 'status_leasing' => $this->session->userdata('status_leasing')
             );
         }
