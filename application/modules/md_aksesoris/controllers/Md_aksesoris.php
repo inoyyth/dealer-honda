@@ -90,5 +90,16 @@ class Md_aksesoris extends MX_Controller {
         $data['list'] = $this->m_aksesoris->getdata($this->table, 0, 1000, $like = array(), $where = array('m_status!=' => '3'));
         $this->load->view('template_excel', $data);
     }
+    
+    public function check_code(){
+        $kode = $this->input->post('kode');
+        $code = $this->db->get_where('m_aksesoris',array('kd_aksesoris'=>$kode));
+        if($code->num_rows() > 0 ){
+            $response = array('code'=>201,'status'=>'duplicate','message'=>'Duplicate Kode Aksesoris');
+        }else{
+            $response = array('code'=>200);
+        }
+        echo json_encode($response);
+    }
 
 }

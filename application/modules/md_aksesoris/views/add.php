@@ -9,7 +9,7 @@
             <div class="porlets-content">
                 <div class="form-group">
                     <label>Kode Aksesoris</label>
-                    <input type="text" name="kd_aksesoris" parsley-trigger="change" required readonly="true" value="<?php echo $code;?>" class="form-control">
+                    <input type="text" name="kd_aksesoris" parsley-trigger="change" required placeholder="Isi Kode Aksesoris" id="kode_aksesoris" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Nama Aksesoris</label>
@@ -50,6 +50,31 @@
     </form>
 </div>
 <script>
+ $(document).ready(function(){
+     $("#kode_aksesoris").focusout(function(){
+         var kode = $(this).val();
+         $.ajax({
+                url : "<?php echo base_url('master-aksesoris-cek-kode'); ?>", 
+                type : "post",
+                data : {kode:kode},
+                cache: false,
+                dataType : "json",
+                success: function(e){
+                    if(e.code=="201"){
+                        $(".modal-alert-header").text('Warning');
+                        $(".modal-alert-body").text('Duplicate Kode Aksesoris');
+                        $('#myModalAlert').modal('show');
+                        $("#kode_aksesoris").val('');
+                    }
+                },
+                error: function(e){
+                    $(".modal-alert-header").text('Warning');
+                    $(".modal-alert-body").text('Failed Process');
+                    $('#myModalAlert').modal('show');
+                }
+           });
+     });
+ });
 function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
