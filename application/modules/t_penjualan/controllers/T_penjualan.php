@@ -22,7 +22,7 @@ class T_penjualan extends MX_Controller {
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->pagination->initialize($config);
         $data['paging'] = $this->pagination->create_links();
-        $data['data'] = $this->t_penjualan->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array('status_gudang!=' => '3'));
+        $data['data'] = $this->t_penjualan->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array());
         $data['sr_data'] = $data_session;
         $data['view'] = 't_penjualan/main';
         $this->load->view('default', $data);
@@ -54,11 +54,6 @@ class T_penjualan extends MX_Controller {
 
     function save() {
         if ($_POST) {
-            
-            var_dump($_POST);
-            //exit();
-            //$noso = $this->input->post('noso');
-            //$this->t_penjualan->simpan($noso);
             if ($this->t_penjualan->save()) {
                 $this->session->set_flashdata('success', 'Data Berhasil Di Simpan !');
             } else {
@@ -74,20 +69,18 @@ class T_penjualan extends MX_Controller {
         if ($_POST) {
             return $data = array(
                 'page' => set_session_table_search('page', $this->input->get_post('page', TRUE)),
-                'kd_gudang' => set_session_table_search('kd_gudang', $this->input->get_post('kd_gudang', TRUE)),
-                'gudang' => set_session_table_search('gudang', $this->input->get_post('gudang', TRUE)),
-                'alamat' => set_session_table_search('alamat', $this->input->get_post('alamat', TRUE)),
-                'telepon' => set_session_table_search('telepon', $this->input->get_post('telepon', TRUE)),
-                'status_gudang' => set_session_table_search('status_gudang', $this->input->get_post('status_gudang', TRUE))
+                'noso' => set_session_table_search('noso', $this->input->get_post('noso', TRUE)),
+                'nomsn' => set_session_table_search('nomsn', $this->input->get_post('nomsn', TRUE)),
+                'harga_otr' => set_session_table_search('harga_otr', $this->input->get_post('harga_otr', TRUE)),
+                'tipe' => set_session_table_search('tipe', $this->input->get_post('tipe', TRUE))
             );
         } else {
             return $data = array(
                 'page' => $this->session->userdata('page'),
-                'kd_gudang' => $this->session->userdata('kd_gudang'),
-                'gudang' => $this->session->userdata('gudang'),
-                'alamat' => $this->session->userdata('alamat'),
-                'telepon' => $this->session->userdata('telepon'),
-                'status_gudang' => $this->session->userdata('status_gudang')
+                'no_so' => $this->session->userdata('noso'),
+                'nomsn' => $this->session->userdata('nomsn'),
+                'harga_otr' => $this->session->userdata('harga_otr'),
+                'tipe' => $this->session->userdata('tipe')
             );
         }
     }
@@ -107,12 +100,12 @@ class T_penjualan extends MX_Controller {
 
     public function get_list_motor() {
         $table = 'penerimaan_motor';
-        $where = array();
+        $where = array('penerimaan_motor.status_jual'=>'1');
         $join = array(
             array('table' => 'm_motor', 'where' => 'm_motor.tipe_motor=penerimaan_motor.tipe', 'join' => 'INNER')
         );
-        $column_order = array(null, 'penerimaan_motor.id as idx','no_sj','tgl_sj','nomesin','penerimaan_motor.norangka as no_rangka','tipe','penerimaan_motor.warna as warnax','varian','harga_otr');
-        $column_search = array('penerimaan_motor.id as idx','no_sj','tgl_sj','nomesin','penerimaan_motor.norangka as no_rangka','tipe','penerimaan_motor.warna as warnax','varian','harga_otr');
+        $column_order = array(null, 'penerimaan_motor.id as idx','no_sj','tgl_sj','nomesin','penerimaan_motor.norangka as no_rangka','tipe','penerimaan_motor.warna as warnax','penerimaan_motor.tahun','varian','harga_otr');
+        $column_search = array('penerimaan_motor.id as idx','no_sj','tgl_sj','nomesin','penerimaan_motor.norangka as no_rangka','tipe','penerimaan_motor.warna as warnax','penerimaan_motor.tahun','varian','harga_otr');
         $list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('idx'=>'ASC'), $where, $join, $group=array());
         $data = array();
         $no = $_POST['start'];
@@ -125,7 +118,7 @@ class T_penjualan extends MX_Controller {
             $row[] = $result->no_rangka;
             $row[] = $result->tipe;
             $row[] = $result->warnax;
-            $row[] = $result->varian;
+            $row[] = $result->tahun;
             $row[] = formatrp($result->harga_otr);
 
             $data[] = $row;
@@ -147,7 +140,7 @@ class T_penjualan extends MX_Controller {
                 $this->load->view('t_penjualan/pembelian_cash');
                 break;
             case "Kredit":
-                $data['dtleasing'] = $this->t_penjualan->getdata('m_leasing', 0, 1000, $like = array(), $where = array('status_leasing!=' => '3'));
+                $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('status_leasing' => '1'));
                 $this->load->view('t_penjualan/pembelian_kredit', $data);
                 break;
             default:
@@ -158,7 +151,7 @@ class T_penjualan extends MX_Controller {
 
     function load_customer_by_ktp() {
         $ktp = $this->input->post('no_ktp');
-        $dtcustomer = $this->t_penjualan->getdata('m_customer', 0, 1, $like = array(), $where = array('no_ktp' => $ktp));
+        $dtcustomer = $this->main_model->getMaster('m_customer', $like = array(), $where = array('no_ktp' => $ktp));
         foreach($dtcustomer as $row){
             $data = $row;
         }
@@ -176,6 +169,10 @@ class T_penjualan extends MX_Controller {
         $noso = $this->input->post('noso');
         $result = $this->t_penjualan->getdata_transaction_price_by_noso($noso);
         echo json_encode($result);
+    }
+    
+    public function load_modal_confirm(){
+        $this->load->view('t_penjualan/modal_confirm');
     }
 
 }

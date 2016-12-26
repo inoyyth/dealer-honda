@@ -215,7 +215,8 @@ if (!function_exists('formatrp')) {
 if (!function_exists('currency_to_normal')) {
 
     function currency_to_normal($string) {
-        $num = (float) str_replace('.', '', $string);
+        //$num = (float) str_replace('.', '', $string);
+        $num = (float) preg_replace('~\D~', "", $string);
         return $num;
     }
 

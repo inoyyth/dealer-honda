@@ -104,7 +104,7 @@
                 <form method="post" name="frmGroupUser" id="frmGroupUser" enctype="multipart/form-data">
                     <div class="form-group" id="remote">
                         <label>No Mesin</label>
-                        <input class="typeahead form-control" parsley-trigger="change" required name="nomesin" id="nomesin" type="text" placeholder="Type No Mesin">
+                        <input class="typeahead form-control" style="text-transform: uppercase;" parsley-trigger="change" required name="nomesin" id="nomesin" type="text" placeholder="Type No Mesin">
                     </div>
                     <div class="form-group">
                         <label>Type</label>

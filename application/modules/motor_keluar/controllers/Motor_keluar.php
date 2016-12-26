@@ -172,7 +172,7 @@ class Motor_keluar extends MX_Controller {
     
     public function getMotor(){
         $query = $this->input->get('query');
-        $data = $this->main_model->getMaster('penerimaan_motor', $like=array('nomesin'=>$query), $where=array('m_status'=>'1'));
+        $data = $this->main_model->getMaster('penerimaan_motor', $like=array('nomesin'=>$query), $where=array('m_status'=>'1','status_jual'=>'1'));
         echo json_encode($data);
     }
     
