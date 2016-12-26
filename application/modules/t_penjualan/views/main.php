@@ -3,12 +3,12 @@
         <section class="panel default blue_title h4">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-md-6 pull-left">Master Gudang
+                    <div class="col-md-6 pull-left">Penujualan
                     </div>
                     <div class="col-md-6 pull-right text-right">
-                        <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'master-gudang-tambah', 'text' => 'Tambah')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'master-gudang-pdf/?template=table_pdf&name=master_gudang', 'text' => 'Print')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'master-gudang-excel/?template=table_excel&name=master_gudang', 'text' => 'Excel')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'penjualan-tambah', 'text' => 'Tambah')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'penjualan-pdf/?template=table_pdf&name=t_penjualan', 'text' => 'Print')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'penjualan-excel/?template=table_excel&name=t_penjualan', 'text' => 'Excel')); ?>
                     </div> 
                 </div>
             </div>
@@ -18,8 +18,10 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Kode Gudang</th>
-                                <th>Nama Gudang</th>
+                                <th>No.SO</th>
+                                <th>No. Mesin</th>
+                                <th>Harga</th>
+                                <th>Tipe</th>
                                 <th class="text-center" style="width: 150px;">Action</th>
                             </tr>
                         </thead>
@@ -32,23 +34,24 @@
                                     ?>
                                     <tr>
                                         <td><?php echo intval($this->uri->segment(2) + ($k + 1)); ?></td>
-                                        <td><?php echo $v['kd_gudang']; ?></td>
-                                        <td><?php echo $v['gudang']; ?></td>
+                                        <td><?php echo $v['noso']; ?></td>
+                                        <td><?php echo $v['nomsn']; ?></td>
+                                        <td><?php echo formatrp($v['harga_otr']); ?></td>
+                                        <td><?php echo $v['tipe']; ?></td>
                                         <td class="text-center">
-                                            <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'master-gudang-edit-' . $v['id'], 'text' => 'Edit')); ?>
-                                            <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'master-gudang-delete-' . $v['id'], 'text' => 'Delete')); ?> 
-                                            <!--<a href="<?php echo base_url('master-gudang-detail-'.$v['id']);?>" class="btn btn-sm btn-success"><i class="fa fa-info-circle"></i> Detail</a>-->
+                                            <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'penjualan-edit-' . $v['id'], 'text' => 'Edit')); ?>
+                                            <a href="<?php echo base_url('penjualan-edit-' . $v['id']);?>" class="btn btn-success btn-sm"><i class="fa fa-info-circle"></i> Detail</a>
                                         </td>
                                     </tr>
     <?php }
 } ?>
                         </tbody>
                         <tfoot>
-                        <form id="form1" method="post" action="<?php echo base_url('master-gudang'); ?>">
+                        <form id="form1" method="post" action="<?php echo base_url('penjualan'); ?>">
                             <tr>
                                 <td>#</td>
                                 <td>
-                                    <input class="form-control input-sm" name="kd_gudang" class="form-control" value="<?php echo (isset($sr_data['kd_gudang']) ? $sr_data['kd_gudang'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="noso" class="form-control" value="<?php echo (isset($sr_data['noso']) ? $sr_data['noso'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;
@@ -56,7 +59,23 @@
                                             ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="gudang" value="<?php echo (isset($sr_data['gudang']) ? $sr_data['gudang'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="nomsn" value="<?php echo (isset($sr_data['nomsn']) ? $sr_data['nomsn'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                                submit_search('form1');
+                                            } else {
+                                                return false;
+                                            }
+                                            ;"/>
+                                </td>
+                                <td>
+                                    <input class="form-control input-sm" name="harga_otr" value="<?php echo (isset($sr_data['harga_otr']) ? $sr_data['harga_otr'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                                submit_search('form1');
+                                            } else {
+                                                return false;
+                                            }
+                                            ;"/>
+                                </td>
+                                <td>
+                                    <input class="form-control input-sm" name="tipe" value="<?php echo (isset($sr_data['tipe']) ? $sr_data['tipe'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;

@@ -164,7 +164,7 @@ $route['master-customer-pdf/(:any)'] = 'md_customer/print_pdf/$1';
 $route['master-customer-excel'] = 'md_customer/print_excel';
 $route['master-customer-excel/(:any)'] = 'md_customer/print_excel/$1';
 
-$route['penjualan'] = 't_penjualan/add';
+$route['penjualan'] = 't_penjualan/index';
 $route['penjualan-tambah'] = 't_penjualan/add';
 $route['penjualan-edit-(:num)'] = 't_penjualan/edit/$1';
 $route['penjualan-detail-(:num)'] = 't_penjualan/detail/$1';

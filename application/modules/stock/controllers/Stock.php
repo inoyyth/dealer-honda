@@ -37,6 +37,8 @@ class Stock extends MX_Controller {
         } else if (!empty($_POST['tipe'])) {
             $where = array('tipe' => $_POST['tipe']);
         }
+        
+        $where_combine = array_merge($where,array('status_jual'=>'1'));
 
        //dump($where);
         $join = array(
@@ -44,7 +46,7 @@ class Stock extends MX_Controller {
         );
         $column_order = array(null, 'gudang', 'tipe', 'warna');
         $column_search = array('penerimaan_motor.id AS idx', 'gudang', 'kdgudang', 'tipe', 'warna', 'count(*) as stok');
-        $list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('tipe'=>'ASC'), $where, $join, $group=array('tipe','kdgudang'));
+        $list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('tipe'=>'ASC'), $where_combine, $join, $group=array('tipe','kdgudang'));
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $result) {

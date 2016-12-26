@@ -7,15 +7,13 @@ Class M_t_penjualan extends CI_Model {
     var $table_thargamotor = "t_harga_motor";
     var $table_motor = "m_motor";
 
-    public function simpan($noso){
-        $this->db->set('noso',$noso);
+    public function simpan($noso) {
+        $this->db->set('noso', $noso);
         $this->db->insert('t_penjualan');
     }
-    public function save() {
-      
-       
-        $id = $this->input->post('id');
 
+    public function save() {
+        $id = $this->input->post('id');
         $data_penjualan = array('noso' => $this->input->post('noso'),
             'nokonsumen' => $this->input->post('nokonsumen'),
             'ktp' => $this->input->post('no_ktp'),
@@ -23,12 +21,8 @@ Class M_t_penjualan extends CI_Model {
             'nomsn' => $this->input->post('nomsn'),
             'warna_motor' => $this->input->post('warna'),
             'harga_otr' => currency_to_normal($this->input->post('harga_otr')),
-            'm_status' => 1
+            'm_status' => '1'
         );
-        //$this->db->insert($this->table_tpenjualan, $this->main_model->create_sys($data_penjualan));
-        //var_dump($data_penjualan);
-        //exit();
-        
 
         switch ($this->input->post('cara_pembelian')) {
             case 'kredit':
@@ -42,7 +36,7 @@ Class M_t_penjualan extends CI_Model {
                     'dp' => currency_to_normal($this->input->post('dp')),
                     'sisa_hutang' => currency_to_normal($this->input->post('sisa_hutang')),
                     'fee' => currency_to_normal($this->input->post('fee')),
-                    'm_status' => 1
+                    'm_status' => "1"
                 );
                 break;
             default:
@@ -54,7 +48,7 @@ Class M_t_penjualan extends CI_Model {
                     'dp' => currency_to_normal($this->input->post('dp')),
                     'sisa_hutang' => currency_to_normal($this->input->post('sisa_hutang')),
                     'fee' => currency_to_normal($this->input->post('fee')),
-                    'm_status' => 1
+                    'm_status' => "1"
                 );
                 break;
         }
@@ -72,45 +66,36 @@ Class M_t_penjualan extends CI_Model {
             'wilayah' => $this->input->post('wilayah'),
             'kelurahan' => $this->input->post('kelurahan'),
             'kecamatan' => $this->input->post('kecamatan'),
-            'm_status' => 1//$this->input->post('no_ktp')
+            'm_status' => "1",
         );
         
-        //echo json_encode($data_penjualan);
-        //echo "<br>";
-        //echo json_encode($data_harga_motor);
-        //echo "<br>";
-        //echo json_encode($data_customer);
-        //exit();
         if (empty($id)) {
-            //echo 'simpen';
-            //exit();
-            
-            $this->db->insert($this->table_customer, $this->main_model->create_sys($data_customer));
+            $this->__insert_customer($data_customer,$this->input->post('no_ktp'));
+            //$sqlCustomer = $this->db->insert_string($this->table_customer, $data_customer) . ' ON DUPLICATE KEY UPDATE ' . implode(', ', $data_customer);
+            //$this->db->query($sqlCustomer);
             $this->db->insert($this->table_tpenjualan, $this->main_model->create_sys($data_penjualan));
             $this->db->insert($this->table_thargamotor, $this->main_model->create_sys($data_harga_motor));
-            // exit();
-              
-             
+            $this->db->update('penerimaan_motor',$this->main_model->update_sys(array('status_jual'=>'2')),array('nomesin' => $this->input->post('nomsn')));
             return true;
-              
-        } else {
-             
             
-            $this->db->update($this->table_customer, $this->main_model->update_sys($data_customer), array('no_ktp' => $this->input->post('no_ktp')));
+        } else {
+            $this->__insert_customer($data_customer,$this->input->post('no_ktp'));
+            //$sqlCustomer = $this->db->insert_string($this->table_customer, $data_customer) . ' ON DUPLICATE KEY UPDATE ' . implode(', ', $data_customer);
+            //$this->db->query($sqlCustomer);
             $this->db->update($this->table_tpenjualan, $this->main_model->update_sys($data_penjualan), array('noso' => $this->input->post('noso')));
             $this->db->update($this->table_thargamotor, $this->main_model->update_sys($data_harga_motor), array('noso' => $this->input->post('noso')));
-            return true;
-             
            
+            return true;
         }
-        return false;
         
+        return false;
     }
 
     public function getdata($table, $limit, $pg, $like = array(), $where = array()) {
         unset($like['page']);
-        $this->db->select("*");
+        $this->db->select($table.".*,penerimaan_motor.tipe");
         $this->db->from($table);
+        $this->db->join('penerimaan_motor',$table.".nomsn=penerimaan_motor.nomesin");
         $this->db->like($like);
         $this->db->where($where);
         $this->db->limit($pg, $limit);
@@ -119,13 +104,13 @@ Class M_t_penjualan extends CI_Model {
 
     public function getdata_transaction_by_noso($noso) {
         $this->db->select("t_harga_motor.cara_pembelian,t_penjualan.id,t_penjualan.noso,t_penjualan.nokonsumen,
-t_penjualan.tanggal,t_penjualan.nomsn,t_penjualan.warna_motor,t_penjualan.harga_otr,t_harga_motor.marketing,
-t_harga_motor.leasing,t_harga_motor.dp_system,t_harga_motor.diskon,t_harga_motor.tagih,t_harga_motor.dp,
-t_harga_motor.sisa_hutang,t_harga_motor.fee,m_customer.no_ktp,m_customer.nama_customer,m_customer.tempat_lahir_customer,
-m_customer.tanggal_lahir_customer,m_customer.kelamin_customer,m_customer.alamat_customer,m_customer.telepon_customer,
-m_customer.handphone_customer,m_customer.rt,m_customer.rw,m_customer.wilayah,m_customer.kelurahan,
-m_customer.kecamatan,m_motor.norangka,m_motor.tipe_motor,m_motor.nama_motor,m_motor.varian,m_motor.warna,
-m_motor.tahun,m_motor.merk,m_motor.harga_otr,m_motor.nama_foto,m_motor.url_foto", false);
+        t_penjualan.tanggal,t_penjualan.nomsn,t_penjualan.warna_motor,t_penjualan.harga_otr,t_harga_motor.marketing,
+        t_harga_motor.leasing,t_harga_motor.dp_system,t_harga_motor.diskon,t_harga_motor.tagih,t_harga_motor.dp,
+        t_harga_motor.sisa_hutang,t_harga_motor.fee,m_customer.no_ktp,m_customer.nama_customer,m_customer.tempat_lahir_customer,
+        m_customer.tanggal_lahir_customer,m_customer.kelamin_customer,m_customer.alamat_customer,m_customer.telepon_customer,
+        m_customer.handphone_customer,m_customer.rt,m_customer.rw,m_customer.wilayah,m_customer.kelurahan,
+        m_customer.kecamatan,m_motor.norangka,m_motor.tipe_motor,m_motor.nama_motor,m_motor.varian,m_motor.warna,
+        m_motor.tahun,m_motor.merk,m_motor.harga_otr,m_motor.nama_foto,m_motor.url_foto", false);
         $this->db->from($this->table_tpenjualan);
         $this->db->join($this->table_thargamotor, $this->table_thargamotor . ".noso = " . $this->table_tpenjualan . ".noso", "left");
         $this->db->join($this->table_customer, $this->table_customer . ".no_ktp = " . $this->table_tpenjualan . ".ktp", "left");
@@ -136,9 +121,18 @@ m_motor.tahun,m_motor.merk,m_motor.harga_otr,m_motor.nama_foto,m_motor.url_foto"
     }
 
     public function getdata_transaction_price_by_noso($noso) {
-        $this->db->where('noso',$noso);
+        $this->db->where('noso', $noso);
         $query = $this->db->get($this->table_thargamotor);
         return $query->row();
+    }
+    
+    public function __insert_customer($data,$ktp){
+        $getExisting = $this->db->get_where("m_customer",array('no_ktp'=>$ktp));
+        if($getExisting->num_rows() > 0 ){
+            $this->db->update('m_customer',$data,array('no_ktp'=>$ktp));
+        }else{
+            $this->db->insert('m_customer',$data);
+        }
     }
 
 }

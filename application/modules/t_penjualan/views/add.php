@@ -1,11 +1,11 @@
 <div class="row">
-    <div class="col-md-12">
+   <!-- <div class="col-md-12">
         <div class="block-web">
-            <button type="button" name="edit" id="edit" class="btn btn-default">Edit</button>
+            <button type="submit" name="edit" id="edit" class="btn btn-default">Edit</button>
         </div>
-    </div>
+    </div>-->
 
-    <form action="<?php echo base_url("penjualan-save"); ?>" class="form-horizontal row-border" id="frmtransaksi" method="post" enctype="multipart/form-data" parsley-validate novalidate>
+    <form action="<?php echo base_url("penjualan-save"); ?>" class="form-horizontal row-border" id="frmtransaksi-new" method="post" enctype="multipart/form-data" parsley-validate novalidate>
         <div class="col-md-6">
             <div class="block-web">
                 <div class="header">
@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">No Sales Order</label>
                         <div class="col-sm-9">
-                            <input type="hidden" name="id" id="id" parsley-trigger="change" required readonly="true" class="form-control">
+                            <input type="hidden" name="id" id="id" readonly="true" class="form-control">
                             <input type="text" name="noso" id="noso" parsley-trigger="change"  readonly="true" value="<?php echo $codeso; ?>" class="form-control">
                         </div>
                     </div>
@@ -72,9 +72,11 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Pembelian Secara</label>
                         <div class="col-sm-9">
-                            <?php foreach ($cpembelian as $pembelian) { ?>
+                            <?php
+                            foreach ($cpembelian as $k => $pembelian) {
+                            ?>
                                 <label class="radio-inline">
-                                    <input type="radio" id="inlineradio1" class="carapembelian" name="cara_pembelian" value="<?= $pembelian->value; ?>">
+                                    <input type="radio" id="inlineradio1" class="carapembelian" name="cara_pembelian" value="<?= $pembelian->value; ?>" <?php echo ($k==0?"checked":""); ?>>
                                     <?= $pembelian->value; ?> </label>
                             <?php } ?>
                         </div>
@@ -125,9 +127,9 @@
                         <label class="col-sm-3 control-label">Jenis Kelamin</label>
                         <div class="col-sm-9">
                             <select name="kelamin_customer" id="kelamin_customer" parsley-trigger="change" class="form-control">
-                                <option value="">Jenis Kelamin</option>
-                                <option value="P">Pria</option>
-                                <option value="W">Wanita</option>
+                                <option label="" value="">Jenis Kelamin</option>
+                                <option label="Pria" value="P">Pria</option>
+                                <option label="Wanita" value="W">Wanita</option>
                             </select>
                         </div>
                     </div>
@@ -189,8 +191,22 @@
             <div class="block-web">
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <button name="submit" id="simpan" class="btn btn-primary">Save</button>
-                        <button type="reset" name="cancel" id="cancel" class="btn btn-danger">Cancel</button>
+                        <input type="button" name="submit" id="simpan" class="btn btn-primary" value="Save" data-toggle="modal" data-target="#modalComfirm">
+                        <a href="<?php echo base_url('penjualan');?>" class="btn btn-warning">Cancel</a>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <!--modal confirmation-->
+        <div class="modal fade bs-example-modal-lg" id="modalComfirm" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Confirm Process</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modal-body-confirm" class="block-web"></div>
                     </div>
                 </div>
             </div>
@@ -215,7 +231,7 @@
                             <th>No. Rangka</th>
                             <th>Tipe</th>
                             <th>Warna</th>
-                            <th>Varian</th>
+                            <th>Tahun</th>
                             <th>Harga OTR</th>
                         </tr>
                     </thead>
@@ -234,10 +250,11 @@
 
 <script>
     $(document).ready(function () {
-        //$('#modalBrowse').modal({backdrop: 'static', keyboard: false})  
+        var cpembelian = $('.carapembelian:checked').val();
+        $(".cpembelian").empty();
+        $(".cpembelian").load("t_penjualan/load_cpembelian/" + cpembelian);
         //datatables
         table = $('#listmotor').DataTable({
-
             "processing": true, //Feature control the processing indicator.
             "serverSide": true, //Feature control DataTables' server-side processing mode.
             "order": [], //Initial no order.
@@ -247,7 +264,6 @@
                 "url": "<?php echo base_url('t_penjualan/get_list_motor') ?>",
                 "type": "POST"
             },
-
             //Set column definition initialisation properties.
             "columnDefs": [
                 {
@@ -292,26 +308,17 @@
                     //alert(hasil.nama_customer);
                     $('#no_ktp').val(hasil.no_ktp);
                     $('#nama_customer').val(hasil.nama_customer);
-                    $('#tempat_lahir_customer').val(hasil.tempat_lahir_customer); 
-                    $('#tanggal_lahir_customer').val(hasil.tanggal_lahir_customer); 
+                    $('#tempat_lahir_customer').val(hasil.tempat_lahir_customer);
+                    $('#tanggal_lahir_customer').val(hasil.tanggal_lahir_customer);
                     $('#kelamin_customer').val(hasil.kelamin_customer);
-                    $('#alamat_customer').val(hasil.alamat_customer); 
-                    $('#rt').val(hasil.rt); 
-                    $('#rw').val(hasil.rw); 
-                    $('#wilayah').val(hasil.wilayah); 
-                    $('#kelurahan').val(hasil.kelurahan); 
-                    $('#kecamatan').val(hasil.kecamatan); 
-                    $('#telepon_customer').val(hasil.telepon_customer); 
-                    $('#handphone_customer').val(hasil.handphone_customer); 
-                    
-                    /*
-                    $.map(hasil, function (value, index) {
-                        if (index != "no_ktp")
-                            if (document.getElementById(index)) {
-                                $("#" + index).val(value);
-                            }
-                    });
-                    */
+                    $('#alamat_customer').val(hasil.alamat_customer);
+                    $('#rt').val(hasil.rt);
+                    $('#rw').val(hasil.rw);
+                    $('#wilayah').val(hasil.wilayah);
+                    $('#kelurahan').val(hasil.kelurahan);
+                    $('#kecamatan').val(hasil.kecamatan);
+                    $('#telepon_customer').val(hasil.telepon_customer);
+                    $('#handphone_customer').val(hasil.handphone_customer);
                 }
             });
             return false;
@@ -389,6 +396,13 @@
             $(".cpembelian").empty();
             $(".cpembelian").load("t_penjualan/load_cpembelian/" + cpembelian);
         });
-
+        
+        $('#modalComfirm').on('shown.bs.modal', function (e) {
+             $("#modal-body-confirm").load("<?php echo base_url();?>t_penjualan/load_modal_confirm",function () {
+                $('#submitForm').click(function () {
+                    $("#frmtransaksi-new").submit();
+                });
+            });
+        });
     });
 </script>
