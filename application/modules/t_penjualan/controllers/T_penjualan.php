@@ -42,7 +42,12 @@ class T_penjualan extends MX_Controller {
 
     public function edit($id) {
         $this->breadcrumbs->push('Edit', '/penjualan-edit');
-        $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
+        $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
+        $data['detail_penjualan'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
+        $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
+        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();
+        $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
+        //dump($data,true);
         $data['view'] = 't_penjualan/edit';
         $this->load->view('default', $data);
     }

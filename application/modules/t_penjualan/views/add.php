@@ -16,7 +16,6 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">No Sales Order</label>
                         <div class="col-sm-9">
-                            <input type="hidden" name="id" id="id" readonly="true" class="form-control">
                             <input type="text" name="noso" id="noso" parsley-trigger="change"  readonly="true" value="<?php echo $codeso; ?>" class="form-control">
                         </div>
                     </div>

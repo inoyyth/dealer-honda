@@ -27,6 +27,7 @@ Class M_t_penjualan extends CI_Model {
         switch ($this->input->post('cara_pembelian')) {
             case 'kredit':
                 $data_harga_motor = array(
+                    'noso'=>$this->input->post('noso'),
                     'cara_pembelian' => $this->input->post('cara_pembelian'),
                     'marketing' => $this->input->post('marketing'),
                     'leasing' => $this->input->post('leasing'),
@@ -41,6 +42,7 @@ Class M_t_penjualan extends CI_Model {
                 break;
             default:
                 $data_harga_motor = array(
+                    'noso'=>$this->input->post('noso'),
                     'cara_pembelian' => $this->input->post('cara_pembelian'),
                     'marketing' => $this->input->post('marketing'),
                     'diskon' => currency_to_normal($this->input->post('diskon')),
