@@ -25,7 +25,7 @@ Class M_t_penjualan extends CI_Model {
         );
 
         switch ($this->input->post('cara_pembelian')) {
-            case 'kredit':
+            case 'Kredit':
                 $data_harga_motor = array(
                     'noso'=>$this->input->post('noso'),
                     'cara_pembelian' => $this->input->post('cara_pembelian'),

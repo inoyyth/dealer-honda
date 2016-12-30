@@ -47,71 +47,72 @@ if (!function_exists('set_session_table_search')) {
 
 }
 
-if(!function_exists('tanggalan')){
-    
-function tanggalan($tanggal) {
-    $getyear = substr($tanggal, 0, 4);
-    $getmonth = substr($tanggal, 5, 2);
-    $getdate = substr($tanggal, 8, 2);
+if (!function_exists('tanggalan')) {
 
-    switch ($getmonth) {
-        case "01":
-            $bulan = "Januari";
-            break;
+    function tanggalan($tanggal) {
+        $getyear = substr($tanggal, 0, 4);
+        $getmonth = substr($tanggal, 5, 2);
+        $getdate = substr($tanggal, 8, 2);
 
-        case "02":
-            $bulan = "Februari";
-            break;
+        switch ($getmonth) {
+            case "01":
+                $bulan = "Januari";
+                break;
 
-        case "03":
-            $bulan = "Maret";
-            break;
+            case "02":
+                $bulan = "Februari";
+                break;
 
-        case "04":
-            $bulan = "April";
-            break;
+            case "03":
+                $bulan = "Maret";
+                break;
 
-        case "05":
-            $bulan = "Mei";
-            break;
+            case "04":
+                $bulan = "April";
+                break;
 
-        case "06":
-            $bulan = "Juni";
-            break;
+            case "05":
+                $bulan = "Mei";
+                break;
 
-        case "07":
-            $bulan = "Juli";
-            break;
+            case "06":
+                $bulan = "Juni";
+                break;
 
-        case "08":
-            $bulan = "Agustus";
-            break;
+            case "07":
+                $bulan = "Juli";
+                break;
 
-        case "09":
-            $bulan = "September";
-            break;
+            case "08":
+                $bulan = "Agustus";
+                break;
 
-        case "10":
-            $bulan = "Oktober";
-            break;
+            case "09":
+                $bulan = "September";
+                break;
 
-        case "11":
-            $bulan = "November";
-            break;
+            case "10":
+                $bulan = "Oktober";
+                break;
 
-        case "12":
-            $bulan = "Desember";
-            break;
+            case "11":
+                $bulan = "November";
+                break;
 
-        default:
-            $bulan = "Bulan tidak diketahui";
-            break;
+            case "12":
+                $bulan = "Desember";
+                break;
+
+            default:
+                $bulan = "Bulan tidak diketahui";
+                break;
+        }
+
+        $hasil = $getdate . ' ' . $bulan . ' ' . $getyear;
+
+        return $hasil;
     }
 
-    $hasil = $getdate . ' ' . $bulan . ' ' . $getyear;
-
-    return $hasil;
-}
 }
 if (!function_exists('kekata')) {
 
@@ -168,7 +169,7 @@ if (!function_exists('terbilang')) {
                 $hasil = ucfirst($hasil);
                 break;
         }
-        return $hasil. " rupiah";
+        return $hasil . " rupiah";
     }
 
 }
@@ -249,6 +250,50 @@ if (!function_exists('dump')) {
         echo '</pre>';
         if ($die)
             die;
+    }
+
+}
+
+if (!function_exists('encode_url')) {
+
+    function encode_url($string, $key = "", $url_safe = TRUE) {
+        if ($key == null || $key == "") {
+            $key = "tyz_mydefaulturlencryption";
+        }
+        $CI = & get_instance();
+        $ret = $CI->encrypt->encode($string, $key);
+
+        if ($url_safe) {
+            $ret = strtr(
+                    $ret, array(
+                '+' => '.',
+                '=' => '-',
+                '/' => '~'
+                    )
+            );
+        }
+
+        return $ret;
+    }
+
+}
+
+if (!function_exists('decode_url')) {
+
+    function decode_url($string, $key = "") {
+        if ($key == null || $key == "") {
+            $key = "tyz_mydefaulturlencryption";
+        }
+        $CI = & get_instance();
+        $string = strtr(
+                $string, array(
+            '.' => '+',
+            '-' => '=',
+            '~' => '/'
+                )
+        );
+
+        return $CI->encrypt->decode($string, $key);
     }
 
 }

@@ -33,7 +33,7 @@
                                 <input type="hidden" name="id_motor" id="id_motor" value="<?php echo $detail_penerimaan_motor['id'];?>">
                                 <input type="text" readonly="true" name="nomsn" id="nomsn" value="<?php echo $detail_penerimaan_motor['nomesin'];?>" required="true" parsley-trigger="change" placeholder="Pilih No Mesin" class="form-control">
                                 <div class="input-group-btn">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalBrowse">Browse</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalBrowse" disabled="true">Browse</button>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Harga OTR</label>
                         <div class="col-sm-9">
-                            <input type="text" name="harga_otr" id="harga_otr" value="<?php echo $detail_motor['harga_otr'];?>" parsley-trigger="change" readonly="true" placeholder="Harga OTR" class="form-control">
+                            <input type="text" name="harga_otr" id="harga_otr" value="<?php echo formatrp($detail_motor['harga_otr']);?>" parsley-trigger="change" readonly="true" placeholder="Harga OTR" class="form-control">
                         </div>
                     </div>
 
@@ -76,7 +76,7 @@
                             foreach ($cpembelian as $k => $pembelian) {
                             ?>
                                 <label class="radio-inline">
-                                    <input type="radio" id="inlineradio1" class="carapembelian" name="cara_pembelian" value="<?= $pembelian->value; ?>" <?php echo ($k==0?"checked":""); ?>>
+                                    <input type="radio" id="inlineradio1" class="carapembelian" name="cara_pembelian" value="<?= $pembelian->value; ?>" <?php echo ($pembelian->value==$detail_harga['cara_pembelian']?"checked":""); ?>>
                                     <?= $pembelian->value; ?> </label>
                             <?php } ?>
                         </div>
@@ -84,7 +84,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Marketing</label>
                         <div class="col-sm-9">
-                            <input type="text" name="marketing" id="marketing" parsley-trigger="change" required placeholder="Nama Marketing" class="form-control">
+                            <input type="text" name="marketing" value="<?php echo $detail_harga['marketing'];?>" id="marketing" parsley-trigger="change" required placeholder="Nama Marketing" class="form-control">
                         </div>
                     </div>
 
@@ -102,25 +102,25 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">ID / No. KTP</label>
                         <div class="col-sm-9">
-                            <input type="text" name="no_ktp" id="no_ktp" parsley-trigger="change" required placeholder="ID No. / No. KTP" class="form-control">
+                            <input type="text" name="no_ktp" value="<?php echo $detail_customer['no_ktp'];?>" id="no_ktp" parsley-trigger="change" required placeholder="ID No. / No. KTP" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Nama</label>
                         <div class="col-sm-9">
-                            <input type="text" name="nama_customer" id="nama_customer" parsley-trigger="change" required placeholder="Nama di KTP" class="form-control">
+                            <input type="text" name="nama_customer" value="<?php echo $detail_customer['nama_customer'];?>" id="nama_customer" parsley-trigger="change" required placeholder="Nama di KTP" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Tempat Lahir</label>
                         <div class="col-sm-9">
-                            <input type="text" name="tempat_lahir_customer" id="tempat_lahir_customer" parsley-trigger="change" placeholder="Tempat Lahir" class="form-control">
+                            <input type="text" value="<?php echo $detail_customer['tempat_lahir_customer'];?>" name="tempat_lahir_customer" id="tempat_lahir_customer" parsley-trigger="change" placeholder="Tempat Lahir" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Tanggal Lahir</label>
                         <div class="col-sm-9">
-                            <input type="text" name="tanggal_lahir_customer" id="tanggal_lahir_customer" parsley-trigger="change" placeholder="Tanggal Lahir" class="form-control datepicker">
+                            <input type="text" value="<?php echo $detail_customer['tanggal_lahir_customer'];?>" name="tanggal_lahir_customer" id="tanggal_lahir_customer" parsley-trigger="change" placeholder="Tanggal Lahir" class="form-control datepicker">
                         </div>
                     </div>
                     <div class="form-group">
@@ -128,55 +128,55 @@
                         <div class="col-sm-9">
                             <select name="kelamin_customer" id="kelamin_customer" parsley-trigger="change" class="form-control">
                                 <option label="" value="">Jenis Kelamin</option>
-                                <option label="Pria" value="P">Pria</option>
-                                <option label="Wanita" value="W">Wanita</option>
+                                <option label="Pria" value="P" <?php echo ($detail_customer["kelamin_customer"]=="P"?"selected":"");?>>Pria</option>
+                                <option label="Wanita" value="W" <?php echo ($detail_customer['kelaim_customer']=="W"?"selected":"");?>>Wanita</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Alamat</label>
                         <div class="col-sm-9">
-                            <textarea name="alamat_customer" id="alamat_customer" parsley-trigger="change" placeholder="Isi Alamat Customer" class="form-control"></textarea>
+                            <textarea name="alamat_customer" id="alamat_customer" parsley-trigger="change" placeholder="Isi Alamat Customer" class="form-control"><?php echo $detail_customer['alamat_customer'];?></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">RT / RW</label>
                         <div class="col-sm-4">
-                            <input type="text" name="rt" id="rt" parsley-trigger="change" placeholder="RT Customer" class="form-control">
+                            <input type="text" name="rt" value="<?php echo $detail_customer['rt'];?>" id="rt" parsley-trigger="change" placeholder="RT Customer" class="form-control">
                         </div>
                         <div class="col-sm-1"> / </div>
                         <div class="col-sm-4">
-                            <input type="text" name="rw" id="rw" parsley-trigger="change" placeholder="RW Customer" class="form-control">
+                            <input type="text" name="rw" value="<?php echo $detail_customer['rw'];?>" id="rw" parsley-trigger="change" placeholder="RW Customer" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Wilayah</label>
                         <div class="col-sm-9">
-                            <input type="text" name="wilayah" id="wilayah" parsley-trigger="change" placeholder="Wilayah Customer" class="form-control">
+                            <input type="text" name="wilayah" value="<?php echo $detail_customer['wilayah'];?>" id="wilayah" parsley-trigger="change" placeholder="Wilayah Customer" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Kelurahan</label>
                         <div class="col-sm-9">
-                            <input type="text" name="kelurahan" id="kelurahan" parsley-trigger="change" placeholder="Kelurahan Customer" class="form-control">
+                            <input type="text" name="kelurahan" value="<?php echo $detail_customer['kelurahan'];?>" id="kelurahan" parsley-trigger="change" placeholder="Kelurahan Customer" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Kecamatan</label>
                         <div class="col-sm-9">
-                            <input type="text" name="kecamatan" id="kecamatan" parsley-trigger="change" placeholder="Kecamatan Customer" class="form-control">
+                            <input type="text" name="kecamatan" value="<?php echo $detail_customer['kecamatan'];?>" id="kecamatan" parsley-trigger="change" placeholder="Kecamatan Customer" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Telp.</label>
                         <div class="col-sm-9">
-                            <input type="text" name="telepon_customer" id="telepon_customer" parsley-trigger="change" placeholder="Telp. Cusomer" class="form-control">
+                            <input type="text" value="<?php echo $detail_customer['telepon_customer'];?>" name="telepon_customer" id="telepon_customer" parsley-trigger="change" placeholder="Telp. Cusomer" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">HP.</label>
                         <div class="col-sm-9">
-                            <input type="text" name="handphone_customer" id="handphone_customer" parsley-trigger="change" required placeholder="HP. Customer" class="form-control">
+                            <input type="text" name="handphone_customer" value="<?php echo $detail_customer['handphone_customer'];?>" id="handphone_customer" parsley-trigger="change" required placeholder="HP. Customer" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -252,7 +252,7 @@
     $(document).ready(function () {
         var cpembelian = $('.carapembelian:checked').val();
         $(".cpembelian").empty();
-        $(".cpembelian").load("t_penjualan/load_cpembelian/" + cpembelian);
+        $(".cpembelian").load("t_penjualan/load_cpembelian_edit/" + cpembelian + "/<?php echo encode_url($detail_penjualan['noso']);?>");
         //datatables
         table = $('#listmotor').DataTable({
             "processing": true, //Feature control the processing indicator.
@@ -394,7 +394,7 @@
         $(".carapembelian").on("change", function () {
             var cpembelian = $('.carapembelian:checked').val();
             $(".cpembelian").empty();
-            $(".cpembelian").load("t_penjualan/load_cpembelian/" + cpembelian);
+            $(".cpembelian").load("t_penjualan/load_cpembelian_edit/" + cpembelian + "/<?php echo encode_url($detail_penjualan['noso']);?>");
         });
         
         $('#modalComfirm').on('shown.bs.modal', function (e) {
