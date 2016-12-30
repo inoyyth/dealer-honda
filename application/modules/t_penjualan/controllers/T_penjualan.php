@@ -47,6 +47,7 @@ class T_penjualan extends MX_Controller {
         $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
         $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();
         $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
+        $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
         //dump($data,true);
         $data['view'] = 't_penjualan/edit';
         $this->load->view('default', $data);
@@ -150,6 +151,22 @@ class T_penjualan extends MX_Controller {
                 break;
             default:
                 $this->load->view('t_penjualan/pembelian_cash');
+                break;
+        }
+    }
+    
+    function load_cpembelian_edit($cpembelian = "",$kode_so) {
+        $data['price_list'] = $this->db->get_where('t_harga_motor',array('noso'=>decode_url($kode_so)))->row_array();
+        switch ($cpembelian) {
+            case "Cash":
+                $this->load->view('t_penjualan/pembelian_cash',$data);
+                break;
+            case "Kredit":
+                $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('status_leasing' => '1'));
+                $this->load->view('t_penjualan/pembelian_kredit', $data);
+                break;
+            default:
+                $this->load->view('t_penjualan/pembelian_cash',$data);
                 break;
         }
     }

@@ -6,8 +6,16 @@
     <div class="col-sm-9">
         <select name="leasing" id="leasing" required class="form-control">
             <option value="">Choose Leasing</option>
-            <?php foreach($dtleasing as $leasing) { ?>
-            <option label="<?=$leasing['leasing'];?>" value="<?=$leasing['kd_leasing'];?>"><?=$leasing['leasing'];?></option>
+            <?php 
+                foreach($dtleasing as $leasing) { 
+                    $selected = "";
+                    if(isset($price_list)){
+                        if($price_list['leasing']==$leasing['kd_leasing'] && $price_list['cara_pembelian']=="Kredit"){
+                            $selected = "selected";
+                        }
+                    }
+                ?>
+            <option label="<?=$leasing['leasing'];?>" value="<?=$leasing['kd_leasing'];?>" <?php echo $selected;?>><?=$leasing['leasing'];?></option>
             <?php } ?>
         </select>
     </div>
@@ -15,37 +23,37 @@
 <div class="form-group">
     <label class="col-sm-3 control-label">DP System</label>
     <div class="col-sm-9">
-        <input type="text" value="0" autocomplete="false" name="dp_system" id="dp_system" parsley-trigger="change" required placeholder="DP System" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
+        <input type="text" value="<?php echo isset($price_list)&&$price_list['cara_pembelian']=="Kredit"?$price_list['dp_system']:0; ?>" autocomplete="false" name="dp_system" id="dp_system" parsley-trigger="change" required placeholder="DP System" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-3 control-label">Diskon</label>
     <div class="col-sm-9">
-        <input type="text" value="0" autocomplete="false" name="diskon" id="diskon" parsley-trigger="change" required placeholder="Diskon" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
+        <input type="text" value="<?php echo isset($price_list)&&$price_list['cara_pembelian']=="Kredit"?$price_list['diskon']:0;?>" autocomplete="false" name="diskon" id="diskon" parsley-trigger="change" required placeholder="Diskon" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-3 control-label">Tagih</label>
     <div class="col-sm-9">
-            <input type="text" value="0" autocomplete="false" name="tagih" id="tagih" parsley-trigger="change" required placeholder="Tagih" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;" readonly>
+            <input type="text" value="<?php echo isset($price_list)&&$price_list['cara_pembelian']=="Kredit"?$price_list['tagih']:0;?>" autocomplete="false" name="tagih" id="tagih" parsley-trigger="change" required placeholder="Tagih" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;" readonly>
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-3 control-label">DP / Uang Muka</label>
     <div class="col-sm-9">
-        <input type="text" value="0" autocomplete="false" name="dp" id="dp" parsley-trigger="change" required placeholder="Down Payment" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
+        <input type="text" value="<?php echo isset($price_list)&&$price_list['cara_pembelian']=="Kredit"?$price_list['dp']:0;?>" autocomplete="false" name="dp" id="dp" parsley-trigger="change" required placeholder="Down Payment" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-3 control-label">Sisa Hutang</label>
     <div class="col-sm-9">
-        <input type="text" value="0" autocomplete="false" readonly="true" name="sisa_hutang" id="sisa_hutang" parsley-trigger="change" required placeholder="Sisa Hutang" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
+        <input type="text" value="<?php echo isset($price_list)&&$price_list['cara_pembelian']=="Kredit"?$price_list['sisa_hutang']:0;?>" autocomplete="false" readonly="true" name="sisa_hutang" id="sisa_hutang" parsley-trigger="change" required placeholder="Sisa Hutang" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-3 control-label">Fee</label>
     <div class="col-sm-9">
-        <input type="text" value="0" autocomplete="false" name="fee" id="fee" parsley-trigger="change" required placeholder="Fee Marketing" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
+        <input type="text" value="<?php echo isset($price_list)&&$price_list['cara_pembelian']=="Kredit"?$price_list['fee']:0;?>" autocomplete="false" name="fee" id="fee" parsley-trigger="change" required placeholder="Fee Marketing" class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
     </div>
 </div>
 
