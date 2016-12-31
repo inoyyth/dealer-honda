@@ -19,13 +19,13 @@ class T_kwitansidp extends MX_Controller {
         $data_session = $this->__getSession();
         
         $config['base_url'] = base_url() . 'kwitansi-dp';
-        $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
+        $config['total_rows'] = $this->mt_kwitansi->count_dp();
         $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
         $config['uri_segment'] = 2;
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->pagination->initialize($config);
         $data['paging'] = $this->pagination->create_links();
-        $data['data'] = $this->t_penjualan->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array('status_gudang!=' => '3'));
+        $data['data'] = $this->mt_kwitansi->getdata_dp();
         $data['sr_data'] = $data_session;
         $data['view'] = 't_kwitansi/kwitansi_dp/main';
         $this->load->view('default', $data);
@@ -51,7 +51,7 @@ class T_kwitansidp extends MX_Controller {
     public function edit($id) {
         $this->breadcrumbs->push('Edit', '/penjualan-edit');
         $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
-        $data['view'] = 't_penjualan/edit';
+         $data['view'] = 't_kwitansi/kwitansi_dp/edit';
         $this->load->view('default', $data);
     }
 

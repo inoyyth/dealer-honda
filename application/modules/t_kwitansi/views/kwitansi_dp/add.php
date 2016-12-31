@@ -102,7 +102,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Nominal</label>
                         <div class="col-sm-9">
-                            <input type="text" name="nominal" id="nominal" parsley-trigger="change"  placeholder="Nominal" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" class="form-control mask">
+                            <input type="text" name="nominal" id="nominal" parsley-trigger="change" style="text-align:left;"  placeholder="Nominal" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" class="form-control mask">
                         </div>
                     </div>
                     <!--
@@ -144,7 +144,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Type</label>
                         <div class="col-sm-9">
-                            <input type="text" name="tipe_motor" id="tipe_motor" parsley-trigger="change" readonly="true" placeholder="Type" class="form-control">
+                            <input type="text" name="tipe_motor" id="type" parsley-trigger="change" readonly="true" placeholder="Type" class="form-control">
                         </div>
                     </div>
 
@@ -300,14 +300,17 @@
             console.log(datum);
             $('#noso').val(datum.noso);
             $('#harga_otr').val(datum.harga_otr);
-            $('#nama').val(datum.nama_customer);
+            $('#nama_customer').val(datum.nama_customer);
             $('#fee').val(datum.fee);
+            $('#dp').val(datum.dp);
             $('#no_mesin').val(datum.nomsn);
-            $('#warna').val(datum.warna_motor);
+            $('#warna_motor').val(datum.warna_motor);
             $('#type').val(datum.tipe_motor);
             $('#no_rangka').val(datum.norangka);
             $('#sisa_hutang').val(datum.sisa_hutang);
             $('#tagih').val(datum.tagih);
+            $('#cara_pembelian').val(datum.cara_pembelian);
+            //cara_pembelian
             //$('#terbilang').val(datum.terbilang);
             //$('#norangka').val(datum['norangka']);
             //$('#warna').val(datum['warna']);
