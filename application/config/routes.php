@@ -176,6 +176,7 @@ $route['penjualan-pdf'] = 't_penjualan/print_pdf';
 $route['penjualan-pdf/(:any)'] = 't_penjualan/print_pdf/$1';
 $route['penjualan-excel'] = 't_penjualan/print_excel';
 $route['penjualan-excel/(:any)'] = 't_penjualan/print_excel/$1';
+$route['penjualan-fee-(:any)'] = 't_penjualan/print_fee/$1';
 
 /* Start Kwitansi DP */
 $route['kwitansi-dp'] = 't_kwitansi/t_kwitansidp';
