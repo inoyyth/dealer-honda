@@ -71,10 +71,11 @@ left join m_customer f on f.no_ktp = b.ktp
     }   
     
     public function getNOSO($query){
-        $data = $this->db->query('select a.*,b.nama_customer,c.fee,c.diskon,d.norangka,d.tipe_motor from t_penjualan a left join m_customer b on b.no_ktp = a.ktp 
+        $data = $this->db->query('select a.*,b.nama_customer,c.fee,c.diskon,c.sisa_hutang,c.tagih,d.norangka,d.tipe from t_penjualan a left join m_customer b on b.no_ktp = a.ktp 
 left join t_harga_motor c on c.noso = a.noso 
-left join m_motor d on d.nomsn = a.nomsn
+ 
 left join t_kwitansi_fee e on e.noso = a.noso
+left join penerimaan_motor d on d.nomesin = a.nomsn
             WHERE a.noso LIKE "%'.$query.'%"  AND a.m_status =  "1" ');
        $show = array();
         foreach($data->result_array() as $list){
@@ -82,14 +83,16 @@ left join t_kwitansi_fee e on e.noso = a.noso
            //
            $show[] = array('noso'=>$list['noso'],
                          'fee'=>$list['fee'],
-                         'harga_otr'=>$list['harga_otr'],
+                         'harga_otr'=>formatrp($list['harga_otr']),
                          'diskon'=>$list['diskon'],
                          'nama_customer'=>$list['nama_customer'],
                          'nomsn'=>$list['nomsn'],
                          'warna_motor'=>$list['warna_motor'],
-                         'tipe_motor'=>$list['tipe_motor'],
+                         'tipe_motor'=>$list['tipe'],
                          'norangka'=>$list['norangka'],
-                         'fee'=>$list['fee'],
+                         'fee'=>formatrp($list['fee']),
+                         'tagih'=>formatrp($list['tagih']),
+                         'sisa_hutang'=>formatrp($list['sisa_hutang']),
                          'terbilang_diskon'=>terbilang($list['diskon']),
                          'terbilang'=>terbilang($list['fee']));
            //$aku = array('noso'=>$list['noso']);

@@ -64,12 +64,14 @@
                         </div>
                     </div>
                     
+                   
+                    
                     
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Transaksi</label>
                         <div class="col-sm-9">
                             <select name="transaksi" id="transaksi" class="form-control">
-                                <option value="1">DP 1</option>
+                                
                                 <option value="2">DP 2</option>
                                 <option value="3">DP 3</option>
                                 <option value="4">DP 4</option>
@@ -79,21 +81,37 @@
                             
                         </div>
                     </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Sisa Hutang</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="sisa_hutang" id="sisa_hutang" parsley-trigger="change" required    class="form-control">
+                        </div>
+                    </div>
+                    
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label">Total Tagih</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="total_tagih" id="tagih" parsley-trigger="change" required    class="form-control">
+                        </div>
+                    </div>
+                    
+                     
 
                  
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Nominal</label>
                         <div class="col-sm-9">
-                            <input type="text" name="nominal" id="nominal" parsley-trigger="change"  placeholder="Nominal" class="form-control">
+                            <input type="text" name="nominal" id="nominal" parsley-trigger="change"  placeholder="Nominal" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" class="form-control mask">
                         </div>
                     </div>
-                    
+                    <!--
                      <div class="form-group">
                         <label class="col-sm-3 control-label">Fee</label>
                         <div class="col-sm-9">
                             <input type="text" name="fee" id="fee" parsley-trigger="change"  placeholder="Nominal" class="form-control">
                         </div>
-                    </div>
+                    </div>-->
 
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Sisa</label>
@@ -111,7 +129,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">No.Mesin</label>
                         <div class="col-sm-9">
-                            <input type="text" name="nomsn" id="nomsn" parsley-trigger="change" readonly="true" placeholder="No.Mesin" class="form-control">
+                            <input type="text" name="nomsn" id="no_mesin" parsley-trigger="change" readonly="true" placeholder="No.Mesin" class="form-control">
                         </div>
                     </div>
 
@@ -119,7 +137,7 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">No.Rangka</label>
                         <div class="col-sm-9">
-                            <input type="text" name="norangka" id="norangka" parsley-trigger="change" readonly="true" placeholder="No.Rangka" class="form-control">
+                            <input type="text" name="norangka" id="no_rangka" parsley-trigger="change" readonly="true" placeholder="No.Rangka" class="form-control">
                         </div>
                     </div>
 
@@ -233,6 +251,7 @@
             return false;
         });
 
+        /*
         $("#nominal").focusout(function () {
             var nominal = $(this).val();
             $.post("t_kwitansi/t_kwitansidp/terbilang/", {nominal: nominal}).done(function (data) {
@@ -248,6 +267,7 @@
             $("#sisa").val(sisahutang);
             return false;
         });
+        */
         
         $("#new_kwitansidp").click(function(){
             window.location = "kwitansi-dp-tambah";
@@ -286,6 +306,8 @@
             $('#warna').val(datum.warna_motor);
             $('#type').val(datum.tipe_motor);
             $('#no_rangka').val(datum.norangka);
+            $('#sisa_hutang').val(datum.sisa_hutang);
+            $('#tagih').val(datum.tagih);
             //$('#terbilang').val(datum.terbilang);
             //$('#norangka').val(datum['norangka']);
             //$('#warna').val(datum['warna']);
@@ -350,4 +372,28 @@
             }
         });
     }
+    
+    $("#nominal").keyup(function () {
+        var nominal = $("#nominal").val().match(/\d/g);
+          var nominalx = $("#nominal").val().match(/\d/g);
+          var sending = parseInt(nominalx.join(""));
+        
+            
+            $.post("t_kwitansi/t_kwitansidp/terbilang/", {nominal: sending}).done(function (data) {
+                $("#terbilang").text(data);
+            });
+            
+            
+        var sisa_hutang = $("#sisa_hutang").val().match(/\d/g);
+         if ($(this).val().trim().length == 0) {
+                $(this).val(0);
+            }
+        //var sisa_hutang = $(this).val().match(/\d/g);
+        var sisax = parseInt(sisa_hutang.join("")) - parseInt(nominal.join(""));
+        console.log(nominal);
+        //$("#sisa").val(sisa.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+        $("#sisa").val(sisax.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+    });
+    
+     
 </script>
