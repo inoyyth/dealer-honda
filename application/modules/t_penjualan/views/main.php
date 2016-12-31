@@ -22,7 +22,7 @@
                                 <th>No. Mesin</th>
                                 <th>Harga</th>
                                 <th>Tipe</th>
-                                <th class="text-center" style="width: 220px;">Action</th>
+                                <th class="text-center" style="width: 270px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,7 +41,8 @@
                                         <td class="text-center">
                                             <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'penjualan-edit-' . $v['id'], 'text' => 'Edit')); ?>
                                             <a href="<?php echo base_url('penjualan-edit-' . $v['id']);?>" class="btn btn-success btn-sm"><i class="fa fa-info-circle"></i> Detail</a>
-                                            <a href="<?php echo base_url('penjualan-fee-' . $v['id']);?>" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Fee</a>
+                                            <a href="<?php echo base_url('penjualan-fee-' . $v['id']);?>" class="btn btn-default btn-sm" target="_blank"><i class="fa fa-print"></i> Fee</a> 
+                                            <a href="<?php echo base_url('penjualan-diskon-' . $v['id']);?>" class="btn btn-default btn-sm" target="_blank"><i class="fa fa-print"></i> Disc</a>
                                         </td>
                                     </tr>
     <?php }
