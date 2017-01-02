@@ -37,7 +37,12 @@ class M_t_pdi extends CI_Model {
                 foreach($accs as $k => $v){
                     $result[] = array('pdi_id'=>$last_id,'aksesoris_id'=>$v);
                 }
-                $this->db->insert_batch('t_pdi_detail', $result); 
+                $insert_detail = $this->db->insert_batch('t_pdi_detail', $result); 
+                if($insert_detail){
+                    foreach($accs as $ks => $vs){
+                        $this->__update_aksesoris_value($vs);
+                    }
+                }
                 //dump($result,true);
             }
             return true;
@@ -95,6 +100,19 @@ left join m_customer f on f.no_ktp = b.ktp
         $this->db->where(array('penerimaan_aksesoris.gudang_id' => $gudang, 'm_aksesoris.kategori' => $type));
         $this->db->group_by(array('aksesoris_id'));
         return $this->db->get()->result_array();
+    }
+    
+    public function __update_aksesoris_value($aksesoris_id){
+        $this->db->select('*');
+        $this->db->from('penerimaan_aksesoris');
+        $this->db->where(array('jumlah >'=>0,'aksesoris_id'=>$aksesoris_id));
+        $this->db->order_by('tanggal_terima','ASC');
+        $this->db->limit(1);
+        $getAksesoris = $this->db->get()->row_array();
+        if(count($getAksesoris) > 0){
+            $this->db->query("UPDATE penerimaan_aksesoris SET jumlah=jumlah-1 WHERE id='".$getAksesoris['id']."'");
+        }
+        return TRUE;
     }
 
 }
