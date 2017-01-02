@@ -27,12 +27,23 @@
                         <input type="text" name="jumlah" id="jumlah" parsley-trigger="change" parsley-type="digits" required placeholder="Isi Jumlah" class="form-control">
                     </div>
                     <div class="form-group">
+                        <label>Plus or Minus</label>
+                        <select name="status_add_or_min" class="form-control" required="true">
+                            <option value="1">Tambah</option>
+                            <option value="2">Kurang</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label>Gudang</label>
                         <select style="text-transform: capitalize;" name="gudang" id="gudang" class="form-control" required="true">
                             <?php foreach ($gudang as $kGudang => $vGudang) { ?>
                                 <option value="<?php echo $vGudang['id']; ?>"><?php echo $vGudang['gudang']; ?></option>
                             <?php } ?>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <input type="text" name="keterangan" id="jumlah" parsley-trigger="change" required placeholder="Isi Keterangan" class="form-control">
                     </div>
                     <button class="btn btn-primary" type="submit">Submit</button>
                     <a href="<?php echo base_url('input-penerimaan-aksesoris'); ?>" class="btn btn-default">Cancel</a>
@@ -87,11 +98,11 @@
                                         <td><?php echo intval($this->uri->segment(2) + ($k + 1)); ?></td>
                                         <td><?php echo $v['kd_aksesoris']; ?></td>
                                         <td><?php echo $v['aksesoris']; ?></td>
-                                        <td><?php echo $v['jumlah']; ?></td>
+                                        <td><?php echo $v['total']; ?></td>
                                         <td><?php echo $v['gudang']; ?></td>
                                         <td class="text-center">
-                                            <button class="btn btn-sm btn-warning" onclick="editList(<?php echo $v['id']; ?>);"><i class="fa fa-edit"></i></button>
-                                            <a href="<?php echo base_url('input-penerimaan-aksesoris-delete-'.$v['id']);?>" onclick="return confirm('yakin hapus data?');" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i> </a> 
+                                            <button class="btn btn-sm btn-warning" onclick="detailAksesorisBtn('<?php echo $v['aksesoris_id']; ?>');"><i class="fa fa-info-circle"></i></button>
+                                            <!--<a href="<?php echo base_url('input-penerimaan-aksesoris-delete-'.$v['id']);?>" onclick="return confirm('yakin hapus data?');" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i> </a>-->
                                         </td>
                                     </tr>
                                 <?php
@@ -120,12 +131,12 @@
                                             ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="jumlah" value="<?php echo (isset($sr_data['jumlah']) ? $sr_data['jumlah'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <!--<input class="form-control input-sm" name="jumlah" value="<?php echo (isset($sr_data['jumlah']) ? $sr_data['jumlah'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;
                                             }
-                                            ;"/>
+                                            ;"/>-->
                                 </td>
                                 <td>
                                     <input class="form-control input-sm" name="gudang" value="<?php echo (isset($sr_data['gudang']) ? $sr_data['gudang'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
@@ -184,6 +195,34 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Apply</button>
                 <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Detail-->
+<div class="modal fade bs-example-modal-lg" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Detail History</h4>
+            </div>
+            <div class="modal-body">
+                <table style="width: 100%;" class="display table table-bordered table-hover" id="listDetail">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Kode Aksesoris</th>
+                            <th>Jumlah</th>
+                            <th>Tanggal</th>
+                            <th>Status</th>
+                            <th>Keterangan</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -250,8 +289,30 @@
             }
         });
     }
+    
+    function detailAksesorisBtn(kode){
+            $('#listDetail').DataTable({
+                "processing": true, //Feature control the processing indicator.
+                "serverSide": true, //Feature control DataTables' server-side processing mode.
+                "order": [], //Initial no order.
 
-    function deleteList(id) {
-
-    }
+                // Load data for the table's content from an Ajax source
+                "ajax": {
+                    "url": "<?php echo base_url('aksesoris_terima/get_list_aksesoris_detail') ?>",
+                    "type": "POST",
+                    "data":{kode:kode}
+                },
+                "fnDrawCallback" : function(data,item) {
+                    $("#modalDetail").modal('show');
+                },
+                "columnDefs": [
+                    {
+                        "targets": [0], //first column / numbering column
+                        "orderable": false, //set not orderable
+                        //"className": 'select-checkbox',
+                    }
+                ],
+                "bDestroy": true,
+            });
+        }
 </script>

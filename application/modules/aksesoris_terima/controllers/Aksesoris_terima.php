@@ -122,4 +122,38 @@ class Aksesoris_terima extends MX_Controller {
         //output to json format
         echo json_encode($output);
     }
+    
+    public function get_list_aksesoris_detail() {
+        $table = 'penerimaan_aksesoris';
+        $join = array(
+            array('table' => 'm_aksesoris', 'where' => 'penerimaan_aksesoris.aksesoris_id=m_aksesoris.id', 'join' => 'left'),
+        );
+        $where = array('aksesoris_id'=>$this->input->post('kode'));
+        $column_order = array(null, 'kd_aksesoris', 'jumlah', 'tanggal_terima', 'status_add_or_min', 'keterangan');
+        $column_search = array('kd_aksesoris', 'jumlah', 'tanggal_terima', 'status_add_or_min', 'keterangan');
+        $list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('penerimaan_aksesoris.id'=>'asc'),$where,$join);
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $result) {
+            $no++;
+            $row = array();
+            $row[] = $no;
+            $row[] = $result->kd_aksesoris;
+            $row[] = $result->jumlah;
+            $row[] = $result->tanggal_terima;
+            $row[] = ($result->status_add_or_min=="1"?"Tambah":"Kurang");
+            $row[] = $result->keterangan;
+
+            $data[] = $row;
+        }
+    
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->m_datatable->count_all($table),
+            "recordsFiltered" => $this->m_datatable->count_filtered($table, $column_order, $column_search, $order = array('penerimaan_aksesoris.id'=>'asc'),$where,$join),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
 }
