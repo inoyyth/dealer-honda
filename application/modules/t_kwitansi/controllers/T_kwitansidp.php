@@ -37,6 +37,26 @@ class T_kwitansidp extends MX_Controller {
         //echo $this->db->last_query();
         echo json_encode($data);
     }
+    
+    public function print_pdf($id){
+        //echo $id;
+        //die();
+        
+        $data['template'] = array("template" => "t_kwitansi/kwitansi_dp/print_out_dp", "filename" => "Kwitansi PDF");
+        $data['parsing'] = $this->mt_kwitansi->get_print_dp($id);
+        //var_dump($data['parsing']);
+        //die();
+        //$data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
+        //$data['detail_penjualan'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
+        //$data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
+        //$data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();
+        //$data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
+        //$data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
+        //$data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
+        $this->printpdf->create_pdf($data);
+         
+    }
+    
 
     public function add() {
         $this->breadcrumbs->push('Add', '/kwitansi-dp');
@@ -54,30 +74,20 @@ class T_kwitansidp extends MX_Controller {
          $data['view'] = 't_kwitansi/kwitansi_dp/edit';
         $this->load->view('default', $data);
     }
+    
+     public function detail($id) {
+        $this->breadcrumbs->push('Edit', '/penjualan-detail');
+        $data['detail'] = $this->mt_kwitansi->get_detail_dp($id);
+        $data['view'] = 't_kwitansi/kwitansi_dp/detail';
+        $this->load->view('default', $data);
+    }
 
     function delete($id) {
         $this->main_model->delete('t_penjualan', array('id' => $id), array('status_gudang' => '3'));
         redirect("penjualan");
     }
     
-    public function printout() {
-        //$data['template'] = array("template" => "t_kwitansi/kwitansi_dp/" . $_GET['template'], "filename" => $_GET['name']);
-        //$data['list'] = $this->M_t_kwitansi->getdata($this->table, 0, 1000, $like = array());
-        //$this->load->view('t_kwitansi/kwitansi_dp/table_html', $data);
-        //$this->printpdf->create_pdf($data);
-          
-          //var_dump($_POST);
-        
-        $id = $this->uri->segment(2);
-        $cek = str_replace("_","/",$id);
-        $data['list'] = $this->mt_kwitansi->get_data_print_dp($cek);
-        //var_dump($data['list']);
-        $data['template'] = array("template" => "t_kwitansi/kwitansi_dp/" . $_GET['template'], "filename" => $_GET['name']);
-        //$data['list'] = $this->M_t_kwitansi->getdata($this->table, 0, 1000, $like = array());
-        $this->load->view('t_kwitansi/kwitansi_dp/table_html', $data);
-        //$this->printpdf->create_pdf($data);
-         
-    }
+    
     
     function save() {
         //print_r($_POST);die();
@@ -118,12 +128,7 @@ class T_kwitansidp extends MX_Controller {
         }
     }
 
-    public function print_pdf() {
-        $data['template'] = array("template" => "t_penjualan/" . $_GET['template'], "filename" => $_GET['name']);
-        $data['list'] = $this->t_penjualan->getdata($this->table, 0, 1000, $like = array(), $where = array('status_gudang!=' => '3'));
-        $this->printpdf->create_pdf($data);
-    }
-
+     
     public function print_excel() {
         $data['template_excel'] = "t_penjualan/" . $_GET['template'];
         $data['file_name'] = $_GET['name'];

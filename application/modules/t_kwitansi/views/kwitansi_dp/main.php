@@ -40,7 +40,8 @@
                                          
                                         <td class="text-center">
  
-                                            <a href="<?php echo base_url('kwitansi-print-out-' . $v['id']);?>" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
+                                            <a href="<?php echo base_url('kwitansi-dp-detail/'.$v['id']);?>" class="btn btn-default btn-sm"><i class="fa fa-info"></i> Detail</a>
+                                            <a href="<?php echo base_url('kwitansi-dp-pdf/'.$v['id']);?>" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
                                         </td>
                                     </tr>
     <?php }

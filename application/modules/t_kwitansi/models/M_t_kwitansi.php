@@ -103,7 +103,8 @@ left join m_customer f on f.no_ktp = b.ktp
     }   
     
     public function getNOSO($query){
-        $data = $this->db->query('select a.*,b.nama_customer,c.fee,c.cara_pembelian,c.diskon,c.dp,c.sisa_hutang,c.tagih,d.norangka,d.warna,d.tipe from t_penjualan a left join m_customer b on b.no_ktp = a.ktp 
+        $data = $this->db->query('select a.*,b.nama_customer,c.fee,c.cara_pembelian,c.diskon,c.dp,c.sisa_hutang,c.tagih,d.norangka,d.warna,d.tipe from t_penjualan a 
+            left join m_customer b on b.no_ktp = a.ktp 
 left join t_harga_motor c on c.noso = a.noso 
  
 left join t_kwitansi_fee e on e.noso = a.noso
@@ -197,6 +198,23 @@ m_motor.tahun,m_motor.merk,m_motor.harga_otr,m_motor.nama_foto,m_motor.url_foto"
         return false;
     }
     
+    function get_print_dp($id){
+        return $this->db->query("SELECT a.*,b.harga_otr,c.nama_customer,d.leasing,d.cara_pembelian,e.nomesin,e.norangka,e.tipe,e.warna,e.tahun FROM t_pembayaran a
+LEFT JOIN t_penjualan b on b.noso = a.noso
+LEFT JOIN m_customer c on c.no_ktp = b.ktp
+LEFT JOIN t_harga_motor d on d.noso = a.noso
+LEFT JOIN penerimaan_motor e on e.nomesin = b.nomsn
+WHERE a.id = '$id'")->row();
+    }
+    
+      function get_detail_dp($id){
+        return $this->db->query("SELECT a.*,b.harga_otr,c.nama_customer,d.leasing,d.cara_pembelian,d.tagih,d.sisa_hutang,e.nomesin,e.norangka,e.tipe,e.warna,e.tahun FROM t_pembayaran a
+LEFT JOIN t_penjualan b on b.noso = a.noso
+LEFT JOIN m_customer c on c.no_ktp = b.ktp
+LEFT JOIN t_harga_motor d on d.noso = a.noso
+LEFT JOIN penerimaan_motor e on e.nomesin = b.nomsn
+WHERE a.id = '$id'")->row();
+    }
     function save_dp() {
         $id = $this->input->post('id');
 /*array(16) { ["nokwitansi"]=> string(22) "KWT/KD/2016/XII/000001" ["noso"]=> string(21) "SO/MKA-2016/XI/000001" ["id"]=> string(0) "" ["nama_customer"]=> string(5) "Jarot" ["harga_otr"]=> string(10) "17.500.000" ["dp"]=> string(10) "10.000.000" ["cara_pembelian"]=> string(4) "Cash" ["transaksi"]=> string(0) "" ["nominal"]=> string(5) "20000" ["sisa"]=> string(7) "7480000" ["nomsn"]=> string(10) "MSN0101010" ["norangka"]=> string(10) "RGK9009090" ["tipe_motor"]=> string(7) "NC11D1D" ["warna_motor"]=> string(2) "WH" ["terbilang"]=> string(22) "Dua puluh ribu rupiah" ["submit"]=> string(0) "" } 
@@ -206,7 +224,7 @@ m_motor.tahun,m_motor.merk,m_motor.harga_otr,m_motor.nama_foto,m_motor.url_foto"
             'noso' => $this->input->post('noso'),
             'dp' => currency_to_normal($this->input->post('dp')),
             'transaksi' => $this->input->post('transaksi'),
-            'nominal' => $this->input->post('nominal'),
+            'nominal' => str_replace(".","",$this->input->post('nominal')),
             'sisa_pembayaran' => str_replace(",","",$this->input->post('sisa_pembayaran')),
             'fee' => $this->input->post('fee'),
             'm_status' => 1

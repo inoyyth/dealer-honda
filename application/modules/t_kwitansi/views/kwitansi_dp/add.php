@@ -173,7 +173,7 @@
                     <button type="button" name="new_kwitansidp" id="new_kwitansidp" class="btn btn-default">New</button>
                     <button name="submit" id="simpan" class="btn btn-primary">Save</button>
                     <button type="reset" name="cancel" id="cancel" class="btn btn-danger">Cancel</button>
-                    <button type="button" name="print" id="print" onclick="cetak()" class="btn btn-default">Print</button>
+                    <!--<button type="button" name="print" id="print" onclick="cetak()" class="btn btn-default">Print</button>-->
                 </div>
             </div>
         </div>
@@ -221,7 +221,7 @@
         });
 
         $("#cancel").on("click", function () {
-            
+            window.location="t_kwitansi/t_kwitansidp";
         });
 
         $("#noso").focusout(function () {
