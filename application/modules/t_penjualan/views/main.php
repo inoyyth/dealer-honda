@@ -3,7 +3,7 @@
         <section class="panel default blue_title h4">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-md-6 pull-left">Penujualan
+                    <div class="col-md-6 pull-left">Penjualan
                     </div>
                     <div class="col-md-6 pull-right text-right">
                         <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'penjualan-tambah', 'text' => 'Tambah')); ?>

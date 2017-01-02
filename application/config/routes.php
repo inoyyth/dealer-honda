@@ -229,18 +229,18 @@ $route['kwitansi-diskon-excel/(:any)'] = 't_kwitansi/t_kwitansi_diskon/print_exc
 /* Kwitansi Diskon */
 
 /* Start PDI */
-$route['pdi'] = 't_pdi/t_pdi/add';
-$route['pdi-tambah'] = 't_pdi/t_pdi/add';
-$route['pdi-edit-(:num)'] = 't_pdi/t_pdi/edit/$1';
-$route['pdi-detail-(:num)'] = 't_pdi/t_pdi/detail/$1';
-$route['pdi-delete-(:num)'] = 't_pdi/t_pdi/delete/$1';
-$route['pdi-save'] = 't_pdi/t_pdi/save';
-$route['pdi-page'] = 't_pdi/t_pdi/index';
-$route['pdi-page/(:any)'] = 't_pdi/t_pdi/index/$1';
-$route['pdi-pdf'] = 't_pdi/t_pdi/print_pdf';
-$route['pdi-pdf/(:any)'] = 't_pdi/t_pdi/print_pdf/$1';
-$route['pdi-excel'] = 't_pdi/t_pdi/print_excel';
-$route['pdi-excel/(:any)'] = 't_pdi/t_pdi/print_excel/$1';
+$route['pdi'] = 't_pdi/index';
+$route['pdi-tambah'] = 't_pdi/add';
+$route['pdi-edit-(:num)'] = 't_pdi/edit/$1';
+$route['pdi-detail-(:num)'] = 't_pdi/detail/$1';
+$route['pdi-delete-(:num)'] = 't_pdi/delete/$1';
+$route['pdi-save'] = 't_pdi/save';
+$route['pdi-page'] = 't_pdi/index';
+$route['pdi-page/(:any)'] = 't_pdi/index/$1';
+$route['pdi-pdf'] = 't_pdi/print_pdf';
+$route['pdi-pdf/(:any)'] = 't_pdi/print_pdf/$1';
+$route['pdi-excel'] = 't_pdi/print_excel';
+$route['pdi-excel/(:any)'] = 't_pdi/print_excel/$1';
 /* End PDI */
 
 /* Start STNK BPKB */
