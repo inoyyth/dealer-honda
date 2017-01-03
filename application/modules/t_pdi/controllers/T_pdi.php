@@ -72,6 +72,14 @@ class t_pdi extends MX_Controller {
         $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
         $data['sales_order'] = $this->db->query("SELECT t_penjualan.noso,t_penjualan.tanggal,m_customer.nama_customer,penerimaan_motor.nomesin,penerimaan_motor.norangka,penerimaan_motor.tipe,penerimaan_motor.warna FROM t_penjualan LEFT JOIN m_customer ON t_penjualan.ktp=m_customer.no_ktp LEFT JOIN penerimaan_motor ON penerimaan_motor.nomesin=t_penjualan.nomsn WHERE t_penjualan.noso='".$data['detail']['noso']."'")->row_array();
         $data['gudang'] = $this->main_model->getMaster('m_gudang', $like=array(), $where=array('status_gudang'=>'1'));
+        $data['aki'] = $this->__getAksesoris(1,$data['detail']['gudang_id']);
+        $data['spion'] = $this->__getAksesoris(2,$data['detail']['gudang_id']);
+        $data['helm'] = $this->__getAksesoris(3,$data['detail']['gudang_id']);
+        $data['toolkit'] = $this->__getAksesoris(6,$data['detail']['gudang_id']);
+        $data['rumah_plat'] = $this->__getAksesoris(7,$data['detail']['gudang_id']);
+        $data['jacket'] = $this->__getAksesoris(8,$data['detail']['gudang_id']);
+        $data['jas_hujan'] = $this->__getAksesoris(9,$data['detail']['gudang_id']);
+        $data['pdi_detail'] = $this->db->query("SELECT aksesoris_id FROM t_pdi_detail WHERE pdi_id='".$id."' ORDER BY id ASC")->result_array();
         $data['view'] = "t_pdi/edit";
         $this->load->view('default', $data);
     }
@@ -186,5 +194,9 @@ class t_pdi extends MX_Controller {
             }
         }
     }   
+    
+    public function __getAksesoris($aksesoris,$gudang){
+        return $this->t_pdi->get_master_aksesoris($aksesoris,$gudang);
+    }
 }
 
