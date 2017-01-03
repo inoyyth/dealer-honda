@@ -13,7 +13,7 @@
                             <label class="col-sm-3 control-label">No Sales Order</label>
                             <div class="col-sm-9">
                                 <input type="hidden" name="id" id="id"  value="<?php echo $detail['id'];?>" parsley-trigger="change" required readonly="true" class="form-control">
-                                <input disabled="true" style="text-transform: uppercase;" class="typeahead form-control" parsley-trigger="change" required name="noso" id="noso" value="<?php echo $detail['noso'];?>" type="text" placeholder="Type No Sales Order">
+                                <input readonly="true" style="text-transform: uppercase;" class="typeahead form-control" parsley-trigger="change" required name="noso" id="noso" value="<?php echo $detail['noso'];?>" type="text" placeholder="Type No Sales Order">
                             </div>
                         </div>
 
@@ -118,7 +118,12 @@
                             <td> Aki</td>
                             <td> 
                                 <select name="aksesoris[]" id="aki" class="form-control">
-                                    <option value=""> </option>
+                                    <option value="0" <?php echo ($pdi_detail[0]['aksesoris_id']==0?"selected":"");?>>Not Available</option>
+                                    <?php 
+                                        foreach($aki as $kAki=>$vAki){
+                                    ?>
+                                    <option value="<?php echo $vAki['aksesoris_id'];?>" <?php echo ($pdi_detail[0]['aksesoris_id']==$vAki['aksesoris_id']?"selected":"");?>><?php echo $vAki['aksesoris'];?> (<?php echo $vAki['total'];?> pcs)</option>
+                                    <?php } ?>
                                 </select>
                             </td>
                         </tr>
@@ -126,7 +131,12 @@
                             <td> Spion</td>
                             <td> 
                                 <select name="aksesoris[]" id="spion" class="form-control">
-                                    <option value=""> </option>
+                                    <option value="0" <?php echo ($pdi_detail[1]['aksesoris_id']==0?"selected":"");?>>Not Available</option>
+                                    <?php 
+                                        foreach($spion as $kSpion=>$vSpion){
+                                    ?>
+                                    <option value="<?php echo $vSpion['aksesoris_id'];?>" <?php echo ($pdi_detail[1]['aksesoris_id']==$vSpion['aksesoris_id']?"selected":"");?>><?php echo $vSpion['aksesoris'];?> (<?php echo $vSpion['total'];?> pcs)</option>
+                                    <?php } ?>
                                 </select>
                             </td>
                         </tr>
@@ -134,7 +144,12 @@
                             <td> Toolkit</td>
                             <td> 
                                 <select name="aksesoris[]" id="toolkit" class="form-control">
-                                    <option value=""> </option>
+                                    <option value="0" <?php echo ($pdi_detail[2]['aksesoris_id']==0?"selected":"");?>>Not Available</option>
+                                    <?php 
+                                        foreach($toolkit as $kToolkit=>$vToolkit){
+                                    ?>
+                                    <option value="<?php echo $vToolkit['aksesoris_id'];?>" <?php echo ($pdi_detail[2]['aksesoris_id']==$vToolkit['aksesoris_id']?"selected":"");?>><?php echo $vToolkit['aksesoris'];?> (<?php echo $vToolkit['total'];?> pcs)</option>
+                                    <?php } ?>
                                 </select>
                             </td>
                         </tr>
@@ -142,7 +157,12 @@
                             <td> Helm</td>
                             <td> 
                                 <select name="aksesoris[]" id="helm" class="form-control">
-                                    <option value=""> </option>
+                                    <option value="0" <?php echo ($pdi_detail[3]['aksesoris_id']==0?"selected":"");?>>Not Available</option>
+                                    <?php 
+                                        foreach($helm as $kHelm=>$vHelm){
+                                    ?>
+                                    <option value="<?php echo $vHelm['aksesoris_id'];?>" <?php echo ($pdi_detail[3]['aksesoris_id']==$vHelm['aksesoris_id']?"selected":"");?>><?php echo $vHelm['aksesoris'];?> (<?php echo $vHelm['total'];?> pcs)</option>
+                                    <?php } ?>
                                 </select>
                             </td>
                         </tr>
@@ -162,7 +182,12 @@
                             <td>Rumah Plat</td>
                             <td>  
                                 <select name="aksesoris[]" id="rumah_plat" class="form-control">
-                                    <option value=""> </option>
+                                    <option value="0" <?php echo ($pdi_detail[4]['aksesoris_id']==0?"selected":"");?>>Not Available</option>
+                                    <?php 
+                                        foreach($rumah_plat as $kPlat=>$vPlat){
+                                    ?>
+                                    <option value="<?php echo $vPlat['aksesoris_id'];?>" <?php echo ($pdi_detail[4]['aksesoris_id']==$vPlat['aksesoris_id']?"selected":"");?>><?php echo $vPlat['aksesoris'];?> (<?php echo $vPlat['total'];?> pcs)</option>
+                                    <?php } ?>
                                 </select>
                             </td>
                         </tr>
@@ -170,7 +195,12 @@
                             <td>Jacket</td>
                             <td>  
                                 <select name="aksesoris[]" id="jacket" class="form-control">
-                                    <option value=""> </option>
+                                    <option value="0" <?php echo ($pdi_detail[5]['aksesoris_id']==0?"selected":"");?>>Not Available</option>
+                                    <?php 
+                                        foreach($jacket as $kJacket=>$vJacket){
+                                    ?>
+                                    <option value="<?php echo $vJacket['aksesoris_id'];?>" <?php echo ($pdi_detail[5]['aksesoris_id']==$vJacket['aksesoris_id']?"selected":"");?>><?php echo $vJacket['aksesoris'];?> (<?php echo $vJacket['total'];?> pcs)</option>
+                                    <?php } ?>
                                 </select>
                             </td>
                         </tr>
@@ -178,7 +208,12 @@
                             <td>Jas Hujan</td>
                             <td> 
                                 <select name="aksesoris[]" id="jas_hujan" class="form-control">
-                                    <option value=""> </option>
+                                    <option value="0" <?php echo ($pdi_detail[6]['aksesoris_id']==0?"selected":"");?>>Not Available</option>
+                                    <?php 
+                                        foreach($jas_hujan as $kJas=>$vJas){
+                                    ?>
+                                    <option value="<?php echo $vJas['aksesoris_id'];?>" <?php echo ($pdi_detail[6]['aksesoris_id']==$vJas['aksesoris_id']?"selected":"");?>><?php echo $vJas['aksesoris'];?> (<?php echo $vJas['total'];?> pcs)</option>
+                                    <?php } ?>
                                 </select>
                             </td>
                         </tr>
