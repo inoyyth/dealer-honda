@@ -303,11 +303,12 @@
             $('#nama_customer').val(datum.nama_customer);
             $('#fee').val(datum.fee);
             $('#dp').val(datum.dp);
-            $('#no_mesin').val(datum.nomsn);
+            $('#no_mesin').val(datum.no_mesin);
+            $('#transaksi').val(datum.transaksi);
             $('#warna_motor').val(datum.warna_motor);
-            $('#type').val(datum.tipe_motor);
-            $('#no_rangka').val(datum.norangka);
-            $('#sisa_hutang').val(datum.sisa_hutang);
+            $('#type').val(datum.type);
+            $('#no_rangka').val(datum.no_rangka);
+            $('#sisa_hutang').val(datum.sisa_pembayaran);
             $('#tagih').val(datum.tagih);
             $('#cara_pembelian').val(datum.cara_pembelian);
             //cara_pembelian

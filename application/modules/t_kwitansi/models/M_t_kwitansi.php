@@ -102,6 +102,61 @@ left join m_customer f on f.no_ktp = b.ktp
         
     }   
     
+    public function getokki($query){
+        /*
+        $sqla = $this->db->query("select * from t_harga_motor where noso LIKE '%$query%'");
+        $geta = $sqla->row();
+        
+        echo $tagihan_total = $geta->tagih;
+        echo '<br>';
+        echo $dp_pertama = $geta->dp;
+        */
+        $datadua = $this->db->query("select a.*,c.nama_customer,e.cara_pembelian,b.harga_otr,b.nomsn,b.warna_motor,d.norangka,d.tipe from t_pembayaran a 
+            LEFT JOIN t_penjualan b on b.noso = a.noso
+            LEFT JOIN m_customer c on c.no_ktp = b.ktp
+            LEFT JOIN penerimaan_motor d on d.nomesin = b.nomsn
+            LEFT JOIN t_harga_motor e on e.noso = a.noso where a.noso LIKE '%$query%' ORDER BY a.transaksi DESC");
+        $getdua = $datadua->row();
+        $show = array();
+        foreach($datadua->result_array() as $list){
+            $show[] = array('noso'=>$list['noso'],
+                            'nama_customer'=>$list['nama_customer'],
+                            'dp'=>formatrp($list['dp']),
+                            'harga_otr'=>formatrp($list['harga_otr']),
+                            'transaksi'=>$list['transaksi'],
+                            'cara_pembelian'=>$list['cara_pembelian'],
+                            'sisa_pembayaran'=>formatrp($list['sisa_pembayaran']),
+                            'tagih'=>formatrp($list['dp']),
+                            'no_rangka'=>$list['norangka'],
+                            'no_mesin'=>$list['nomsn'],
+                            'warna_motor'=>$list['warna_motor'],
+                            'type'=>$list['tipe'],
+                            );
+        }
+        
+        return $show;
+        //$tagihan_dua = $getdua->nominal;
+        /*
+        $sqlb = $this->db->query("select * from t_pembayaran where noso LIKE '%$query%'");
+        $getb = $sqlb->row();
+        
+        $nominal = $getb->nominal;
+        
+        $total_dp_seluruhnya = $tagihan_total;
+        $total_bayar_seluruhnya = $dp_pertama+$nominal;
+        $sisa_bayar = $total_dp_seluruhnya-$total_bayar_seluruhnya;
+        
+        $data = array('tagihan_total'=>$tagihan_total,
+                      'dp_pertama'=>$dp_pertama,
+                      'total_dp_seluruhnya'=>$total_dp_seluruhnya,
+                      'total_bayar_seluruhnya'=>$total_bayar_seluruhnya,
+                      'sisa_pembayaran'=>$sisa_bayar
+                     );
+        return $data;
+         * 
+         */
+    }
+    
     public function getNOSO($query){
         $data = $this->db->query('select a.*,b.nama_customer,c.fee,c.cara_pembelian,c.diskon,c.dp,c.sisa_hutang,c.tagih,d.norangka,d.warna,d.tipe from t_penjualan a 
             left join m_customer b on b.no_ktp = a.ktp 
@@ -119,6 +174,7 @@ left join penerimaan_motor d on d.nomesin = a.nomsn
                          'harga_otr'=>formatrp($list['harga_otr']),
                          'diskon'=>$list['diskon'],
                          'dp'=>formatrp($list['dp']),
+                         'dpall'=>formatrp($list['tagih']),
                          'cara_pembelian'=>$list['cara_pembelian'],
                          'nama_customer'=>$list['nama_customer'],
                          'nomsn'=>$list['nomsn'],
@@ -218,18 +274,31 @@ WHERE a.id = '$id'")->row();
     function save_dp() {
         $id = $this->input->post('id');
 /*array(16) { ["nokwitansi"]=> string(22) "KWT/KD/2016/XII/000001" ["noso"]=> string(21) "SO/MKA-2016/XI/000001" ["id"]=> string(0) "" ["nama_customer"]=> string(5) "Jarot" ["harga_otr"]=> string(10) "17.500.000" ["dp"]=> string(10) "10.000.000" ["cara_pembelian"]=> string(4) "Cash" ["transaksi"]=> string(0) "" ["nominal"]=> string(5) "20000" ["sisa"]=> string(7) "7480000" ["nomsn"]=> string(10) "MSN0101010" ["norangka"]=> string(10) "RGK9009090" ["tipe_motor"]=> string(7) "NC11D1D" ["warna_motor"]=> string(2) "WH" ["terbilang"]=> string(22) "Dua puluh ribu rupiah" ["submit"]=> string(0) "" } 
- */
+ */     $sisabayar = (currency_to_normal($this->input->post('sisa_hutang')) - str_replace(".","",$this->input->post('nominal')));
+
         $data_pembayaran = array(
             'nokwitansi' => $this->input->post('nokwitansi'),
             'noso' => $this->input->post('noso'),
-            'dp' => currency_to_normal($this->input->post('dp')),
+            'dp' => currency_to_normal($this->input->post('dp')),  
+            //'sisa_hutang'=> currency_to_normal($this->input->post('sisa_hutang')),
             'transaksi' => $this->input->post('transaksi'),
             'nominal' => str_replace(".","",$this->input->post('nominal')),
-            'sisa_pembayaran' => str_replace(",","",$this->input->post('sisa_pembayaran')),
+            'sisa_pembayaran' => $sisabayar,
             'fee' => $this->input->post('fee'),
+            
             'm_status' => 1
         );
+        
 
+        /*
+        echo "yang dibayar : ". $data_pembayaran['nominal'];
+        echo "<br>";
+        echo "yang harus dibayar : ".$data_pembayaran['sisa_hutang'];
+        echo "<br>";
+        echo "sisa nya :".$data_pembayaran['sisabayar'];
+        exit();
+         */
+        
         if (empty($id)) {
             $this->db->insert($this->table_kwitansi_dp, $this->main_model->create_sys($data_pembayaran));
             return true;

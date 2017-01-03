@@ -33,7 +33,8 @@ class T_kwitansidp extends MX_Controller {
     
     public function getSO(){
         $query = $this->input->get('query');
-        $data = $this->mt_kwitansi->getNOSO($query);
+        //$data = $this->mt_kwitansi->getNOSO($query);
+        $data = $this->mt_kwitansi->getokki($query);
         //echo $this->db->last_query();
         echo json_encode($data);
     }
