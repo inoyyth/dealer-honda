@@ -182,7 +182,8 @@ $route['penjualan-diskon-(:any)'] = 't_penjualan/print_diskon/$1';
 
 /* Start Kwitansi DP */
 $route['kwitansi-dp'] = 't_kwitansi/t_kwitansidp';
-$route['kwitansi-dp/(:any)/(:num)'] = 't_kwitansi/t_kwitansidp/$1/$2';
+$route['kwitansi-dp/(:any)'] = 't_kwitansi/t_kwitansidp/index/$1';
+//$route['kwitansi-dp/(:any)/(:num)'] = 't_kwitansi/t_kwitansidp/$1/$2';
 
 $route['kwitansi-dp-tambah'] = 't_kwitansi/t_kwitansidp/add';
 $route['kwitansi-dp-edit-(:num)'] = 't_kwitansi/t_kwitansidp/edit/$1';

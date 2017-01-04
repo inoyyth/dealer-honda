@@ -36,7 +36,7 @@
                                         <td><?php echo $v['nokwitansi']; ?></td>
                                         <td><?php echo $v['noso']; ?></td>
                                         <td><?php echo $v['nama_customer']; ?></td>
-                                         <td><?php echo $v['transaksi']; ?></td>
+                                        <td><?php echo $v['transaksi']; ?></td>
                                          
                                         <td class="text-center">
  

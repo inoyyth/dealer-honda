@@ -13,6 +13,7 @@ class M_t_kwitansi extends CI_Model {
     var $table_thargamotor = "t_harga_motor";
     var $table_motor = "m_motor";
 
+    /*
     public function getdata_dp() {
         //unset($like['page']);
         //$this->db->select("*");
@@ -22,7 +23,7 @@ left join t_harga_motor c on c.noso = a.noso
 left join t_kwitansi_fee e on e.noso = a.noso
 left join penerimaan_motor d on d.nomesin = a.nomsn
             WHERE a.noso LIKE "%'.$query.'%"  AND a.m_status =  "1" 
-         */
+        
         return $this->db->query("select a.*,c.nama_customer from t_pembayaran a 
                         left join t_penjualan b on b.noso = a.noso
                         left join m_customer c on c.no_ktp = b.ktp")->result_array();
@@ -33,7 +34,28 @@ left join penerimaan_motor d on d.nomesin = a.nomsn
         //$this->db->limit($pg, $limit);
         //return $this->db->get()->result_array();
     }
+    */
+
+
     
+    public function getdata_dp($table, $limit, $pg, $like = array(), $where = array()) {
+        unset($like['page']);
+        $this->db->select("a.*,c.nama_customer");
+        $this->db->from($table.' a');
+        /*
+
+        return $this->db->query("select a.*,c.nama_customer from t_pembayaran a 
+                        left join t_penjualan b on b.noso = a.noso
+                        left join m_customer c on c.no_ktp = b.ktp")->result_array();*/
+        $this->db->join('t_penjualan b','b.noso=a.noso',"left");
+        $this->db->join('m_customer c','c.no_ktp=b.ktp',"left");
+        $this->db->like($like);
+        $this->db->where($where);
+        $this->db->limit($pg, $limit);
+        return $this->db->get()->result_array();
+    }
+
+
     public function count_dp() {
         //unset($like['page']);
         //$this->db->select("*");

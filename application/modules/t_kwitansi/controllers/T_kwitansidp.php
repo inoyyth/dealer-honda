@@ -5,6 +5,7 @@ class T_kwitansidp extends MX_Controller {
     
     var $table = "t_pembayaran";
 
+
     public function __construct() {
         parent::__construct();
         
@@ -17,20 +18,37 @@ class T_kwitansidp extends MX_Controller {
     
     public function index() {
         $data_session = $this->__getSession();
-        
         $config['base_url'] = base_url() . 'kwitansi-dp';
         $config['total_rows'] = $this->mt_kwitansi->count_dp();
         $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
         $config['uri_segment'] = 2;
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        //echo $limit;
+        //die();
         $this->pagination->initialize($config);
         $data['paging'] = $this->pagination->create_links();
-        $data['data'] = $this->mt_kwitansi->getdata_dp();
+        $data['data'] = $this->mt_kwitansi->getdata_dp($this->table, $limit, $config['per_page'], $like = $data_session, $where = array());
+        //$data['data'] = $this->mt_kwitansi->getdata_dp();
         $data['sr_data'] = $data_session;
         $data['view'] = 't_kwitansi/kwitansi_dp/main';
         $this->load->view('default', $data);
+
+        /*
+        $data_session = $this->__getSession();
+        $config['base_url'] = base_url() . 'penjualan-page';
+        $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
+        $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
+        $config['uri_segment'] = 2;
+        $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->pagination->initialize($config);
+        $data['paging'] = $this->pagination->create_links();
+        $data['data'] = $this->t_penjualan->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array());
+        $data['sr_data'] = $data_session;
+        $data['view'] = 't_penjualan/main';
+        $this->load->view('default', $data);
+        */
     }
-    
+        
     public function getSO(){
         $query = $this->input->get('query');
         //$data = $this->mt_kwitansi->getNOSO($query);
@@ -111,20 +129,18 @@ class T_kwitansidp extends MX_Controller {
         if ($_POST) {
             return $data = array(
                 'page' => set_session_table_search('page', $this->input->get_post('page', TRUE)),
-                'kd_gudang' => set_session_table_search('kd_gudang', $this->input->get_post('kd_gudang', TRUE)),
-                'gudang' => set_session_table_search('gudang', $this->input->get_post('gudang', TRUE)),
-                'alamat' => set_session_table_search('alamat', $this->input->get_post('alamat', TRUE)),
-                'telepon' => set_session_table_search('telepon', $this->input->get_post('telepon', TRUE)),
-                'status_gudang' => set_session_table_search('status_gudang', $this->input->get_post('status_gudang', TRUE))
+                'nokwitansi' => set_session_table_search('nokwitansi', $this->input->get_post('nokwitansi', TRUE)),
+                'a.noso' => set_session_table_search('noso', $this->input->get_post('noso', TRUE)),
+                'nama_customer' => set_session_table_search('nama_customer', $this->input->get_post('nama_customer', TRUE)),
+                'transaksi' => set_session_table_search('transaksi', $this->input->get_post('transaksi', TRUE)) 
             );
         } else {
             return $data = array(
                 'page' => $this->session->userdata('page'),
-                'kd_gudang' => $this->session->userdata('kd_gudang'),
-                'gudang' => $this->session->userdata('gudang'),
-                'alamat' => $this->session->userdata('alamat'),
-                'telepon' => $this->session->userdata('telepon'),
-                'status_gudang' => $this->session->userdata('status_gudang')
+                'nokwitansi' => $this->session->userdata('nokwitansi'),
+                'a.noso' => $this->session->userdata('noso'),
+                'nama_customer' => $this->session->userdata('nama_customer'),
+                'transaksi' => $this->session->userdata('transaksi') 
             );
         }
     }
