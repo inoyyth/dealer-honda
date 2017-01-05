@@ -46,15 +46,6 @@ class t_pdi extends MX_Controller {
         }
     }
     
-      public function getSO(){
-        $query = $this->input->get('query');
-        //$data = $this->mt_kwitansi->getNOSO($query);
-        $data = $this->mt_kwitansi->getokki($query);
-        //echo $this->db->last_query();
-        echo json_encode($data);
-    }
-
-    
     public function get_sales_order(){
         $query = $this->input->get('query');
         $so_exist = $this->main_model->getMaster('t_pdi', $like=array(), $where=array('m_status'=>'1'));
