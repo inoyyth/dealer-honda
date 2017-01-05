@@ -41,8 +41,8 @@
                                         <td class="text-center">
                                             <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'penjualan-edit-' . $v['id'], 'text' => 'Edit')); ?>
                                             <a href="<?php echo base_url('penjualan-edit-' . $v['id']);?>" class="btn btn-success btn-sm"><i class="fa fa-info-circle"></i> Detail</a>
-                                            <a href="<?php echo base_url('penjualan-fee-' . $v['id']);?>" class="btn btn-default btn-sm" target="_blank"><i class="fa fa-print"></i> Fee</a> 
-                                            <a href="<?php echo base_url('penjualan-diskon-' . $v['id']);?>" class="btn btn-default btn-sm" target="_blank"><i class="fa fa-print"></i> Disc</a>
+                                            <a href="<?php echo base_url('penjualan-fee-' . $v['id']);?>" class="btn btn-default btn-sm feeBtn" target="_blank"><i class="fa fa-print"></i> Fee</a> 
+                                            <a href="<?php echo base_url('penjualan-diskon-' . $v['id']);?>" class="btn btn-default btn-sm diskonBtn" target="_blank"><i class="fa fa-print"></i> Disc</a>
                                         </td>
                                     </tr>
     <?php }
@@ -106,3 +106,16 @@
 <?php echo $paging; ?>
 </div>
 </div>
+<script>
+    $(document).ready(function(){
+       $('.feeBtn').click(function(event) {
+            event.preventDefault();
+            window.open($(this).attr("href"), "popupWindow", "width=800,height=550,scrollbars=yes");
+        }); 
+        
+        $('.diskonBtn').click(function(event) {
+            event.preventDefault();
+            window.open($(this).attr("href"), "popupWindow", "width=800,height=550,scrollbars=yes");
+        }); 
+    });
+</script>

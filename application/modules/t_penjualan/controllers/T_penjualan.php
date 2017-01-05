@@ -199,7 +199,7 @@ class T_penjualan extends MX_Controller {
     }
     
     public function print_fee($id){
-        $data['template'] = array("template" => "t_penjualan/print_fee", "filename" => "Fee Marketing");
+        //$data['template'] = array("template" => "t_penjualan/print_fee", "filename" => "Fee Marketing");
         $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
         $data['detail_penjualan'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
         $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
@@ -207,11 +207,12 @@ class T_penjualan extends MX_Controller {
         $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
         $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
         $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
-        $this->printpdf->create_pdf($data);
+        //$this->printpdf->create_pdf($data);
+        $this->load->view('t_penjualan/print_fee',$data);
     }
     
     public function print_diskon($id){
-        $data['template'] = array("template" => "t_penjualan/print_diskon", "filename" => "Fee Marketing");
+        //$data['template'] = array("template" => "t_penjualan/print_diskon", "filename" => "Fee Marketing");
         $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
         $data['detail_penjualan'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
         $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
@@ -219,7 +220,8 @@ class T_penjualan extends MX_Controller {
         $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
         $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
         $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
-        $this->printpdf->create_pdf($data);
+        //$this->printpdf->create_pdf($data);
+        $this->load->view('t_penjualan/print_diskon',$data);
     }
 
 }

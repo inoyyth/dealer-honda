@@ -24,12 +24,63 @@ class t_pdi extends MX_Controller {
         $this->breadcrumbs->push('Transaksi PDI', '/pdi');
     }
     
+    public function index() {
+        $data_session = $this->__getSession();
+        $config['base_url'] = base_url() . 'pdi-page';
+        $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
+        $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
+        $config['uri_segment'] = 2;
+        $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->pagination->initialize($config);
+        $data['paging'] = $this->pagination->create_links();
+        $data['data'] = $this->t_pdi->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array('m_status' => '1'));
+        $data['sr_data'] = $data_session;
+        $data['view'] = 't_pdi/main';
+        $this->load->view('default', $data);
+    }
+    
+    public function __getSession() {
+        if ($_POST) {
+            return $data = array(
+                'page' => set_session_table_search('page', $this->input->get_post('page', TRUE)),
+                'kdpdi' => set_session_table_search('kdpdi', $this->input->get_post('kdpdi', TRUE)),
+                'noso' => set_session_table_search('noso', $this->input->get_post('noso', TRUE)),
+                'tgl_pdi' => set_session_table_search('tgl_pdi', $this->input->get_post('tgl_pdi', TRUE)),
+                'pic' => set_session_table_search('pic', $this->input->get_post('pic', TRUE))
+            );
+        } else {
+            return $data = array(
+                'page' => $this->session->userdata('page'),
+                'kdpdi' => $this->session->userdata('kdpdi'),
+                'noso' => $this->session->userdata('noso'),
+                'tgl_pdi' => $this->session->userdata('tgl_pdi'),
+                'pic' => $this->session->userdata('pic')
+            );
+        }
+    }
+    
     public function add() {
         $this->breadcrumbs->push('Add', '/pdi');
-        //$data['acs_aki'] = $this->t_pdi->get_master_aksesoris('aki');
         $data['gudang'] = $this->main_model->getMaster('m_gudang', $like=array(), $where=array('status_gudang'=>'1'));
         $data['codepdi'] = $this->main_model->generate_code($this->table, 'PDI-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = false);
         $data['view'] = "t_pdi/add";
+        $this->load->view('default', $data);
+    }
+    
+    public function edit($id) {
+        $this->breadcrumbs->push('Add', '/pdi');
+        $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
+        $data['sales_order'] = $this->db->query("SELECT t_penjualan.noso,t_penjualan.tanggal,m_customer.nama_customer,penerimaan_motor.nomesin,penerimaan_motor.norangka,penerimaan_motor.tipe,penerimaan_motor.warna FROM t_penjualan LEFT JOIN m_customer ON t_penjualan.ktp=m_customer.no_ktp LEFT JOIN penerimaan_motor ON penerimaan_motor.nomesin=t_penjualan.nomsn WHERE t_penjualan.noso='".$data['detail']['noso']."'")->row_array();
+        $data['gudang'] = $this->main_model->getMaster('m_gudang', $like=array(), $where=array('status_gudang'=>'1'));
+        $data['aki'] = $this->__getAksesoris(1,$data['detail']['gudang_id']);
+        $data['spion'] = $this->__getAksesoris(2,$data['detail']['gudang_id']);
+        $data['helm'] = $this->__getAksesoris(3,$data['detail']['gudang_id']);
+        $data['toolkit'] = $this->__getAksesoris(6,$data['detail']['gudang_id']);
+        $data['rumah_plat'] = $this->__getAksesoris(7,$data['detail']['gudang_id']);
+        $data['jacket'] = $this->__getAksesoris(8,$data['detail']['gudang_id']);
+        $data['jas_hujan'] = $this->__getAksesoris(9,$data['detail']['gudang_id']);
+        $data['pdi_detail'] = $this->db->query("SELECT aksesoris_id FROM t_pdi_detail WHERE pdi_id='".$id."' ORDER BY id ASC")->result_array();
+        $data['view'] = "t_pdi/edit";
         $this->load->view('default', $data);
     }
     
@@ -143,5 +194,9 @@ class t_pdi extends MX_Controller {
             }
         }
     }   
+    
+    public function __getAksesoris($aksesoris,$gudang){
+        return $this->t_pdi->get_master_aksesoris($aksesoris,$gudang);
+    }
 }
 

@@ -13,13 +13,21 @@
  */
 class M_t_pdi extends CI_Model {
 
-    //put your code here
-
     var $table_pdi = "t_pdi";
-    
+
+    public function getdata($table, $limit, $pg, $like = array(), $where = array()) {
+        unset($like['page']);
+        $this->db->select("*");
+        $this->db->from($table);
+        $this->db->like($like);
+        $this->db->where($where);
+        $this->db->limit($pg, $limit);
+        return $this->db->get()->result_array();
+    }
+
     function save() {
         $id = $this->input->post('id');
-        $accs = $this->input->post('aksesoris');        
+        $accs = $this->input->post('aksesoris');
         $data_pembayaran = array(
             'noso' => $this->input->post('noso'),
             'kdpdi' => $this->input->post('kdpdi'),
@@ -34,20 +42,35 @@ class M_t_pdi extends CI_Model {
             if ($insert) {
                 $result = array();
                 $last_id = $this->db->insert_id();
-                foreach($accs as $k => $v){
-                    $result[] = array('pdi_id'=>$last_id,'aksesoris_id'=>$v);
+                foreach ($accs as $k => $v) {
+                    $result[] = array('pdi_id' => $last_id, 'aksesoris_id' => $v);
                 }
-                $insert_detail = $this->db->insert_batch('t_pdi_detail', $result); 
-                if($insert_detail){
-                    foreach($accs as $ks => $vs){
-                        $this->__update_aksesoris_value($vs);
+                $insert_detail = $this->db->insert_batch('t_pdi_detail', $result);
+                if ($insert_detail) {
+                    foreach ($accs as $ks => $vs) {
+                        $this->__update_aksesoris_value($vs, $this->input->post('gudang_id'), $this->input->post('kdpdi'));
                     }
                 }
-                //dump($result,true);
             }
             return true;
         } else {
-            $this->db->update($this->table_pdi, $this->main_model->update_sys($data_pembayaran), array('id' => $id));
+            //if ($insert) {
+                $result = array();
+                $release = $this->__releaseAksesoris($id, $this->input->post('kdpdi'));
+                if ($release) {
+                    $this->db->delete('t_pdi_detail', array('pdi_id' => $id));
+                    foreach ($accs as $k => $v) {
+                        $result[] = array('pdi_id' => $id, 'aksesoris_id' => $v);
+                    }
+                    $insert_detail = $this->db->insert_batch('t_pdi_detail', $result);
+                    if ($insert_detail) {
+                        foreach ($accs as $ks => $vs) {
+                            $this->__update_aksesoris_value($vs, $this->input->post('gudang_id'), $this->input->post('kdpdi'));
+                        }
+                    }
+                }
+                $update = $this->db->update($this->table_pdi, $this->main_model->update_sys($data_pembayaran), array('id' => $id));
+            //}
             return true;
         }
         return false;
@@ -101,16 +124,35 @@ left join m_customer f on f.no_ktp = b.ktp
         $this->db->group_by(array('aksesoris_id'));
         return $this->db->get()->result_array();
     }
-    
-    public function __update_aksesoris_value($aksesoris_id){
-        $this->db->select('*');
-        $this->db->from('penerimaan_aksesoris');
-        $this->db->where(array('jumlah >'=>0,'aksesoris_id'=>$aksesoris_id));
-        $this->db->order_by('tanggal_terima','ASC');
-        $this->db->limit(1);
-        $getAksesoris = $this->db->get()->row_array();
-        if(count($getAksesoris) > 0){
-            $this->db->query("UPDATE penerimaan_aksesoris SET jumlah=jumlah-1 WHERE id='".$getAksesoris['id']."'");
+
+    public function __update_aksesoris_value($aksesoris_id, $gudang, $pdi) {
+        $data = array(
+            'aksesoris_id' => $aksesoris_id,
+            'jumlah' => 1,
+            'tanggal_terima' => date('Y-m-d H:i:s'),
+            'status_add_or_min' => 2,
+            'keterangan' => 'Update By System For ' . $pdi,
+            'gudang_id' => $gudang,
+            'by_system' => 2
+        );
+        $this->db->insert('penerimaan_aksesoris', $data);
+        return TRUE;
+    }
+
+    public function __releaseAksesoris($id, $kdpdi) {
+        $gudang = $this->db->get_where('t_pdi',array('id'=>$id))->row_array();
+        $aksesorisPdi = $this->db->get_where('t_pdi_detail', array('pdi_id' => $id))->result_array();
+        foreach ($aksesorisPdi as $k => $v) {
+            $data = array(
+                'aksesoris_id' => $v['aksesoris_id'],
+                'jumlah' => 1,
+                'tanggal_terima' => date('Y-m-d H:i:s'),
+                'status_add_or_min' => 1,
+                'keterangan' => 'Release By System For ' . $kdpdi,
+                'gudang_id' => $gudang['gudang_id'],
+                'by_system' => 2
+            );
+            $this->db->insert('penerimaan_aksesoris', $data);
         }
         return TRUE;
     }
