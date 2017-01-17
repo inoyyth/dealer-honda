@@ -1,34 +1,42 @@
 <div class="row">
- 
-
-    <form action="<?php echo base_url("kwitansi-fee-save"); ?>" class="form-horizontal row-border" id="frmkwitansidp" method="post" enctype="multipart/form-data" parsley-validate novalidate>
+    <form action="<?php echo base_url("kwitansi-diskon-save"); ?>" class="form-horizontal row-border" id="frmkwitansidp" method="post" enctype="multipart/form-data" parsley-validate novalidate>
         <div class="col-md-12">
             <div class="block-web">
                 <div class="header">
                     <div class="actions"> </div>
-                    <h3 class="content-header">Kwitansi Fee</h3>
+                    <h3 class="content-header">Kwitansi Diskon</h3>
                 </div>
                 
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">No Kwitansi</label>
-                            <div class="col-sm-9">
-                                <input type="hidden" name="id" id="id" parsley-trigger="change" required readonly="true" class="form-control">
-                                <input type="text" name="nokwitansi" readonly="readonly" id="nokwitansi" parsley-trigger="change" required  value="<?php echo $codeso; ?>" class="form-control">
+                     <div class="col-md-6">
+                     </div>
+                     <div class="col-md-6">
+                         <div class="form-group">
+                            <label class="col-sm-3 control-label">No. Kwitansi</label>
+                            <div class="col-sm-9" >
+                                <input type="no_kwitansi" name="nokwitansi" id="no_kwitansi" parsley-trigger="change" required value="<?php echo $codeso;?>" class="form-control">
                             </div>
                         </div>
+                     </div>
+                    
+                </div>
+         
+                <hr style="border:1px solid #000;">
+                <div class="row">
+                    
+                    <div class="col-md-6">
+                        
+                        
                         
                         <div class="form-group" id="remote">
                             <label class="col-sm-3 control-label">No Sales Order</label>
-                            <div class="col-sm-9">
-                                 <input class="typeahead form-control" parsley-trigger="change" required name="noso" id="noso" type="text" placeholder="Type No Sales Order">
-                              
+                            <div class="col-sm-9" >
+                                
+                                <input type="hidden" name="id" id="id" parsley-trigger="change" required readonly="true" class="form-control">
+                               <input class="typeahead form-control" parsley-trigger="change" required name="noso" id="noso" type="text" placeholder="Type No Sales Order">
                             </div>
                         </div>
-
-                        
-
+ 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Nama</label>
                             <div class="col-sm-9">
@@ -44,27 +52,28 @@
                         </div>
                         
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Fee</label>
+                            <label class="col-sm-3 control-label">Diskon</label>
                             <div class="col-sm-9">
-                                <input type="text" name="fee" id="fee" parsley-trigger="change"     placeholder="Fee" class="form-control">
+                                <input type="diskon" name="diskon" id="diskon" parsley-trigger="change"     placeholder="Diskon" class="form-control">
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Terbilang</label>
                             <div class="col-sm-9">
-                                <textarea name="terbilang" id="terbilang"  class="form-control"> </textarea>
+                                <textarea name="terbilang" id="terbilang_diskon"  class="form-control"> </textarea>
                             </div>
                         </div>
                         
                     </div>
                     
                     <div class="col-md-6">
-                         
+                        
+                        
                         <div class="form-group">
                             <label class="col-sm-3 control-label">No.Rangka</label>
                             <div class="col-sm-9">
-                                <input type="text" name="no_rangka" id="no_rangka" parsley-trigger="change"     placeholder="No.Rangka" class="form-control">
+                                <input type="text" name="no_rangka" id="no_rangka" parsley-trigger="change"     placeholder="No. Rangka" class="form-control">
                             </div>
                         </div>
                         
@@ -95,11 +104,12 @@
             
             <div class="col-md-6">
                 <div class="form-group">
-                    <button name="submit" id="new" class="btn btn-primary">New</button>
+                    <button name="submit" id="new" name="new" class="btn btn-primary">New</button>
                     <button type="submit" name="save" id="save" class="btn btn-danger">Save</button>
-                    <button type="submit" name="New" id="edit" class="btn btn-default">Edit</button>
-                    <button type="button" name="cancel" id="cancel" class="btn btn-default">Cancel</button>
+                    <button type="submit" name="edit" id="edit" class="btn btn-default">Edit</button>
+                    <button type="reset" name="cancel" id="cancel" class="btn btn-default">Cancel</button>
                     <button type="button" name="print" id="print" onclick="cetak()" class="btn btn-default">Print</button>
+                      
                 </div>
             </div>
 
@@ -108,119 +118,17 @@
 
     </form>
 </div>
- 
-<script>
-    $(document).ready(function () {
-        //$('#modalBrowse').modal({backdrop: 'static', keyboard: false})  
-        //datatables
-        
-        $("#no_ktp").focusout(function () {
-            var ktp = $(this).val();
-
-            var dt = {no_ktp: ktp};
-            $.ajax({
-                type: "post",
-                url: "t_penjualan/load_customer_by_ktp",
-                data: dt,
-                dataType: "json",
-                success: function (hasil) {
-                    $.map(hasil, function (value, index) {
-                        if (index != "no_ktp")
-                            if (document.getElementById(index)) {
-                                $("#" + index).val(value);
-                            }
-                    });
-                }
-            });
-            return false;
-        })
-
-        $("#edit").on("click", function () {
-            $("#noso").removeAttr("readonly");
-        });
-
-       $("#cancel").on("click", function () {
-            window.location="t_kwitansi/t_kwitansi_fee";
-        });
-
-        $("#noso").focusout(function () {
-            var noso = $(this).val();
-            var dt = {noso: noso};
-            $.ajax({
-                type: "post",
-                url: "t_kwitansi/t_kwitansi_fee/load_transaction_by_noso",
-                data: dt,
-                dataType: "json",
-                success: function (hasil) {
-                    $.map(hasil, function (value, index) {
-                        if (index != "noso") {
-                            if (index != "cara_pembelian") {
-                                if (document.getElementById(index)) {
-                                    if (index != "handphone_customer" && index != "no_ktp") {
-                                        if ($.isNumeric(value)) {
-                                            $("#" + index).val(formatCurrency(value));
-                                        } else {
-                                            $("#" + index).val(value);
-                                        }
-                                    } else {
-                                        $("#" + index).val(value);
-                                    }
-                                }
-                            } else {
-                                $('input:radio[name="' + index + '"][value="' + value + '"]').prop('checked', true);
-                                $(".carapembelian").change();
-                                setTimeout(function () {
-                                    $.ajax({
-                                        type: "post",
-                                        url: "t_penjualan/load_transaction_price_by_noso",
-                                        data: dt,
-                                        dataType: "json",
-                                        success: function (hsl) {
-                                            $.map(hsl, function (value, index) {
-                                                if ($(".cpembelian").find("#" + index)) {
-                                                    if (index != "handphone_customer" && index != "no_ktp") {
-                                                        if ($.isNumeric(value)) {
-                                                            $("#" + index).val(formatCurrency(value));
-                                                        } else {
-                                                            $("#" + index).val(value);
-                                                        }
-                                                    } else {
-                                                        $("#" + index).val(value);
-                                                    }
-                                                }
-                                            });
-
-                                        }
-                                    });
-                                }, 1000);
-                            }
-                        }
-
-                    });
-                }
-            });
-            return false;
-        });
-
-        $(".carapembelian").on("change", function () {
-            var cpembelian = $('.carapembelian:checked').val();
-            $(".cpembelian").empty();
-            $(".cpembelian").load("t_penjualan/load_cpembelian/" + cpembelian);
-        });
-
-    });
-</script>
 
 
 
 <script>
     $(document).ready(function(){
-        
+       
         var bestPictures = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {
-              url: '<?php echo base_url('t_kwitansi/t_kwitansi_fee/getSO?query=%QUERY');?>',
+              url: '<?php echo base_url('t_kwitansi/t_kwitansi_diskon/getSO?query=%QUERY');?>',
               wildcard: '%QUERY'
             }
         });
@@ -237,11 +145,12 @@
             $('#harga_otr').val(datum.harga_otr);
             $('#nama').val(datum.nama_customer);
             $('#fee').val(datum.fee);
+            $('#diskon').val(datum.diskon);
             $('#no_mesin').val(datum.nomsn);
             $('#warna').val(datum.warna_motor);
             $('#type').val(datum.tipe_motor);
             $('#no_rangka').val(datum.norangka);
-            $('#terbilang').val(datum.terbilang);
+            $('#terbilang_diskon').val(datum.terbilang_diskon);
             //$('#norangka').val(datum['norangka']);
             //$('#warna').val(datum['warna']);
             //$('#tahun').val(datum['tahun']);
@@ -337,7 +246,7 @@
 
     //alert(res);
     //$.post( "<?php echo base_url();?>kwitansi-diskon-printout/?template=table_html&name=kwitansi-dp-printout", { noso: data } );
-    location.href="<?php echo base_url();?>kwitansi-fee-printout/"+res+"?template=table_html&name=kwitansi-fee-printout";
+    location.href="<?php echo base_url();?>kwitansi-diskon-printout/"+res+"?template=table_html&name=kwitansi-diskon-printout";
     //alert(data);
     }
     function getGudangTo(id){

@@ -1,9 +1,9 @@
 <?php
 
-class M_t_kwitansi extends CI_Model {
+class M_t_leasing extends CI_Model {
 
     //put your code here
-
+    var $table = "t_kwitansi_leasing";
     var $table_kwitansi_dp = "t_pembayaran";
     var $table_kwitansi_fee = "t_kwitansi_fee";
     var $table_kwitansi_diskon = "t_kwitansi_diskon";
@@ -12,6 +12,7 @@ class M_t_kwitansi extends CI_Model {
     var $table_tpenjualan = "t_penjualan";
     var $table_thargamotor = "t_harga_motor";
     var $table_motor = "m_motor";
+    var $table_penerimaan_motor = "penerimaan_motor";
 
     /*
     public function getdata_dp() {
@@ -140,7 +141,7 @@ left join m_motor d on d.nomsn = b.nomsn
 left join t_kwitansi_fee e on e.noso = a.noso
 left join m_customer f on f.no_ktp = b.ktp
  
-            WHERE a.noso ="'.$id.'"')->row();
+            WHERE a.noso ="'.$id.'" AND a.m_status = "1"')->row();
         return $data;
         
     }   
@@ -218,34 +219,37 @@ left join m_customer f on f.no_ktp = b.ktp
     }
     
     public function getNOSO($query){
-        $data = $this->db->query('select a.*,b.nama_customer,c.fee,c.cara_pembelian,c.diskon,c.dp,c.sisa_hutang,c.tagih,d.norangka,d.warna,d.tipe from t_penjualan a 
-            left join m_customer b on b.no_ktp = a.ktp 
-left join t_harga_motor c on c.noso = a.noso 
- 
-left join t_kwitansi_fee e on e.noso = a.noso
-left join penerimaan_motor d on d.nomesin = a.nomsn
+        $data = $this->db->query('select a.noso,a.harga_otr,a.tanggal,b.nama_customer,c.nomesin,c.norangka,c.tipe,c.warna,c.tahun,e.leasing,e.dp_system,e.diskon,(a.harga_otr - e.dp_system) as tagihan from t_penjualan a
+left join m_customer b on b.no_ktp = a.ktp
+left join penerimaan_motor c on c.nomesin = a.nomsn
+left join m_motor d on d.tipe_motor = c.tipe
+left join t_harga_motor e on e.noso = a.noso
             WHERE a.noso LIKE "%'.$query.'%"  AND a.m_status =  "1" ');
        $show = array();
         foreach($data->result_array() as $list){
            //echo "<br>".terbilang($list['fee'],3)."<br>";
            //
            $show[] = array('noso'=>$list['noso'],
-                         'fee'=>$list['fee'],
+                         
                          'harga_otr'=>formatrp($list['harga_otr']),
                          'diskon'=>$list['diskon'],
-                         'dp'=>formatrp($list['dp']),
-                         'dpall'=>formatrp($list['tagih']),
-                         'cara_pembelian'=>$list['cara_pembelian'],
+                        
+                         'tagihan'=>$list['tagihan'],
+                         'tanggal'=>$list['tanggal'],
+                         'tahun'=>$list['tahun'],
                          'nama_customer'=>$list['nama_customer'],
-                         'nomsn'=>$list['nomsn'],
-                         'warna_motor'=>$list['warna'],
-                         'tipe_motor'=>$list['tipe'],
+                         'tipe'=>$list['tipe'],
+                         'warna'=>$list['warna'],
+                         'leasing'=>$list['leasing'],
+                         'dp_system'=> formatrp($list['dp_system']),
+                         'diskon'=>formatrp($list['diskon']),
+                         'tagihan'=>formatrp($list['tagihan']),
+                         'tipe'=>$list['tipe'],
                          'norangka'=>$list['norangka'],
-                         'fee'=>formatrp($list['fee']),
-                         'tagih'=>formatrp($list['tagih']),
-                         'sisa_hutang'=>formatrp($list['sisa_hutang']),
-                         'terbilang_diskon'=>terbilang($list['diskon']),
-                         'terbilang'=>terbilang($list['fee']));
+                         'nomesin'=>$list['nomesin']
+                         
+                     
+                                         );
            //$aku = array('noso'=>$list['noso']);
         }
         return $show;
@@ -270,45 +274,45 @@ left join penerimaan_motor d on d.nomesin = a.nomsn
     }
 
     public function getdata_transaction_by_noso($noso) {
-        $this->db->select("t_harga_motor.cara_pembelian,t_penjualan.id,t_penjualan.noso,t_penjualan.nokonsumen,
-t_penjualan.tanggal,t_penjualan.nomsn,t_penjualan.warna_motor,t_penjualan.harga_otr,t_harga_motor.marketing,
-t_harga_motor.leasing,t_harga_motor.dp_system,t_harga_motor.diskon,t_harga_motor.tagih,t_harga_motor.dp,
-t_harga_motor.sisa_hutang,t_harga_motor.fee,m_customer.no_ktp,m_customer.nama_customer,m_customer.tempat_lahir_customer,
-m_customer.tanggal_lahir_customer,m_customer.kelamin_customer,m_customer.alamat_customer,m_customer.telepon_customer,
-m_customer.handphone_customer,m_customer.rt,m_customer.rw,m_customer.wilayah,m_customer.kelurahan,
-m_customer.kecamatan,m_motor.norangka,m_motor.tipe_motor,m_motor.nama_motor,m_motor.varian,m_motor.warna,
-m_motor.tahun,m_motor.merk,m_motor.harga_otr,m_motor.nama_foto,m_motor.url_foto", false);
-        $this->db->from($this->table_tpenjualan);
+        return $this->db->query("select a.noso,a.harga_otr,a.tanggal,b.nama_customer,c.nomesin,c.norangka,c.tipe,c.warna,c.tahun,e.leasing,e.dp_system,e.diskon,(a.harga_otr - e.dp_system) as tagihan from t_penjualan a
+left join m_customer b on b.no_ktp = a.ktp
+left join penerimaan_motor c on c.nomesin = a.nomsn
+left join m_motor d on d.tipe_motor = c.tipe
+left join t_harga_motor e on e.noso = a.noso where a.noso = '$noso'")->result_array();
+        //$this->db->from($this->table_tpenjualan);
 
-        
-        $this->db->join($this->table_thargamotor, $this->table_thargamotor . ".noso = " . $this->table_tpenjualan . ".noso", "left");
-        $this->db->join($this->table_customer, $this->table_customer . ".no_ktp = " . $this->table_tpenjualan . ".ktp", "left");
-        $this->db->join($this->table_motor, $this->table_motor . ".nomsn = " . $this->table_tpenjualan . ".nomsn", "left");
-        $this->db->where($this->table_tpenjualan . ".noso", $noso);
-        $query = $this->db->get();
-        return $query->row();
+        //$table_penerimaan_motor
+        //$this->db->join($this->table_thargamotor, $this->table_thargamotor . ".noso = " . $this->table_tpenjualan . ".noso", "left");
+        //$this->db->join($this->table_customer, $this->table_customer . ".no_ktp = " . $this->table_tpenjualan . ".ktp", "left");
+        //$this->db->join($this->table_motor, $this->table_penerimaan_motor . ".nomesin = " . $this->table_tpenjualan . ".nomsn", "left");
+        //$this->db->where($this->table_tpenjualan . ".noso", $noso);
+        //$query = $this->db->get();
+        //return $query->row();
     }
     
     function get_sum_pembayaran(){
         $this->db->select("",false);
     }
     
-    function save() {
+    function save_kw_leasing() {
         $id = $this->input->post('id');
 
-        $data_pembayaran = array(
+        $data_pembayaran = array(      
             'nokwitansi' => $this->input->post('nokwitansi'),
             'noso' => $this->input->post('noso'),
-            'fee' => currency_to_normal($this->input->post('fee')),
-            
-            'm_status' => 1
-        );
+            'dp_system' => currency_to_normal($this->input->post('dp_system')),
+            'tagih' => currency_to_normal($this->input->post('tagih')),
+            'subsidi1' => currency_to_normal($this->input->post('subsidi1')),
+            'subsidi2' => currency_to_normal($this->input->post('subsidi2')),
+            'm_status'=>1
+            );
 
         if (empty($id)) {
-            $this->db->insert($this->table_kwitansi_fee, $this->main_model->create_sys($data_pembayaran));
+            $this->db->insert($this->table, $this->main_model->create_sys($data_pembayaran));
             return true;
+            
         } else {
-            $this->db->update($this->table_kwitansi_fee, $this->main_model->update_sys($data_pembayaran), array('id' => $id));
+            $this->db->update($this->table, $this->main_model->update_sys($data_pembayaran), array('id' => $id));
             return true;
         }
         return false;

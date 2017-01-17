@@ -200,16 +200,23 @@ $route['kwitansi-dp-excel'] = 't_kwitansi/t_kwitansidp/print_excel';
 $route['kwitansi-dp-excel/(:any)'] = 't_kwitansi/t_kwitansidp/print_excel/$1';
 
 /* Start Kwitansi Fee */
-$route['kwitansi-fee'] = 't_kwitansi/t_kwitansi_fee/add';
+$route['kwitansi-fee'] = 't_kwitansi/t_kwitansi_fee';
 $route['kwitansi-fee-tambah'] = 't_kwitansi/t_kwitansi_fee/add';//kwitansi-fee-save
 $route['kwitansi-fee-edit-(:num)'] = 't_kwitansi/t_kwitansi_dp/edit/$1';
 $route['kwitansi-fee-detail-(:num)'] = 't_kwitansi/t_kwitansi_dp/detail/$1';
 $route['kwitansi-fee-delete-(:num)'] = 't_kwitansi/t_kwitansi_dp/delete/$1';
+
+//fee detail
+$route['kwitansi-fee-detail/(:any)'] = 't_kwitansi/t_kwitansi_fee/detail/$1';
+
 $route['kwitansi-fee-save'] = 't_kwitansi/t_kwitansi_fee/save';
 $route['kwitansi-fee-page'] = 't_kwitansi/t_kwitansi_dp/index';
 $route['kwitansi-fee-page/(:any)'] = 't_kwitansi/t_kwitansi_dp/index/$1';
 $route['kwitansi-fee-pdf'] = 't_kwitansi/t_kwitansi_dp/print_pdf';
-$route['kwitansi-fee-pdf/(:any)'] = 't_kwitansi/t_kwitansi_dp/print_pdf/$1';
+
+//fee print
+$route['kwitansi-fee-pdf/(:any)'] = 't_kwitansi/t_kwitansi_fee/print_pdf/$1';
+ 
 $route['kwitansi-fee-excel'] = 't_kwitansi/t_kwitansi_dp/print_excel';
 $route['kwitansi-fee-excel/(:any)'] = 't_kwitansi/t_kwitansi_dp/print_excel/$1';
 /* Kwitansi Fee */
@@ -228,6 +235,20 @@ $route['kwitansi-diskon-pdf/(:any)'] = 't_kwitansi/t_kwitansi_diskon/print_pdf/$
 $route['kwitansi-diskon-excel'] = 't_kwitansi/t_kwitansi_diskon/print_excel';
 $route['kwitansi-diskon-excel/(:any)'] = 't_kwitansi/t_kwitansi_diskon/print_excel/$1';
 /* Kwitansi Diskon */
+
+/*Start Leasing*/
+$route['cetak-kwitansi-leasing'] = 'leasing/cetak_kwitansi_leasing/index';
+$route['cetak-kwitansi-leasing-save'] = 'leasing/cetak_kwitansi_leasing/save';
+$route['cetak-kwitansi-leasing-proseska'] = 'leasing/cetak_kwitansi_leasing/proses_ka';
+$route['cetak-kwitansi-leasing-proseska/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_ka/$1';
+$route['cetak-kwitansi-leasing-proseskb'] = 'leasing/cetak_kwitansi_leasing/proses_kb';
+$route['cetak-kwitansi-leasing-proseskb/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_kb/$1';
+$route['cetak-kwitansi-leasing-proseskc'] = 'leasing/cetak_kwitansi_leasing/proses_kc';
+$route['cetak-kwitansi-leasing-proseskc/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_kc/$1';
+$route['cetak-kwitansi-leasing-proseskc2'] = 'leasing/cetak_kwitansi_leasing/proses_kc2';
+$route['cetak-kwitansi-leasing-proseskc2/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_kc2/$1';
+
+/*End Leasing*/
 
 /* Start PDI */
 $route['pdi'] = 't_pdi/index';

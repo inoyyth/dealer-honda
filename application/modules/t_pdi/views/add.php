@@ -291,15 +291,21 @@
                 dataType: "json",
                 data: {id: datum.id},
                 success: function (result) {
-                    console.log(result);
-                    $('#noso').val(result.noso);
-                    $('#harga_otr').val(result.harga_otr);
-                    $('#nama').val(result.nama_customer);
-                    $('#tanggal').val(result.tanggal);
-                    $('#type').val(result.tipe);
-                    $('#no_mesin').val(result.nomsn);
-                    $('#no_rangka').val(result.norangka);
-                    $('#warna').val(result.warna);
+                      //console.log(result.master_motor[0].nama_motor);
+
+-                    $('#harga_otr').val(result.master_motor.harga_otr);
+
+-                    $('#nama').val(result.customer[0].nama_customer);
+
+-                    $('#tanggal').val(result.penjualan[0].tanggal);
+
+-                    $('#type').val(result.terima_motor[0].tipe);
+
+-                    $('#no_mesin').val(result.terima_motor[0].nomesin);
+
+-                    $('#no_rangka').val(result.terima_motor[0].norangka);
+
+-                    $('#warna').val(result.terima_motor[0].warna);
                 },
                 async: false
             });
