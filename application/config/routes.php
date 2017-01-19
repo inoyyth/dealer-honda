@@ -244,18 +244,18 @@ $route['pdi-excel/(:any)'] = 't_pdi/print_excel/$1';
 /* End PDI */
 
 /* Start STNK BPKB */
-$route['stnk-bpkb'] = 't_stnk_bpkb/add';
-$route['stnk-bpkb-tambah'] = 't_stnk_bpkb/add';
-$route['stnk-bpkb-edit-(:num)'] = 't_stnk_bpkb/edit/$1';
-$route['stnk-bpkb-detail-(:num)'] = 't_stnk_bpkb/detail/$1';
-$route['stnk-bpkb-delete-(:num)'] = 't_stnk_bpkb/delete/$1';
-$route['stnk-bpkb-save'] = 't_stnk_bpkb/save';
-$route['stnk-bpkb-page'] = 't_stnk_bpkb/index';
-$route['stnk-bpkb-page/(:any)'] = 't_stnk_bpkb/index/$1';
-$route['stnk-bpkb-pdf'] = 't_stnk_bpkb/print_pdf';
-$route['stnk-bpkb-pdf/(:any)'] = 't_stnk_bpkb/t_stnk_bpkb/$1';
-$route['stnk-bpkb-excel'] = 't_stnk_bpkb/print_excel';
-$route['stnk-bpkb-excel/(:any)'] = 't_stnk_bpkb/print_excel/$1';
+$route['stnk'] = 't_stnk_bpkb/index';
+$route['stnk-tambah'] = 't_stnk_bpkb/add';
+$route['stnk-edit-(:num)'] = 't_stnk_bpkb/edit/$1';
+$route['stnk-detail-(:num)'] = 't_stnk_bpkb/detail/$1';
+$route['stnk-delete-(:num)'] = 't_stnk_bpkb/delete/$1';
+$route['stnk-save'] = 't_stnk_bpkb/save';
+$route['stnk-page'] = 't_stnk_bpkb/index';
+$route['stnk-page/(:any)'] = 't_stnk_bpkb/index/$1';
+$route['stnk-pdf'] = 't_stnk_bpkb/print_pdf';
+$route['stnk-pdf/(:any)'] = 't_stnk_bpkb/t_stnk_bpkb/$1';
+$route['stnk-excel'] = 't_stnk_bpkb/print_excel';
+$route['stnk-excel/(:any)'] = 't_stnk_bpkb/print_excel/$1';
 /* End STNK BPKB */
 
 /* Start Void */
