@@ -1,4 +1,16 @@
 <?php
+date_default_timezone_get('Asia/Jakarta');
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of t_stnk_bpkb
+ *
+ * @author Langit-Biru
+ */
 class T_stnk_bpkb extends MX_Controller {
     //put your code here
     var $table = "t_stnk_bpkb";
@@ -22,18 +34,24 @@ class T_stnk_bpkb extends MX_Controller {
     public function getSO(){
         $query = $this->input->get('query');
         $data = $this->t_stnk_bpkb->getNOSO($query);
+        //echo $this->db->last_query();
         echo json_encode($data);
     }
     
     public function getNOPRO(){
         $hasil = $this->input->get('hasil');
         $data = $this->t_stnk_bpkb->getNOPRO($hasil);
+        //echo $this->db->last_query();
         echo json_encode($data);
     }
     
     public function save_proses(){
+        //echo "hello";
          if ($_POST) {
+            //var_dump($_POST);
+            //exit();
             if ($this->t_stnk_bpkb->save_proses()) {
+                
                 $this->session->set_flashdata('success', 'Data Berhasil Di Simpan !');
             } else {
                 $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
@@ -46,7 +64,10 @@ class T_stnk_bpkb extends MX_Controller {
     
     public function save_tt(){
         if ($_POST) {
+            //var_dump($_POST);
+            //exit();
             if ($this->t_stnk_bpkb->save_tt()) {
+                
                 $this->session->set_flashdata('success', 'Data Berhasil Di Simpan !');
             } else {
                 $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
@@ -58,9 +79,16 @@ class T_stnk_bpkb extends MX_Controller {
     }
     
     public function pro_est_date_stnk(){
-        $tgl_proses_stnk = $this->input->post('tgl_proses_stnk');
+        $tgl_proses_stnk = $this->input->post('tgl_proses_stnk');       
+   
+        //$tgl1 = "2016-12-16";// pendefinisian tanggal awal
         $tgl2 = date('Y-m-d', strtotime('+14 days', strtotime($tgl_proses_stnk))); //operasi penjumlahan tanggal sebanyak 6 hari
         echo $tgl2;
+        
+        //$tambah_tanggal = mktime(0, 0, 0, date('m'), date('d') + 14, date('Y')); 
+        //$tambah = date($tgl_proses_stnk,$tambah_tanggal);
+
+        //echo $tambah;
     }
     
     function terbilang(){
@@ -71,30 +99,15 @@ class T_stnk_bpkb extends MX_Controller {
     
    public function pro_est_date_bpkb(){
         $tgl_proses_bpkb = $this->input->post('tgl_proses_bpkb');       
+   
+        //$tgl1 = "2016-12-16";// pendefinisian tanggal awal
         $tgl2 = date('Y-m-d', strtotime('+90 days', strtotime($tgl_proses_bpkb))); //operasi penjumlahan tanggal sebanyak 6 hari
         echo $tgl2;
-    }
-    
-    public function get_sales_order(){
-        $query = $this->input->get('query');
-        $so_exist = $this->main_model->getMaster('t_stnk', $like=array(), $where=array('m_status'=>'1'));
-        $where_not_in = array();
-        foreach($so_exist as $k=>$v){
-            $where_not_in[] = $v['noso'];
-        }
-        $so_implode = "'" . implode("', '", $where_not_in) . "'";
-        $data = $this->db->query("SELECT * FROM t_penjualan WHERE noso LIKE '%$query%' AND m_status='1' AND noso NOT IN ($so_implode)")->result_array();
-        echo json_encode($data);
-    }
-    
-    public function get_detail_so(){
-        $id = $this->input->post('id');
-        $data['penjualan'] = $this->main_model->getMaster('t_penjualan', $like=array(), $where=array('id'=>$id));
-        $data['customer'] = $this->main_model->getMaster('m_customer', $like=array(), $where=array('no_ktp'=>$data['penjualan'][0]['ktp']));
-        $data['terima_motor'] = $this->main_model->getMaster('penerimaan_motor', $like=array(), $where=array('nomesin'=>$data['penjualan'][0]['nomsn']));
-        $data['master_motor'] = $this->main_model->getMaster('m_motor', $like=array(), $where=array('tipe_motor'=>$data['terima_motor'][0]['tipe']));
-        $data['master_harga_motor'] = $this->main_model->getMaster('t_harga_motor', $like=array(), $where=array('noso'=>$data['penjualan'][0]['noso']));
-        echo json_encode($data);
+        
+        //$tambah_tanggal = mktime(0, 0, 0, date('m'), date('d') + 14, date('Y')); 
+        //$tambah = date($tgl_proses_stnk,$tambah_tanggal);
+
+        //echo $tambah;
     }
     
 }

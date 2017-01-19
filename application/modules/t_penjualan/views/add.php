@@ -1,10 +1,4 @@
 <div class="row">
-   <!-- <div class="col-md-12">
-        <div class="block-web">
-            <button type="submit" name="edit" id="edit" class="btn btn-default">Edit</button>
-        </div>
-    </div>-->
-
     <form action="<?php echo base_url("penjualan-save"); ?>" class="form-horizontal row-border" id="frmtransaksi-new" method="post" enctype="multipart/form-data" parsley-validate novalidate>
         <div class="col-md-6">
             <div class="block-web">
