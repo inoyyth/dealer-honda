@@ -12,7 +12,7 @@
                             <div class="form-group" id="remote">
                                 <label class="col-sm-3 control-label">No Sales Order</label>
                                 <div class="col-sm-9">
-                                    <input type="" name="id" value="<?php echo $detail['id'];?>"/>
+                                    <input type="hidden" name="id" value="<?php echo $detail['id'];?>"/>
                                     <input style="text-transform: uppercase;" class="typeahead form-control" parsley-trigger="change" required name="noso" id="noso" value="<?php echo $detail['no_so'];?>" type="text" placeholder="Type No Sales Order">
                                 </div>
                             </div>
