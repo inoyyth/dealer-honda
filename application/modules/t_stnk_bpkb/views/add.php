@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <div class="block-web">
-        <form action="<?php echo base_url("stnk-save-proses"); ?>" class="form-horizontal row-border" id="frmkwitansidp" method="post" enctype="multipart/form-data" parsley-validate novalidate>
+        <form action="<?php echo base_url("stnk-save"); ?>" class="form-horizontal row-border" method="post" enctype="multipart/form-data" parsley-validate novalidate>
             <div class="header">
                 <div class="actions"> </div>
                 <h3 class="content-header">Proses STNK</h3>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">No Proses</label>
+                                <label class="col-sm-3 control-label">No. Proses</label>
                                 <div class="col-sm-9">
                                     <input type="text" readonly="true" name="no_proses" id="no_proses" value="<?php echo $codeso; ?>" parsley-trigger="change" required placeholder="No Proses" class="form-control">
                                 </div>
@@ -95,31 +95,31 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">ID/KTP</label>
                             <div class="col-sm-9">
-                                <input type="text" name="ktp_stnk" id="no_ktp" parsley-trigger="change"  placeholder="ID/KTP" class="form-control">
+                                <input type="text" required="true" parsley-trigger="change" name="ktp_stnk" id="no_ktp" parsley-trigger="change"  placeholder="ID/KTP" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Nama</label>
                             <div class="col-sm-9">
-                                <input type="text" name="nama" id="nama" parsley-trigger="change"  placeholder="Nama" class="form-control">
+                                <input type="text" required="true" parsley-trigger="change" name="nama" id="nama" parsley-trigger="change"  placeholder="Nama" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tempat Lahir</label>
                             <div class="col-sm-9">
-                                <input type="text" name="tempat_lahir" id="tempat_lahir_customer" parsley-trigger="change" placeholder="Tempat Lahir" class="form-control">
+                                <input type="text" required="true" parsley-trigger="change" name="tempat_lahir" id="tempat_lahir_customer" parsley-trigger="change" placeholder="Tempat Lahir" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tanggal Lahir</label>
                             <div class="col-sm-9">
-                                <input type="text" name="tanggal_lahir" id="tanggal_lahir_customer" parsley-trigger="change"  placeholder="Tanggal Lahir" class="form-control">
+                                <input type="text" required="true" parsley-trigger="change" name="tanggal_lahir" id="tanggal_lahir_customer" parsley-trigger="change"  placeholder="Tanggal Lahir" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Jenis Kelamin</label>
                             <div class="col-sm-9">
-                                <select name="kelamin_customer" class="form-control" id="kelamin_customer">
+                                <select required="true" parsley-trigger="change" name="kelamin_customer" class="form-control" id="kelamin_customer">
                                     <option value=""> --Pilih-- </option>
                                     <option value="P"> Laki-Laki </option>
                                     <option value="W"> Perempuan </option>
@@ -129,7 +129,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Alamat</label>
                             <div class="col-sm-9">
-                                <textarea name="alamat" id="alamat_customer" class="form-control"> </textarea>
+                                <textarea required="true" parsley-trigger="change" name="alamat_customer" id="alamat_customer" class="form-control"> </textarea>
                             </div>
                         </div>
                     </div>
@@ -143,10 +143,10 @@
                             <div class="col-sm-9">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <input type="text" name="rt" id="rt" parsley-trigger="change" placeholder="RT" class="form-control">
+                                        <input type="text" required="true" parsley-trigger="change" name="rt" id="rt" parsley-trigger="change" placeholder="RT" class="form-control">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" name="rw" id="rw" parsley-trigger="change" placeholder="RW" class="form-control">
+                                        <input type="text" required="true" parsley-trigger="change" name="rw" id="rw" parsley-trigger="change" placeholder="RW" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -154,31 +154,31 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Wilayah</label>
                             <div class="col-sm-9">
-                                <input type="text" name="wilayah" id="kelurahan" parsley-trigger="change" placeholder="Kel/Desa" class="form-control">
+                                <input type="text" required="true" parsley-trigger="change" name="wilayah" id="wilayah" parsley-trigger="change" placeholder="Kel/Desa" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Kelurahan</label>
                             <div class="col-sm-9">
-                                <input type="text" name="kelurahan" id="kelurahan" parsley-trigger="change" placeholder="Kel/Desa" class="form-control">
+                                <input type="text" required="true" parsley-trigger="change" name="kelurahan" id="kelurahan" parsley-trigger="change" placeholder="Kel/Desa" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Kecamatan</label>
                             <div class="col-sm-9">
-                                <input type="text" name="kecamatan" id="kecamatan" parsley-trigger="change"     placeholder="Kecamatan" class="form-control">
+                                <input type="text" required="true" parsley-trigger="change" name="kecamatan" id="kecamatan" parsley-trigger="change"     placeholder="Kecamatan" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Telepon</label>
                             <div class="col-sm-9">
-                                <input type="text" name="telepon" id="telepon_customer" parsley-trigger="change"     placeholder="Telepon" class="form-control">
+                                <input type="text" required="true" parsley-trigger="change" name="telepon_customer" id="telepon_customer" parsley-trigger="change"     placeholder="Telepon" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Handphone</label>
                             <div class="col-sm-9">
-                                <input type="text" name="handphone" id="handphone_customer" parsley-trigger="change"     placeholder="Handphone" class="form-control">
+                                <input type="text" required="true" parsley-trigger="change" name="handphone_customer" id="handphone_customer" parsley-trigger="change"     placeholder="Handphone" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -234,14 +234,14 @@
                     $('#tempat_lahir_customer').val(result.customer[0].tempat_lahir_customer);
                     $('#tanggal_lahir_customer').val(result.customer[0].tanggal_lahir_customer);
                     $('#kelamin_customer').val(result.customer[0].kelamin_customer);
-                    $('#alamat').val(result.customer[0].alamat_customer);
+                    $('#alamat_customer').val(result.customer[0].alamat_customer);
                     $('#rt').val(result.customer[0].rt);
                     $('#rw').val(result.customer[0].rw);
                     $('#wilayah').val(result.customer[0].wilayah);
                     $('#kelurahan').val(result.customer[0].kelurahan);
-                    $('#kecamatan').val(result.customer[0].nama_customer);
-                    $('#telepon').val(result.customer[0].telepon_customer);
-                    $('#handphone').val(result.customer[0].handphone_customer);
+                    $('#kecamatan').val(result.customer[0].kecamatan);
+                    $('#telepon_customer').val(result.customer[0].telepon_customer);
+                    $('#handphone_customer').val(result.customer[0].handphone_customer);
                 },
                 async: false
             });
