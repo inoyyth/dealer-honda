@@ -70,7 +70,10 @@ class M_t_stnk_bpkb extends CI_Model {
             }
             return true;
         } else {
-            $this->db->update($this->table, $this->main_model->update_sys($data_pembayaran), array('id' => $id));
+            $update = $this->db->update($this->table, $this->main_model->update_sys($data_stnk), array('id' => $id));
+            if ($update) {
+                $this->db->update($this->table_customer, $this->main_model->update_sys($data_customer), array('t_stnk_id' => $id));
+            }
             return true;
         }
         return false;

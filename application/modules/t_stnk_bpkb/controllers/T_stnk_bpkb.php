@@ -76,6 +76,11 @@ class T_stnk_bpkb extends MX_Controller {
             show_404();
         }
     }
+    
+    function delete($id) {
+        $this->main_model->delete($this->table, array('id' => $id), array('stnk_status' => '3'));
+        redirect("stnk");
+    }
 
     public function pro_est_date_stnk() {
         $tgl_proses_stnk = $this->input->post('tgl_proses_stnk');
