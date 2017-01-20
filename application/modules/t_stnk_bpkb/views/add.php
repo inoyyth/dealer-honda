@@ -187,7 +187,7 @@
                 <div class="row">
                     <div class="pull-right">
                         <button type="submit" name="save" id="save" class="btn btn-primary">Save</button>
-                        <a href="<?php echo base_url('stnk-bpkb'); ?>" class="btn btn-warning">Cancel</a>
+                        <a href="<?php echo base_url('stnk'); ?>" class="btn btn-warning">Cancel</a>
                     </div>
                 </div>
             </div>
