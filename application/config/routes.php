@@ -114,6 +114,18 @@ $route['master-leasing-pdf/(:any)'] = 'md_leasing/print_pdf/$1';
 $route['master-leasing-excel'] = 'md_leasing/print_excel';
 $route['master-leasing-excel/(:any)'] = 'md_leasing/print_excel/$1';
 
+$route['master-biro-jasa'] = 'md_birojasa';
+$route['master-biro-jasa-tambah'] = 'md_birojasa/add';
+$route['master-biro-jasa-edit-(:num)'] = 'md_birojasa/edit/$1';
+$route['master-biro-jasa-delete-(:num)'] = 'md_birojasa/delete/$1';
+$route['master-biro-jasa-save'] = 'md_birojasa/save';
+$route['master-biro-jasa-page'] = 'md_birojasa/index';
+$route['master-biro-jasa-page/(:any)'] = 'md_birojasa/index/$1';
+$route['master-biro-jasa-pdf'] = 'md_birojasa/print_pdf';
+$route['master-biro-jasa-pdf/(:any)'] = 'md_birojasa/print_pdf/$1';
+$route['master-biro-jasa-excel'] = 'md_birojasa/print_excel';
+$route['master-biro-jasa-excel/(:any)'] = 'md_birojasa/print_excel/$1';
+
 $route['master-supplier'] = 'md_supplier';
 $route['master-supplier-tambah'] = 'md_supplier/add';
 $route['master-supplier-edit-(:num)'] = 'md_supplier/edit/$1';
