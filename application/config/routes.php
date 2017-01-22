@@ -286,12 +286,8 @@ $route['void-excel/(:any)'] = 't_void/print_excel/$1';
 /* End Void */
 
 /* Start Surat Jalan */
-$route['surat-jalan'] = 't_surat_jalan/add';
-$route['surat-jalan-tambah'] = 't_surat_jalan/add';
-$route['surat-jalan-edit-(:num)'] = 't_surat_jalan/edit/$1';
-$route['surat-jalan-detail-(:num)'] = 't_surat_jalan/detail/$1';
-$route['surat-jalan-delete-(:num)'] = 't_surat_jalan/delete/$1';
-$route['surat-jalan-save'] = 't_surat_jalan/save';
+$route['surat-jalan'] = 't_surat_jalan/index';
+$route['surat-jalan-printsj-(:any)'] = 't_surat_jalan/print_suratjalan/$1';
 $route['surat-jalan-page'] = 't_surat_jalan/index';
 $route['surat-jalan-page/(:any)'] = 't_surat_jalan/index/$1';
 $route['surat-jalan-pdf'] = 't_surat_jalan/print_pdf';
@@ -351,3 +347,31 @@ $route['stock-excel-detail'] = 'stock/print_excel_detail';
 $route['stock-excel/(:any)'] = 'stock/print_excel/$1';
 
 $route['kwitansi-dp-add'] = 't_kwitansi/add';
+
+/*Start Leasing*/
+$route['cetak-kwitansi-leasing'] = 'leasing/cetak_kwitansi_leasing/index';
+$route['cetak-kwitansi-leasing-save'] = 'leasing/cetak_kwitansi_leasing/save';
+$route['cetak-kwitansi-leasing-proseska'] = 'leasing/cetak_kwitansi_leasing/proses_ka';
+$route['cetak-kwitansi-leasing-proseska/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_ka/$1';
+$route['cetak-kwitansi-leasing-proseskb'] = 'leasing/cetak_kwitansi_leasing/proses_kb';
+$route['cetak-kwitansi-leasing-proseskb/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_kb/$1';
+$route['cetak-kwitansi-leasing-proseskc'] = 'leasing/cetak_kwitansi_leasing/proses_kc';
+$route['cetak-kwitansi-leasing-proseskc/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_kc/$1';
+$route['cetak-kwitansi-leasing-proseskc2'] = 'leasing/cetak_kwitansi_leasing/proses_kc2';
+$route['cetak-kwitansi-leasing-proseskc2/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_kc2/$1';
+/*End Leasing*/
+
+/* Start Tanda Terima STNK BPKB */
+$route['terima-stnk'] = 't_terima_stnk/index';
+$route['terima-stnk-tambah'] = 't_terima_stnk/add';
+$route['terima-stnk-edit-(:num)'] = 't_terima_stnk/edit/$1';
+$route['terima-stnk-detail-(:num)'] = 't_terima_stnk/detail/$1';
+$route['terima-stnk-delete-(:num)'] = 't_terima_stnk/delete/$1';
+$route['terima-stnk-save'] = 't_terima_stnk/save';
+$route['terima-stnk-page'] = 't_terima_stnk/index';
+$route['terima-stnk-page/(:any)'] = 't_terima_stnk/index/$1';
+$route['terima-stnk-pdf'] = 't_terima_stnk/print_pdf';
+$route['terima-stnk-pdf/(:any)'] = 't_terima_stnk/t_terima-stnk_bpkb/$1';
+$route['terima-stnk-excel'] = 't_terima_stnk/print_excel';
+$route['terima-stnk-excel/(:any)'] = 't_terima_stnk/print_excel/$1';
+/* End Tanda Terima STNK BPKB */

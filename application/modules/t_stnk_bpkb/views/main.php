@@ -54,7 +54,7 @@
                             <tr>
                                 <td>#</td>
                                 <td>
-                                    <input class="form-control input-sm" name="no_so" class="form-control" value="<?php echo (isset($sr_data['no_so']) ? $sr_data['jabatan'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="no_so" class="form-control" value="<?php echo (isset($sr_data['no_so']) ? $sr_data['no_so'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;

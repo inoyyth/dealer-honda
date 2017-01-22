@@ -194,6 +194,7 @@
 <script src="<?php echo base_url();?>themes/plugins/new-datatables/dataTables.buttons.min.js"></script>
 <script src="<?php echo base_url();?>themes/plugins/typeahead/dist/typeahead.jquery.min.js"></script>
 <script src="<?php echo base_url();?>themes/plugins/typeahead/dist/bloodhound.min.js"></script>
+<script src="<?php echo base_url();?>themes/plugins/numeral-js/numeral.min.js"></script>
 <script>
     $(document).ready(function(){
         $('.datepicker').datepicker({

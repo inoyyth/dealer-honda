@@ -63,6 +63,7 @@ class t_pdi extends MX_Controller {
         $this->breadcrumbs->push('Add', '/pdi');
         $data['gudang'] = $this->main_model->getMaster('m_gudang', $like=array(), $where=array('status_gudang'=>'1'));
         $data['codepdi'] = $this->main_model->generate_code($this->table, 'PDI-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = false);
+        $data['codesj'] = $this->main_model->generate_code($this->table, 'SJ-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = false);
         $data['view'] = "t_pdi/add";
         $this->load->view('default', $data);
     }
