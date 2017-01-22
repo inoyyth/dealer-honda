@@ -21,6 +21,7 @@ class M_t_pdi extends CI_Model {
         $this->db->from($table);
         $this->db->like($like);
         $this->db->where($where);
+        $this->db->order_by('id','desc');
         $this->db->limit($pg, $limit);
         return $this->db->get()->result_array();
     }
@@ -30,6 +31,7 @@ class M_t_pdi extends CI_Model {
         $accs = $this->input->post('aksesoris');
         $data_pembayaran = array(
             'noso' => $this->input->post('noso'),
+            'nosj' => $this->input->post('nosj'),
             'kdpdi' => $this->input->post('kdpdi'),
             'tgl_pdi' => $this->input->post('tgl_pdi'),
             'pic' => $this->input->post('pic'),

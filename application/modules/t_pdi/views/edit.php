@@ -78,7 +78,8 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">No. PDI</label>
                             <div class="col-sm-9">
-                                <input type="text" readonly="true" name="kdpdi" id="no_pdi" parsley-trigger="change" required   value="<?php echo $detail['kdpdi']; ?>" class="form-control">
+                                <input type="hidden" readonly="true" name="nosj" id="nosj" parsley-trigger="change" required value="<?php echo $detail['nosj']; ?>" class="form-control">
+                                <input type="text" readonly="true" name="kdpdi" id="no_pdi" parsley-trigger="change" required value="<?php echo $detail['kdpdi']; ?>" class="form-control">
                             </div>
                         </div>
 

@@ -110,20 +110,20 @@ class T_penjualan extends MX_Controller {
         $join = array(
             array('table' => 'm_motor', 'where' => 'm_motor.tipe_motor=penerimaan_motor.tipe', 'join' => 'INNER')
         );
-        $column_order = array(null, 'penerimaan_motor.id as idx','no_sj','tgl_sj','nomesin','penerimaan_motor.norangka as no_rangka','tipe','penerimaan_motor.warna as warnax','penerimaan_motor.tahun','varian','harga_otr');
-        $column_search = array('penerimaan_motor.id as idx','no_sj','tgl_sj','nomesin','penerimaan_motor.norangka as no_rangka','tipe','penerimaan_motor.warna as warnax','penerimaan_motor.tahun','varian','harga_otr');
-        $list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('idx'=>'ASC'), $where, $join, $group=array());
+        $column_order = array(null, 'penerimaan_motor.id','no_sj','tgl_sj','nomesin','penerimaan_motor.norangka','tipe','penerimaan_motor.warna','penerimaan_motor.tahun','varian','harga_otr');
+        $column_search = array('penerimaan_motor.id','no_sj','tgl_sj','nomesin','penerimaan_motor.norangka','tipe','penerimaan_motor.warna','penerimaan_motor.tahun','varian','harga_otr');
+        $list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('penerimaan_motor.id'=>'ASC'), $where, $join, $group=array());
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $result) {
             $no++;
             $row = array();
             $row[] = '';
-            $row[] = $result->idx;
+            $row[] = $result->id;
             $row[] = $result->nomesin;
-            $row[] = $result->no_rangka;
+            $row[] = $result->norangka;
             $row[] = $result->tipe;
-            $row[] = $result->warnax;
+            $row[] = $result->warna;
             $row[] = $result->tahun;
             $row[] = formatrp($result->harga_otr);
 
@@ -133,7 +133,7 @@ class T_penjualan extends MX_Controller {
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->m_datatable->count_all($table),
-            "recordsFiltered" => $this->m_datatable->count_filtered($table, $column_order, $column_search, $order = array('idx'=>'ASC'), $where, $join, $group=array()),
+            "recordsFiltered" => $this->m_datatable->count_filtered($table, $column_order, $column_search, $order = array('penerimaan_motor.id'=>'ASC'), $where, $join, $group=array()),
             "data" => $data,
         );
         //output to json format
