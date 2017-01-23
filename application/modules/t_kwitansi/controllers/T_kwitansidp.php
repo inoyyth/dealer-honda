@@ -23,8 +23,7 @@ class T_kwitansidp extends MX_Controller {
         $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
         $config['uri_segment'] = 2;
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
-        //echo $limit;
-        //die();
+            
         $this->pagination->initialize($config);
         $data['paging'] = $this->pagination->create_links();
         $data['data'] = $this->mt_kwitansi->getdata_dp($this->table, $limit, $config['per_page'], $like = $data_session, $where = array());
