@@ -6,10 +6,11 @@ $kwt_explode = explode("/", $detail_harga['noso']);
         font-family: "Times New Roman", Times, serif;
         letter-spacing: 2px;
         font-size: 12px;
+        font-family: Sans-Serif;
     }
     @media print {
         .no-print, .no-print * { display: none !important; }
-        font-family: "Times New Roman", Times, serif;
+        font-family: Sans-Serif;
         letter-spacing: 2px;
         font-size: 12px;
     }
@@ -59,16 +60,17 @@ $kwt_explode = explode("/", $detail_harga['noso']);
             </td>
         </tr>
     </table>
-    <table style="width: 100%;" cellspacing="0" cellpadding="2">
-        <tr style="text-align:center;font-size:15px;">
-            <th style="border-top:2px solid;border-left:2px solid;">No.</th>
-            <th style="border-top:2px solid;border-left:2px solid;">Tipe Motor</th>
-            <th style="border-top:2px solid;border-left:2px solid;">Warna</th>
-            <th style="border-top:2px solid;border-left:2px solid;">Tahun</th>
-            <th style="border-top:2px solid;border-left:2px solid;">No.Rangka</th>
-            <th style="border-top:2px solid;border-right:2px solid;border-left:2px solid;">No.Mesin</th>
+    <br>
+    <table style="width: 100%;" cellspacing="0" cellpadding="3">
+        <tr style="text-align:center;font-size:13px;">
+            <td style="border-top:2px solid;border-left:2px solid;height: 30px;">No.</td>
+            <td style="border-top:2px solid;border-left:2px solid;">Tipe Motor</td>
+            <td style="border-top:2px solid;border-left:2px solid;">Warna</td>
+            <td style="border-top:2px solid;border-left:2px solid;">Tahun</td>
+            <td style="border-top:2px solid;border-left:2px solid;">No.Rangka</td>
+            <td style="border-top:2px solid;border-right:2px solid;border-left:2px solid;">No.Mesin</td>
         </tr>
-        <tr style="text-align:center;font-size:15px;">
+        <tr style="text-align:center;font-size:13px;">
             <td style="border-top:2px solid;border-left:2px solid;border-bottom:2px solid;">1.</td>
             <td style="border-top:2px solid;border-left:2px solid;border-bottom:2px solid;"><?php echo $detail_penerimaan_motor['tipe'];?></td>
             <td style="border-top:2px solid;border-left:2px solid;border-bottom:2px solid;"><?php echo $detail_penerimaan_motor['warna'];?></td>
@@ -131,6 +133,13 @@ $kwt_explode = explode("/", $detail_harga['noso']);
 </body>
 <script>
     function printPage() {
-        window.print();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('t_surat_jalan/update_status_print'); ?>",
+            data: {noso: <?php echo $detail_harga['noso'];?>},
+            success: function (result) {
+                window.print();
+            }
+        });
     }
 </script>
