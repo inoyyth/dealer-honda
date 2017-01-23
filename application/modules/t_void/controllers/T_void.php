@@ -17,7 +17,7 @@ class t_void extends MX_Controller {
         parent::__construct();
         
         $this->load->model(array('M_t_void' => 't_void', 'Datatable_model' => 'm_datatable'));
-        $this->load->library(array('upload', 'encrypt', 'Printpdf', 'Auth_log'));
+        $this->load->library(array('Printpdf', 'Auth_log'));
         
         //set breadcrumb
         $this->breadcrumbs->push('Transaksi PDI', '/pdi');
