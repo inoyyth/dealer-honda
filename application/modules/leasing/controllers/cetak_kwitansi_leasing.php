@@ -38,9 +38,12 @@ class Cetak_kwitansi_leasing extends MX_Controller {
     public function proses_ka(){
         $id = $this->uri->segment(2);
         $extract = str_replace("_","/",$id);
+<<<<<<< HEAD
          
         //echo $extract;
         
+=======
+>>>>>>> 5187a3d2538e0b25c0d07d4a259ea675a4f66fe0
         $isi = $this->db->query('select a.nokwitansi,a.noso,b.harga_otr,b.tanggal,c.nama_customer,d.nomesin,d.norangka,d.tipe,d.warna,d.tahun,f.leasing,f.dp_system,f.diskon,(b.harga_otr - f.dp_system) as tagihan from t_kwitansi_leasing a 
         left join t_penjualan b on b.noso = a.noso
         left join m_customer c on c.no_ktp = b.ktp
@@ -48,8 +51,12 @@ class Cetak_kwitansi_leasing extends MX_Controller {
         left join m_motor e on e.tipe_motor = d.tipe
         left join t_harga_motor f on f.noso = b.noso
         where a.nokwitansi = "'.$extract.'" AND a.m_status = "1"')->row();
+<<<<<<< HEAD
         //var_dump($isi);
         
+=======
+
+>>>>>>> 5187a3d2538e0b25c0d07d4a259ea675a4f66fe0
         $data['list'] = $isi;
         $this->load->view('leasing/kwitansi_leasing/print_ka', $data);
         

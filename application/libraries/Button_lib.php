@@ -43,6 +43,7 @@ class Button_lib {
     
     public function __setButton($config){
         $event = "";
+        $target = "_parent";
         if($config['anchor']=="add"){
             $style = "btn btn-primary btn-sm";
             $icon = "fa fa-plus-square";
@@ -64,7 +65,10 @@ class Button_lib {
             $style = "btn btn-succes btn-sm";
             $icon = "fa fa-info-circle";
         }
-        echo "<a href='".base_url($config['url'])."' ".$event." class='".$style."'><i class='".$icon."'></i> ".$config['text']."</a>";
+        if(isset($config['target'])){
+            $target = $config['target'];
+        }
+        echo "<a target='".$target."' href='".base_url($config['url'])."' ".$event." class='".$style."'><i class='".$icon."'></i> ".$config['text']."</a>";
     }
 
 }
