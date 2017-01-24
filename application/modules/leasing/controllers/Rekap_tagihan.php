@@ -1,14 +1,14 @@
 <?php
 
-class T_kwitansi_fee extends MX_Controller {
+class Rekap_tagihan extends MX_Controller {
     //put your code here
     
-    var $table = "t_kwitansi_fee";
+    var $table = "rekap_tagihan";
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('M_t_kwitansi');
-        $this->load->model(array('M_t_kwitansi' => 't_kwitansi', 'Datatable_model' => 'm_datatable'));
+        $this->load->model('M_t_leasing');
+        $this->load->model(array('M_t_leasing' => 't_kwitansi', 'Datatable_model' => 'm_datatable'));
         $this->load->library(array('upload', 'encrypt', 'Printpdf', 'Auth_log'));
         
         //set breadcrumb
@@ -17,7 +17,7 @@ class T_kwitansi_fee extends MX_Controller {
     
     public function getSO(){
         $query = $this->input->get('query');
-        $data = $this->M_t_kwitansi->getNOSO($query);
+        $data = $this->t_kwitansi->getNOSO($query);
         //echo $this->db->last_query();
         echo json_encode($data);
     }
@@ -30,20 +30,11 @@ class T_kwitansi_fee extends MX_Controller {
     }
     
     public function index() {
-        $data_session = $this->__getSession();
-        
-        $config['base_url'] = base_url() . 'kwitansi-fee';
-        $config['total_rows'] = $this->t_kwitansi->count_fee();
-        //$config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
-        $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
-        $config['uri_segment'] = 2;
-        $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
-        $this->pagination->initialize($config);
-        $data['paging'] = $this->pagination->create_links();
-        $data['data'] = $this->t_kwitansi->getdata_fee($this->table, $limit, $config['per_page'], $like = $data_session, $where = array());
-        $data['sr_data'] = $data_session;
-        $data['view'] = 't_kwitansi/kwitansi_fee/main';
-        //echo $this->db->last_query();
+         //$data['nokwitansi'] = $this->main_model->generate_code($this->table, 'KWT/MKA/FIF/' . romanic_number(date('m')), '/', 6, $date = false, $loop = false);
+        //$data['codeso'] = $this->main_model->generate_code($this->table, 'KWT/KDS-' . date('Y') . '-' . romanic_number(date('m')), '-', 6, $date = false, $loop = false);
+        $this->breadcrumbs->push('Leasing', '/cetak-kwitansi-diskon');
+         $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('status_leasing' => '1'));
+        $data['view'] = "leasing/rekap_tagihan/main";
         $this->load->view('default', $data);
     }
 
@@ -72,12 +63,12 @@ class T_kwitansi_fee extends MX_Controller {
     public function edit($id) {
         $this->breadcrumbs->push('Edit', '/penjualan-edit');
         $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
-        $data['view'] = 't_kwitansi_fee/edit';
+        $data['view'] = 'rekap_tagihan/edit';
         $this->load->view('default', $data);
     }
 
     function delete($id) {
-        $this->main_model->delete('t_kwitansi_fee', array('id' => $id), array('status_gudang' => '3'));
+        $this->main_model->delete('rekap_tagihan', array('id' => $id), array('status_gudang' => '3'));
         redirect("penjualan");
     }
 
@@ -139,9 +130,9 @@ class T_kwitansi_fee extends MX_Controller {
    
 
     public function print_excel() {
-        $data['template_excel'] = "t_kwitansi_fee/" . $_GET['template'];
+        $data['template_excel'] = "rekap_tagihan/" . $_GET['template'];
         $data['file_name'] = $_GET['name'];
-        $data['list'] = $this->t_kwitansi_fee->getdata($this->table, 0, 1000, $like = array(), $where = array('status_gudang!=' => '3'));
+        $data['list'] = $this->rekap_tagihan->getdata($this->table, 0, 1000, $like = array(), $where = array('status_gudang!=' => '3'));
         $this->load->view('template_excel', $data);
     }
 
@@ -181,14 +172,14 @@ class T_kwitansi_fee extends MX_Controller {
     function load_cpembelian($cpembelian = "") {
         switch ($cpembelian) {
             case "Cash":
-                $this->load->view('t_kwitansi_fee/pembelian_cash');
+                $this->load->view('rekap_tagihan/pembelian_cash');
                 break;
             case "Kredit":
-                $data['dtleasing'] = $this->t_kwitansi_fee->getdata('m_leasing', 0, 1000, $like = array(), $where = array('status_leasing!=' => '3'));
-                $this->load->view('t_kwitansi_fee/pembelian_kredit', $data);
+                $data['dtleasing'] = $this->rekap_tagihan->getdata('m_leasing', 0, 1000, $like = array(), $where = array('status_leasing!=' => '3'));
+                $this->load->view('rekap_tagihan/pembelian_kredit', $data);
                 break;
             default:
-                $this->load->view('t_kwitansi_fee/pembelian_cash');
+                $this->load->view('rekap_tagihan/pembelian_cash');
                 break;
         }
     }

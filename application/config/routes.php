@@ -383,6 +383,9 @@ $route['cetak-kwitansi-leasing-proseskc2'] = 'leasing/cetak_kwitansi_leasing/pro
 $route['cetak-kwitansi-leasing-proseskc2/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_kc2/$1';
 /*End Leasing*/
 
+/*rekap tagihan*/
+$route['rekap-tagihan'] = 'leasing/rekap_tagihan/index';
+$route['cetak-kwitansi-leasing-save'] = 'leasing/cetak_kwitansi_leasing/save';
 /* Start Tanda Terima STNK BPKB */
 $route['terima-stnk'] = 't_terima_stnk/index';
 $route['terima-stnk-tambah'] = 't_terima_stnk/add';
