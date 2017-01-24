@@ -24,8 +24,6 @@ Class M_t_penjualan extends CI_Model {
             'm_status' => '1'
         );
 
-
-
         switch ($this->input->post('cara_pembelian')) {
             case 'Kredit':
                 $data_harga_motor = array(
@@ -39,25 +37,9 @@ Class M_t_penjualan extends CI_Model {
                     'dp' => currency_to_normal($this->input->post('dp')),
                     'sisa_hutang' => currency_to_normal($this->input->post('sisa_hutang')),
                     'fee' => currency_to_normal($this->input->post('fee')),
-                    'm_status' => "1",
-                    
+                    'm_status' => "1"
                 );
-
-                $data_dp = array(
-                    'noso'=>$this->input->post('noso'),
-                     
-                    'dp' => currency_to_normal($this->input->post('dp_system')),
-                    'm_status'=>1,
-                   
-                    'nominal' => currency_to_normal($this->input->post('dp')),
-                    'sisa_pembayaran' => currency_to_normal($this->input->post('sisa_hutang')),
-                    'transaksi'=>1,
-                    'nokwitansi'=>$this->input->post('no_kwitansi_dp'));
-
-
                 break;
-
-                
             default:
                 $data_harga_motor = array(
                     'noso'=>$this->input->post('noso'),
@@ -70,16 +52,6 @@ Class M_t_penjualan extends CI_Model {
                     'fee' => currency_to_normal($this->input->post('fee')),
                     'm_status' => "1"
                 );
-                 $data_dp = array(
-                    'noso'=>$this->input->post('noso'),
-                     
-                    'dp' => currency_to_normal($this->input->post('tagih')),
-                    'm_status'=>1,
-                   
-                    'nominal' => currency_to_normal($this->input->post('dp')),
-                    'sisa_pembayaran' => currency_to_normal($this->input->post('sisa_hutang')),
-                    'transaksi'=>1,
-                    'nokwitansi'=>$this->input->post('no_kwitansi_dp'));
                 break;
         }
         $data_customer = array(
@@ -103,9 +75,6 @@ Class M_t_penjualan extends CI_Model {
             $this->__insert_customer($data_customer,$this->input->post('no_ktp'));
             //$sqlCustomer = $this->db->insert_string($this->table_customer, $data_customer) . ' ON DUPLICATE KEY UPDATE ' . implode(', ', $data_customer);
             //$this->db->query($sqlCustomer);
-
-            $this->db->insert("t_pembayaran",$this->main_model->create_sys($data_dp));
-             
             $this->db->insert($this->table_tpenjualan, $this->main_model->create_sys($data_penjualan));
             $this->db->insert($this->table_thargamotor, $this->main_model->create_sys($data_harga_motor));
             $this->db->update('penerimaan_motor',$this->main_model->update_sys(array('status_jual'=>'2')),array('nomesin' => $this->input->post('nomsn')));

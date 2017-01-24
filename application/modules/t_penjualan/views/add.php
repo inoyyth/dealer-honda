@@ -1,11 +1,10 @@
 <div class="row">
     <form action="<?php echo base_url("penjualan-save"); ?>" class="form-horizontal row-border" id="frmtransaksi-new" method="post" enctype="multipart/form-data" parsley-validate novalidate>
-    <input type="hidden" name="no_kwitansi_dp" value="<?php echo $no_kwitansi_dp; ?>">
         <div class="col-md-6">
             <div class="block-web">
                 <div class="header">
                     <div class="actions"> </div>
-                    <h3 class="content-header">Transaksi  </h3>
+                    <h3 class="content-header">Transaksi</h3>
                 </div>
                 <div class="porlets-content">
                     <div class="form-group">
