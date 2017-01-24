@@ -67,4 +67,28 @@ class T_surat_jalan extends MX_Controller {
 
         $this->load->view('t_surat_jalan/print_sj',$data);
     }
+    
+    public function print_pdf() {
+        $data['template'] = array("template" => "t_surat_jalan/" . $_GET['template'], "filename" => $_GET['name']);
+        $data['list'] = $this->m_motor->getdata($this->table_pdi, 0, 1000, $like = array(), $where = array('m_status!=' => '3'));
+        $this->printpdf->create_pdf($data);
+    }
+
+    public function print_excel() {
+        $data['template_excel'] = "t_surat_jalan/" . $_GET['template'];
+        $data['file_name'] = $_GET['name'];
+        $data['list'] = $this->m_motor->getdata($this->table_pdi, 0, 1000, $like = array(), $where = array('m_status!=' => '3'));
+        $this->load->view('template_excel', $data);
+    }
+    
+    public function update_status_print(){
+        $session = $this->session->userdata('logged_in_admin');
+        $noso = $this->input->post('noso');
+        $data = array(
+            'sj_print_user_id' => $session['id'],
+            'sj_print_status' => "2" 
+        );
+        $this->db->update('t_pdi',$data,array('noso'=>$noso));
+        return true;
+    }
 }

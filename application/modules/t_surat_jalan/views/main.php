@@ -22,6 +22,8 @@
                                 <th>No.PDI</th>
                                 <th>No.SO</th>
                                 <th>PDI Date</th>
+                                <th>Prt.Date</th>
+                                <th>Prt.User</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -38,11 +40,17 @@
                                         <td><?php echo $v['kdpdi']; ?></td>
                                         <td><?php echo $v['noso']; ?></td>
                                         <td><?php echo $v['tgl_pdi']; ?></td>
+                                        <td><?php echo $v['sj_print_date']; ?></td>
+                                        <td><?php echo $v['nama_lengkap']; ?></td>
                                         <td class="text-center">
-                                            <a href="<?php echo base_url('surat-jalan-printsj-' . $this->encrypt->encode($v['noso'])); ?>" class="btn btn-default btn-sm sjBtn" target="_blank"><i class="fa fa-print"></i> Print SJ</a> 
+                                            <?php if ($v['sj_print_status'] == "1") { ?>
+                                                <a href="<?php echo base_url('surat-jalan-printsj-' . $this->encrypt->encode($v['noso'])); ?>" class="btn btn-default btn-sm sjBtn" target="_blank"><i class="fa fa-print"></i> Print SJ</a> 
+                                            <?php } else { ?>
+                                                PRINTED
+                                            <?php } ?>
                                         </td>
                                     </tr>
-                                <?php
+                                    <?php
                                 }
                             }
                             ?>
@@ -53,43 +61,43 @@
                                 <td>#</td>
                                 <td>
                                     <input class="form-control input-sm" name="nosj" class="form-control" value="<?php echo (isset($sr_data['nosj']) ? $sr_data['nosj'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
-                                                submit_search('form1');
-                                            } else {
-                                                return false;
-                                            }
-                                            ;"/>
+                                                    submit_search('form1');
+                                                } else {
+                                                    return false;
+                                                }
+                                                ;"/>
                                 </td>
                                 <td>
                                     <input class="form-control input-sm" name="kdpdi" class="form-control" value="<?php echo (isset($sr_data['kdpdi']) ? $sr_data['kdpdi'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
-                                                submit_search('form1');
-                                            } else {
-                                                return false;
-                                            }
-                                            ;"/>
+                                                    submit_search('form1');
+                                                } else {
+                                                    return false;
+                                                }
+                                                ;"/>
                                 </td>
                                 <td>
                                     <input class="form-control input-sm" name="noso" value="<?php echo (isset($sr_data['noso']) ? $sr_data['noso'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
-                                                submit_search('form1');
-                                            } else {
-                                                return false;
-                                            }
-                                            ;"/>
+                                                    submit_search('form1');
+                                                } else {
+                                                    return false;
+                                                }
+                                                ;"/>
                                 </td>
                                 <td>
                                     <input class="form-control input-sm" name="tgl_pdi" value="<?php echo (isset($sr_data['tgl_pdi']) ? $sr_data['tgl_pdi'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
-                                                submit_search('form1');
-                                            } else {
-                                                return false;
-                                            }
-                                            ;"/>
+                                                    submit_search('form1');
+                                                } else {
+                                                    return false;
+                                                }
+                                                ;"/>
                                 </td>
                                 <td>
                                     <input class="form-control input-sm" name="pic" value="<?php echo (isset($sr_data['pic']) ? $sr_data['pic'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
-                                                submit_search('form1');
-                                            } else {
-                                                return false;
-                                            }
-                                            ;"/>
+                                                    submit_search('form1');
+                                                } else {
+                                                    return false;
+                                                }
+                                                ;"/>
                                 </td>
                             </tr>
                             </tfoot>
@@ -110,14 +118,14 @@
     </div>
 </form>
 <div class="col-lg-11 pull-right text-right">	
-<?php echo $paging; ?>
+    <?php echo $paging; ?>
 </div>
 </div>
 <script>
-    $(document).ready(function(){
-       $('.sjBtn').click(function(event) {
+    $(document).ready(function () {
+        $('.sjBtn').click(function (event) {
             event.preventDefault();
             window.open($(this).attr("href"), "popupWindow", "width=800,height=550,scrollbars=yes");
-        }); 
+        });
     });
 </script>

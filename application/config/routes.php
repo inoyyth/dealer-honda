@@ -293,7 +293,7 @@ $route['stnk-excel/(:any)'] = 't_stnk_bpkb/print_excel/$1';
 /* End STNK BPKB */
 
 /* Start Void */
-$route['void'] = 't_void/add';
+$route['void'] = 't_void/index';
 $route['void-tambah'] = 't_void/add';
 $route['void-edit-(:num)'] = 't_void/edit/$1';
 $route['void-detail-(:num)'] = 't_void/detail/$1';
