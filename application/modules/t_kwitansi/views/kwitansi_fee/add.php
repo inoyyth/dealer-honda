@@ -98,7 +98,7 @@
                     <button name="submit" id="new" class="btn btn-primary">New</button>
                     <button type="submit" name="save" id="save" class="btn btn-danger">Save</button>
                     <button type="submit" name="New" id="edit" class="btn btn-default">Edit</button>
-                    <button type="submit" name="cancel" id="cancel" class="btn btn-default">Cancel</button>
+                    <button type="button" name="cancel" id="cancel" class="btn btn-default">Cancel</button>
                     <button type="button" name="print" id="print" onclick="cetak()" class="btn btn-default">Print</button>
                 </div>
             </div>
@@ -139,8 +139,8 @@
             $("#noso").removeAttr("readonly");
         });
 
-        $("#cancel").on("click", function () {
-            document.getElementById('noso').readOnly = true;
+       $("#cancel").on("click", function () {
+            window.location="t_kwitansi/t_kwitansi_fee";
         });
 
         $("#noso").focusout(function () {

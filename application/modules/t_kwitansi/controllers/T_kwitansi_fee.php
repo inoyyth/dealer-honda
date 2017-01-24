@@ -22,19 +22,28 @@ class T_kwitansi_fee extends MX_Controller {
         echo json_encode($data);
     }
     
+     public function detail($id) {
+        $this->breadcrumbs->push('Detail', '/kwitansi-fee-detail');
+        $data['detail'] = $this->t_kwitansi->get_detail_fee($id);
+        $data['view'] = 't_kwitansi/kwitansi_fee/detail';
+        $this->load->view('default', $data);
+    }
+    
     public function index() {
         $data_session = $this->__getSession();
         
         $config['base_url'] = base_url() . 'kwitansi-fee';
-        $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
+        $config['total_rows'] = $this->t_kwitansi->count_fee();
+        //$config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
         $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
         $config['uri_segment'] = 2;
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->pagination->initialize($config);
         $data['paging'] = $this->pagination->create_links();
-        $data['data'] = $this->t_kwitansi_fee->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array('status_gudang!=' => '3'));
+        $data['data'] = $this->t_kwitansi->getdata_fee($this->table, $limit, $config['per_page'], $like = $data_session, $where = array());
         $data['sr_data'] = $data_session;
         $data['view'] = 't_kwitansi/kwitansi_fee/main';
+        //echo $this->db->last_query();
         $this->load->view('default', $data);
     }
 
@@ -82,7 +91,7 @@ class T_kwitansi_fee extends MX_Controller {
             } else {
                 $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
             }
-            redirect("kwitansi-fee-tambah");
+            redirect("kwitansi-fee");
         } else {
             show_404();
         }
@@ -92,28 +101,39 @@ class T_kwitansi_fee extends MX_Controller {
         if ($_POST) {
             return $data = array(
                 'page' => set_session_table_search('page', $this->input->get_post('page', TRUE)),
-                'kd_gudang' => set_session_table_search('kd_gudang', $this->input->get_post('kd_gudang', TRUE)),
-                'gudang' => set_session_table_search('gudang', $this->input->get_post('gudang', TRUE)),
-                'alamat' => set_session_table_search('alamat', $this->input->get_post('alamat', TRUE)),
-                'telepon' => set_session_table_search('telepon', $this->input->get_post('telepon', TRUE)),
-                'status_gudang' => set_session_table_search('status_gudang', $this->input->get_post('status_gudang', TRUE))
+                'nokwitansi' => set_session_table_search('nokwitansi', $this->input->get_post('nokwitansi', TRUE)),
+                'a.noso' => set_session_table_search('noso', $this->input->get_post('noso', TRUE)),
+                'c.nama_customer' => set_session_table_search('nama_customer', $this->input->get_post('nama_customer', TRUE)),
+                'fee' => set_session_table_search('fee', $this->input->get_post('fee', TRUE)) 
             );
         } else {
             return $data = array(
                 'page' => $this->session->userdata('page'),
-                'kd_gudang' => $this->session->userdata('kd_gudang'),
-                'gudang' => $this->session->userdata('gudang'),
-                'alamat' => $this->session->userdata('alamat'),
-                'telepon' => $this->session->userdata('telepon'),
-                'status_gudang' => $this->session->userdata('status_gudang')
+                'nokwitansi' => $this->session->userdata('nokwitansi'),
+                'a.noso' => $this->session->userdata('noso'),
+                'c.nama_customer' => $this->session->userdata('nama_customer'),
+                'fee' => $this->session->userdata('fee') 
             );
         }
     }
 
-    public function print_pdf() {
-        $data['template'] = array("template" => "t_kwitansi/kwitansi_fee/" . $_GET['template'], "filename" => $_GET['name']);
-        $data['list'] = $this->M_t_kwitansi->getdata($this->table, 0, 1000, $like = array());
+    public function print_pdf($id){
+        //echo $id;
+        //die();
+        
+        $data['template'] = array("template" => "t_kwitansi/kwitansi_fee/print_out_fee", "filename" => "Kwitansi PDF");
+        $data['parsing'] = $this->t_kwitansi->get_print_fee($id);
+        //var_dump($data['parsing']);
+        //die();
+        //$data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
+        //$data['detail_penjualan'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
+        //$data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
+        //$data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();
+        //$data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
+        //$data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
+        //$data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
         $this->printpdf->create_pdf($data);
+         
     }
     
    

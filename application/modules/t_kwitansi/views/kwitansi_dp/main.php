@@ -1,3 +1,4 @@
+<!--menampilkan historical dp-->
 <div class="row">
     <div class="col-lg-12">
         <section class="panel default blue_title h4">
@@ -36,7 +37,7 @@
                                         <td><?php echo $v['nokwitansi']; ?></td>
                                         <td><?php echo $v['noso']; ?></td>
                                         <td><?php echo $v['nama_customer']; ?></td>
-                                         <td><?php echo $v['transaksi']; ?></td>
+                                        <td><?php echo $v['transaksi']; ?></td>
                                          
                                         <td class="text-center">
  
@@ -48,11 +49,11 @@
 } ?>
                         </tbody>
                         <tfoot>
-                        <form id="form1" method="post" action="<?php echo base_url('penjualan'); ?>">
+                        <form id="form1" method="post" action="<?php echo base_url('kwitansi-dp'); ?>">
                             <tr>
                                 <td>#</td>
                                 <td>
-                                    <input class="form-control input-sm" name="noso" class="form-control" value="<?php echo (isset($sr_data['noso']) ? $sr_data['noso'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="nokwitansi" class="form-control" value="<?php echo (isset($sr_data['nokwitansi']) ? $sr_data['nokwitansi'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;
@@ -60,7 +61,7 @@
                                             ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="nomsn" value="<?php echo (isset($sr_data['nomsn']) ? $sr_data['nomsn'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="noso" value="<?php echo (isset($sr_data['noso']) ? $sr_data['noso'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;
@@ -68,7 +69,7 @@
                                             ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="harga_otr" value="<?php echo (isset($sr_data['harga_otr']) ? $sr_data['harga_otr'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="nama_customer" value="<?php echo (isset($sr_data['nama_customer']) ? $sr_data['nama_customer'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;
@@ -76,7 +77,7 @@
                                             ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="tipe" value="<?php echo (isset($sr_data['tipe']) ? $sr_data['tipe'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="transaksi" value="<?php echo (isset($sr_data['transaksi']) ? $sr_data['transaksi'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;

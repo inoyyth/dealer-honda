@@ -1,11 +1,12 @@
+
 <div class="row">
 
-    <form action="<?php echo base_url("kwitansi-dp-save"); ?>" class="form-horizontal row-border" id="frmkwitansidp" method="post" enctype="multipart/form-data" parsley-validate novalidate>
+    <form action="<?php echo base_url("cetak-kwitansi-leasing-save"); ?>" class="form-horizontal row-border" id="frmkwitansidp" method="post" enctype="multipart/form-data" parsley-validate novalidate>
         <div class="col-md-12">
             <div class="block-web">
                 <div class="header">
                     <div class="actions"> </div>
-                    <h3 class="content-header">Kwitansi DP</h3>
+                    <h3 class="content-header">Cetak Kwitansi Leasing</h3>
                 </div>
             </div>
         </div>
@@ -26,99 +27,60 @@
         <div class="col-md-6">
             <div class="block-web">
                 <div class="porlets-content">
-                   
+                    
                     <div class="form-group" id="remote">
                         <label class="col-sm-3 control-label">No Sales Order</label>
                         <div class="col-sm-9">
                             <input class="typeahead form-control" parsley-trigger="change" required name="noso" id="noso" type="text" placeholder="Type No Sales Order">
                             <input type="hidden" name="id" id="id" parsley-trigger="change" required readonly="true" value="" class="form-control">
+                            <input type="hidden" name="nama_customer" id="nama_customer" parsley-trigger="change" class="form-control">
                           
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Nama</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="nama_customer" id="nama_customer" parsley-trigger="change" required placeholder="Nama Customer" readonly="true" class="form-control">
-                        </div>
-                    </div>
                     
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Harga OTR</label>
+                        <label class="col-sm-3 control-label">Tanggal</label>
                         <div class="col-sm-9">
-                            <input type="text" name="harga_otr" id="harga_otr" parsley-trigger="change" required placeholder="Harga OTR" readonly="true" class="form-control">
+                            <input type="text" name="tanggal" id="tanggal" parsley-trigger="change" required   class="form-control">
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">DP</label>
+                        <label class="col-sm-3 control-label">No.Mesin</label>
                         <div class="col-sm-9">
-                            <input type="text" name="dp" id="dp" parsley-trigger="change" required   placeholder="DP Keseluruhan" readonly="true" class="form-control">
-                        </div>
-                    </div>
-                    
-                       <div class="form-group">
-                        <label class="col-sm-3 control-label">Pembelian Secara</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="cara_pembelian" id="cara_pembelian" parsley-trigger="change" readonly="true" required placeholder="Pembelian Secara" class="form-control">
-                        </div>
-                    </div>
-                    
-                   
-                    
-                    
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Transaksi</label>
-                        <div class="col-sm-9">
-                            <select name="transaksi" id="transaksi" class="form-control">
-                                
-                                <option value="2">DP 2</option>
-                                <option value="3">DP 3</option>
-                                <option value="4">DP 4</option>
-                                <option value="5">Pelunasan </option>
-                                <option value="6">Pelunasan DP</option>
-                            </select>
-                            
+                            <input type="text" name="nomesin" id="nomesin" parsley-trigger="change" required   class="form-control">
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Sisa Hutang</label>
+                        <label class="col-sm-3 control-label">No.Rangka</label>
                         <div class="col-sm-9">
-                            <input type="text" name="sisa_hutang" id="sisa_hutang" parsley-trigger="change" required    class="form-control">
+                            <input type="text" name="norangka" id="norangka" parsley-trigger="change"   required  class="form-control">
                         </div>
                     </div>
                     
-                      <div class="form-group">
-                        <label class="col-sm-3 control-label">Total Tagih</label>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Type</label>
                         <div class="col-sm-9">
-                            <input type="text" name="total_tagih" id="tagih" parsley-trigger="change" required    class="form-control">
+                            <input type="text" name="tipe" id="tipe" parsley-trigger="change"   required   class="form-control">
                         </div>
                     </div>
                     
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Warna</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="warna" id="warna" parsley-trigger="change"   required   class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Tahun</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="tahun" id="tahun" parsley-trigger="change"   required  class="form-control">
+                        </div>
+                    </div>
                      
-
-                 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Nominal</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="nominal" id="nominal" parsley-trigger="change" style="text-align:left;"  placeholder="Nominal" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" class="form-control mask">
-                        </div>
-                    </div>
-                    <!--
-                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Fee</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="fee" id="fee" parsley-trigger="change"  placeholder="Nominal" class="form-control">
-                        </div>
-                    </div>-->
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Sisa</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="sisa_pembayaran" id="sisa" parsley-trigger="change" readonly="true" required placeholder="Sisa" class="form-control">
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -127,56 +89,79 @@
             <div class="block-web">
                 <div class="porlets-content">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">No.Mesin</label>
+                        <label class="col-sm-3 control-label">Harga OTR</label>
                         <div class="col-sm-9">
-                            <input type="text" name="nomsn" id="no_mesin" parsley-trigger="change" readonly="true" placeholder="No.Mesin" class="form-control">
+                            <input type="text" name="harga_otr" id="harga_otr" required parsley-trigger="change"  class="form-control">
                         </div>
                     </div>
 
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">No.Rangka</label>
+                        <label class="col-sm-3 control-label">Leasing</label>
                         <div class="col-sm-9">
-                            <input type="text" name="norangka" id="no_rangka" parsley-trigger="change" readonly="true" placeholder="No.Rangka" class="form-control">
+                            <input type="text" name="leasing" id="leasing" parsley-trigger="change"  required class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Type</label>
+                        <label class="col-sm-3 control-label">DP System</label>
                         <div class="col-sm-9">
-                            <input type="text" name="tipe_motor" id="type" parsley-trigger="change" readonly="true" placeholder="Type" class="form-control">
+                            <input type="text" name="dp_system" id="dp_system" required parsley-trigger="change" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Warna</label>
+                        <label class="col-sm-3 control-label">Diskon</label>
                         <div class="col-sm-9">
-                            <input type="text" name="warna_motor" id="warna_motor" parsley-trigger="change" readonly="true" placeholder="Warna" class="form-control">
+                            <input type="text" name="diskon" id="diskon" required parsley-trigger="change" class="form-control">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Terbilang</label>
+                        <label class="col-sm-3 control-label">Tagih</label>
                         <div class="col-sm-9">
-                            <textarea name="terbilang" id="terbilang" readonly="true" class="form-control"></textarea>
+                            <input type="text" name="tagih" id="tagihan" required parsley-trigger="change"  class="form-control">
                         </div>
                     </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Subsidi</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="subsidi1" id="subsidi1" parsley-trigger="change"    class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Subsidi 2</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="subsidi2" id="subsidi2"  parsley-trigger="change"   class="form-control mask" data-inputmask="'alias': 'decimal', 'groupSeparator': '.', 'autoGroup': true" style="text-align: right;">
+                        </div>
+                    </div>
+                    
+                     
 
                     <div class="form-group"></div>
                 </div>
+                
             </div>
+         
         </div>
-
-        <div class="col-md-6">
-            <div class="block-web">
-                <div class="form-group">
-                    <button type="button" name="new_kwitansidp" id="new_kwitansidp" class="btn btn-default">New</button>
-                    <button name="submit" id="simpan" class="btn btn-primary">Save</button>
-                    <button type="reset" name="cancel" id="cancel" class="btn btn-danger">Cancel</button>
+   <div class="col-lg-12">
+       
+             <div class="form-group">
+                    <button type="button" name="new" id="new" onclick="newdata(); return false;" class="btn btn-primary">New </button>
+                    <button type="button" name="save_data" id="save_data" onclick="simpan_data();" class="btn btn-primary">Save</button>
+                    <button type="button" name="edit_data" id="edit_data" onclick="edit_data();" class="btn btn-primary">Edit</button>
+                    <button type="button" onclick="resetform(); return false;" name="cancel" id="cancel" class="btn btn-danger">Cancel</button>
+                    <button type="button" name="print_ka" id="print_ka" onclick="cetak_ka(); return false;" class="btn btn-primary">Print K(A)</button>
+                    <button type="button" name="print_kb" id="print_kb" onclick="cetak_kb(); return false;" class="btn btn-primary">Print K(B)</button>
+                    <button type="button" name="print_kc" id="print_kc" onclick="cetak_kc(); return false;" class="btn btn-primary">Print K(C)</button>
+                    <button type="button" name="print_kc2" id="print_kc2" onclick="cetak_kc2(); return false;" class="btn btn-primary">Print K(C)2</button>
+ 
                     <!--<button type="button" name="print" id="print" onclick="cetak()" class="btn btn-default">Print</button>-->
                 </div>
             </div>
-        </div>
+        
         
     </form>
 </div>
@@ -184,7 +169,12 @@
 <!-- Modal -->
  
 <script>
+    
+    
     $(document).ready(function () {
+      
+        
+
         //$('#modalBrowse').modal({backdrop: 'static', keyboard: false})  
         //datatables
         table = $('#listmotor').DataTable({
@@ -229,7 +219,7 @@
             var dt = {noso: noso};
             $.ajax({
                 type: "post",
-                url: "t_kwitansi/t_kwitansidp/load_transaction_by_noso",
+                url: "leasing/cetak_kwitansi_leasing/load_transaction_by_noso",
                 data: dt,
                 dataType: "json",
                 success: function (hasil) {
@@ -279,13 +269,15 @@
 
 
 <script>
+    
+   
     $(document).ready(function(){
         
         var bestPictures = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {
-              url: '<?php echo base_url('t_kwitansi/t_kwitansidp/getSO?query=%QUERY');?>',
+              url: '<?php echo base_url('leasing/cetak_kwitansi_leasing/getSO?query=%QUERY');?>',
               wildcard: '%QUERY'
             }
         });
@@ -303,14 +295,28 @@
             $('#nama_customer').val(datum.nama_customer);
             $('#fee').val(datum.fee);
             $('#dp').val(datum.dp);
-            $('#no_mesin').val(datum.no_mesin);
+            $('#nomesin').val(datum.nomesin);
             $('#transaksi').val(datum.transaksi);
-            $('#warna_motor').val(datum.warna_motor);
-            $('#type').val(datum.type);
-            $('#no_rangka').val(datum.no_rangka);
+            $('#warna').val(datum.warna);
+            $('#tipe').val(datum.tipe);
+            $('#leasing').val(datum.leasing);
+            $('#norangka').val(datum.norangka);
+            $('#tanggal').val(datum.tanggal);
             $('#sisa_hutang').val(datum.sisa_pembayaran);
             $('#tagih').val(datum.tagih);
+            $('#tahun').val(datum.tahun);
+            $('#tanggal').val(datum.tanggal);
+            $('#dp_system').val(datum.dp_system);
+            $('#diskon').val(datum.diskon);
+            $('#tagihan').val(datum.tagihan);
             $('#cara_pembelian').val(datum.cara_pembelian);
+            $('#link_a').text('<?php echo base_url('cetak-kwitansi-leasing-ka/');?>'+datum.noso);
+            $('#link_b').text('<?php echo base_url('cetak-kwitansi-leasing-kb/');?>'+datum.noso);
+            $('#link_c').text('<?php echo base_url('cetak-kwitansi-leasing-kc/');?>'+datum.noso);
+            $('#link_c2').text('<?php echo base_url('cetak-kwitansi-leasing-kc2/');?>'+datum.noso);
+            $( "barisan_link" ).find( "link_a" ).href('<?php echo base_url('cetak-kwitansi-leasing-kc2/');?>'+datum.noso);
+            //
+           
             //cara_pembelian
             //$('#terbilang').val(datum.terbilang);
             //$('#norangka').val(datum['norangka']);
@@ -346,19 +352,95 @@
        });
     });
     
-    function cetak(){
-    var data = $('#noso').val();
-    //var res = data.replace("/,/","-");
-    
-    //var mystring = "SO/MKA-2016/XI/000001"  
+    function cetak_ka(){
+    var data = $('#nokwitansi').val();
+     
     var newchar = '_'
     var res = data.split('/').join(newchar);
-
-
     //alert(res);
-    //$.post( "<?php echo base_url();?>kwitansi-diskon-printout/?template=table_html&name=kwitansi-dp-printout", { noso: data } );
-    location.href="<?php echo base_url();?>kwitansi-dp-printout/"+res+"?template=table_html&name=kwitansi-dp-printout";
-    //alert(data);
+    
+    var tembak = "<?php echo base_url('cetak-kwitansi-leasing-proseska/');?>"+res;
+    
+        if(data == ''){
+        alert('SO masih Kosong!');
+        }else{
+            window.open(tembak);
+          //window.location.href = tembak;
+        }
+   
+    }
+    
+    function simpan_data(){
+        $('#save_data').prop("disabled",true);
+        var data = $('#frmkwitansidp').serialize();
+        //alert(data);
+        $.ajax({
+              url:"cetak-kwitansi-leasing-save",
+              type:"POST",
+              data:data,
+              datatype:"json",
+              success:function(data){
+                  console.log(data);
+                  alert('data successfully added!');
+              },
+              error:function(){
+                  console.log('brutal');
+              }
+        })
+   
+    }
+    
+    function cetak_kb(){
+    var data = $('#nokwitansi').val();
+     
+    var newchar = '_'
+    var res = data.split('/').join(newchar);
+    var tembak = "<?php echo base_url('cetak-kwitansi-leasing-proseskb/');?>"+res;
+    
+        if(data == ''){
+        alert('SO masih Kosong!');
+        }else{
+          window.open(tembak);
+        }
+   
+    }
+    
+    function cetak_kc(){
+    var data = $('#nokwitansi').val();
+     
+    var newchar = '_'
+    var res = data.split('/').join(newchar);
+    var tembak = "<?php echo base_url('cetak-kwitansi-leasing-proseskc/');?>"+res;
+    
+        if(data == ''){
+        alert('SO masih Kosong!');
+        }else{
+         window.open(tembak);
+        }
+   
+    }
+    
+    function cetak_kc2(){
+    var data = $('#nokwitansi').val();
+     
+    var newchar = '_'
+    var res = data.split('/').join(newchar);
+    var tembak = "<?php echo base_url('cetak-kwitansi-leasing-proseskc2/');?>"+res;
+    
+        if(data == ''){
+        alert('SO masih Kosong!');
+        }else{
+          window.open(tembak);
+        }
+   
+    }
+    
+    function newdata(){
+       window.location.href ="<?php echo base_url('cetak-kwitansi-leasing');?>";
+    }
+    
+    function resetform(){
+    $("#noso").val('');    
     }
     
     function getGudangTo(id){
