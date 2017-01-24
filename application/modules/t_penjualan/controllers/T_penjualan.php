@@ -30,7 +30,6 @@ class T_penjualan extends MX_Controller {
 
     public function add() {
         $this->breadcrumbs->push('Add', '/penjualan-tambah');
-         $data['no_kwitansi_dp'] = $this->main_model->generate_code("t_pembayaran", 'KWT/KD/' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = false);
         $data['codesj'] = $this->main_model->generate_code($this->table, 'SJ/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true);
         $data['codeso'] = $this->main_model->generate_code($this->table, 'SO/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = false);
         
