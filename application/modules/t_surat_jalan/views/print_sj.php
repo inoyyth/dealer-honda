@@ -131,12 +131,13 @@ $kwt_explode = explode("/", $detail_harga['noso']);
         <button class="no-print" onclick="printPage();">Print</button>
     </div>
 </body>
+<script src="<?php echo base_url();?>themes/js/jquery-2.1.0.js"></script>
 <script>
     function printPage() {
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('t_surat_jalan/update_status_print'); ?>",
-            data: {noso: <?php echo $detail_harga['noso'];?>},
+            data: {noso: '<?php echo $detail_harga['noso'];?>'},
             success: function (result) {
                 window.print();
             }
