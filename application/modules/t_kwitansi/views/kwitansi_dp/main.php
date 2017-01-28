@@ -7,7 +7,7 @@
                     <div class="col-md-6 pull-left">Kwitansi DP
                     </div>
                     <div class="col-md-6 pull-right text-right">
-                         <a href="<?php echo base_url('kwitansi-dp-tambah');?>" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Tambah </a>
+                        <a href="<?php echo base_url('kwitansi-dp-tambah'); ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah </a>
                     </div> 
                 </div>
             </div>
@@ -21,7 +21,7 @@
                                 <th>No.SO</th>
                                 <th>Nama Customer</th>
                                 <th>DP Ke</th>
-                              
+
                                 <th class="text-center" style="width: 220px;">Action</th>
                             </tr>
                         </thead>
@@ -38,15 +38,16 @@
                                         <td><?php echo $v['noso']; ?></td>
                                         <td><?php echo $v['nama_customer']; ?></td>
                                         <td><?php echo $v['transaksi']; ?></td>
-                                         
+
                                         <td class="text-center">
- 
-                                            <a href="<?php echo base_url('kwitansi-dp-detail/'.$v['id']);?>" class="btn btn-default btn-sm"><i class="fa fa-info"></i> Detail</a>
-                                            <a href="<?php echo base_url('kwitansi-dp-pdf/'.$v['id']);?>" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
+
+                                            <a href="<?php echo base_url('kwitansi-dp-detail/' . $v['id']); ?>" class="btn btn-default btn-sm"><i class="fa fa-info"></i> Detail</a>
+                                            <a href="<?php echo base_url('kwitansi-dp-pdf/' . $v['id']); ?>" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
                                         </td>
                                     </tr>
-    <?php }
-} ?>
+                                <?php }
+                            }
+                            ?>
                         </tbody>
                         <tfoot>
                         <form id="form1" method="post" action="<?php echo base_url('kwitansi-dp'); ?>">
@@ -61,7 +62,7 @@
                                             ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="noso" value="<?php echo (isset($sr_data['noso']) ? $sr_data['noso'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="noso" value="<?php echo (isset($sr_data['a.noso']) ? $sr_data['a.noso'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;

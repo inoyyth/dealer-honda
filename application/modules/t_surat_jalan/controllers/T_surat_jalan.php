@@ -86,7 +86,8 @@ class T_surat_jalan extends MX_Controller {
         $noso = $this->input->post('noso');
         $data = array(
             'sj_print_user_id' => $session['id'],
-            'sj_print_status' => "2" 
+            'sj_print_status' => "2",
+            'sj_print_date' => date('Y-m-d')
         );
         $this->db->update('t_pdi',$data,array('noso'=>$noso));
         return true;
