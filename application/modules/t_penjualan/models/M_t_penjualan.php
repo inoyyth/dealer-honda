@@ -45,6 +45,8 @@ Class M_t_penjualan extends CI_Model {
                     'noso'=>$this->input->post('noso'),
                     'cara_pembelian' => $this->input->post('cara_pembelian'),
                     'marketing' => $this->input->post('marketing'),
+                    'leasing' => '',
+                    'dp_system' => currency_to_normal($this->input->post('harga_otr')),
                     'diskon' => currency_to_normal($this->input->post('diskon')),
                     'tagih' => currency_to_normal($this->input->post('tagih')),
                     'dp' => currency_to_normal($this->input->post('dp')),
@@ -54,6 +56,14 @@ Class M_t_penjualan extends CI_Model {
                 );
                 break;
         }
+        
+        $dataDp1 = array(
+            'nokwitansi'=>$this->main_model->generate_code("t_pembayaran", 'KWT/KD/' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true),
+            'noso'=> $this->input->post('noso'),
+            'nominal'=> currency_to_normal($this->input->post('dp')),
+            'transaksi'=> 1
+        );
+        
         $data_customer = array(
             'no_ktp' => $this->input->post('no_ktp'),
             'nama_customer' => $this->input->post('nama_customer'),
@@ -73,20 +83,17 @@ Class M_t_penjualan extends CI_Model {
         
         if (empty($id)) {
             $this->__insert_customer($data_customer,$this->input->post('no_ktp'));
-            //$sqlCustomer = $this->db->insert_string($this->table_customer, $data_customer) . ' ON DUPLICATE KEY UPDATE ' . implode(', ', $data_customer);
-            //$this->db->query($sqlCustomer);
             $this->db->insert($this->table_tpenjualan, $this->main_model->create_sys($data_penjualan));
             $this->db->insert($this->table_thargamotor, $this->main_model->create_sys($data_harga_motor));
+            $this->db->insert("t_pembayaran", $this->main_model->create_sys($dataDp1));
             $this->db->update('penerimaan_motor',$this->main_model->update_sys(array('status_jual'=>'2')),array('nomesin' => $this->input->post('nomsn')));
             return true;
             
         } else {
             $this->__insert_customer($data_customer,$this->input->post('no_ktp'));
-            //$sqlCustomer = $this->db->insert_string($this->table_customer, $data_customer) . ' ON DUPLICATE KEY UPDATE ' . implode(', ', $data_customer);
-            //$this->db->query($sqlCustomer);
             $this->db->update($this->table_tpenjualan, $this->main_model->update_sys($data_penjualan), array('noso' => $this->input->post('noso')));
             $this->db->update($this->table_thargamotor, $this->main_model->update_sys($data_harga_motor), array('noso' => $this->input->post('noso')));
-           
+            $this->db->update("t_pembayaran", $this->main_model->update_sys($dataDp1), array('noso' => $this->input->post('noso'),'transaksi'=>1));
             return true;
         }
         

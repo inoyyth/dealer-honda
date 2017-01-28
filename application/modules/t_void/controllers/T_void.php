@@ -101,11 +101,11 @@ class t_void extends MX_Controller {
     
     public function load_transaksi_detail($id){
         $data['detail_penjualan'] = $this->db->get_where('t_penjualan', array('id' => $id))->row_array();
-        $data['detail_pdi'] = $this->db->get_where('t_pdi',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
-        $data['list_aksesoris'] = $this->m_surat_jalan->getAksesoris($data['detail_pdi']['id']);
-        $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
-        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();
+        $data['detail_penerimaan_motor'] = $this->t_void->getPenerimaanMotor($data['detail_penjualan']['nomsn'])->row_array();
         $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
+        $data['detail_pdi'] = $this->db->get_where('t_pdi',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
+        $data['list_aksesoris'] = $this->t_void->getAksesoris($data['detail_pdi']['id']);
+        $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
         $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
         $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
         $this->load->view('t_void/detail_transaksi', $data);
