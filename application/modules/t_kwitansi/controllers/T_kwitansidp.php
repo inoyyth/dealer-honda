@@ -67,6 +67,20 @@ class T_kwitansidp extends MX_Controller {
         $this->load->view('default', $data);
     }
     
+    public function detail($id) {
+        $this->breadcrumbs->push('Edit', '/kwitansi-dp');
+        $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
+        $data['sisa_hutang'] = $this->mt_kwitansi->getSisaHutang($data['detail']['noso'],$data['detail']['transaksi']);
+        $data['penjualan'] = $this->main_model->getMaster('t_penjualan', $like = array(), $where = array('noso' => $data['detail']['noso']));
+        $data['customer'] = $this->main_model->getMaster('m_customer', $like = array(), $where = array('no_ktp' => $data['penjualan'][0]['ktp']));
+        $data['terima_motor'] = $this->main_model->getMaster('penerimaan_motor', $like = array(), $where = array('nomesin' => $data['penjualan'][0]['nomsn']));
+        $data['master_motor'] = $this->main_model->getMaster('m_motor', $like = array(), $where = array('tipe_motor' => $data['terima_motor'][0]['tipe']));
+        $data['master_harga_motor'] = $this->main_model->getMaster('t_harga_motor', $like = array(), $where = array('noso' => $data['detail']['noso']));
+        $data['total_bayar'] = $this->mt_kwitansi->getTotalBayar($data['detail']['noso']);
+        $data['view'] = "t_kwitansi/kwitansi_dp/edit";
+        $this->load->view('default', $data);
+    }
+    
     public function save() {
         if ($_POST) {
             if ($this->mt_kwitansi->save_proses()) {

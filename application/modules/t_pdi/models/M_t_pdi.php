@@ -79,31 +79,15 @@ class M_t_pdi extends CI_Model {
         return false;
     }
 
-    public function getNOSO($query) {
-        $data = $this->db->query('select a.*,b.nama_customer,c.fee,c.diskon,d.norangka,d.tipe_motor from t_penjualan a left join m_customer b on b.no_ktp = a.ktp 
-left join t_harga_motor c on c.noso = a.noso 
-left join m_motor d on d.nomsn = a.nomsn
-left join t_kwitansi_fee e on e.noso = a.noso
-            WHERE a.noso LIKE "%' . $query . '%" AND a.m_status =  "1" ');
-        $show = array();
-        foreach ($data->result_array() as $list) {
-            //echo "<br>".terbilang($list['fee'],3)."<br>";
-            //
-           $show[] = array('noso' => $list['noso'],
-                'fee' => $list['fee'],
-                'harga_otr' => $list['harga_otr'],
-                'diskon' => $list['diskon'],
-                'nama_customer' => $list['nama_customer'],
-                'nomsn' => $list['nomsn'],
-                'warna_motor' => $list['warna_motor'],
-                'tipe_motor' => $list['tipe_motor'],
-                'norangka' => $list['norangka'],
-                'fee' => $list['fee'],
-                'terbilang_diskon' => terbilang($list['diskon']),
-                'terbilang' => terbilang($list['fee']));
-            //$aku = array('noso'=>$list['noso']);
-        }
-        return $show;
+    public function getSO($query,$inside){
+        //("SELECT * FROM t_penjualan WHERE noso LIKE '%$query%' AND m_status='1' AND noso NOT IN ($so_implode)")
+        $this->db->select('*');
+        $this->db->from('t_penjualan');
+        $this->db->join('t_harga_motor','t_penjualan.noso=t_harga_motor.noso','INNER');
+        $this->db->like(array('t_penjualan.noso'=>$query));
+        $this->db->where(array('t_penjualan.m_status'=>'1','t_harga_motor.dp_lunas'=>'2'));
+        $this->db->where_not_in('t_penjualan.noso',$inside);
+        return $this->db->get();
     }
 
     public function get_data_print($id) {

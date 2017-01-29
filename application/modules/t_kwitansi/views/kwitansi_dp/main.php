@@ -7,7 +7,9 @@
                     <div class="col-md-6 pull-left">Kwitansi DP
                     </div>
                     <div class="col-md-6 pull-right text-right">
-                        <a href="<?php echo base_url('kwitansi-dp-tambah'); ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah </a>
+                        <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'kwitansi-dp-tambah', 'text' => 'Tambah')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'kwitansi-dp-pdf/?template=table_pdf&name=master_gudang', 'text' => 'Print', 'target'=>'_blank')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'kwitansi-dp-excel/?template=table_excel&name=master_gudang', 'text' => 'Excel', 'target'=>'_blank')); ?>
                     </div> 
                 </div>
             </div>
@@ -46,7 +48,7 @@
                                         <td><?php echo $v['tgl_dp']; ?></td>
                                         <td><?php echo formatrp($v['nominal']); ?></td>
                                         <td class="text-center">
-                                            <a href="<?php echo base_url('kwitansi-dp-detail/' . $v['id']); ?>" class="btn btn-default btn-sm"><i class="fa fa-info"></i> Detail</a>
+                                            <a href="<?php echo base_url('kwitansi-dp-detail/' . $v['id']); ?>" class="btn btn-success btn-sm"><i class="fa fa-info"></i> Detail</a>
                                             <a href="<?php echo base_url('kwitansi-dp-pdf/' . $v['id']); ?>" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
                                         </td>
                                     </tr>

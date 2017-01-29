@@ -106,7 +106,7 @@ class t_pdi extends MX_Controller {
             $where_not_in[] = $v['noso'];
         }
         $so_implode = "'" . implode("', '", $where_not_in) . "'";
-        $data = $this->db->query("SELECT * FROM t_penjualan WHERE noso LIKE '%$query%' AND m_status='1' AND noso NOT IN ($so_implode)")->result_array();
+        $data = $this->t_pdi->getSO($query,$so_implode)->result_array();
         echo json_encode($data);
     }
     
