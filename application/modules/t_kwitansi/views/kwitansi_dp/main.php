@@ -7,7 +7,9 @@
                     <div class="col-md-6 pull-left">Kwitansi DP
                     </div>
                     <div class="col-md-6 pull-right text-right">
-                        <a href="<?php echo base_url('kwitansi-dp-tambah'); ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah </a>
+                        <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'kwitansi-dp-tambah', 'text' => 'Tambah')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'kwitansi-dp-pdf/?template=table_pdf&name=master_gudang', 'text' => 'Print', 'target'=>'_blank')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'kwitansi-dp-excel/?template=table_excel&name=master_gudang', 'text' => 'Excel', 'target'=>'_blank')); ?>
                     </div> 
                 </div>
             </div>
@@ -21,7 +23,8 @@
                                 <th>No.SO</th>
                                 <th>Nama Customer</th>
                                 <th>DP Ke</th>
-
+                                <th>Tgl</th>
+                                <th>Nominal</th>
                                 <th class="text-center" style="width: 220px;">Action</th>
                             </tr>
                         </thead>
@@ -31,21 +34,26 @@
                                 echo"<tr><td class='text-center' colspan='10'>-No Data Found-</td></tr>";
                             } else {
                                 foreach ($data as $k => $v) {
+                                    $lunas = "";
+                                    if($v['transaksi']==4){
+                                        $lunas = " (Lunas)";
+                                    }
                                     ?>
                                     <tr>
                                         <td><?php echo intval($this->uri->segment(2) + ($k + 1)); ?></td>
-                                        <td><?php echo $v['nokwitansi']; ?></td>
-                                        <td><?php echo $v['noso']; ?></td>
+                                        <td style="width: 170px;"><?php echo $v['nokwitansi']; ?></td>
+                                        <td style="width: 170px;"><?php echo $v['noso']; ?></td>
                                         <td><?php echo $v['nama_customer']; ?></td>
-                                        <td><?php echo $v['transaksi']; ?></td>
-
+                                        <td><?php echo $v['transaksi'].$lunas; ?></td>
+                                        <td><?php echo $v['tgl_dp']; ?></td>
+                                        <td><?php echo formatrp($v['nominal']); ?></td>
                                         <td class="text-center">
-
-                                            <a href="<?php echo base_url('kwitansi-dp-detail/' . $v['id']); ?>" class="btn btn-default btn-sm"><i class="fa fa-info"></i> Detail</a>
+                                            <a href="<?php echo base_url('kwitansi-dp-detail/' . $v['id']); ?>" class="btn btn-success btn-sm"><i class="fa fa-info"></i> Detail</a>
                                             <a href="<?php echo base_url('kwitansi-dp-pdf/' . $v['id']); ?>" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
                                         </td>
                                     </tr>
-                                <?php }
+                                    <?php
+                                }
                             }
                             ?>
                         </tbody>
@@ -85,6 +93,22 @@
                                             }
                                             ;"/>
                                 </td>
+                                <td>
+                                    <input class="form-control input-sm" name="tgl_dp" value="<?php echo (isset($sr_data['tgl_dp']) ? $sr_data['tgl_dp'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                                submit_search('form1');
+                                            } else {
+                                                return false;
+                                            }
+                                            ;"/>
+                                </td>
+                                <td>
+                                    <input class="form-control input-sm" name="nominal" value="<?php echo (isset($sr_data['nominal']) ? $sr_data['nominal'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                                submit_search('form1');
+                                            } else {
+                                                return false;
+                                            }
+                                            ;"/>
+                                </td>
                             </tr>
                             </tfoot>
                     </table>
@@ -104,6 +128,6 @@
     </div>
 </form>
 <div class="col-lg-11 pull-right text-right">	
-<?php echo $paging; ?>
+    <?php echo $paging; ?>
 </div>
 </div>

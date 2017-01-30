@@ -18,7 +18,7 @@ class T_kwitansidp extends MX_Controller {
         $data_session = $this->__getSession();
         $config['base_url'] = base_url() . 'kwitansi-dp';
         $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
-        $config['per_page'] = 1;
+        $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
         $config['uri_segment'] = 2;
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->pagination->initialize($config);
@@ -43,6 +43,8 @@ class T_kwitansidp extends MX_Controller {
                 'nokwitansi' => set_session_table_search('nokwitansi', $this->input->get_post('nokwitansi', TRUE)),
                 'a.noso' => set_session_table_search('noso', $this->input->get_post('noso', TRUE)),
                 'nama_customer' => set_session_table_search('nama_customer', $this->input->get_post('nama_customer', TRUE)),
+                'tgl_dp' => set_session_table_search('tgl_dp', $this->input->get_post('tgl_dp', TRUE)),
+                'nominal' => set_session_table_search('nominal', $this->input->get_post('nominal', TRUE)),
                 'transaksi' => set_session_table_search('transaksi', $this->input->get_post('transaksi', TRUE))
             );
         } else {
@@ -51,6 +53,8 @@ class T_kwitansidp extends MX_Controller {
                 'nokwitansi' => $this->session->userdata('nokwitansi'),
                 'a.noso' => $this->session->userdata('noso'),
                 'nama_customer' => $this->session->userdata('nama_customer'),
+                'tgl_dp' => $this->session->userdata('tgl_dp'),
+                'nominal' => $this->session->userdata('nominal'),
                 'transaksi' => $this->session->userdata('transaksi')
             );
         }
@@ -61,6 +65,33 @@ class T_kwitansidp extends MX_Controller {
         $data['nokwitansi'] = $this->main_model->generate_code($this->table, 'KWT/KD/' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true);
         $data['view'] = "t_kwitansi/kwitansi_dp/add";
         $this->load->view('default', $data);
+    }
+    
+    public function detail($id) {
+        $this->breadcrumbs->push('Edit', '/kwitansi-dp');
+        $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
+        $data['sisa_hutang'] = $this->mt_kwitansi->getSisaHutang($data['detail']['noso'],$data['detail']['transaksi']);
+        $data['penjualan'] = $this->main_model->getMaster('t_penjualan', $like = array(), $where = array('noso' => $data['detail']['noso']));
+        $data['customer'] = $this->main_model->getMaster('m_customer', $like = array(), $where = array('no_ktp' => $data['penjualan'][0]['ktp']));
+        $data['terima_motor'] = $this->main_model->getMaster('penerimaan_motor', $like = array(), $where = array('nomesin' => $data['penjualan'][0]['nomsn']));
+        $data['master_motor'] = $this->main_model->getMaster('m_motor', $like = array(), $where = array('tipe_motor' => $data['terima_motor'][0]['tipe']));
+        $data['master_harga_motor'] = $this->main_model->getMaster('t_harga_motor', $like = array(), $where = array('noso' => $data['detail']['noso']));
+        $data['total_bayar'] = $this->mt_kwitansi->getTotalBayar($data['detail']['noso']);
+        $data['view'] = "t_kwitansi/kwitansi_dp/edit";
+        $this->load->view('default', $data);
+    }
+    
+    public function save() {
+        if ($_POST) {
+            if ($this->mt_kwitansi->save_proses()) {
+                $this->session->set_flashdata('success', 'Data Berhasil Di Simpan !');
+            } else {
+                $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
+            }
+            redirect("kwitansi-dp");
+        } else {
+            show_404();
+        }
     }
     
     public function get_detail_so($id=null) {
@@ -80,7 +111,7 @@ class T_kwitansidp extends MX_Controller {
             unset($jumTransaksi[$i]);
         }
         
-        $transaksiList = "";
+        $transaksiList = "<option value='' selected>==pilih==</option>";
         foreach($jumTransaksi as $k=>$v){
             $transaksiList .= "<option value='".$k."'>".$v."</option>";
         }

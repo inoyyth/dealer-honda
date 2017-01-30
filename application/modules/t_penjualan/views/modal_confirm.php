@@ -252,7 +252,7 @@
         }
 
         if ($('.carapembelian:checked').val() === "Cash") {
-            if ($("#diskon").val() <= 1) {
+            if ($("#diskon").val() < 0) {
                 $("#submitForm").prop('disabled', true);
                 $("#confirm-diskon").css("background-color", "yellow");
             }
@@ -264,11 +264,11 @@
                 $("#submitForm").prop('disabled', true);
                 $("#confirm-dp").css("background-color", "yellow");
             }
-            if ($("#sisa_hutang").val() <= 1) {
+            if ($("#sisa_hutang").val() < 0) {
                 $("#submitForm").prop('disabled', true);
                 $("#confirm-hutang").css("background-color", "yellow");
             }
-            if ($("#fee").val() <= 1) {
+            if ($("#fee").val() < 0) {
                 $("#submitForm").prop('disabled', true);
                 $("#confirm-fee").css("background-color", "yellow");
             }
@@ -281,7 +281,7 @@
                 $("#submitForm").prop('disabled', true);
                 $("#confirm-credit-dpsystem").css("background-color", "yellow");
             }
-            if ($("#diskon").val() <= 1) {
+            if ($("#diskon").val() < 0) {
                 $("#submitForm").prop('disabled', true);
                 $("#confirm-credit-diskon").css("background-color", "yellow");
             }
@@ -293,11 +293,11 @@
                 $("#submitForm").prop('disabled', true);
                 $("#confirm-credit-uangmuka").css("background-color", "yellow");
             }
-            if ($("#sisa_hutang").val() <= 1) {
+            if ($("#sisa_hutang").val() < 0) {
                 $("#submitForm").prop('disabled', true);
                 $("#confirm-credit-hutang").css("background-color", "yellow");
             }
-            if ($("#fee").val() <= 1) {
+            if ($("#fee").val() < 0) {
                 $("#submitForm").prop('disabled', true);
                 $("#confirm-credit-fee").css("background-color", "yellow");
             }

@@ -26,6 +26,11 @@ Class M_t_penjualan extends CI_Model {
 
         switch ($this->input->post('cara_pembelian')) {
             case 'Kredit':
+                if((currency_to_normal($this->input->post('dp_system')) - currency_to_normal($this->input->post('diskon'))) <= currency_to_normal($this->input->post('dp'))){
+                    $dplunas = "2";
+                }else{
+                    $dplunas = "1";
+                }
                 $data_harga_motor = array(
                     'noso'=>$this->input->post('noso'),
                     'cara_pembelian' => $this->input->post('cara_pembelian'),
@@ -36,11 +41,17 @@ Class M_t_penjualan extends CI_Model {
                     'tagih' => currency_to_normal($this->input->post('tagih')),
                     'dp' => currency_to_normal($this->input->post('dp')),
                     'sisa_hutang' => currency_to_normal($this->input->post('sisa_hutang')),
+                    'dp_lunas'=>$dplunas,
                     'fee' => currency_to_normal($this->input->post('fee')),
                     'm_status' => "1"
                 );
                 break;
             default:
+                if((currency_to_normal($this->input->post('harga_otr')) - currency_to_normal($this->input->post('diskon'))) <= currency_to_normal($this->input->post('dp'))){
+                    $dplunas = "2";
+                }else{
+                    $dplunas = "1";
+                }
                 $data_harga_motor = array(
                     'noso'=>$this->input->post('noso'),
                     'cara_pembelian' => $this->input->post('cara_pembelian'),
@@ -51,6 +62,7 @@ Class M_t_penjualan extends CI_Model {
                     'tagih' => currency_to_normal($this->input->post('tagih')),
                     'dp' => currency_to_normal($this->input->post('dp')),
                     'sisa_hutang' => currency_to_normal($this->input->post('sisa_hutang')),
+                    'dp_lunas'=>$dplunas,
                     'fee' => currency_to_normal($this->input->post('fee')),
                     'm_status' => "1"
                 );
@@ -60,8 +72,9 @@ Class M_t_penjualan extends CI_Model {
         $dataDp1 = array(
             'nokwitansi'=>$this->main_model->generate_code("t_pembayaran", 'KWT/KD/' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true),
             'noso'=> $this->input->post('noso'),
+            'tgl_dp'=> $this->input->post('tanggal'),
             'nominal'=> currency_to_normal($this->input->post('dp')),
-            'transaksi'=> 1
+            'transaksi'=> ($dplunas=="2"?4:1)
         );
         
         $data_customer = array(

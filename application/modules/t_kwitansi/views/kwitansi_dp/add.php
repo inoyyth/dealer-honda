@@ -25,6 +25,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-3 control-label">Tgl Dp</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="tgl_dp" id="tgl_dp" parsley-trigger="change" required placeholder="Pilih Tanggal" class="form-control datepicker">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-3 control-label">Nama</label>
                         <div class="col-sm-9">
                             <input type="text" name="nama_customer" id="nama_customer" parsley-trigger="change" required placeholder="Nama Customer" readonly="true" class="form-control">
@@ -43,15 +49,21 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-3 control-label">Diskon</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="diskon" id="diskon" parsley-trigger="change" required   placeholder="Diskon" readonly="true" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-3 control-label">Pembelian Secara</label>
                         <div class="col-sm-9">
                             <input type="text" name="cara_pembelian" id="cara_pembelian" parsley-trigger="change" readonly="true" required placeholder="Pembelian Secara" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">Transaksi</label>
+                        <label class="col-sm-3 control-label">DP Ke</label>
                         <div class="col-sm-9">
-                            <select name="transaksi" id="transaksi" class="form-control">
+                            <select name="transaksi" id="transaksi" class="form-control" parsley-trigger="change" required="true">
                                 
                             </select>
                         </div>
@@ -59,19 +71,19 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Sudah Dibayar</label>
                         <div class="col-sm-9">
-                            <input type="text" name="sudah_bayar" id="sudah_bayar" readonly="true" parsley-trigger="change" required    class="form-control">
+                            <input type="text" name="sudah_bayar" id="sudah_bayar" readonly="true" parsley-trigger="change" required class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Sisa Hutang</label>
                         <div class="col-sm-9">
-                            <input type="text" name="sisa_hutang" id="sisa_hutang" readonly="true" parsley-trigger="change" required    class="form-control">
+                            <input type="text" name="sisa_hutang" id="sisa_hutang" readonly="true" parsley-trigger="change" required class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">Nominal</label>
                         <div class="col-sm-9">
-                            <input type="text" name="nominal" id="nominal" parsley-trigger="change" style="text-align:left;"  placeholder="Nominal" data-inputmask="'alias': 'decimal', 'groupSeparator': ',', 'autoGroup': true" class="form-control mask">
+                            <input type="text" name="nominal" id="nominal" required="true" parsley-trigger="change" style="text-align:left;"  placeholder="Nominal" data-inputmask="'alias': 'decimal', 'groupSeparator': ',', 'autoGroup': true" class="form-control mask">
                         </div>
                     </div>
                     <div class="form-group">
@@ -123,9 +135,8 @@
         <div class="col-md-6">
             <div class="block-web">
                 <div class="form-group">
-                    <button type="button" name="new_kwitansidp" id="new_kwitansidp" class="btn btn-default">New</button>
                     <button name="submit" id="simpan" class="btn btn-primary">Save</button>
-                    <button type="reset" name="cancel" id="cancel" class="btn btn-danger">Cancel</button>
+                    <a href="<?php echo base_url('kwitansi-dp');?>" name="cancel" id="cancel" class="btn btn-danger">Cancel</a>
                 </div>
             </div>
         </div>
@@ -150,33 +161,14 @@
         });
 
         $('#remote .typeahead').bind('typeahead:selected', function (obj, datum, name) {
-            console.log(datum);
             $('#noso').val(datum.noso);
-            $.ajax({
-                type: "POST",
-                url: "<?php echo base_url('t_kwitansi/t_kwitansidp/get_detail_so'); ?>",
-                dataType: "json",
-                data: {id: datum.id},
-                success: function (result) {
-                    var sisaHutang = (parseInt(result.master_motor[0].harga_otr) - parseInt(result.total_bayar.total));
-                    $('#harga_otr').val(numeral(result.master_motor[0].harga_otr).format('0,0'));
-                    $('#nama_customer').val(result.customer[0].nama_customer);
-                    $('#type').val(result.terima_motor[0].tipe);
-                    $('#no_mesin').val(result.terima_motor[0].nomesin);
-                    $('#no_rangka').val(result.terima_motor[0].norangka);
-                    $('#warna').val(result.terima_motor[0].warna);
-                    $('#tahun').val(result.terima_motor[0].tahun);
-                    $('#cara_pembelian').val(result.master_harga_motor[0].cara_pembelian);
-                    $('#total_dp').val(numeral(result.master_harga_motor[0].dp_system).format('0,0'));
-                    $('#sudah_bayar').val(numeral(result.total_bayar.total).format('0,0'));
-                    $('#sisa_hutang').val(numeral(sisaHutang).format('0,0'));
-                    $('#transaksi').html(result.transaksi);
-                },
-                async: false
-            });
+            getDetailInfo(datum.id);
         });
         
         $("#nominal").keyup(function () {
+            if ($(this).val().trim().length == 0) {
+                $(this).val(0);
+            }
             var nominal = $("#nominal").val().match(/\d/g);
             var sending = parseInt(nominal.join(""));
         
@@ -193,6 +185,36 @@
             var sisa = parseInt(sisa_hutang.join("")) - parseInt(nominal.join(""));
             console.log(nominal);
             $("#sisa").val(sisa.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+        });
     });
-    });
+    
+    function getDetailInfo(id){
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('t_kwitansi/t_kwitansidp/get_detail_so'); ?>",
+            dataType: "json",
+            data: {id: id},
+            success: function (result) {
+                if(result.master_harga_motor[0].cara_pembelian === "Cash"){
+                    var sisaHutang = ((parseInt(result.master_motor[0].harga_otr) - parseInt(result.total_bayar.total)) - parseInt(result.master_harga_motor[0].diskon));
+                }else{
+                    var sisaHutang = (parseInt(result.master_harga_motor[0].dp_system) - parseInt(result.total_bayar.total));
+                }
+                $('#harga_otr').val(numeral(result.master_motor[0].harga_otr).format('0,0'));
+                $('#nama_customer').val(result.customer[0].nama_customer);
+                $('#type').val(result.terima_motor[0].tipe);
+                $('#no_mesin').val(result.terima_motor[0].nomesin);
+                $('#no_rangka').val(result.terima_motor[0].norangka);
+                $('#warna').val(result.terima_motor[0].warna);
+                $('#tahun').val(result.terima_motor[0].tahun);
+                $('#cara_pembelian').val(result.master_harga_motor[0].cara_pembelian);
+                $('#diskon').val(numeral(result.master_harga_motor[0].diskon).format('0,0'));
+                $('#total_dp').val(numeral(result.master_harga_motor[0].dp_system).format('0,0'));
+                $('#sudah_bayar').val(numeral(result.total_bayar.total).format('0,0'));
+                $('#sisa_hutang').val(numeral(sisaHutang).format('0,0'));
+                $('#transaksi').html(result.transaksi);
+            },
+            async: false
+        });
+    }
 </script>
