@@ -108,6 +108,7 @@ class t_void extends MX_Controller {
         $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
         $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
         $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
+        $data['list_dp'] = $this->db->get_where('t_pembayaran',array('noso'=>$data['detail_penjualan']['noso']))->result_array();
         $this->load->view('t_void/detail_transaksi', $data);
     }
     
