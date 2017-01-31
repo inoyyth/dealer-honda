@@ -1,3 +1,10 @@
+<div class="col-md-12">
+    <div class="block-web">
+        <div class="form-group">
+            <button id="voidTransaction" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-danger">Void Transaction</button>
+        </div>
+    </div>
+</div>
 <div class="col-lg-12">
     <div class="col-lg-6">
         <section class="panel default red_border vertical_border h1">
@@ -175,3 +182,36 @@
         </section>
     </div>
 </div>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Void Confirm</h4>
+            </div>
+            <div class="modal-body">
+                <p>Yakin untuk meng-cancel transaksi ini ???</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="VoidTransaction">VOID !!!</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#VoidTransaction').click(function () {
+            var noso = '<?php echo $detail_harga['noso'];?>';
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('t_void/void_transaction'); ?>",
+                data: {noso: noso},
+                success: function (result) {
+                    location.replace('<?php echo base_url('void');?>');
+                },
+                async: false
+            });
+        });
+    });
+</script>

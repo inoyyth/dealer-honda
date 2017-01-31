@@ -1,5 +1,9 @@
 <?php
-$kwt_explode = explode("/", $detail_harga['noso']);
+if($dp['transaksi'] == 4 ){
+    $descDp = "PELUNASAN";
+}else{
+    $descDp = "DP KE ".$dp['transaksi'];
+}
 ?>
 <style>
     body {
@@ -21,14 +25,14 @@ $kwt_explode = explode("/", $detail_harga['noso']);
     <div>Jl. Raya Bekasi Timur No. 158 Cipinang Jakarta Timur</div>
     <div>Telp.(021)6198464,8517484,8517620 Fax.:(021)8514855</div>
     <br>
-    <div style="text-align: center;">
-        == TANDA TERIMA ==
+    <div style="text-align: center;font-weight: bolder;">
+        == KWITANSI ==
     </div>
     <br>
     <table style="width: 100%;" style="font-size:15px;" cellspacing="0" cellpadding="3">
         <tr>
             <td style="font-size:15px;width: 25%;border-top:2px solid;border-left:2px solid;border-right:2px solid;">No Kwitansi : </td>
-            <td style="font-size:15px;width: 75%;border-top:2px solid;border-right:2px solid;"> <?php echo "KWT-" . $kwt_explode[1] . "-" . $kwt_explode[2] . "-" . $kwt_explode[3]; ?></td>
+            <td style="font-size:15px;width: 75%;border-top:2px solid;border-right:2px solid;"> <?php echo $dp['nokwitansi']; ?></td>
         </tr>
         <tr>
             <td style="font-size:15px;border-bottom:2px solid;border-left:2px solid;border-right:2px solid;">No SO : </td>
@@ -39,7 +43,7 @@ $kwt_explode = explode("/", $detail_harga['noso']);
     <table style="width: 100%;" style="font-size: 10px;" cellspacing="0" cellpadding="3">
         <tr>
             <td style="font-size:15px;width: 25%;border-top:2px solid;border-left:2px solid;border-right:2px solid;">Telah Terima Dari : </td>
-            <td style="font-size:15px;width: 75%;border-top:2px solid;border-right:2px solid;"> Mandala Kekar Abadi</td>
+            <td style="font-size:15px;width: 75%;border-top:2px solid;border-right:2px solid;"> <?php echo $detail_customer['nama_customer'];?></td>
         </tr>
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;"></td>
@@ -47,18 +51,18 @@ $kwt_explode = explode("/", $detail_harga['noso']);
         </tr>
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">Terbilang : </td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo ucwords(terbilang($detail_harga['fee'])); ?></td>
+            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo ucwords(terbilang($dp['nominal'])); ?></td>
         </tr>  
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">Untuk Pembayaran : </td>
             <td style="font-size:15px;width: 75%;border-right:2px solid;"> 
-                <u>DISKON</u> PEMBELIAN SATU UNIT SMH TIPE <?php echo $detail_penerimaan_motor['tipe']; ?> WARNA <?php echo $detail_penerimaan_motor['warna']; ?> <br>
+                <u><?php echo $descDp;?></u> PEMBELIAN SATU UNIT SMH TIPE <?php echo $detail_penerimaan_motor['tipe']; ?> WARNA <?php echo $detail_penerimaan_motor['warna']; ?> <br>
                 SECARA <?php echo strtoupper($detail_harga['cara_pembelian']); ?> <?php echo ($detail_harga['cara_pembelian']=="Kredit"? strtoupper($detail_leasing['leasing']):""); ?> A/N <?php echo strtoupper($detail_customer['nama_customer']); ?>
             </td>
         </tr>  
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">Jumlah Rp : </td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo formatrp($detail_harga['fee']); ?>,00</td>
+            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo formatrp($dp['nominal']); ?>,00</td>
         </tr>
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;border-bottom:2px solid;">Nomor Mesin : </td>

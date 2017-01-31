@@ -8,8 +8,8 @@
                     </div>
                     <div class="col-md-6 pull-right text-right">
                         <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'kwitansi-dp-tambah', 'text' => 'Tambah')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'kwitansi-dp-pdf/?template=table_pdf&name=master_gudang', 'text' => 'Print', 'target'=>'_blank')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'kwitansi-dp-excel/?template=table_excel&name=master_gudang', 'text' => 'Excel', 'target'=>'_blank')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'kwitansi-dp-pdf/?template=table_pdf&name=t_kwitansi', 'text' => 'Print', 'target'=>'_blank')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'kwitansi-dp-excel/?template=table_excel&name=t_kwitansi', 'text' => 'Excel', 'target'=>'_blank')); ?>
                     </div> 
                 </div>
             </div>
@@ -49,7 +49,7 @@
                                         <td><?php echo formatrp($v['nominal']); ?></td>
                                         <td class="text-center">
                                             <a href="<?php echo base_url('kwitansi-dp-detail/' . $v['id']); ?>" class="btn btn-success btn-sm"><i class="fa fa-info"></i> Detail</a>
-                                            <a href="<?php echo base_url('kwitansi-dp-pdf/' . $v['id']); ?>" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-print"></i> Print</a>
+                                            <a href="<?php echo base_url('kwitansi-dp-print-' . $this->encrypt->encode($v['id']));?>" class="btn btn-default btn-sm kwtPrtBtn" target="_blank"><i class="fa fa-print"></i> Print</a> 
                                         </td>
                                     </tr>
                                     <?php
@@ -131,3 +131,11 @@
     <?php echo $paging; ?>
 </div>
 </div>
+<script>
+    $(document).ready(function(){
+       $('.kwtPrtBtn').click(function(event) {
+            event.preventDefault();
+            window.open($(this).attr("href"), "popupWindow", "width=950,height=550,scrollbars=yes");
+        });  
+    });
+</script>
