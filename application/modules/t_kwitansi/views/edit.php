@@ -154,9 +154,17 @@
     <div class="col-md-6">
         <div class="block-web">
             <div class="form-group">
-                <button id="printDP" class="btn btn-default">Print</button>
+                <a href="<?php echo base_url('kwitansi-dp-print-' . $this->encrypt->encode($detail['id']));?>" class="btn btn-default kwtPrtBtn" target="_blank"><i class="fa fa-print"></i> Print</a>
                 <a href="<?php echo base_url('kwitansi-dp');?>" name="cancel" id="cancel" class="btn btn-danger">Back</a>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+       $('.kwtPrtBtn').click(function(event) {
+            event.preventDefault();
+            window.open($(this).attr("href"), "popupWindow", "width=950,height=550,scrollbars=yes");
+        });  
+    });
+</script>

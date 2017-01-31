@@ -191,20 +191,20 @@ $route['penjualan-excel/(:any)'] = 't_penjualan/print_excel/$1';
 $route['penjualan-fee-(:any)'] = 't_penjualan/print_fee/$1';
 $route['penjualan-diskon-(:any)'] = 't_penjualan/print_diskon/$1';
 
-/* Start Kwitansi DP */
-$route['kwitansi-dp'] = 't_kwitansi/t_kwitansidp';
-$route['kwitansi-dp/(:any)'] = 't_kwitansi/t_kwitansidp/index/$1';
-$route['kwitansi-dp-tambah'] = 't_kwitansi/t_kwitansidp/add';
-$route['kwitansi-dp-edit-(:num)'] = 't_kwitansi/t_kwitansidp/edit/$1';
-$route['kwitansi-dp-detail/(:any)'] = 't_kwitansi/t_kwitansidp/detail/$1';
-$route['kwitansi-dp-delete-(:num)'] = 't_kwitansi/t_kwitansidp/delete/$1';
-$route['kwitansi-dp-save'] = 't_kwitansi/t_kwitansidp/save';
-$route['kwitansi-dp-page'] = 't_kwitansi/t_kwitansidp/index';
-$route['kwitansi-dp-page/(:any)'] = 't_kwitansi/t_kwitansidp/index/$1';
-$route['kwitansi-dp-pdf'] = 't_kwitansi/t_kwitansidp/print_pdf';
-$route['kwitansi-dp-pdf/(:any)'] = 't_kwitansi/t_kwitansidp/print_pdf/$1';
-$route['kwitansi-dp-excel'] = 't_kwitansi/t_kwitansidp/print_excel';
-$route['kwitansi-dp-excel/(:any)'] = 't_kwitansi/t_kwitansidp/print_excel/$1';
+/* Start Kwitansi */
+$route['kwitansi-dp'] = 't_kwitansi';
+$route['kwitansi-dp/(:any)'] = 't_kwitansi/index/$1';
+$route['kwitansi-dp-tambah'] = 't_kwitansi/add';
+$route['kwitansi-dp-edit-(:num)'] = 't_kwitansi/edit/$1';
+$route['kwitansi-dp-detail/(:any)'] = 't_kwitansi/detail/$1';
+$route['kwitansi-dp-print-(:any)'] = 't_kwitansi/print_kwt/$1';
+$route['kwitansi-dp-save'] = 't_kwitansi/save';
+$route['kwitansi-dp-page'] = 't_kwitansi/index';
+$route['kwitansi-dp-page/(:any)'] = 't_kwitansi/index/$1';
+$route['kwitansi-dp-pdf'] = 't_kwitansi/print_pdf';
+$route['kwitansi-dp-pdf/(:any)'] = 't_kwitansi/print_pdf/$1';
+$route['kwitansi-dp-excel'] = 't_kwitansi/print_excel';
+$route['kwitansi-dp-excel/(:any)'] = 't_kwitansi/print_excel/$1';
 
 /* Start Kwitansi Fee */
 $route['kwitansi-fee'] = 't_kwitansi/t_kwitansi_fee';

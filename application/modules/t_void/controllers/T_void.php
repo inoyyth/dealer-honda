@@ -64,10 +64,11 @@ class t_void extends MX_Controller {
         
         $join = array(
             array('table' => 't_pdi', 'where' => 't_penjualan.noso=t_pdi.noso', 'join' => 'left'),
-            array('table' => 'penerimaan_motor', 'where' => 't_penjualan.nomsn=penerimaan_motor.nomesin', 'join' => 'left')
+            array('table' => 'penerimaan_motor', 'where' => 't_penjualan.nomsn=penerimaan_motor.nomesin', 'join' => 'left'),
+            array('table' => 't_harga_motor', 'where' => 't_penjualan.noso=t_harga_motor.noso', 'join' => 'left')
         );
         
-        $where = array('t_penjualan.m_status'=>'1');
+        $where = array('t_penjualan.m_status'=>'1','t_harga_motor.dp_lunas'=>'1');
         
         $column_search = array(null, 't_penjualan.id', 't_penjualan.noso', 't_pdi.kdpdi', 't_pdi.nosj','t_penjualan.nomsn','penerimaan_motor.norangka');
         $column_order = array('id', 'noso', 'kdpdi', 'nosj', 'nomsn', 'norangka');
@@ -110,6 +111,11 @@ class t_void extends MX_Controller {
         $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
         $data['list_dp'] = $this->db->get_where('t_pembayaran',array('noso'=>$data['detail_penjualan']['noso']))->result_array();
         $this->load->view('t_void/detail_transaksi', $data);
+    }
+    
+    public function void_transaction(){
+        $noso = $this->input->post('noso');
+        return true;
     }
     
 }

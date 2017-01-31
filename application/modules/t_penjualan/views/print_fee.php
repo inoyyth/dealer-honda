@@ -4,13 +4,13 @@ $kwt_explode = explode("/", $detail_harga['noso']);
 <style>
     body {
         font-family: "Times New Roman", Times, serif;
-        letter-spacing: 2px;
+        letter-spacing: 4px;
         font-size: 12px;
     }
     @media print {
         .no-print, .no-print * { display: none !important; }
         font-family: "Times New Roman", Times, serif;
-        letter-spacing: 2px;
+        letter-spacing: 4px;
         font-size: 12px;
     }
 </style>

@@ -1,6 +1,6 @@
 <?php
 
-class T_kwitansidp extends MX_Controller {
+class T_kwitansi extends MX_Controller {
 
     var $table = "t_pembayaran";
 
@@ -26,7 +26,7 @@ class T_kwitansidp extends MX_Controller {
         $data['data'] = $this->mt_kwitansi->getdata_dp($this->table, $limit, $config['per_page'], $like = $data_session, $where = array());
         //$data['data'] = $this->mt_kwitansi->getdata_dp();
         $data['sr_data'] = $data_session;
-        $data['view'] = 't_kwitansi/kwitansi_dp/main';
+        $data['view'] = 't_kwitansi/main';
         $this->load->view('default', $data);
     }
 
@@ -63,7 +63,7 @@ class T_kwitansidp extends MX_Controller {
     public function add() {
         $this->breadcrumbs->push('Add', '/kwitansi-dp');
         $data['nokwitansi'] = $this->main_model->generate_code($this->table, 'KWT/KD/' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true);
-        $data['view'] = "t_kwitansi/kwitansi_dp/add";
+        $data['view'] = "t_kwitansi/add";
         $this->load->view('default', $data);
     }
     
@@ -77,7 +77,7 @@ class T_kwitansidp extends MX_Controller {
         $data['master_motor'] = $this->main_model->getMaster('m_motor', $like = array(), $where = array('tipe_motor' => $data['terima_motor'][0]['tipe']));
         $data['master_harga_motor'] = $this->main_model->getMaster('t_harga_motor', $like = array(), $where = array('noso' => $data['detail']['noso']));
         $data['total_bayar'] = $this->mt_kwitansi->getTotalBayar($data['detail']['noso']);
-        $data['view'] = "t_kwitansi/kwitansi_dp/edit";
+        $data['view'] = "t_kwitansi/edit";
         $this->load->view('default', $data);
     }
     
@@ -123,6 +123,32 @@ class T_kwitansidp extends MX_Controller {
         $nominal = $this->input->post('nominal');
         $terbilang = terbilang($nominal);
         echo $terbilang;
+    }
+    
+    public function print_kwt($id){
+        $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
+        $data['dp'] = $this->db->get_where($this->table, array('id' => $this->encrypt->decode($id)))->row_array();
+        $data['detail_penjualan'] = $this->db->get_where('t_penjualan', array('noso' => $data['dp']['noso']))->row_array();
+        $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['dp']['noso']))->row_array();
+        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();
+        $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
+        $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
+        $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
+        
+        $this->load->view('t_kwitansi/print_dp',$data);
+    }
+    
+    public function print_pdf() {
+        $data['template'] = array("template" => "t_kwitansi/" . $_GET['template'], "filename" => $_GET['name']);
+        $data['list'] = $this->mt_kwitansi->getdata_dp($this->table, 0, 1000, $like = array(), $where = array('a.m_status!=' => '3'));
+        $this->printpdf->create_pdf($data);
+    }
+
+    public function print_excel() {
+        $data['template_excel'] = "t_kwitansi/" . $_GET['template'];
+        $data['file_name'] = $_GET['name'];
+        $data['list'] = $this->mt_kwitansi->getdata_dp($this->table, 0, 1000, $like = array(), $where = array('a.m_status!=' => '3'));
+        $this->load->view('template_excel', $data);
     }
 
 }
