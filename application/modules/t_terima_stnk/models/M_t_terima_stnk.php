@@ -44,4 +44,13 @@ class M_t_terima_stnk extends CI_Model {
         }
         return false;
     }
+    
+    public function getSO($query,$inside){
+        $this->db->select('*');
+        $this->db->from('t_stnk');
+        $this->db->like(array('t_stnk.no_process'=>$query));
+        $this->db->where(array('t_stnk.stnk_status'=>'1'));
+        $this->db->where_not_in('t_stnk.id',$inside);
+        return $this->db->get();
+    }
 }

@@ -81,7 +81,7 @@ class M_t_pdi extends CI_Model {
 
     public function getSO($query,$inside){
         //("SELECT * FROM t_penjualan WHERE noso LIKE '%$query%' AND m_status='1' AND noso NOT IN ($so_implode)")
-        $this->db->select('*');
+        $this->db->select('t_penjualan.id,t_penjualan.ktp,t_penjualan.nomsn,t_penjualan.noso');
         $this->db->from('t_penjualan');
         $this->db->join('t_harga_motor','t_penjualan.noso=t_harga_motor.noso','INNER');
         $this->db->like(array('t_penjualan.noso'=>$query));
