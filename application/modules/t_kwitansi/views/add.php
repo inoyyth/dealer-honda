@@ -149,7 +149,7 @@
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             remote: {
-                url: '<?php echo base_url('t_kwitansi/t_kwitansidp/getSO?query=%QUERY'); ?>',
+                url: '<?php echo base_url('t_kwitansi/getSO?query=%QUERY'); ?>',
                 wildcard: '%QUERY'
             }
         });
@@ -172,7 +172,7 @@
             var nominal = $("#nominal").val().match(/\d/g);
             var sending = parseInt(nominal.join(""));
         
-            $.post("t_kwitansi/t_kwitansidp/terbilang/", {nominal: sending}).done(function (data) {
+            $.post("t_kwitansi/terbilang/", {nominal: sending}).done(function (data) {
                 $("#terbilang").text(data);
             });
             
@@ -191,7 +191,7 @@
     function getDetailInfo(id){
         $.ajax({
             type: "POST",
-            url: "<?php echo base_url('t_kwitansi/t_kwitansidp/get_detail_so'); ?>",
+            url: "<?php echo base_url('t_kwitansi/get_detail_so'); ?>",
             dataType: "json",
             data: {id: id},
             success: function (result) {

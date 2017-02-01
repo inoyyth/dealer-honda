@@ -125,7 +125,7 @@
     $(document).ready(function () {
         $('.sjBtn').click(function (event) {
             event.preventDefault();
-            window.open($(this).attr("href"), "popupWindow", "width=800,height=550,scrollbars=yes");
+            window.open($(this).attr("href"), "popupWindow", "width=960,height=550,scrollbars=yes");
         });
     });
 </script>

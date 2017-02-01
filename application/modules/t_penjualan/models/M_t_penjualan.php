@@ -49,8 +49,10 @@ Class M_t_penjualan extends CI_Model {
             default:
                 if((currency_to_normal($this->input->post('harga_otr')) - currency_to_normal($this->input->post('diskon'))) <= currency_to_normal($this->input->post('dp'))){
                     $dplunas = "2";
+                    $status_motor = "2";
                 }else{
                     $dplunas = "1";
+                    $status_motor = "4";
                 }
                 $data_harga_motor = array(
                     'noso'=>$this->input->post('noso'),
@@ -99,7 +101,7 @@ Class M_t_penjualan extends CI_Model {
             $this->db->insert($this->table_tpenjualan, $this->main_model->create_sys($data_penjualan));
             $this->db->insert($this->table_thargamotor, $this->main_model->create_sys($data_harga_motor));
             $this->db->insert("t_pembayaran", $this->main_model->create_sys($dataDp1));
-            $this->db->update('penerimaan_motor',$this->main_model->update_sys(array('status_jual'=>'2')),array('nomesin' => $this->input->post('nomsn')));
+            $this->db->update('penerimaan_motor',$this->main_model->update_sys(array('status_jual'=>$status_motor)),array('nomesin' => $this->input->post('nomsn')));
             return true;
             
         } else {

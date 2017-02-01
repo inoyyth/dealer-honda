@@ -105,7 +105,11 @@ class t_pdi extends MX_Controller {
         foreach($so_exist as $k=>$v){
             $where_not_in[] = $v['noso'];
         }
-        $so_implode = "'" . implode("', '", $where_not_in) . "'";
+        
+        $last  = array_slice($where_not_in, -1);
+        $first = join(', ', array_slice($where_not_in, 0, -1));
+        $so_implode  = array_filter(array_merge(array($first), $last), 'strlen');
+
         $data = $this->t_pdi->getSO($query,$so_implode)->result_array();
         echo json_encode($data);
     }

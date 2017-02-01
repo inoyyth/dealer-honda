@@ -32,7 +32,7 @@ class T_kwitansi extends MX_Controller {
 
     public function getSO() {
         $query = $this->input->get('query');
-        $data = $this->db->query("SELECT * FROM t_penjualan WHERE noso LIKE '%$query%' AND m_status='1'")->result_array();
+        $data = $this->mt_kwitansi->getSO($query)->result_array();
         echo json_encode($data);
     }
 

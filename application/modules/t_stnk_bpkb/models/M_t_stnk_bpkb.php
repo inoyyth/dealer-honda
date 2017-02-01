@@ -85,4 +85,16 @@ class M_t_stnk_bpkb extends CI_Model {
         $this->db->where(array('noso'=>$no_so));
         return $this->db->get()->row_array();
     }
+    
+    public function getSO($query,$inside){
+        $this->db->select('t_penjualan.id,t_penjualan.ktp,t_penjualan.nomsn,t_penjualan.noso');
+        $this->db->from('t_penjualan');
+        $this->db->join('t_harga_motor','t_penjualan.noso=t_harga_motor.noso','INNER');
+        $this->db->like(array('t_penjualan.noso'=>$query));
+        $this->db->where(array('t_penjualan.m_status'=>'1','t_harga_motor.dp_lunas'=>'2'));
+        if(count($inside) > 0){
+            $this->db->where_not_in('t_penjualan.noso',$inside);
+        }
+        return $this->db->get();
+    }
 }
