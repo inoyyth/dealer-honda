@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="block-web">
         <div class="form-group">
-            <button id="voidTransaction" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-danger">Void Transaction</button>
+            <a href="<?php echo base_url('void');;?>" class="btn btn-danger">Back</a>
         </div>
     </div>
 </div>
