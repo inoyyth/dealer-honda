@@ -34,7 +34,7 @@
                     <div class="form-group" id="remote">
                         <label class="col-sm-3 control-label">No Sales Order</label>
                         <div class="col-sm-9">
-                            <input class="typeahead form-control" parsley-trigger="change" required name="noso" id="noso" type="text" placeholder="Type No Sales Order" value="<?= isset($kleasing['noso']) ? $kleasing['noso'] : ''; ?>">
+                            <input class="typeahead form-control" parsley-trigger="change" required name="noso" style="text-transform: uppercase;" id="noso" type="text" placeholder="Type No Sales Order" value="<?= isset($kleasing['noso']) ? $kleasing['noso'] : ''; ?>">
                             <input type="hidden" name="id" id="id" parsley-trigger="change" required readonly="true" value="<?= isset($kleasing['id']) ? $kleasing['id'] : ''; ?>" class="form-control">
                             <input type="hidden" name="nama_customer" id="nama_customer" parsley-trigger="change" class="form-control">
 
@@ -160,7 +160,7 @@
                         $no_kwitansi = isset($nokwitansi) ? $nokwitansi : $kleasing['nokwitansi'];
                         $noKwitansi = str_replace("/", "_", $no_kwitansi);
                         $atts = array(
-                            'width' => 900,
+                            'width' => 950,
                             'height' => 550,
                             'scrollbars' => 'yes',
                             'status' => 'yes',
