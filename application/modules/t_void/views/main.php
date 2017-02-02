@@ -7,6 +7,8 @@
                     </div>
                     <div class="col-md-6 pull-right text-right">
                         <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'void-tambah', 'text' => 'Tambah')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'void-pdf/?template=table_pdf&name=t_void', 'text' => 'Print')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'void-excel/?template=table_excel&name=t_void', 'text' => 'Excel')); ?>
                     </div> 
                 </div>
             </div>
@@ -37,7 +39,7 @@
                                         <td><?php echo $v['nama_lengkap']; ?></td>
                                         <td><?php echo $v['void_description']; ?></td>
                                         <td class="text-center">
-                                            <?php echo $this->button_lib->render(array('anchor' => 'det', 'url' => 'void-detail-' . $v['id'], 'text' => 'Delete')); ?>
+                                            <a href="<?php echo base_url('void-detail-' . $v['id']); ?>" class="btn btn-success btn-sm"><i class="fa fa-info"></i> Detail</a>
                                         </td>
                                     </tr>
                                 <?php }
