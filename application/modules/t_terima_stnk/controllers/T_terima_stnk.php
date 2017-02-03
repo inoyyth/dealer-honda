@@ -89,8 +89,9 @@ class T_terima_stnk extends MX_Controller {
         foreach ($so_exist as $k => $v) {
             $where_not_in[] = $v['t_stnk_id'];
         }
-        $so_implode = "'" . implode("', '", $where_not_in) . "'";
-        $data = $this->db->query("SELECT * FROM t_stnk WHERE no_process LIKE '%$query%' AND stnk_status='1' AND id NOT IN ($so_implode)")->result_array();
+        
+        $so_implode  = implode(',', $where_not_in);
+        $data = $this->t_terima_stnk->getSO($query,$so_implode)->result_array();
         echo json_encode($data);
     }
     

@@ -37,6 +37,7 @@ class M_t_kwitansi extends CI_Model {
             $this->db->insert($this->table, $this->main_model->create_sys($data));
             if ($this->input->post('transaksi') == 4) {
                 $this->db->update('t_harga_motor',array('dp_lunas'=>'2'),array('noso'=>$this->input->post('noso')));
+                $this->db->update('penerimaan_motor',array('status_jual'=>'2'),array('nomesin'=>$this->input->post('nomsn')));
             }
             return true;
         } else {
@@ -51,6 +52,15 @@ class M_t_kwitansi extends CI_Model {
         $this->db->from($this->table);
         $this->db->where(array('noso' => $noso, 'transaksi <' => $dp));
         return $this->db->get()->row_array();
+    }
+    
+    public function getSO($query){
+        $this->db->select('t_penjualan.id,t_penjualan.ktp,t_penjualan.nomsn,t_penjualan.noso');
+        $this->db->from('t_penjualan');
+        $this->db->join('t_harga_motor','t_penjualan.noso=t_harga_motor.noso','INNER');
+        $this->db->like(array('t_penjualan.noso'=>$query));
+        $this->db->where(array('t_penjualan.m_status'=>'1','t_harga_motor.dp_lunas'=>'1'));
+        return $this->db->get();
     }
 
 }

@@ -101,8 +101,11 @@ class T_stnk_bpkb extends MX_Controller {
         foreach ($so_exist as $k => $v) {
             $where_not_in[] = $v['no_so'];
         }
-        $so_implode = "'" . implode("', '", $where_not_in) . "'";
-        $data = $this->db->query("SELECT * FROM t_harga_motor WHERE noso LIKE '%$query%' AND m_status='1' AND noso NOT IN ($so_implode)")->result_array();
+        $last  = array_slice($where_not_in, -1);
+        $first = join(', ', array_slice($where_not_in, 0, -1));
+        $so_implode  = array_filter(array_merge(array($first), $last), 'strlen');
+        
+        $data = $this->t_stnk_bpkb->getSO($query,$so_implode)->result_array();
         echo json_encode($data);
     }
 

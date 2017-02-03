@@ -115,6 +115,9 @@ class t_void extends MX_Controller {
     
     public function void_transaction(){
         $noso = $this->input->post('noso');
+        $updateTpenjualan = $this->db->update('t_penjualan',array('m_status'=>4),array('noso'=>$noso));
+        $getTpenjualan = $this->db->get_where('t_penjualan',array('noso'=>$noso))->row_array();
+        $updatePenerimaanMotor = $this->db->update('penerimaan_motor',array('status_jual'=>1),array('nomesin'=>$getTpenjualan['nomsn']));
         return true;
     }
     

@@ -242,7 +242,7 @@
 
         $("#nominal").focusout(function () {
             var nominal = $(this).val();
-            $.post("t_kwitansi/t_kwitansidp/terbilang/", {nominal: nominal}).done(function (data) {
+            $.post("t_kwitansi/terbilang/", {nominal: nominal}).done(function (data) {
                 $("#terbilang").text(data);
             });
 
