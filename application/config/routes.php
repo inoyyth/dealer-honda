@@ -245,7 +245,12 @@ $route['kwitansi-diskon-excel/(:any)'] = 't_kwitansi/t_kwitansi_diskon/print_exc
 
 /*Start Leasing*/
 $route['cetak-kwitansi-leasing'] = 'leasing/cetak_kwitansi_leasing/index';
+$route['cetak-kwitansi-leasing-tambah'] = 'leasing/cetak_kwitansi_leasing/form';
+$route['cetak-kwitansi-leasing-edit-(:num)'] = 'leasing/cetak_kwitansi_leasing/editform/$1';
 $route['cetak-kwitansi-leasing-save'] = 'leasing/cetak_kwitansi_leasing/save';
+$route['cetak-kwitansi-leasing-print-(:num)'] = 'leasing/cetak_kwitansi_leasing/kwitansi/$1';
+$route['cetak-kwitansi-leasing-detail-(:num)'] = 'leasing/cetak_kwitansi_leasing/detail/$1';
+
 $route['cetak-kwitansi-leasing-proseska'] = 'leasing/cetak_kwitansi_leasing/proses_ka';
 $route['cetak-kwitansi-leasing-proseska/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_ka/$1';
 $route['cetak-kwitansi-leasing-proseskb'] = 'leasing/cetak_kwitansi_leasing/proses_kb';
@@ -254,6 +259,10 @@ $route['cetak-kwitansi-leasing-proseskc'] = 'leasing/cetak_kwitansi_leasing/pros
 $route['cetak-kwitansi-leasing-proseskc/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_kc/$1';
 $route['cetak-kwitansi-leasing-proseskc2'] = 'leasing/cetak_kwitansi_leasing/proses_kc2';
 $route['cetak-kwitansi-leasing-proseskc2/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_kc2/$1';
+$route['cetak-kwitansi-leasing-pdf'] = 'leasing/cetak_kwitansi_leasing/print_pdf';
+$route['cetak-kwitansi-leasing-pdf/(:any)'] = 'leasing/cetak_kwitansi_leasing/print_pdf/$1';
+$route['cetak-kwitansi-leasing-excel'] = 'leasing/cetak_kwitansi_leasing/print_excel';
+$route['cetak-kwitansi-leasing-excel/(:any)'] = 'leasing/cetak_kwitansi_leasing/print_excel/$1';
 
 /*End Leasing*/
 
