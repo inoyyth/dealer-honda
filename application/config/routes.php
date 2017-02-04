@@ -362,6 +362,7 @@ $route['motor-keluar-pdf'] = 'motor_keluar/print_pdf';
 $route['motor-keluar-pdf/(:any)'] = 'motor_keluar/print_pdf/$1';
 $route['motor-keluar-excel'] = 'motor_keluar/print_excel';
 $route['motor-keluar-excel/(:any)'] = 'motor_keluar/print_excel/$1';
+$route['motor-keluar-sj-(:any)'] = 'motor_keluar/print_sj/$1';
 
 
 $route['stock'] = 'stock';
