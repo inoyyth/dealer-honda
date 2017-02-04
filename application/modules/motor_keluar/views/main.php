@@ -39,8 +39,9 @@
                                         <td><?php echo $v['gudang_masuk']; ?></td>
                                         <td><?php echo $v['kode_po_motor_keluar']; ?></td>
                                         <td><?php echo $v['kode_do_motor_keluar']; ?></td>
-                                        <td class="text-center" style="width: 150px;">
+                                        <td class="text-center" style="width: 230px;">
                                             <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'motor-keluar-edit-' . $v['id_motor_keluar'], 'text' => 'Edit')); ?>
+                                            <a href="<?php echo base_url('motor-keluar-sj-' . $this->encrypt->encode($v['id_motor_keluar']));?>" class="btn btn-default btn-sm sjBtn" target="_blank"><i class="fa fa-print"></i> Print</a> 
                                             <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'motor-keluar-delete-' . $v['id_motor_keluar'], 'text' => 'Delete')); ?>
                                         </td>
                                     </tr>
@@ -115,3 +116,11 @@
 <?php echo $paging; ?>
 </div>
 </div>
+<script>
+    $(document).ready(function(){
+       $('.sjBtn').click(function(event) {
+            event.preventDefault();
+            window.open($(this).attr("href"), "popupWindow", "width=970,height=550,scrollbars=yes");
+        }); 
+    });
+</script>

@@ -6,11 +6,10 @@ class Motor_keluar extends MX_Controller {
 
     public function __construct() {
         parent::__construct();
-        if(!$this->session->userdata('logged_in_admin')){
-            redirect(base_url());
-        }
+        
         $this->load->model(array('M_motor_keluar' => 'm_motor_keluar','Datatable_model'=>'m_datatable'));
-        $this->load->library('Printpdf', 'Auth_log');
+                $this->load->library(array('encrypt','Printpdf', 'Auth_log'));
+        $this->encrypt->set_cipher(MCRYPT_BLOWFISH);
         //set breadcrumb
         $this->breadcrumbs->push('Motor Keluar', '/motor-keluar');
     }
@@ -222,6 +221,13 @@ class Motor_keluar extends MX_Controller {
         foreach($gudang as $k=>$v){
             echo "<option value='".$v['id']."'>".$v['gudang']."</option>";
         }
+    }
+    
+    public function print_sj($id){
+        $data['motor_keluar'] = $this->m_motor_keluar->get_motor_keluar($this->encrypt->decode($id))->row_array();
+        $data['motor_keluar_list'] = $this->m_motor_keluar->get_motor_list($this->encrypt->decode($id))->result_array();
+
+        $this->load->view('motor_keluar/print_sj',$data);
     }
 
 }
