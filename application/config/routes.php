@@ -405,3 +405,14 @@ $route['terima-stnk-pdf/(:any)'] = 't_terima_stnk/t_terima-stnk_bpkb/$1';
 $route['terima-stnk-excel'] = 't_terima_stnk/print_excel';
 $route['terima-stnk-excel/(:any)'] = 't_terima_stnk/print_excel/$1';
 /* End Tanda Terima STNK BPKB */
+
+/* Owner Info*/
+$route['owner'] = 'md_owner_info';
+$route['owner-save'] = 'md_owner_info/save';
+/* End Owner Info*/
+
+/* Surat Pernyataan (covernote)*/
+$route['surat-pernyataan'] = 'leasing_covernote';
+$route['surat-pernyataan-save'] = 'leasing_covernote/save';
+$route['surat-pernyataan-print/(:num)/(:any)'] = 'leasing_covernote/print_covernotex/$1/$1/';
+/* End Surat Pernyataan (Covernote)*/
