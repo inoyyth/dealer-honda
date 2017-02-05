@@ -18,6 +18,8 @@
     <div>Jl. Raya Bekasi Timur No. 158 Cipinang Jakarta Timur</div>
     <div>Telp.(021)6198464,8517484,8517620 Fax.:(021)8514855</div>
     <br>
+    <div style="text-align: center;font-size: 13px;font-weight: bolder;">== Surat Jalan (Mutasi Motor) ==</div>
+    <br>
     <table style="width: 100%;">
         <tr>
             <td style="border-top:2px solid;border-left:2px solid;border-bottom:2px solid;">
