@@ -375,7 +375,7 @@ $route['stock-excel/(:any)'] = 'stock/print_excel/$1';
 
 $route['kwitansi-dp-add'] = 't_kwitansi/add';
 
-/*Start Leasing*/
+/*Start Leasing
 $route['cetak-kwitansi-leasing'] = 'leasing/cetak_kwitansi_leasing/index';
 $route['cetak-kwitansi-leasing-save'] = 'leasing/cetak_kwitansi_leasing/save';
 $route['cetak-kwitansi-leasing-proseska'] = 'leasing/cetak_kwitansi_leasing/proses_ka';
@@ -386,11 +386,14 @@ $route['cetak-kwitansi-leasing-proseskc'] = 'leasing/cetak_kwitansi_leasing/pros
 $route['cetak-kwitansi-leasing-proseskc/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_kc/$1';
 $route['cetak-kwitansi-leasing-proseskc2'] = 'leasing/cetak_kwitansi_leasing/proses_kc2';
 $route['cetak-kwitansi-leasing-proseskc2/(:any)'] = 'leasing/cetak_kwitansi_leasing/proses_kc2/$1';
-/*End Leasing*/
+End Leasing*/
 
 /*rekap tagihan*/
 $route['rekap-tagihan'] = 'leasing/rekap_tagihan/index';
-$route['cetak-kwitansi-leasing-save'] = 'leasing/cetak_kwitansi_leasing/save';
+$route['rekap-tagihan-tambah'] = 'leasing/rekap_tagihan/form';
+$route['rekap-tagihan-edit'] = 'leasing/rekap_tagihan/edit';
+$route['rekap-tagihan-detail'] = 'leasing/rekap_tagihan/detail';
+//$route['cetak-kwitansi-leasing-save'] = 'leasing/cetak_kwitansi_leasing/save';
 /* Start Tanda Terima STNK BPKB */
 $route['terima-stnk'] = 't_terima_stnk/index';
 $route['terima-stnk-tambah'] = 't_terima_stnk/add';

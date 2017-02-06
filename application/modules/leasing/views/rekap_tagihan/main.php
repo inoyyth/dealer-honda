@@ -1,164 +1,120 @@
- 
 <div class="row">
     <div class="col-lg-12">
         <section class="panel default blue_title h4">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-md-6 pull-left">Rekap Tagihan
-                    </div>
+                    <div class="col-md-6 pull-left">Rekap Kwitansi Leasing</div>
                     <div class="col-md-6 pull-right text-right">
-                         <a href="<?php echo base_url('kwitansi-dp-tambah');?>" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> Tambah </a>
+                        <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'rekap-tagihan-tambah', 'text' => 'Tambah')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'rekap-tagihan-pdf/?template=table_pdf&name=kwitansi-leasing', 'text' => 'Print')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'rekap-tagihan-excel/?template=table_excel&name=kwitansi-leasing', 'text' => 'Excel')); ?>
                     </div> 
                 </div>
             </div>
             <div class="panel-body">
-                <div class="block-web">
-                <div class="header">
-                    <div class="actions"> </div>
-                    <h3 class="content-header">Transaksi  </h3>
-                </div>
-                <div class="porlets-content">
-                    <div class="form-group">
-                        <label class="col-sm-12 control-label">Tanggal</label>
-                        <div class="col-sm-6">
-                            <input type="text" name="tanggal_start" id="tanggal_start" parsley-trigger="change"   class="form-control datepicker">
-                            
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" name="tanggal_end" id="tanggal_end" parsley-trigger="change"   class="form-control datepicker">
-                             
-                        </div>
-                    </div>
-                    
-                      <div class="form-group">
-                        <label class="col-sm-12 control-label">Leasing</label>
-                        <div class="col-sm-6">
-                              <select name="leasing" id="leasing" required class="form-control">
-                                <option value="">Choose Leasing</option>
-                                <?php 
-                                    foreach($dtleasing as $leasing) { 
-                                        $selected = "";
-                                        if(isset($price_list)){
-                                            if($price_list['leasing']==$leasing['kd_leasing'] && $price_list['cara_pembelian']=="Kredit"){
-                                                $selected = "selected";
-                                            }
-                                        }
-                                    ?>
-                                <option label="<?=$leasing['leasing'];?>" value="<?=$leasing['kd_leasing'];?>" <?php echo $selected;?>><?=$leasing['leasing'];?></option>
-                                <?php } ?>
-                            </select>
-                        </div>
-                        
-                    </div>
-                   
-                    
-                    <br>
-                    &nbsp;
-                    <br>
-                    <hr>
-                    <div class="form-group">
-                         <div class="col-sm-12">
-                        <button type="submit" name="list" class="btn btn-default"> List </button>
-                        <button type="submit" name="generate" class="btn btn-default">  Generate </button>
-                        <button type="submit" name="save" class="btn btn-default"> Save </button>
-                        <button type="submit" name="print" class="btn btn-default"> Print </button>
-                         </div>
-                    </div>
-                    &nbsp;
-                    <br>
-                    <hr>
-                    <h2 align='center'> REKAPAN TAGIHAN </h2>
-                     <div class="form-group">
-                        
-                        <div class="col-sm-6">
-                             
-                        </div>
-                        <div class="col-sm-6">
-                            <label class="col-sm-12 control-label">Leasing</label>
-                            <input type="text" name="tanggal_end" id="tanggal_end" parsley-trigger="change"   class="form-control datepicker">
-                             
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="col-sm-12 control-label">Tanggal</label>
-                        <div class="col-sm-6">
-                            <input type="text" name="tanggal_start" id="tanggal_start" parsley-trigger="change"   class="form-control datepicker">
-                            
-                        </div>
-                        <div class="col-sm-6">
-                          
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-12 control-label">Tanggal</label>
-                        <div class="col-sm-6">
-                            <input type="text" name="tanggal_start" id="tanggal_start" parsley-trigger="change"   class="form-control datepicker">
-                            
-                        </div>
-                        <div class="col-sm-6">
-                          
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-12 control-label">Tanggal</label>
-                        <div class="col-sm-6">
-                            <input type="text" name="tanggal_start" id="tanggal_start" parsley-trigger="change"   class="form-control datepicker">
-                            
-                        </div>
-                        <div class="col-sm-6">
-                          
-                        </div>
-                    </div>
-                    
-                  
-                    
-                    
-                    
-                    
-                    
+                <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
-                            <tr>    
-                                <td>  </td>
-                                <td> No</td>
-                                <td> Tgl Kwitansi</td>
-                                <td> Nmr Kwitansi</td>
-                                <td> Nama</td>
-                                <td> Type</td>
-                                <td> No.Mesin</td>
-                                <td> No.Rangka</td>
-                                <td> OTR </td>
-                                <td> DP </td>
-                                <td> Subsidi </td>
-                                <td> Sisa </td>
-                                <td> Price List </td>
+                            <tr>
+                                <th>#</th>
+                                <th>No. Tagihan</th>
+                                <th>Tgl. Tagihan</th>
+                                <th>Total Tagihan</th>
+                                <th>Leasing</th>
+                                <th class="text-center" style="width: 270px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                           
-                            <tr>    
-                                <td> <input type="checkbox" name="id" value="id"> </td>
-                                <td>  </td>
-                                <td>  </td>
-                                <td>  </td>
-                                <td>  </td>
-                                <td>  </td>
-                                <td>  </td>
-                                <td>  </td>
-                                <td>  </td>
-                                <td>  </td>
-                                <td>  </td>
-                                <td>  </td>
-                                <td>  </td>
-                            </tr>
+                            <?php
+                            if (count($data) < 1) {
+                                echo"<tr><td class='text-center' colspan='10'>-No Data Found-</td></tr>";
+                            } else {
+                                foreach ($data as $k => $v) {
+                                    ?>
+                                    <tr>
+                                        <td><?php echo intval($this->uri->segment(2) + ($k + 1)); ?></td>
+                                        <td><?php echo $v['no_tagihan']; ?></td>
+                                        <td><?php echo $v['tgl_tagihan']; ?></td>
+                                        <td><?php echo formatrp($v['total_tagihan']); ?></td>
+                                        <td><?php echo $v['kd_leasing']; ?></td>
+                                        <td class="text-center">
+                                            <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'rekap-tagihan-edit-' . $v['id'], 'text' => 'Edit')); ?>
+                                            <a href="<?php echo base_url('rekap-tagihan-detail-' . $v['id']); ?>" class="btn btn-success btn-sm"><i class="fa fa-info-circle"></i> Detail</a>
+
+                                        </td>
+                                    </tr>
+                                <?php }
+                            }
+                            ?>
                         </tbody>
+                        <tfoot>
+                        <form id="form1" method="post" action="<?php echo base_url('rekap-tagihan'); ?>">
+                            <tr>
+                                <td>#</td>
+                                <td>
+                                    <input class="form-control input-sm" name="no_tagihan" class="form-control" value="<?php echo (isset($sr_data['no_tagihan']) ? $sr_data['no_tagihan'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                                submit_search('form1');
+                                            } else {
+                                                return false;
+                                            }
+                                            ;"/>
+                                </td>
+                                <td>
+                                    <input class="form-control input-sm" name="tgl_tagihan" value="<?php echo (isset($sr_data['tgl_tagihan']) ? $sr_data['tgl_tagihan'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                                submit_search('form1');
+                                            } else {
+                                                return false;
+                                            }
+                                            ;"/>
+                                </td>
+                                <td>
+                                    <input class="form-control input-sm" name="total_tagihan" value="<?php echo (isset($sr_data['total_tagihan']) ? $sr_data['total_tagihan'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                                submit_search('form1');
+                                            } else {
+                                                return false;
+                                            }
+                                            ;"/>
+                                </td>
+                                <td>
+                                    <input class="form-control input-sm" name="kd_leasing" value="<?php echo (isset($sr_data['kd_leasing']) ? $sr_data['kd_leasing'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                                submit_search('form1');
+                                            } else {
+                                                return false;
+                                            }
+                                            ;"/>
+                                </td>
+                            </tr>
+                            </tfoot>
                     </table>
                 </div>
-                    
-            </div>
             </div>
         </section>
     </div>
 </div>
- 
+<div class="row">
+    <div class="col-lg-1 pull-left text-left">	
+        <select class="form-control input-sm" name="page" onchange="submit_search('form1');"/>
+        <option value="10" <?php echo (isset($sr_data['page']) && $sr_data['page'] == "10" ? "selected" : ""); ?>>10</option>
+        <option value="25" <?php echo (isset($sr_data['page']) && $sr_data['page'] == "25" ? "selected" : ""); ?>>25</option>
+        <option value="50" <?php echo (isset($sr_data['page']) && $sr_data['page'] == "50" ? "selected" : ""); ?>>50</option>
+        <option value="100" <?php echo (isset($sr_data['page']) && $sr_data['page'] == "100" ? "selected" : ""); ?>>100</option>
+        </select>
+    </div>
+</form>
+<div class="col-lg-11 pull-right text-right">	
+<?php echo $paging; ?>
+</div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.feeBtn').click(function (event) {
+            event.preventDefault();
+            window.open($(this).attr("href"), "popupWindow", "width=900,height=550,scrollbars=yes");
+        });
+
+        $('.diskonBtn').click(function (event) {
+            event.preventDefault();
+            window.open($(this).attr("href"), "popupWindow", "width=900,height=550,scrollbars=yes");
+        });
+    });
+</script>
