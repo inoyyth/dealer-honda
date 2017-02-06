@@ -3,6 +3,9 @@
         #printSection {
             display: none;
         }
+        .head-covernote{
+            font-family: TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif;
+        }
     }
 
     @media print {
@@ -17,16 +20,23 @@
                     left:0;
                     top:0;
                 }*/
+        .head-covernote{
+            font-family: TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif;
+        }
     }
 </style>
 <div id="printThis" style="padding: 10px;text-align: justify;">
-    <div style="text-align: center;font-weight: bolder;font-size: 15px;">
-        SURAT PERNYATAAN <br>
-        ("COVERNOTE")
+    <div style="height: 75px;">
+        <img src="<?php echo base_url('assets/images/logo-honda.jpg');?>" style="float:left;" height="80px;">
+        <div style="text-align: center;font-weight: bolder;font-size: 15px;padding-top: 20px;">
+            SURAT PERNYATAAN <br>
+            ("COVERNOTE")
+        </div>
     </div>
+    <br>
     <div>
         <p>Yang bertanda tangan di bawah ini : </p>
-        <table>
+        <table style="margin-left: 40px;">
             <tr>
                 <td>Nama</td>
                 <td>: <?php echo $detail_owner['owner_name']; ?></td>
@@ -51,7 +61,7 @@
         <p>
             Bahwa konsumen (sebagai didefinisikan di bawah ini) telah membeli kendaraan dari dealer dengan data-data sebagai berikut : 
         </p>
-        <table>
+        <table style="margin-left: 40px;">
             <tr>
                 <td>Nama</td>
                 <td>: <?php echo $detail_motor['nama_motor']; ?></td>
@@ -144,8 +154,19 @@
             <?php echo ucwords($detail_owner['owner_jabatan']);?>
         </p>
     </div>
+    <div>
+        <div class="head-covernote" style="float:left;">
+            <b style="font-size: 22px;">PT.MANDALA KEKAR ABADI</b><br>
+            <b style="font-size: 18px;">DEALER RESMI SEPEDA MOTOR HONDA</b><br>
+            <b style="font-size: 9px;">Jl.Raya Bekasi Timur No.158 Cipinang Jakarta Timur Telp.8198484, 8517620 Fax.(021)8514855</b>
+        </div>
+        <div style="text-align: right;">
+            <img src="<?php echo base_url('assets/images/mandala-kekar-abadi-logo.jpg');?>" height="75px;">
+        </div>
+    </div>
+    <hr style="border: 2px solid #000000;margin-top: -1px;">
 </div>
-<button id="btnPrint">Print</button>
+<center><button id="btnPrint">Print</button></center>
 <script>
     document.getElementById("btnPrint").onclick = function () {
         printElement(document.getElementById("printThis"));
