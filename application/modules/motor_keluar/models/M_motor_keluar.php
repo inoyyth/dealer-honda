@@ -76,4 +76,21 @@ Class M_motor_keluar extends CI_Model{
         
         return true;
     }
+    
+    public function get_motor_list($id){
+        $this->db->select('penerimaan_motor.tipe,penerimaan_motor.nomesin,penerimaan_motor.norangka,penerimaan_motor.warna,penerimaan_motor.tahun');
+        $this->db->from('penerimaan_motor');
+        $this->db->join('detail_motor_keluar','detail_motor_keluar.no_mesin=penerimaan_motor.nomesin');
+        $this->db->where(array('detail_motor_keluar.id_detail_motor_keluar'=>$id));
+        return $this->db->get();
+    }
+    
+    public function get_motor_keluar($id){
+        $this->db->select('motor_keluar.kode_motor_keluar,motor_keluar.tgl_motor_keluar,motor_keluar.kode_po_motor_keluar,motor_keluar.kode_do_motor_keluar,motor_keluar.pic_motor_keluar,motor_keluar.keterangan_motor_keluar,gudang_out.gudang AS asal,gudang_in.gudang AS tujuan');
+        $this->db->from('motor_keluar');
+        $this->db->join('m_gudang gudang_out','gudang_out.id=motor_keluar.id_gudang_out');
+        $this->db->join('m_gudang gudang_in','gudang_in.id=motor_keluar.id_gudang_in');
+        $this->db->where(array('motor_keluar.id_motor_keluar'=>$id));
+        return $this->db->get();
+    }
 }
