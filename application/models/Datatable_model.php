@@ -2,18 +2,16 @@
 
 Class Datatable_model extends CI_Model {
 
-    private function _get_datatables_query($table, $column_order, $column_search, $order, $where, $joint, $group_by) {
-        $this->db->protect_identifiers(FALSE);
-                
-        $this->db->select($column_search, false);
+    private function _get_datatables_query($table,$column_order,$column_search,$order,$where,$joint,$group_by){
+        $this->db->select($column_search);
         $this->db->from($table);
         $this->db->where($where); //dump($joint,true);
-        if (isset($joint)) {
-            foreach ($joint as $kJoin => $vJoin) {
-                $this->db->join($vJoin['table'], $vJoin['where'], $vJoin['join']);
+        if(isset($joint)){
+            foreach($joint as $kJoin=>$vJoin){
+                $this->db->join($vJoin['table'],$vJoin['where'],$vJoin['join']);
             }
         }
-
+        
         $i = 0;
         foreach ($column_search as $item) { // loop column 
             if ($_POST['search']['value']) { // if datatable send POST for search
@@ -36,32 +34,32 @@ Class Datatable_model extends CI_Model {
             $order = $order;
             $this->db->order_by(key($order), $order[key($order)]);
         }
-
+        
         $this->db->group_by($group_by);
     }
-
-    function get_datatables($table, $column_order = array(), $column_search = array(), $order = array('id' => 'asc'), $where = array(), $join = array(), $group_by = array()) {
-        $this->_get_datatables_query($table, $column_order, $column_search, $order, $where, $join, $group_by);
-        if ($_POST['length'] != -1)
-            $this->db->limit($_POST['length'], $_POST['start']);
+ 
+    function get_datatables($table,$column_order=array(),$column_search=array(),$order=array('id'=>'asc'),$where=array(),$join=array(),$group_by=array()){
+        $this->_get_datatables_query($table,$column_order,$column_search,$order,$where,$join,$group_by);
+        if($_POST['length'] != -1)
+        $this->db->limit($_POST['length'], $_POST['start']); 
         $query = $this->db->get();
         return $query->result();
     }
-
-    function count_filtered($table, $column_order = array(), $column_search = array(), $order = array('id' => 'asc'), $where = array(), $join = array(), $group_by = array()) {
-        $this->_get_datatables_query($table, $column_order, $column_search, $order, $where, $join, $group_by);
+ 
+    function count_filtered($table,$column_order=array(),$column_search=array(),$order=array('id'=>'asc'),$where=array(),$join=array(),$group_by=array()){
+        $this->_get_datatables_query($table,$column_order,$column_search,$order,$where,$join,$group_by);
         $query = $this->db->get();
         return $query->num_rows();
     }
-
-    public function count_all($table, $where = array()) {
+ 
+    public function count_all($table,$where=array()){
         $this->db->from($table);
         $this->db->where($where);
         return $this->db->count_all_results();
     }
-
-    function get_datatablesoriginal($table, $column_order = array(), $column_search = array(), $order = array('id' => 'asc'), $where = array(), $join = array(), $group_by = array()) {
-        $this->_get_datatables_query($table, $column_order, $column_search, $order, $where, $join, $group_by);
+    
+    function get_datatablesoriginal($table,$column_order=array(),$column_search=array(),$order=array('id'=>'asc'),$where=array(),$join=array(),$group_by=array()){
+        $this->_get_datatables_query($table,$column_order,$column_search,$order,$where,$join,$group_by);
         $query = $this->db->get();
         return $query->result();
     }
