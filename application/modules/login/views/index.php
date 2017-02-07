@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>ULTIMO Admin Dashboard Template</title>
+        <title>Dealer Admin Login</title>
         <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
             <link href="<?php echo base_url(); ?>themes/css/font-awesome.css" rel="stylesheet" type="text/css" />
             <link href="<?php echo base_url(); ?>themes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />

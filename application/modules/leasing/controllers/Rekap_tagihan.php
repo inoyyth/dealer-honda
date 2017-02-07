@@ -1,40 +1,43 @@
 <?php
 
 class Rekap_tagihan extends MX_Controller {
+
     //put your code here
-    
-    var $table = "rekap_tagihan";
+
+    var $table = "t_rekap_tagihan";
 
     public function __construct() {
         parent::__construct();
         $this->load->model('M_t_leasing');
-        $this->load->model(array('M_t_leasing' => 't_kwitansi', 'Datatable_model' => 'm_datatable'));
+        $this->load->model(array('M_t_rekap_tagihan' => 't_rekap', 'Datatable_model' => 'm_datatable'));
         $this->load->library(array('upload', 'encrypt', 'Printpdf', 'Auth_log'));
-        
+
         //set breadcrumb
-        $this->breadcrumbs->push('Transaksi Kwitansi', '/kwitansi-fee');
+        $this->breadcrumbs->push('Rekap Kwitansi', '/rekap-tagihan');
     }
-    
-    public function getSO(){
-        $query = $this->input->get('query');
-        $data = $this->t_kwitansi->getNOSO($query);
-        //echo $this->db->last_query();
-        echo json_encode($data);
-    }
-    
-     public function detail($id) {
-        $this->breadcrumbs->push('Detail', '/kwitansi-fee-detail');
-        $data['detail'] = $this->t_kwitansi->get_detail_fee($id);
-        $data['view'] = 't_kwitansi/kwitansi_fee/detail';
+
+    public function index() {
+        $data_session = $this->__getSession();
+
+        $config['base_url'] = base_url() . 'rekap-tagihan';
+        $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
+        $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
+        $config['uri_segment'] = 2;
+        $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
+        $this->pagination->initialize($config);
+        $data['paging'] = $this->pagination->create_links();
+        $data['data'] = $this->t_rekap->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array());
+        $data['sr_data'] = $data_session;
+
+        $data['view'] = "leasing/rekap_tagihan/main";
         $this->load->view('default', $data);
     }
-    
-    public function index() {
-         //$data['nokwitansi'] = $this->main_model->generate_code($this->table, 'KWT/MKA/FIF/' . romanic_number(date('m')), '/', 6, $date = false, $loop = false);
-        //$data['codeso'] = $this->main_model->generate_code($this->table, 'KWT/KDS-' . date('Y') . '-' . romanic_number(date('m')), '-', 6, $date = false, $loop = false);
-        $this->breadcrumbs->push('Leasing', '/cetak-kwitansi-diskon');
-         $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('status_leasing' => '1'));
-        $data['view'] = "leasing/rekap_tagihan/main";
+
+    function form() {
+        $data['notagihan'] = $this->main_model->generate_code($this->table, 'TGH/MKA-REK/' . date('Y'), '/', 6, $date = false, $loop = false);
+        $this->breadcrumbs->push('Add', '/rekap-tagihan-tambah');
+        $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('status_leasing' => '1'));
+        $data['view'] = "leasing/rekap_tagihan/print-form";
         $this->load->view('default', $data);
     }
 
@@ -46,17 +49,31 @@ class Rekap_tagihan extends MX_Controller {
         $data['view'] = "t_kwitansi/kwitansi_fee/add";
         $this->load->view('default', $data);
     }
-    
+
+    public function getSO() {
+        $query = $this->input->get('query');
+        $data = $this->t_kwitansi->getNOSO($query);
+        //echo $this->db->last_query();
+        echo json_encode($data);
+    }
+
+    public function detail($id) {
+        $this->breadcrumbs->push('Detail', '/kwitansi-fee-detail');
+        $data['detail'] = $this->t_kwitansi->get_detail_fee($id);
+        $data['view'] = 't_kwitansi/kwitansi_fee/detail';
+        $this->load->view('default', $data);
+    }
+
     public function printout() {
         //var_dump($_POST);
-        
+
         $id = $this->uri->segment(2);
-        $cek = str_replace("_","/",$id);
+        $cek = str_replace("_", "/", $id);
         $data['list'] = $this->t_kwitansi->get_data_print_fee($cek);
         //var_dump($data['list']);
         $data['template'] = array("template" => "t_kwitansi/kwitansi_fee/" . $_GET['template'], "filename" => $_GET['name']);
         //$data['list'] = $this->M_t_kwitansi->getdata($this->table, 0, 1000, $like = array());
-         $this->load->view('t_kwitansi/kwitansi_fee/table_html', $data);
+        $this->load->view('t_kwitansi/kwitansi_fee/table_html', $data);
         //$this->printpdf->create_pdf($data);
     }
 
@@ -77,7 +94,7 @@ class Rekap_tagihan extends MX_Controller {
             //var_dump($_POST);
             //exit();
             if ($this->M_t_kwitansi->save()) {
-                
+
                 $this->session->set_flashdata('success', 'Data Berhasil Di Simpan !');
             } else {
                 $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
@@ -88,30 +105,148 @@ class Rekap_tagihan extends MX_Controller {
         }
     }
 
+    function dt_leasing_json() {
+        $post = $this->input->post();
+        $nmleasing = $this->t_rekap->get_leasing($post['kdleasing']);
+
+        echo json_encode(array('leasing' => $nmleasing));
+    }
+
+    function get_list_kwitansi() {
+        $tanggal_start = $this->input->get('tanggal_start');
+        $tanggal_end = $this->input->get('tanggal_end');
+        $kdleasing = $this->input->get('kdleasing');
+
+        $table = 't_kwitansi_leasing';
+        $join = array(
+            array('table' => 't_penjualan', 'where' => 't_kwitansi_leasing.noso = t_penjualan.noso', 'join' => 'left'),
+            array('table' => 'penerimaan_motor', 'where' => 't_penjualan.nomsn = penerimaan_motor.nomesin', 'join' => 'left'),
+            array('table' => 't_harga_motor', 'where' => 't_kwitansi_leasing.noso = t_harga_motor.noso', 'join' => 'left'),
+            array('table' => 'm_customer', 'where' => 't_penjualan.ktp = m_customer.no_ktp', 'join' => 'left'),
+            array('table' => 'm_motor', 'where' => 'penerimaan_motor.tipe = m_motor.tipe_motor', 'join' => 'left')
+        );
+        //echo json_encode($_GET);die();
+        //echo print_r($join[0]['table']);die();
+
+
+        $column_search = array('t_kwitansi_leasing.id', 't_kwitansi_leasing.nokwitansi', 't_kwitansi_leasing.noso', 't_kwitansi_leasing.dp_system', 't_kwitansi_leasing.tagih', 't_kwitansi_leasing.subsidi1', 't_kwitansi_leasing.subsidi2', 't_kwitansi_leasing.m_status', 't_kwitansi_leasing.sys_create_user', 't_kwitansi_leasing.sys_create_date', 't_kwitansi_leasing.status_rekap', 't_penjualan.nosj', 't_penjualan.nokonsumen', 't_penjualan.ktp', 't_penjualan.tanggal', 't_penjualan.nomsn', 't_penjualan.warna_motor', 't_penjualan.harga_otr', 'penerimaan_motor.norangka', 'penerimaan_motor.tipe', 'penerimaan_motor.warna', 'penerimaan_motor.tahun', 'penerimaan_motor.kdgudang', 'penerimaan_motor.tglupload', 't_harga_motor.cara_pembelian', 't_harga_motor.marketing', 't_harga_motor.leasing', 't_harga_motor.dp_system', 't_harga_motor.diskon', 't_harga_motor.tagih', 't_harga_motor.dp', 't_harga_motor.sisa_hutang', 't_harga_motor.dp_lunas', 't_harga_motor.fee', 'm_customer.nama_customer', 'm_customer.tempat_lahir_customer', 'm_customer.tanggal_lahir_customer', 'm_customer.kelamin_customer', 'm_customer.alamat_customer', 'm_customer.telepon_customer', 'm_customer.handphone_customer', 'm_customer.rt', 'm_customer.rw', 'm_customer.wilayah', 'm_customer.kelurahan', 'm_customer.kecamatan', 'm_motor.nama_motor', 'm_motor.varian', 'm_motor.merk', 'm_motor.url_foto');
+        $column_order = array(null, 't_kwitansi_leasing.id', 't_kwitansi_leasing.nokwitansi', 't_kwitansi_leasing.noso');
+
+        @$list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('t_kwitansi_leasing.id' => 'asc'), $where = array($table . '.sys_create_user' => $this->sessionGlobal['id'],
+            $join[0]['table'] . ".tanggal >= " => $tanggal_start,
+            $join[0]['table'] . ".tanggal <= " => $tanggal_end,
+            $join[2]['table'] . ".leasing" => $kdleasing,
+            $table . '.sys_create_user' => $this->sessionGlobal['id']), $join);
+
+        $no = isset($_POST['start']) ? $_POST['start'] : 0;
+        $data = array();
+        foreach ($list as $result) {
+            $no++;
+            $row = array();
+
+            $row[] = "<span align='center'><input type='checkbox'  class='idkwitansileasing' value='" . $result->id . "'  /></span>";
+            $row[] = $no;
+            $row[] = date("d F Y", strtotime($result->sys_create_date));
+            $row[] = $result->nokwitansi;
+            $row[] = $result->nama_customer;
+            $row[] = $result->tipe;
+            $row[] = $result->nomsn;
+            $row[] = $result->norangka;
+            $row[] = formatrp($result->harga_otr);
+            $row[] = formatrp($result->dp);
+            $row[] = formatrp($result->subsidi1 + $result->subsidi2);
+            $row[] = formatrp(($result->harga_otr - $result->dp) + ($result->subsidi1 + $result->subsidi2));
+            $row[] = $result->varian;
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => isset($_POST['draw']) ? $_POST['draw'] : 0,
+            "recordsTotal" => $this->m_datatable->count_all($table, $where = array($table . '.sys_create_user' => $this->sessionGlobal['id'])),
+            "recordsFiltered" => $this->m_datatable->count_filtered($table, $column_order, $column_search, $order = array('id' => 'asc'), $where = array($table . '.sys_create_user' => $this->sessionGlobal['id']), $join),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    function get_rekap_tagihan() {
+        $idkwitansi_leasing = $this->input->get('dt');
+        
+        $table = 't_kwitansi_leasing';
+        $join = array(
+            array('table' => 't_penjualan', 'where' => 't_kwitansi_leasing.noso = t_penjualan.noso', 'join' => 'left'),
+            array('table' => 'penerimaan_motor', 'where' => 't_penjualan.nomsn = penerimaan_motor.nomesin', 'join' => 'left'),
+            array('table' => 't_harga_motor', 'where' => 't_kwitansi_leasing.noso = t_harga_motor.noso', 'join' => 'left'),
+            array('table' => 'm_customer', 'where' => 't_penjualan.ktp = m_customer.no_ktp', 'join' => 'left'),
+            array('table' => 'm_motor', 'where' => 'penerimaan_motor.tipe = m_motor.tipe_motor', 'join' => 'left')
+        );
+
+        $column_search = array('t_kwitansi_leasing.id', 't_kwitansi_leasing.nokwitansi', 't_kwitansi_leasing.noso', 't_kwitansi_leasing.dp_system', 't_kwitansi_leasing.tagih', 't_kwitansi_leasing.subsidi1', 't_kwitansi_leasing.subsidi2', 't_kwitansi_leasing.m_status', 't_kwitansi_leasing.sys_create_user', 't_kwitansi_leasing.sys_create_date', 't_kwitansi_leasing.status_rekap', 't_penjualan.nosj', 't_penjualan.nokonsumen', 't_penjualan.ktp', 't_penjualan.tanggal', 't_penjualan.nomsn', 't_penjualan.warna_motor', 't_penjualan.harga_otr', 'penerimaan_motor.norangka', 'penerimaan_motor.tipe', 'penerimaan_motor.warna', 'penerimaan_motor.tahun', 'penerimaan_motor.kdgudang', 'penerimaan_motor.tglupload', 't_harga_motor.cara_pembelian', 't_harga_motor.marketing', 't_harga_motor.leasing', 't_harga_motor.dp_system', 't_harga_motor.diskon', 't_harga_motor.tagih', 't_harga_motor.dp', 't_harga_motor.sisa_hutang', 't_harga_motor.dp_lunas', 't_harga_motor.fee', 'm_customer.nama_customer', 'm_customer.tempat_lahir_customer', 'm_customer.tanggal_lahir_customer', 'm_customer.kelamin_customer', 'm_customer.alamat_customer', 'm_customer.telepon_customer', 'm_customer.handphone_customer', 'm_customer.rt', 'm_customer.rw', 'm_customer.wilayah', 'm_customer.kelurahan', 'm_customer.kecamatan', 'm_motor.nama_motor', 'm_motor.varian', 'm_motor.merk', 'm_motor.url_foto');
+        $column_order = array(null, 't_kwitansi_leasing.id', 't_kwitansi_leasing.nokwitansi', 't_kwitansi_leasing.noso');
+
+        @$list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('t_kwitansi_leasing.id' => 'asc'), $where = array($table . '.sys_create_user' => $this->sessionGlobal['id'],
+            $table . '.id in ' => $idkwitansi_leasing,
+            $table . '.sys_create_user' => $this->sessionGlobal['id']), $join);
+
+        $no = isset($_POST['start']) ? $_POST['start'] : 0;
+        $data = array();
+        foreach ($list as $result) {
+            $no++;
+            $row = array();
+
+            $row[] = "<span align='center'><input type='checkbox'  class='idkwitansileasing' value='" . $result->id . "'  /></span>";
+            $row[] = $no;
+            $row[] = date("d F Y", strtotime($result->sys_create_date));
+            $row[] = $result->nokwitansi;
+            $row[] = $result->nama_customer;
+            $row[] = $result->tipe;
+            $row[] = $result->nomsn;
+            $row[] = $result->norangka;
+            $row[] = formatrp($result->harga_otr);
+            $row[] = formatrp($result->dp);
+            $row[] = formatrp($result->subsidi1 + $result->subsidi2);
+            $row[] = formatrp(($result->harga_otr - $result->dp) + ($result->subsidi1 + $result->subsidi2));
+            $row[] = $result->varian;
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => isset($_POST['draw']) ? $_POST['draw'] : 0,
+            "recordsTotal" => $this->m_datatable->count_all($table, $where = array($table . '.sys_create_user' => $this->sessionGlobal['id'])),
+            "recordsFiltered" => $this->m_datatable->count_filtered($table, $column_order, $column_search, $order = array('id' => 'asc'), $where = array($table . '.sys_create_user' => $this->sessionGlobal['id']), $join),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+
     public function __getSession() {
         if ($_POST) {
             return $data = array(
                 'page' => set_session_table_search('page', $this->input->get_post('page', TRUE)),
-                'nokwitansi' => set_session_table_search('nokwitansi', $this->input->get_post('nokwitansi', TRUE)),
-                'a.noso' => set_session_table_search('noso', $this->input->get_post('noso', TRUE)),
-                'c.nama_customer' => set_session_table_search('nama_customer', $this->input->get_post('nama_customer', TRUE)),
-                'fee' => set_session_table_search('fee', $this->input->get_post('fee', TRUE)) 
+                'no_tagihan' => set_session_table_search('page', $this->input->get_post('no_tagihan', TRUE)),
+                'tgl_tagihan' => set_session_table_search('noso', $this->input->get_post('tgl_tagihan', TRUE)),
+                'total_tagihan' => set_session_table_search('nomsn', $this->input->get_post('total_tagihan', TRUE)),
+                'kd_leasing' => set_session_table_search('nomsn', $this->input->get_post('kd_leasing', TRUE))
             );
         } else {
             return $data = array(
                 'page' => $this->session->userdata('page'),
-                'nokwitansi' => $this->session->userdata('nokwitansi'),
-                'a.noso' => $this->session->userdata('noso'),
-                'c.nama_customer' => $this->session->userdata('nama_customer'),
-                'fee' => $this->session->userdata('fee') 
+                'no_tagihan' => $this->session->userdata('no_tagihan'),
+                'tgl_tagihan' => $this->session->userdata('tgl_tagihan'),
+                'total_tagihan' => $this->session->userdata('total_tagihan'),
+                'kd_leasing' => $this->session->userdata('kd_leasing')
             );
         }
     }
 
-    public function print_pdf($id){
+    public function print_pdf($id) {
         //echo $id;
         //die();
-        
+
         $data['template'] = array("template" => "t_kwitansi/kwitansi_fee/print_out_fee", "filename" => "Kwitansi PDF");
         $data['parsing'] = $this->t_kwitansi->get_print_fee($id);
         //var_dump($data['parsing']);
@@ -124,10 +259,7 @@ class Rekap_tagihan extends MX_Controller {
         //$data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
         //$data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
         $this->printpdf->create_pdf($data);
-         
     }
-    
-   
 
     public function print_excel() {
         $data['template_excel'] = "rekap_tagihan/" . $_GET['template'];
@@ -183,12 +315,11 @@ class Rekap_tagihan extends MX_Controller {
                 break;
         }
     }
-    
-    
-        function load_transaction_by_noso(){
+
+    function load_transaction_by_noso() {
         $noso = $this->input->post('noso');
         $result = $this->t_penjualan->getdata_transaction_by_noso($noso);
         echo json_encode($result);
     }
-    
+
 }
