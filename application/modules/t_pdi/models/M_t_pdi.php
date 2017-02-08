@@ -17,12 +17,12 @@ class M_t_pdi extends CI_Model {
 
     public function getdata($table, $limit, $pg, $like = array(), $where = array()) {
         unset($like['page']);
-        $this->db->select($this->table_pdi.".*,account.nama_lengkap");
+        $this->db->select($this->table_pdi . ".*,account.nama_lengkap");
         $this->db->from($table);
-        $this->db->join('account','account.id='.$this->table_pdi.'.sj_print_user_id','LEFT');
+        $this->db->join('account', 'account.id=' . $this->table_pdi . '.sj_print_user_id', 'LEFT');
         $this->db->like($like);
         $this->db->where($where);
-        $this->db->order_by('id','desc');
+        $this->db->order_by('id', 'desc');
         $this->db->limit($pg, $limit);
         return $this->db->get()->result_array();
     }
@@ -53,40 +53,43 @@ class M_t_pdi extends CI_Model {
                     foreach ($accs as $ks => $vs) {
                         $this->__update_aksesoris_value($vs, $this->input->post('gudang_id'), $this->input->post('kdpdi'));
                     }
+                    $this->db->update('t_penjualan', array('m_status' => '5'), array('noso' => $this->input->post('noso')));
                 }
             }
             return true;
         } else {
             //if ($insert) {
-                $result = array();
-                $release = $this->__releaseAksesoris($id, $this->input->post('kdpdi'));
-                if ($release) {
-                    $this->db->delete('t_pdi_detail', array('pdi_id' => $id));
-                    foreach ($accs as $k => $v) {
-                        $result[] = array('pdi_id' => $id, 'aksesoris_id' => $v);
-                    }
-                    $insert_detail = $this->db->insert_batch('t_pdi_detail', $result);
-                    if ($insert_detail) {
-                        foreach ($accs as $ks => $vs) {
-                            $this->__update_aksesoris_value($vs, $this->input->post('gudang_id'), $this->input->post('kdpdi'));
-                        }
+            $result = array();
+            $release = $this->__releaseAksesoris($id, $this->input->post('kdpdi'));
+            if ($release) {
+                $this->db->delete('t_pdi_detail', array('pdi_id' => $id));
+                foreach ($accs as $k => $v) {
+                    $result[] = array('pdi_id' => $id, 'aksesoris_id' => $v);
+                }
+                $insert_detail = $this->db->insert_batch('t_pdi_detail', $result);
+                if ($insert_detail) {
+                    foreach ($accs as $ks => $vs) {
+                        $this->__update_aksesoris_value($vs, $this->input->post('gudang_id'), $this->input->post('kdpdi'));
                     }
                 }
-                $update = $this->db->update($this->table_pdi, $this->main_model->update_sys($data_pembayaran), array('id' => $id));
+            }
+            $update = $this->db->update($this->table_pdi, $this->main_model->update_sys($data_pembayaran), array('id' => $id));
             //}
             return true;
         }
         return false;
     }
 
-    public function getSO($query,$inside){
+    public function getSO($query, $inside) {
         //("SELECT * FROM t_penjualan WHERE noso LIKE '%$query%' AND m_status='1' AND noso NOT IN ($so_implode)")
         $this->db->select('t_penjualan.id,t_penjualan.ktp,t_penjualan.nomsn,t_penjualan.noso');
         $this->db->from('t_penjualan');
-        $this->db->join('t_harga_motor','t_penjualan.noso=t_harga_motor.noso','INNER');
-        $this->db->like(array('t_penjualan.noso'=>$query));
-        $this->db->where(array('t_penjualan.m_status'=>'1','t_harga_motor.dp_lunas'=>'2'));
-        $this->db->where_not_in('t_penjualan.noso',$inside);
+        $this->db->join('t_harga_motor', 't_penjualan.noso=t_harga_motor.noso', 'INNER');
+        $this->db->like(array('t_penjualan.noso' => $query));
+        $this->db->where(array('t_penjualan.m_status' => '1', 't_harga_motor.dp_lunas' => '2'));
+        if ($inside != null OR ! empty($inside)) {
+            $this->db->where_not_in('t_penjualan.noso', $inside);
+        }
         return $this->db->get();
     }
 
@@ -127,7 +130,7 @@ left join m_customer f on f.no_ktp = b.ktp
     }
 
     public function __releaseAksesoris($id, $kdpdi) {
-        $gudang = $this->db->get_where('t_pdi',array('id'=>$id))->row_array();
+        $gudang = $this->db->get_where('t_pdi', array('id' => $id))->row_array();
         $aksesorisPdi = $this->db->get_where('t_pdi_detail', array('pdi_id' => $id))->result_array();
         foreach ($aksesorisPdi as $k => $v) {
             $data = array(
