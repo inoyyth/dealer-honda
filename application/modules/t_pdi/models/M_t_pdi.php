@@ -53,7 +53,7 @@ class M_t_pdi extends CI_Model {
                     foreach ($accs as $ks => $vs) {
                         $this->__update_aksesoris_value($vs, $this->input->post('gudang_id'), $this->input->post('kdpdi'));
                     }
-                    $this->db->update('t_penjualan', array('m_status' => '5'), array('noso' => $this->input->post('noso')));
+                    //$this->db->update('t_penjualan', array('m_status' => '5'), array('noso' => $this->input->post('noso')));
                 }
             }
             return true;
