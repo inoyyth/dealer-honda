@@ -22,6 +22,7 @@
                                 <th>No. Mesin</th>
                                 <th>Harga</th>
                                 <th>Tipe</th>
+                                <th>Status</th>
                                 <th class="text-center" style="width: 270px;">Action</th>
                             </tr>
                         </thead>
@@ -31,6 +32,23 @@
                                 echo"<tr><td class='text-center' colspan='10'>-No Data Found-</td></tr>";
                             } else {
                                 foreach ($data as $k => $v) {
+                                    switch ($v['m_status']) {
+                                        case 1:
+                                            $status = "On Process";
+                                            break;
+                                        case 2:
+                                            $status="Canceled";
+                                            break;
+                                        case 3:
+                                            $status = "Deleted";
+                                            break;
+                                        case 4:
+                                            $status = "Void";
+                                            break;
+                                        case 5:
+                                            $status = "Finish";
+                                            break;
+                                    }
                                     ?>
                                     <tr>
                                         <td><?php echo intval($this->uri->segment(2) + ($k + 1)); ?></td>
@@ -38,15 +56,19 @@
                                         <td><?php echo $v['nomsn']; ?></td>
                                         <td><?php echo formatrp($v['harga_otr']); ?></td>
                                         <td><?php echo $v['tipe']; ?></td>
+                                        <td><?php echo $status; ?></td>
                                         <td class="text-center">
-                                            <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'penjualan-edit-' . $v['id'], 'text' => 'Edit')); ?>
-                                            <a href="<?php echo base_url('penjualan-edit-' . $v['id']);?>" class="btn btn-success btn-sm"><i class="fa fa-info-circle"></i> Detail</a>
-                                            <a href="<?php echo base_url('penjualan-fee-' . $v['id']);?>" class="btn btn-default btn-sm feeBtn" target="_blank"><i class="fa fa-print"></i> Fee</a> 
-                                            <a href="<?php echo base_url('penjualan-diskon-' . $v['id']);?>" class="btn btn-default btn-sm diskonBtn" target="_blank"><i class="fa fa-print"></i> Disc</a>
+                                            <?php if($v['m_status']==1) { ?>
+                                                <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'penjualan-edit-' . $v['id'], 'text' => 'Edit')); ?>
+                                                <a href="<?php echo base_url('penjualan-edit-' . $v['id']); ?>" class="btn btn-success btn-sm"><i class="fa fa-info-circle"></i> Detail</a>
+                                                <a href="<?php echo base_url('penjualan-fee-' . $v['id']); ?>" class="btn btn-default btn-sm feeBtn" target="_blank"><i class="fa fa-print"></i> Fee</a> 
+                                                <a href="<?php echo base_url('penjualan-diskon-' . $v['id']); ?>" class="btn btn-default btn-sm diskonBtn" target="_blank"><i class="fa fa-print"></i> Disc</a>
+                                            <?php } ?>
                                         </td>
                                     </tr>
-    <?php }
-} ?>
+                                <?php }
+                            }
+                            ?>
                         </tbody>
                         <tfoot>
                         <form id="form1" method="post" action="<?php echo base_url('penjualan'); ?>">
@@ -107,15 +129,15 @@
 </div>
 </div>
 <script>
-    $(document).ready(function(){
-       $('.feeBtn').click(function(event) {
+    $(document).ready(function () {
+        $('.feeBtn').click(function (event) {
             event.preventDefault();
             window.open($(this).attr("href"), "popupWindow", "width=900,height=550,scrollbars=yes");
-        }); 
-        
-        $('.diskonBtn').click(function(event) {
+        });
+
+        $('.diskonBtn').click(function (event) {
             event.preventDefault();
             window.open($(this).attr("href"), "popupWindow", "width=900,height=550,scrollbars=yes");
-        }); 
+        });
     });
 </script>
