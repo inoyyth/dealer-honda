@@ -50,7 +50,7 @@ class T_stnk_bpkb extends MX_Controller {
     
     public function add() {
         $this->breadcrumbs->push('Add', '/t_stnk_bpkb');
-        $data['codeso'] = $this->main_model->generate_code($this->table, 'SB-' . date('Y') . '-' . date('m'), '-', 6, $date = false, $loop = false);
+        $data['codeso'] = $this->main_model->generate_code($this->table, 'SB-' . date('Y') . '-' . date('m'), '-', 6, $date = false, $loop = false, 'id', 'no_process');
         $data['view'] = "t_stnk_bpkb/add";
         $this->load->view('default', $data);
     }

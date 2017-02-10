@@ -30,8 +30,7 @@ class T_penjualan extends MX_Controller {
 
     public function add() {
         $this->breadcrumbs->push('Add', '/penjualan-tambah');
-        $data['codesj'] = $this->main_model->generate_code($this->table, 'SJ/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true);
-        $data['codeso'] = $this->main_model->generate_code($this->table, 'SO/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = false);
+        $data['codeso'] = $this->main_model->generate_code($this->table, 'SO/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true,'id','noso');
         
         
         $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');

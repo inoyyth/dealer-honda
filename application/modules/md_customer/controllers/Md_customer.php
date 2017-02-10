@@ -27,13 +27,6 @@ class Md_customer extends MX_Controller {
         $this->load->view('default', $data);
     }
 
-    public function add() {
-        /*$this->breadcrumbs->push('Add', '/master-customer-tambah');
-        $data['code'] = $this->main_model->generate_code($this->table, 'WRH', '-');
-        $data['view'] = "md_customer/add";
-        $this->load->view('default', $data);*/
-    }
-
     public function edit($id) {
         $this->breadcrumbs->push('Edit', '/master-customer-edit');
         $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();

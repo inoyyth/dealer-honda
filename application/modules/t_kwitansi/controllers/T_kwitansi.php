@@ -62,7 +62,7 @@ class T_kwitansi extends MX_Controller {
     
     public function add() {
         $this->breadcrumbs->push('Add', '/kwitansi-dp');
-        $data['nokwitansi'] = $this->main_model->generate_code($this->table, 'KWT/KD/' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true);
+        $data['nokwitansi'] = $this->main_model->generate_code($this->table, 'KWT/KD/' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true, 'id', 'nokwitansi');
         $data['view'] = "t_kwitansi/add";
         $this->load->view('default', $data);
     }
