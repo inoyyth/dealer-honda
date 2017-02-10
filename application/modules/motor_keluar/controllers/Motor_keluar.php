@@ -32,7 +32,7 @@ class Motor_keluar extends MX_Controller {
     public function add() {
         $this->breadcrumbs->push('Add', '/motor-keluar-tambah');
         //$this->db->delete('detail_motor_keluar_temp',array('id_user'=>$this->sessionGlobal['id']));
-        $data['code'] = $this->main_model->generate_code($this->table, 'MKA-SJL/BK/'.date('Y'), '/',5,false,true,'id_motor_keluar');
+        $data['code'] = $this->main_model->generate_code($this->table, 'MKA-SJL/BK/'.date('Y'), '/',5,false,true,'id_motor_keluar','kode_motor_keluar');
         $data['gudang'] = $this->main_model->getMaster('m_gudang', $like=array(), $where=array('status_gudang'=>'1'));
         $data['view'] = "motor_keluar/add";
         $this->load->view('default', $data);

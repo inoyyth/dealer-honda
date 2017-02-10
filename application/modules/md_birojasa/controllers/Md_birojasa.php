@@ -29,7 +29,6 @@ class Md_birojasa extends MX_Controller {
 
     public function add() {
         $this->breadcrumbs->push('Add', '/master-biro-jasa-tambah');
-        $data['code'] = $this->main_model->generate_code($this->table, 'WRH', '-');
         $data['view'] = "md_birojasa/add";
         $this->load->view('default', $data);
     }

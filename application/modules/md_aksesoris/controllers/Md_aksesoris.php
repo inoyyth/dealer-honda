@@ -29,7 +29,7 @@ class Md_aksesoris extends MX_Controller {
 
     public function add() {
         $this->breadcrumbs->push('Add', '/master-aksesoris-tambah');
-        $data['code'] = $this->main_model->generate_code($this->table, 'AKS', '-');
+        //$data['code'] = $this->main_model->generate_code($this->table, 'AKS', '-');
         $data['global_data'] = $this->main_model->getMaster('global_data', $like = array(), $where = array('global_data_status' => '1','group_data'=>'aksesoris'));
         $data['view'] = "md_aksesoris/add";
         $this->load->view('default', $data);
@@ -37,7 +37,7 @@ class Md_aksesoris extends MX_Controller {
 
     public function edit($id) {
         $this->breadcrumbs->push('Edit', '/master-aksesoris-edit');
-        $data['code'] = $this->main_model->generate_code($this->table, 'AKS', '-',4,true);
+        //$data['code'] = $this->main_model->generate_code($this->table, 'AKS', '-',4,true);
         $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
         $data['global_data'] = $this->main_model->getMaster('global_data', $like = array(), $where = array('global_data_status' => '1','group_data'=>'aksesoris'));
         $data['view'] = 'md_aksesoris/edit';

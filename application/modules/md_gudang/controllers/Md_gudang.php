@@ -29,7 +29,7 @@ class Md_gudang extends MX_Controller {
 
     public function add() {
         $this->breadcrumbs->push('Add', '/master-gudang-tambah');
-        $data['code'] = $this->main_model->generate_code($this->table, 'WRH', '-');
+        $data['code'] = $this->main_model->generate_code($this->table, 'WRH', '-', 4, false, false, 'id', 'kd_gudang');
         $data['view'] = "md_gudang/add";
         $this->load->view('default', $data);
     }

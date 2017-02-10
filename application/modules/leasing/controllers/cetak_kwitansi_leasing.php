@@ -48,8 +48,8 @@ class Cetak_kwitansi_leasing extends MX_Controller {
     }
 
     public function form() {
-        $data['nokwitansi'] = $this->main_model->generate_code($this->table, 'KWT/MKA/FIF/' . romanic_number(date('m')), '/', 6, $date = false, $loop = false);
-        $data['codeso'] = $this->main_model->generate_code($this->table, 'KWT/KDS-' . date('Y') . '-' . romanic_number(date('m')), '-', 6, $date = false, $loop = false);
+        $data['nokwitansi'] = $this->main_model->generate_code($this->table, 'KWT/MKA/FIF/' . romanic_number(date('m')), '/', 6, $date = false, $loop = false,'id','nokwitansi');
+        $data['codeso'] = $this->main_model->generate_code($this->table, 'KWT/KDS-' . date('Y') . '-' . romanic_number(date('m')), '-', 6, $date = false, $loop = false,'id','noso');
         $this->breadcrumbs->push('Leasing Cetak Kwitansi', '/cetak-kwitansi-leasing');
         $this->breadcrumbs->push('Add', '/cetak-kwitansi-leasing-tambah');
         $data['view'] = "leasing/kwitansi_leasing/print-form";

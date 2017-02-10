@@ -29,8 +29,6 @@ class Md_leasing extends MX_Controller {
 
     public function add() {
         $this->breadcrumbs->push('Add', '/master-leasing-add');
-        //$data['list_karyawan'] = $this->main_model->getMaster('m_karyawan', $like = array(), $where = array('status_karyawan' => '1'));
-        //$data['code'] = $this->main_model->generate_code($this->table, 'LSN', '-');
         $data['view'] = "md_leasing/add";
         $this->load->view('default', $data);
     }

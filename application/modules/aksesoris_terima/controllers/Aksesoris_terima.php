@@ -32,7 +32,6 @@ class Aksesoris_terima extends MX_Controller {
 
     public function add() {
         $this->breadcrumbs->push('Add', '/input-penerimaan-aksesoris-tambah');
-        //$data['code'] = $this->main_model->generate_code($this->table, 'AKS', '-');
         $data['gudang'] = $this->main_model->getMaster('m_gudang', $like = array(), $where = array('status_gudang' => '1'));
         $data['view'] = "aksesoris_terima/add";
         $this->load->view('default', $data);
