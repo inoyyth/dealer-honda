@@ -5,7 +5,7 @@
     <link href="<?php echo base_url(); ?>themes/css/font-awesome.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>themes/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="<?php echo base_url(); ?>themes/plugins/typeahead/dist/typeaheadjs.css"/>
-    <link href="<?php echo base_url(); ?>themes/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="<?php echo base_url(); ?>themes/plugins/bootstrap-datepicker-master/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
     <link href="<?php echo base_url(); ?>themes/css/animate.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>themes/css/admin.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>themes/css/jquerysctipttop.css" rel="stylesheet" type="text/css"/>
