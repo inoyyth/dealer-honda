@@ -188,7 +188,7 @@
 <script src="<?php echo base_url();?>themes/plugins/input-mask/jquery.inputmask.min.js"></script>
 <script src="<?php echo base_url();?>themes/js/common-script.js"></script>
 <script src="<?php echo base_url();?>themes/js/jquery.slimscroll.min.js"></script>
-<script src="<?php echo base_url();?>themes/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>  
+<script src="<?php echo base_url();?>themes/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>  
 <script src="<?php echo base_url();?>themes/plugins/new-datatables/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url();?>themes/plugins/new-datatables/jquery.dataTables.select.min.js"></script>
 <script src="<?php echo base_url();?>themes/plugins/new-datatables/dataTables.buttons.min.js"></script>
@@ -204,10 +204,19 @@
             autoclose: true,
             orientation:'right'
         });
+        $('.input-daterange').datepicker({
+            format: "yyyy-mm-dd",
+            todayBtn: "linked",
+            clearBtn: true,
+            multidate: false,
+            calendarWeeks: true,
+            autoclose: true,
+            todayHighlight: true
+        });
     });
-	function submit_search(form1){
-		document.getElementById(form1).submit();
-	}
+    function submit_search(form1){
+            document.getElementById(form1).submit();
+    }
 </script>
 
 </body>
