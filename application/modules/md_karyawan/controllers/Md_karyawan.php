@@ -30,7 +30,7 @@ class Md_karyawan extends MX_Controller {
 
     public function add() {
         $this->breadcrumbs->push('Add', '/master-karyawan-tambah');
-        $data['code'] = $this->main_model->generate_code($this->table, 'EMP', '-');
+        $data['code'] = $this->main_model->generate_code($this->table, 'EMP', '-', 4, false, false, 'id', 'kd_karyawan');
         $data['list_jabatan'] = $this->main_model->getMaster('m_jabatan', $like = array(), $where = array('status_jabatan' => '1'));
         $data['view'] = "md_karyawan/add";
         $this->load->view('default', $data);

@@ -72,7 +72,7 @@ Class M_t_penjualan extends CI_Model {
         }
         
         $dataDp1 = array(
-            'nokwitansi'=>$this->main_model->generate_code("t_pembayaran", 'KWT/KD/' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true),
+            'nokwitansi'=>$this->main_model->generate_code("t_pembayaran", 'KWT/KD/' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true, 'id', 'nokwitansi'),
             'noso'=> $this->input->post('noso'),
             'tgl_dp'=> $this->input->post('tanggal'),
             'nominal'=> currency_to_normal($this->input->post('dp')),

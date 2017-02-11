@@ -34,7 +34,7 @@ class Rekap_tagihan extends MX_Controller {
     }
 
     function form() {
-        $data['notagihan'] = $this->main_model->generate_code($this->table, 'TGH/MKA-REK/' . date('Y'), '/', 6, $date = false, $loop = false);
+        $data['notagihan'] = $this->main_model->generate_code($this->table, 'TGH/MKA-REK/' . date('Y'), '/', 6, $date = false, $loop = false,'id','no_tagihan');
         $this->breadcrumbs->push('Add', '/rekap-tagihan-tambah');
         $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('status_leasing' => '1'));
         $data['view'] = "leasing/rekap_tagihan/print-form";
@@ -43,7 +43,6 @@ class Rekap_tagihan extends MX_Controller {
 
     public function add() {
         $this->breadcrumbs->push('Add', '/kwitansi-fee');
-        //$data['codesj'] = $this->main_model->generate_code($this->table, 'SJ/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true);
         $data['codeso'] = $this->main_model->generate_code($this->table, 'KWT/KF-' . date('Y') . '-' . romanic_number(date('m')), '-', 6, $date = false, $loop = true);
         //var_dump($data['codeso']);
         $data['view'] = "t_kwitansi/kwitansi_fee/add";
