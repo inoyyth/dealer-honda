@@ -147,7 +147,7 @@
     $(document).ready(function () {
         $("#listTagihan").click(function () {
             var dt = $(".frmrekap").serialize();
-
+            //console.log(dt);
             $.ajax({
                 type: 'post',
                 url: 'leasing/rekap_tagihan/dt_leasing_json',

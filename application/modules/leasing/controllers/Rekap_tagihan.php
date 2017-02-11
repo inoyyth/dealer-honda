@@ -106,6 +106,8 @@ class Rekap_tagihan extends MX_Controller {
 
     function dt_leasing_json() {
         $post = $this->input->post();
+        //print_r($post);die();
+        
         $nmleasing = $this->t_rekap->get_leasing($post['kdleasing']);
 
         echo json_encode(array('leasing' => $nmleasing));
