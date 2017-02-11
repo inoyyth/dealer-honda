@@ -108,7 +108,7 @@ class Cetak_kwitansi_leasing extends MX_Controller {
 
     public function getSO() {
         $query = $this->input->get('query');
-        $data = $this->leasing_m->getNOSO($query);
+        $data = $this->leasing_m->getSO($query);
         echo json_encode($data);
     }
 
