@@ -88,7 +88,7 @@ class t_void extends MX_Controller {
             array('table' => 't_harga_motor', 'where' => 't_penjualan.noso=t_harga_motor.noso', 'join' => 'left')
         );
 
-        $where = array('t_penjualan.m_status' => '5', 't_harga_motor.dp_lunas' => '2');
+        $where = array('t_penjualan.m_status' => '1','t_pdi.sj_print_status'=>'2');
 
         $column_search = array(null, 't_penjualan.id', 't_penjualan.noso', 't_pdi.kdpdi', 't_pdi.nosj', 't_penjualan.nomsn', 'penerimaan_motor.norangka');
         $column_order = array('id', 'noso', 'kdpdi', 'nosj', 'nomsn', 'norangka');

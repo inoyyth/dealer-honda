@@ -44,7 +44,10 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Tipe Transaksi</label>
-                                                    <input type="text" style="height: 33px;" class="form-control" name="tipe_transaksi" id="tipe_transaksi">
+                                                    <select style="height: 33px;" class="form-control" name="tipe_transaksi" id="tipe_transaksi">
+                                                        <option value="Kredit">Kredit</option>
+                                                        <option value="Cash">Cash</option>
+                                                    </select>
                                                 </div>
                                                 <div>
                                                     <input type="submit" class="btn btn-sm btn-primary" id="submit-btn" value="Search">
