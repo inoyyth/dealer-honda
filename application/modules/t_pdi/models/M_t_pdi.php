@@ -86,7 +86,7 @@ class M_t_pdi extends CI_Model {
         $this->db->from('t_penjualan');
         $this->db->join('t_harga_motor', 't_penjualan.noso=t_harga_motor.noso', 'INNER');
         $this->db->like(array('t_penjualan.noso' => $query));
-        $this->db->where(array('t_penjualan.m_status' => '1', 't_harga_motor.dp_lunas' => '2'));
+        $this->db->where(array('t_penjualan.m_status' => '1'));
         if ($inside != null OR ! empty($inside)) {
             $this->db->where_not_in('t_penjualan.noso', $inside);
         }

@@ -44,7 +44,7 @@
                                         <td><?php echo $v['nama_lengkap']; ?></td>
                                         <td class="text-center">
                                             <?php if ($v['sj_print_status'] == "1") { ?>
-                                                <a href="<?php echo base_url('surat-jalan-printsj-' . $this->encrypt->encode($v['noso'])); ?>" class="btn btn-default btn-sm sjBtn" target="_blank"><i class="fa fa-print"></i> Print SJ</a> 
+                                                <a href="<?php echo base_url('surat-jalan-printsj-' . encode_url($v['noso'])); ?>" class="btn btn-default btn-sm sjBtn" target="_blank"><i class="fa fa-print"></i> Print SJ</a> 
                                             <?php } else { ?>
                                                 PRINTED
                                             <?php } ?>
