@@ -11,7 +11,7 @@ class T_surat_jalan extends MX_Controller {
         
         $this->load->model(array('M_t_surat_jalan' => 'm_surat_jalan','t_pdi/M_t_pdi' => 't_pdi', 'Datatable_model' => 'm_datatable'));
         $this->load->library(array('encrypt','Printpdf', 'Auth_log'));
-        $this->encrypt->set_cipher(MCRYPT_BLOWFISH);
+        //$this->encrypt->set_cipher(MCRYPT_BLOWFISH);
         
         //set breadcrumb
         $this->breadcrumbs->push('Transaksi Surat Jalan', '/surat-Jalan');
@@ -53,7 +53,7 @@ class T_surat_jalan extends MX_Controller {
     }
     
     public function print_suratjalan($id){
-        $id = $this->encrypt->decode($id);
+        $id = decode_url($id);
         $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
         $data['detail_stnk'] = $this->m_surat_jalan->getStnk($id);
         $data['detail_penjualan'] = $this->db->get_where('t_penjualan', array('noso' => $id))->row_array();
