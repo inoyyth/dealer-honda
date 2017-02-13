@@ -117,7 +117,9 @@
                         <table class="table table-bordered" id="tblRekapTagihan">
                             <thead>
                                 <tr>
+                                    
                                     <td><input type="checkbox" name="cnokwitansi" class="cnokwitansi"></td>
+                                    
                                     <td>No</td>
                                     <td>Tgl Kwitansi</td>
                                     <td>Nmr Kwitansi</td>
@@ -135,6 +137,15 @@
                             <tbody>
                             </tbody>
                         </table>
+
+                        <div style="clear: both;margin-bottom: 10px;"></div>
+
+                        <div class="col-md-12 col-xs-12">
+                            <label class="col-sm-12 control-label">Total Tagihan :</label>
+                            <div class="col-sm-12">
+                                <input type="text" name="tot_tagihan" id="tot_tagihan" class="form-control" placeholder="Total Tagihan" readonly>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -157,16 +168,28 @@
                     $("#leasing").val(hsl.leasing.leasing);
 
                     table = $('#tblRekapTagihan').DataTable({
+                        buttons: [
+                            'selectAll',
+                            'selectNone'
+                        ],
+                        language: {
+                            buttons: {
+                                selectAll: "Select all items",
+                                selectNone: "Select none"
+                            }
+                        },
                         "destroy": true,
                         "processing": true, //Feature control the processing indicator.
                         "serverSide": true, //Feature control DataTables' server-side processing mode.
+                        "ordering": false,
                         "order": [], //Initial no order.
 
                         // Load data for the table's content from an Ajax source
-                        "ajax": {
-                            "url": "<?php echo base_url('leasing/rekap_tagihan/get_list_kwitansi?'); ?>" + dt,
-                            "type": "POST"
-                        },
+                        "ajax":
+                                {
+                                    "url": "<?php echo base_url('leasing/rekap_tagihan/get_list_kwitansi?'); ?>" + dt,
+                                    "type": "POST"
+                                },
                         //Set column definition initialisation properties.
                         "columnDefs": [
                             {
@@ -174,7 +197,10 @@
                                 "orderable": false, //set not orderable
                                 //"className": 'select-checkbox',
                             }
-                        ]
+                        ],
+                        select: {
+                            style: 'multi'
+                        }
                     });
                 }
             })
@@ -185,14 +211,8 @@
         $('#tblRekapTagihan tbody').on('click', 'tr', function () {
             var row = $(this).closest('tr');
             var data = $('#tblRekapTagihan').dataTable().fnGetData(row);
-            //console.log(data[3]);
-        });
-
-        $(".cnokwitansi").on('click', function () { // bulk checked
-            var status = this.checked;
-            $(".nokwitansi").each(function () {
-                $(this).prop("checked", status);
-            });
+            console.log(data);
+            //$(".idkwitansileasing").prop('checked', this.checked);
         });
 
         $("#generateTagihan").click(function () {
@@ -200,7 +220,6 @@
                 return this.value;
             }).get();
             var dtkwitansi = idkwitansi_leasing.join(",");
-            //alert(dtkwitansi);return false;
 
             table = $('#tblRekapTagihan').DataTable({
                 "destroy": true,
@@ -225,5 +244,10 @@
 
             return false;
         });
-    })
+
+        $(".cnokwitansi").change(function () {
+            $(".idkwitansileasing").prop('checked', this.checked);
+        })
+    }
+    )
 </script>
