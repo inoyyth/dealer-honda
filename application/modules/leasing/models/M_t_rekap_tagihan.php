@@ -25,11 +25,94 @@ class M_t_rekap_tagihan extends CI_Model {
         $this->db->limit($pg, $limit);
         return $this->db->get()->result_array();
     }
-    
-    public function get_leasing($kdleasing){
-        $this->db->where('kd_leasing',$kdleasing);
+
+    public function get_leasing($kdleasing) {
+        $this->db->where('kd_leasing', $kdleasing);
         $query = $this->db->get('m_leasing');
         return $query->row();
+    }
+
+    function _get_dt_tables($table, $column_search, $column_filter, $filter, $join = 'left') {
+        $this->db->select($column_search, false);
+        $this->db->from($table);
+
+        // Filter pemilihan fungsi CI dari Join / Like / Where
+        if (is_array($filter)) {
+            foreach ($filter as $key => $dtfilter) {
+                switch ($key) {
+                    case "join":
+                        if (is_array($dtfilter)) {
+                            foreach ($dtfilter as $kunci => $nilai) {
+                                $this->db->$key($kunci, $nilai, $join);
+                            }
+                        } else {
+                            $this->db->where($key, $dtfilter);
+                        }
+                        break;
+                    case "limit":
+                    case "offset":
+                        $this->db->$key($dtfilter);
+                        break;
+                    default:
+                        if (is_array($dtfilter)) {
+                            foreach ($dtfilter as $kunci => $nilai) {
+                                $this->db->$key($kunci, $nilai);
+                            }
+                        } else {
+                            $this->db->where($key, $dtfilter);
+                        }
+                        break;
+                }
+            }
+        }
+
+        $i = 0;
+        foreach ($column_filter as $item) { // loop column 
+            if (@$_POST['search']['value']) { // if datatable send POST for search
+                if ($i === 0) { // first loop
+                    $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+                    $this->db->like($item, @$_POST['search']['value']);
+                } else {
+                    $this->db->or_like($item, @$_POST['search']['value']);
+                }
+
+                if (count($column_filter) - 1 == $i) //last loop
+                    $this->db->group_end(); //close bracket
+            }
+            $i++;
+        }
+
+        if (isset($_POST['order'])) { // here order processing
+            $this->db->order_by($column_order[@$_POST['order']['0']['column']], @$_POST['order']['0']['dir']);
+        } else if (isset($order)) {
+            $order = $order;
+            $this->db->order_by(key($order), $order[key($order)]);
+        }
+
+        //$this->db->group_by($group_by);
+    }
+
+    function get_dt_tables($table, $column_search, $column_filter, $filter, $join = 'left') {
+        $this->db->protect_identifiers(FALSE);
+
+        $this->_get_dt_tables($table, $column_search, $column_filter, $filter);
+
+        if ($_POST['length'] != -1)
+            $this->db->limit(@$_POST['length'], @$_POST['start']);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function count_all($table, $where = array()) {
+        $this->db->from($table);
+        $this->db->where($where);
+        return $this->db->count_all_results();
+    }
+
+    function count_filtered($table, $column_search, $column_filter, $filter) {
+        $this->_get_dt_tables($table, $column_search, $column_filter, $filter);
+        $query = $this->db->get();
+        return $query->num_rows();
     }
 
 }
