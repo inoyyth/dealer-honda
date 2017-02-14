@@ -13,6 +13,7 @@ class Rp_penjualan extends MX_Controller {
     }
 
     public function index() {
+        $data_session = $this->__getSession();
         $config['base_url'] = base_url() . 'penjualan-page';
         $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
         $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
@@ -20,7 +21,7 @@ class Rp_penjualan extends MX_Controller {
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->pagination->initialize($config);
         $data['paging'] = $this->pagination->create_links();
-        $data['data'] = $this->m_report_penjualan->getdata($this->table, $limit, $config['per_page'], $like = [], $where = array());
+        $data['data'] = $this->m_report_penjualan->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array());
         $data['sr_data'] = $data_session;
         $data['view'] = 'rp_penjualan/main';
         $this->load->view('default', $data);
@@ -30,18 +31,20 @@ class Rp_penjualan extends MX_Controller {
         if ($_POST) {
             return $data = array(
                 'page' => set_session_table_search('page', $this->input->get_post('page', TRUE)),
-                't_penjualan' => set_session_table_search('noso', $this->input->get_post('noso', TRUE)),
-                'nomsn' => set_session_table_search('nomsn', $this->input->get_post('nomsn', TRUE)),
-                'harga_otr' => set_session_table_search('harga_otr', $this->input->get_post('harga_otr', TRUE)),
-                'tipe' => set_session_table_search('tipe', $this->input->get_post('tipe', TRUE))
+                'start' => set_session_table_search('start', $this->input->get_post('start', TRUE)),
+                'end' => set_session_table_search('end', $this->input->get_post('end', TRUE)),
+                't_penjualan.m_status' => set_session_table_search('proses_transaksi', $this->input->get_post('proses_transaksi', TRUE)),
+                'tipe' => set_session_table_search('tipe', $this->input->get_post('tipe', TRUE)),
+                'cara_pembelian' => set_session_table_search('cara_pembelian', $this->input->get_post('cara_pembelian', TRUE))
             );
         } else {
             return $data = array(
                 'page' => $this->session->userdata('page'),
-                'no_so' => $this->session->userdata('noso'),
-                'nomsn' => $this->session->userdata('nomsn'),
-                'harga_otr' => $this->session->userdata('harga_otr'),
-                'tipe' => $this->session->userdata('tipe')
+                'start' => $this->session->userdata('page'),
+                'end' => $this->session->userdata('end'),
+                't_penjualan.m_status' => $this->session->userdata('proses_transaksi'),
+                'tipe' => $this->session->userdata('tipe'),
+                'cara_pembelian' => $this->session->userdata('cara_pembelian')
             );
         }
     }
