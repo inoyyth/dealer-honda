@@ -1,7 +1,8 @@
 <div class="col-md-12">
     <div class="block-web">
         <div class="form-group">
-            <a href="<?php echo base_url('void');;?>" class="btn btn-danger">Back</a>
+            <a href="<?php echo base_url('laporan-penjualan');?>" class="btn btn-danger">Back</a> 
+            
         </div>
     </div>
 </div>
@@ -140,6 +141,10 @@
                             <tr>
                                 <td>Fee </td>
                                 <td>: <?php echo formatrp($detail_harga['fee']); ?></td>
+                            </tr>
+                            <tr style="font-weight: bolder;">
+                                <td>Status Transaksi</td>
+                                <td>: <?php echo status_transaksi($detail_penjualan['m_status']);?></td>
                             </tr>
                         </table>
                     </div>

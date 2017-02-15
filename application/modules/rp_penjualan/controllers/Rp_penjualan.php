@@ -49,6 +49,20 @@ class Rp_penjualan extends MX_Controller {
         }
     }
     
+    public function transaksi_detail($noso) {
+        $data['detail_penjualan'] = $this->db->get_where('t_penjualan', array('noso' => decode_url($noso)))->row_array();
+        $data['detail_penerimaan_motor'] = $this->m_report_penjualan->getPenerimaanMotor($data['detail_penjualan']['nomsn'])->row_array();
+        $data['detail_motor'] = $this->db->get_where('m_motor', array('tipe_motor' => $data['detail_penerimaan_motor']['tipe']))->row_array();
+        $data['detail_pdi'] = $this->db->get_where('t_pdi', array('noso' => $data['detail_penjualan']['noso']))->row_array();
+        $data['list_aksesoris'] = $this->m_report_penjualan->getAksesoris($data['detail_pdi']['id']);
+        $data['detail_harga'] = $this->db->get_where('t_harga_motor', array('noso' => $data['detail_penjualan']['noso']))->row_array();
+        $data['detail_customer'] = $this->db->get_where('m_customer', array('no_ktp' => $data['detail_penjualan']['ktp']))->row_array();
+        $data['detail_leasing'] = $this->db->get_where('m_leasing', array('kd_leasing' => $data['detail_harga']['leasing']))->row_array();
+        $data['list_dp'] = $this->db->get_where('t_pembayaran', array('noso' => $data['detail_penjualan']['noso']))->result_array();
+        $data['view'] = 'rp_penjualan/transaksi_detail';
+        $this->load->view('default', $data);
+    }
+    
     public function print_pdf() {
         $data['template'] = array("template" => "rp_penjualan/" . $_GET['template'], "filename" => $_GET['name']);
         $data['list'] = $this->m_report_penjualan->getdata($this->table, 0, 1000, $like = $this->__getSession(), $where = array());
