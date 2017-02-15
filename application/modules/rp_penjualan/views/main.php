@@ -46,7 +46,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label>Tipe Motor</label>
-                                                    <input type="text" style="height: 35px;" value="<?php echo (isset($sr_data['tipe']) ? $sr_data['tipe'] : ""); ?>" class="form-control" name="tipe" id="tipe">
+                                                    <input type="text" style="height: 35px;text-transform: uppercase;" value="<?php echo (isset($sr_data['tipe']) ? $sr_data['tipe'] : ""); ?>" class="form-control" name="tipe" id="tipe">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Tipe Transaksi</label>
@@ -74,8 +74,8 @@
                                 <div class="row">
                                     <div class="col-md-6 pull-left"> </div>
                                     <div class="col-md-6 pull-right text-right">
-                                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'penjualan-pdf/?template=table_pdf&name=t_penjualan', 'text' => 'Print')); ?>
-                                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'penjualan-excel/?template=table_excel&name=t_penjualan', 'text' => 'Excel')); ?>
+                                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'laporan-penjualan-pdf/?template=table_pdf&name=rp_penjualan', 'text' => 'Print')); ?>
+                                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'laporan-penjualan-excel/?template=table_excel&name=rp_penjualan', 'text' => 'Excel')); ?>
                                     </div> 
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>No.SO</th>
-                                                <th>No. Mesin</th>
+                                                <th>No.Mesin</th>
                                                 <th>Harga</th>
                                                 <th>Tipe</th>
                                                 <th>Status</th>
