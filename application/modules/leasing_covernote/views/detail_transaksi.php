@@ -271,7 +271,7 @@
         $("#printCovernote").click(function (event) {
             event.preventDefault();
             var baseUrl = '<?php echo base_url('surat-pernyataan-print'); ?>';
-            $("#covernoteContent").load(baseUrl + "/" + parseInt($("#form-type").val()) + "/" + $("#nosoCovernote").val());
+            $("#covernoteContent").load(baseUrl + "/" + parseInt($("#form-type").val()) + "/" + $("#nosoCovernote").val()); 
             $('#modalCovernote').modal('show');
         });
     });

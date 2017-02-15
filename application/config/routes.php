@@ -429,4 +429,5 @@ $route['laporan-penjualan-pdf'] = 'rp_penjualan/print_pdf';
 $route['laporan-penjualan-pdf/(:any)'] = 'rp_penjualan/print_pdf/$1';
 $route['laporan-penjualan-excel'] = 'rp_penjualan/print_excel';
 $route['laporan-penjualan-excel/(:any)'] = 'rp_penjualan/print_excel/$1';
+$route['laporan-penjualan-print-transaksi-(:any)'] = 'rp_penjualan/print_transaksi_detail/$1';
 /* End laporan Penjualan */

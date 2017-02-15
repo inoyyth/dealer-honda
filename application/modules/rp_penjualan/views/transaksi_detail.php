@@ -1,8 +1,8 @@
 <div class="col-md-12">
     <div class="block-web">
         <div class="form-group">
-            <a href="<?php echo base_url('laporan-penjualan');?>" class="btn btn-danger">Back</a> 
-            
+            <a href="<?php echo base_url('laporan-penjualan');?>" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back</a> 
+            <button id="printTransaksi" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
         </div>
     </div>
 </div>
@@ -17,6 +17,7 @@
                 <div class="porlets-content" style="display: block;">
                     <div class="row">
                         <div class="col-lg-6">
+                            <input type="hidden" id="noso" value="<?php echo encode_url($detail_harga['noso']); ?>"/>
                             <table cellspacing="5" cellpadding="3">
                                 <tr>
                                     <td>Gudang </td>
@@ -207,6 +208,16 @@
         </div>
     </div>
 </div>
+<div class="modal fade bs-example-modal-lg" id="modalCovernote" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div id="covernoteContent"></div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function () {
         $('#VoidTransaction').click(function () {
@@ -221,6 +232,13 @@
                 },
                 async: false
             });
+        });
+        
+        $("#printTransaksi").click(function (event) {
+            event.preventDefault();
+            var baseUrl = '<?php echo base_url('laporan-penjualan-print-transaksi'); ?>';
+            $("#covernoteContent").load(baseUrl + "-" + $("#noso").val()); 
+            $('#modalCovernote').modal('show');
         });
     });
 </script>
