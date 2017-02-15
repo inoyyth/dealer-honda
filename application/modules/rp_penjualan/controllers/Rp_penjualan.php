@@ -48,5 +48,18 @@ class Rp_penjualan extends MX_Controller {
             );
         }
     }
+    
+    public function print_pdf() {
+        $data['template'] = array("template" => "rp_penjualan/" . $_GET['template'], "filename" => $_GET['name']);
+        $data['list'] = $this->m_report_penjualan->getdata($this->table, 0, 1000, $like = $this->__getSession(), $where = array());
+        $this->printpdf->create_pdf($data);
+    }
+
+    public function print_excel() {
+        $data['template_excel'] = "rp_penjualan/" . $_GET['template'];
+        $data['file_name'] = $_GET['name'];
+        $data['list'] = $this->m_report_penjualan->getdata($this->table, 0, 1000, $like = $this->__getSession(), $where = array());
+        $this->load->view('template_excel', $data);
+    }
 
 }
