@@ -82,11 +82,11 @@ class Leasing_covernote extends MX_Controller {
     }
     
     public function print_covernotex($type,$so){
-        $data['detail_penjualan'] = $this->db->get_where('t_penjualan', array('noso' => $this->encrypt->decode($so)))->row_array();
+        $data['detail_penjualan'] = $this->db->get_where('t_penjualan', array('noso' => decode_url($so)))->row_array();
         $data['detail_penerimaan_motor'] = $this->t_void->getPenerimaanMotor($data['detail_penjualan']['nomsn'])->row_array();
         $data['detail_motor'] = $this->db->get_where('m_motor', array('tipe_motor' => $data['detail_penerimaan_motor']['tipe']))->row_array();
         $data['detail_owner'] = $this->db->get_where('m_owner', array('id' => 1))->row_array();
-        $data['stnk_bpkb'] = $this->db->get_where('t_stnk', array('no_so' => $this->encrypt->decode($so)))->row_array();
+        $data['stnk_bpkb'] = $this->db->get_where('t_stnk', array('no_so' => decode_url($so)))->row_array();
         $data['stnk_bpkb_customer'] = $this->db->get_where('t_stnk_customer', array('t_stnk_id' => $data['stnk_bpkb']['id']))->row_array();
         
         $this->load->view('leasing_covernote/covernote_print_'.$type,$data);

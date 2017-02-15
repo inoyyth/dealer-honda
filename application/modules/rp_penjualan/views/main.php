@@ -125,7 +125,7 @@
                                                         <td><?php echo $v['tipe']; ?></td>
                                                         <td><?php echo $status; ?></td>
                                                         <td class="text-center">
-                                                            <a href="<?php echo base_url('penjualan-edit-' . $v['id']); ?>" class="btn btn-success btn-sm"><i class="fa fa-info-circle"></i> Detail</a>
+                                                            <a href="<?php echo base_url('laporan-penjualan-detail-' . encode_url($v['noso'])); ?>" class="btn btn-success btn-sm"><i class="fa fa-info-circle"></i> Detail</a>
                                                         </td>
                                                     </tr>
                                                     <?php
