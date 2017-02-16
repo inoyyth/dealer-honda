@@ -297,3 +297,29 @@ if (!function_exists('decode_url')) {
     }
 
 }
+
+if (!function_exists('status_transaksi')) {
+
+    function status_transaksi($value) {
+        switch ($value) {
+            case 1:
+                $status = "On Process";
+                break;
+            case 2:
+                $status = "Canceled";
+                break;
+            case 3:
+                $status = "Deleted";
+                break;
+            case 4:
+                $status = "Void";
+                break;
+            case 5:
+                $status = "Finish";
+                break;
+        }
+
+        return $status;
+    }
+
+}

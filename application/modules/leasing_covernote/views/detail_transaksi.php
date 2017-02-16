@@ -240,7 +240,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>Print Form Type</label>
-                        <input type="hidden" id="nosoCovernote" name="nosoCovernote" value="<?php echo $this->encrypt->encode($detail_harga['noso']); ?>">
+                        <input type="hidden" id="nosoCovernote" name="nosoCovernote" value="<?php echo encode_url($detail_harga['noso']); ?>">
                         <select name="form-type" id="form-type" class="form-control">
                             <option value="1">Type 1</option>
                             <option value="2">Type 2</option>
@@ -271,7 +271,7 @@
         $("#printCovernote").click(function (event) {
             event.preventDefault();
             var baseUrl = '<?php echo base_url('surat-pernyataan-print'); ?>';
-            $("#covernoteContent").load(baseUrl + "/" + parseInt($("#form-type").val()) + "/" + $("#nosoCovernote").val());
+            $("#covernoteContent").load(baseUrl + "/" + parseInt($("#form-type").val()) + "/" + $("#nosoCovernote").val()); 
             $('#modalCovernote').modal('show');
         });
     });

@@ -422,14 +422,12 @@ $route['surat-pernyataan-print/(:num)/(:any)'] = 'leasing_covernote/print_covern
 
 /* laporan Penjualan */
 $route['laporan-penjualan'] = 'rp_penjualan';
-$route['laporan-penjualan-tambah'] = 'rp_penjualan/add';
-$route['laporan-penjualan-edit-(:num)'] = 'rp_penjualan/edit/$1';
-$route['laporan-penjualan-delete-(:num)'] = 'rp_penjualan/delete/$1';
-$route['laporan-penjualan-save'] = 'rp_penjualan/save';
+$route['laporan-penjualan-detail-(:any)'] = 'rp_penjualan/transaksi_detail/$1';
 $route['laporan-penjualan-page'] = 'rp_penjualan/index';
 $route['laporan-penjualan-page/(:any)'] = 'rp_penjualan/index/$1';
 $route['laporan-penjualan-pdf'] = 'rp_penjualan/print_pdf';
 $route['laporan-penjualan-pdf/(:any)'] = 'rp_penjualan/print_pdf/$1';
 $route['laporan-penjualan-excel'] = 'rp_penjualan/print_excel';
 $route['laporan-penjualan-excel/(:any)'] = 'rp_penjualan/print_excel/$1';
+$route['laporan-penjualan-print-transaksi-(:any)'] = 'rp_penjualan/print_transaksi_detail/$1';
 /* End laporan Penjualan */
