@@ -35,8 +35,8 @@
                                         <td><?php echo intval($this->uri->segment(2) + ($k + 1)); ?></td>
                                         <td><?php echo $v['no_tagihan']; ?></td>
                                         <td><?php echo $v['tgl_tagihan']; ?></td>
-                                        <td><?php echo formatrp($v['total_tagihan']); ?></td>
-                                        <td><?php echo $v['kd_leasing']; ?></td>
+                                        <td><?php echo formatrp($v['tot_tagihan']); ?></td>
+                                        <td><?php echo $v['kdleasing']; ?></td>
                                         <td class="text-center">
                                             <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'rekap-tagihan-edit-' . $v['id'], 'text' => 'Edit')); ?>
                                             <a href="<?php echo base_url('rekap-tagihan-detail-' . $v['id']); ?>" class="btn btn-success btn-sm"><i class="fa fa-info-circle"></i> Detail</a>
@@ -68,7 +68,7 @@
                                             ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="total_tagihan" value="<?php echo (isset($sr_data['total_tagihan']) ? $sr_data['total_tagihan'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="total_tagihan" value="<?php echo (isset($sr_data['tot_tagihan']) ? $sr_data['tot_tagihan'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;
@@ -76,7 +76,7 @@
                                             ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="kd_leasing" value="<?php echo (isset($sr_data['kd_leasing']) ? $sr_data['kd_leasing'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="kd_leasing" value="<?php echo (isset($sr_data['kdleasing']) ? $sr_data['kdleasing'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;

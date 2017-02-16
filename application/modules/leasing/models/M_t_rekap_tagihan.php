@@ -14,7 +14,25 @@
 class M_t_rekap_tagihan extends CI_Model {
 
     //put your code here
-    var $table = "t_rekap_tagihan";
+    protected $table = "t_rekap_tagihan";
+    protected $table_detail = "t_rekap_tagihan_detail";
+
+    function save_trekapan($data) {
+        $query = $this->db->insert($this->table, $data);
+        return $query;
+    }
+
+    function save_trekapan_detail($data) {
+        $query = $this->db->insert($this->table_detail, $data);
+        return $query;
+    }
+
+    function update_kwitansi_leasing($id, $ustatus) {
+        $data['status_rekap'] = $ustatus;
+        $this->db->where('id', $id);
+        $query = $this->db->update('t_kwitansi_leasing', $data);
+        return $query;
+    }
 
     public function getdata($table, $limit, $pg, $like = array(), $where = array()) {
         unset($like['page']);
