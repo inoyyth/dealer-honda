@@ -247,6 +247,12 @@
             });
         });
         
+        $('.datepicker').datepicker({
+            format:'yyyy-mm-dd'
+        }).on('changeDate', function(e) {
+            // `e` here contains the extra attributes
+        });
+        
         $("#tgl_proses_stnk").focusout(function () {
             var tgl_proses_stnk = $(this).val();
             $.post("t_stnk_bpkb/pro_est_date_stnk/", {tgl_proses_stnk: tgl_proses_stnk}).done(function (data) {
