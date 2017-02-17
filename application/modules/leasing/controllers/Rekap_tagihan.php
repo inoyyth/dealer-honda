@@ -77,9 +77,14 @@ class Rekap_tagihan extends MX_Controller {
     }
 
     public function edit($id) {
-        $this->breadcrumbs->push('Edit', '/penjualan-edit');
-        $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
-        $data['view'] = 'rekap_tagihan/edit';
+        $data['notagihan'] = '';
+        $this->breadcrumbs->push('Edit', '/rekap-tagihan-edit-' . $id);
+
+        $data['rkwitansi'] = $this->main_model->getMaster($this->table, $like = array(), $where = array('id' => $id));
+        $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('status_leasing' => '1'));
+
+        $data['view'] = "leasing/rekap_tagihan/print-form";
+
         $this->load->view('default', $data);
     }
 
@@ -89,18 +94,42 @@ class Rekap_tagihan extends MX_Controller {
     }
 
     function save() {
-        if ($_POST) {
-            //var_dump($_POST);
-            //exit();
-            if ($this->M_t_kwitansi->save()) {
+        if ($this->input->post()) {
+            $post = $this->input->post();
 
-                $this->session->set_flashdata('success', 'Data Berhasil Di Simpan !');
-            } else {
-                $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
+            $dtsession = $this->session->userdata('logged_in_admin');
+            $input = [];
+            foreach ($post['rtagihan'] as $rtagihan) {
+                $input[$rtagihan['name']] = $rtagihan['value'];
             }
-            redirect("kwitansi-fee");
+            $input['sys_create_user'] = $dtsession['id'];
+            $input['sys_create_date'] = date('Y-m-d H:i:s');
+            $input['m_status'] = 1;
+
+            $result = $this->t_rekap->save_trekapan($input);
+
+            if ($result) {
+                foreach ($post['kleasing'] as $kleasing) {
+                    $ileasing['id_kwitansi'] = $kleasing;
+                    $ileasing['nomor_tagihan'] = $input['no_tagihan'];
+                    $ileasing['sys_create_user'] = $dtsession['id'];
+                    $ileasing['sys_create_date'] = date('Y-m-d H:i:s');
+                    $ileasing['m_status'] = 1;
+
+                    $result_detail = $this->t_rekap->save_trekapan_detail($ileasing);
+                    $result_update = $this->t_rekap->update_kwitansi_leasing($ileasing['id_kwitansi'], 1);
+                }
+
+                $status = "success";
+                $pesan = "Data success added !";
+            } else {
+                $status = "error";
+                $pesan = "Data fail added !";
+            }
+
+            echo json_encode(array('status' => $status, 'pesan' => $pesan));
         } else {
-            show_404();
+            echo json_encode(array('status' => 'error', 'pesan' => 'Data still empty !'));
         }
     }
 
@@ -135,6 +164,7 @@ class Rekap_tagihan extends MX_Controller {
             't_penjualan.tanggal >= ' => $tanggal_start,
             't_penjualan.tanggal <= ' => $tanggal_end,
             't_harga_motor.leasing' => $kdleasing,
+            't_kwitansi_leasing.status_rekap' => 0
         );
 
         @$list = $this->t_rekap->get_dt_tables($table, $column_search, $column_filter, $filter);
@@ -230,16 +260,16 @@ class Rekap_tagihan extends MX_Controller {
                 'page' => set_session_table_search('page', $this->input->get_post('page', TRUE)),
                 'no_tagihan' => set_session_table_search('page', $this->input->get_post('no_tagihan', TRUE)),
                 'tgl_tagihan' => set_session_table_search('noso', $this->input->get_post('tgl_tagihan', TRUE)),
-                'total_tagihan' => set_session_table_search('nomsn', $this->input->get_post('total_tagihan', TRUE)),
-                'kd_leasing' => set_session_table_search('nomsn', $this->input->get_post('kd_leasing', TRUE))
+                'tot_tagihan' => set_session_table_search('nomsn', $this->input->get_post('total_tagihan', TRUE)),
+                'kdleasing' => set_session_table_search('nomsn', $this->input->get_post('kd_leasing', TRUE))
             );
         } else {
             return $data = array(
                 'page' => $this->session->userdata('page'),
                 'no_tagihan' => $this->session->userdata('no_tagihan'),
                 'tgl_tagihan' => $this->session->userdata('tgl_tagihan'),
-                'total_tagihan' => $this->session->userdata('total_tagihan'),
-                'kd_leasing' => $this->session->userdata('kd_leasing')
+                'tot_tagihan' => $this->session->userdata('tot_tagihan'),
+                'kdleasing' => $this->session->userdata('kdleasing')
             );
         }
     }
