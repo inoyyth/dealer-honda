@@ -58,7 +58,7 @@ $kwt_explode = explode("/", $detail_harga['noso']);
         </tr>  
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">Jumlah Rp : </td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo formatrp($detail_harga['fee']); ?>,00</td>
+            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo formatrp($detail_harga['diskon']); ?>,00</td>
         </tr>
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;border-bottom:2px solid;">Nomor Mesin : </td>
