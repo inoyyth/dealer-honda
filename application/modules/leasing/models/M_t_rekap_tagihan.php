@@ -34,6 +34,18 @@ class M_t_rekap_tagihan extends CI_Model {
         return $query;
     }
 
+    function update_trekapan($data, $notagihan) {
+        $this->db->where('no_tagihan', $notagihan);
+        $query = $this->db->update($this->table, $data);
+        return $query;
+    }
+
+    function update_trekapan_detail($data, $id) {
+        $this->db->where('id_kwitansi', $id);
+        $query = $this->db->update($this->table_detail, $data);
+        return $query;
+    }
+
     public function getdata($table, $limit, $pg, $like = array(), $where = array()) {
         unset($like['page']);
 
@@ -131,6 +143,36 @@ class M_t_rekap_tagihan extends CI_Model {
         $this->_get_dt_tables($table, $column_search, $column_filter, $filter);
         $query = $this->db->get();
         return $query->num_rows();
+    }
+
+    function get_rkwitansi_detail($idkwitansi) {
+        $this->db->select('a.id, a.id_kwitansi, a.nomor_tagihan, b.nokwitansi,b.noso, c.harga_otr,((c.harga_otr - d.dp) + (b.subsidi1 + b.subsidi2)) as sisa_tagihan', false);
+        $this->db->from('t_rekap_tagihan_detail a');
+        $this->db->join('t_kwitansi_leasing b', 'b.id=a.id_kwitansi', 'left');
+        $this->db->join('t_penjualan c', 'c.noso=b.noso', 'left');
+        $this->db->join('t_harga_motor d', 'd.noso=b.noso', 'left');
+        $this->db->where_in('a.id_kwitansi', $idkwitansi);
+
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function get_rekap_kwitansi_leasing($notagihan) {
+        $this->db->select('t_kwitansi_leasing.id,t_kwitansi_leasing.nokwitansi,t_kwitansi_leasing.noso,t_kwitansi_leasing.dp_system, t_kwitansi_leasing.tagih,t_kwitansi_leasing.subsidi1,t_kwitansi_leasing.subsidi2,t_kwitansi_leasing.m_status,t_kwitansi_leasing.sys_create_user,t_kwitansi_leasing.sys_create_date,t_kwitansi_leasing.status_rekap,t_penjualan.nosj,t_penjualan.nokonsumen,t_penjualan.ktp,t_penjualan.tanggal,t_penjualan.nomsn,t_penjualan.warna_motor,t_penjualan.harga_otr,penerimaan_motor.norangka,penerimaan_motor.tipe,penerimaan_motor.warna,penerimaan_motor.tahun,penerimaan_motor.kdgudang,penerimaan_motor.tglupload,t_harga_motor.cara_pembelian,t_harga_motor.marketing,t_harga_motor.leasing,t_harga_motor.dp_system,t_harga_motor.diskon,t_harga_motor.tagih,t_harga_motor.dp,t_harga_motor.sisa_hutang,t_harga_motor.dp_lunas,t_harga_motor.fee,m_customer.nama_customer,m_customer.tempat_lahir_customer,m_customer.tanggal_lahir_customer,m_customer.kelamin_customer,m_customer.alamat_customer,m_customer.telepon_customer,m_customer.handphone_customer,m_customer.rt,m_customer.rw,m_customer.wilayah,m_customer.kelurahan,m_customer.kecamatan,m_motor.nama_motor,m_motor.varian,m_motor.merk,m_motor.url_foto', false);
+        $this->db->from('t_rekap_tagihan_detail');
+        $this->db->join('t_kwitansi_leasing', 't_kwitansi_leasing.id = t_rekap_tagihan_detail.id_kwitansi', 'left');
+        $this->db->join('t_penjualan', 't_penjualan.noso=t_kwitansi_leasing.noso', 'left');
+        $this->db->join('penerimaan_motor', 'penerimaan_motor.nomesin=t_penjualan.nomsn', 'left');
+        $this->db->join('t_harga_motor', 't_harga_motor.noso=t_kwitansi_leasing.noso', 'left');
+        $this->db->join('m_customer', 'm_customer.no_ktp=t_penjualan.ktp', 'left');
+        $this->db->join('m_motor', 'm_motor.tipe_motor=penerimaan_motor.tipe', 'left');
+
+        $this->db->where('t_rekap_tagihan_detail.nomor_tagihan', $notagihan);
+        $this->db->where('t_rekap_tagihan_detail.status_rekap', 1);
+        
+        $query = $this->db->get();
+        
+        return $query;
     }
 
 }

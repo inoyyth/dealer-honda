@@ -392,7 +392,7 @@ End Leasing*/
 $route['rekap-tagihan'] = 'leasing/rekap_tagihan/index';
 $route['rekap-tagihan-tambah'] = 'leasing/rekap_tagihan/form';
 $route['rekap-tagihan-edit-(:num)'] = 'leasing/rekap_tagihan/edit/$1';
-$route['rekap-tagihan-detail'] = 'leasing/rekap_tagihan/detail';
+$route['rekap-tagihan-detail-(:num)'] = 'leasing/rekap_tagihan/detail/$1';
 //$route['cetak-kwitansi-leasing-save'] = 'leasing/cetak_kwitansi_leasing/save';
 /* Start Tanda Terima STNK BPKB */
 $route['terima-stnk'] = 't_terima_stnk/index';
