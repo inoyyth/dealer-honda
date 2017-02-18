@@ -149,7 +149,7 @@ class Motor_terima extends MX_Controller {
 
             $config['upload_path'] = "./assets/" . $folder;
             $config['upload_url'] = "./assets/" . $folder;
-            $config['file_name'] =  date('YmdHis') . "-" . $fileName;
+            $config['file_name'] = date('YmdHis') . "-" . $fileName;
             $config['allowed_types'] = 'xls|xlsx';
             $config['max_size'] = '20000';
             $this->load->library('upload');
@@ -182,10 +182,11 @@ class Motor_terima extends MX_Controller {
                 $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
                 //insert new motor type if not existing
                 //  Insert row data array into your database of choice here
+                //dump(validate_date($rowData[0][2]),true);
                 $data = array(
                     "nopolisi" => $rowData[0][0],
-                    "tgl_sj" => $rowData[0][1],
-                    "no_sj" => $rowData[0][2],
+                    "tgl_sj" => $rowData[0][2],
+                    "no_sj" => $rowData[0][1],
                     "no_so" => $rowData[0][3],
                     "nomesin" => $rowData[0][4],
                     "norangka" => $rowData[0][5],
@@ -199,51 +200,51 @@ class Motor_terima extends MX_Controller {
                 //$this->db->insert("penerimaan_motor_temp", $data); 
                 $sql = $this->db->insert_string('penerimaan_motor_temp', $data) . ' ON DUPLICATE KEY UPDATE nomesin=nomesin,norangka=norangka';
                 $this->db->query($sql);
-                $dataType = array('tipe_motor'=>$rowData[0][6]);
+                $dataType = array('tipe_motor' => $rowData[0][6]);
                 $sqlType = $this->db->insert_string('m_motor', $dataType) . ' ON DUPLICATE KEY UPDATE tipe_motor=tipe_motor';
                 $this->db->query($sqlType);
             }
             return true;
         }
     }
-    
-    public function template_excel(){
+
+    public function template_excel() {
         $this->load->library("phpexcel/PHPExcel");
         $objPHPExcel = new PHPExcel();
-        
+
         $objPHPExcel->getActiveSheet()->getStyle('A1:J1')->applyFromArray(
-            array(
-                'fill' => array(
-                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
-                    'color' => array('rgb' => 'B3FFb3')
+                array(
+                    'fill' => array(
+                        'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                        'color' => array('rgb' => 'B3FFb3')
+                    )
                 )
-            )
         );
-        
+
         $objPHPExcel->getActiveSheet()->getStyle('L1:M1')->applyFromArray(
-            array(
-                'fill' => array(
-                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
-                    'color' => array('rgb' => 'B3FFb3')
+                array(
+                    'fill' => array(
+                        'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                        'color' => array('rgb' => 'B3FFb3')
+                    )
                 )
-            )
         );
-        
-        
+
+
         $objPHPExcel->setActiveSheetIndex(0);
-        $HeaderTitle = array('No.Polisi','Tanggal SJ','No.Surat Jalan','No Sales Order','No Mesin','No Rangka','Tipe','Warna','Tahun','ID Gudang');
+        $HeaderTitle = array('No.Polisi', 'No.Surat Jalan', 'Tanggal SJ', 'No Sales Order', 'No Mesin', 'No Rangka', 'Tipe', 'Warna', 'Tahun', 'ID Gudang');
         $headerMulai = "A";
-            foreach($HeaderTitle as $headerTitleV){
-                $objPHPExcel->getActiveSheet()->SetCellValue($headerMulai."1", $headerTitleV);
-                $headerMulai ++;
-            }
-            $objPHPExcel->getActiveSheet()->SetCellValue('L1','ID Gudang');
-            $objPHPExcel->getActiveSheet()->SetCellValue('M1','Gudang');
+        foreach ($HeaderTitle as $headerTitleV) {
+            $objPHPExcel->getActiveSheet()->SetCellValue($headerMulai . "1", $headerTitleV);
+            $headerMulai ++;
+        }
+        $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'ID Gudang');
+        $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Gudang');
         $rowCount = 2;
-        $gudang = $this->db->get_where('m_gudang',array('status_gudang'=>1))->result_array();
-        foreach($gudang as $k=>$row){
-            $objPHPExcel->getActiveSheet()->SetCellValue('L'.$rowCount, $row['id']);
-            $objPHPExcel->getActiveSheet()->SetCellValue('M'.$rowCount, $row['gudang']);
+        $gudang = $this->db->get_where('m_gudang', array('status_gudang' => 1))->result_array();
+        foreach ($gudang as $k => $row) {
+            $objPHPExcel->getActiveSheet()->SetCellValue('L' . $rowCount, $row['id']);
+            $objPHPExcel->getActiveSheet()->SetCellValue('M' . $rowCount, $row['gudang']);
             $rowCount++;
         }
         $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);

@@ -49,7 +49,7 @@
                                         <td><?php echo formatrp($v['nominal']); ?></td>
                                         <td class="text-center">
                                             <a href="<?php echo base_url('kwitansi-dp-detail/' . $v['id']); ?>" class="btn btn-success btn-sm"><i class="fa fa-info"></i> Detail</a>
-                                            <a href="<?php echo base_url('kwitansi-dp-print-' . $this->encrypt->encode($v['id']));?>" class="btn btn-default btn-sm kwtPrtBtn" target="_blank"><i class="fa fa-print"></i> Print</a> 
+                                            <a href="<?php echo base_url('kwitansi-dp-print-' . encode_url($v['id']));?>" class="btn btn-default btn-sm kwtPrtBtn" target="_blank"><i class="fa fa-print"></i> Print</a> 
                                         </td>
                                     </tr>
                                     <?php

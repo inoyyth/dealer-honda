@@ -1,8 +1,10 @@
 <?php
 if($dp['transaksi'] == 4 ){
     $descDp = "PELUNASAN";
+    $total_kwitansi = ($dp['nominal'] + $detail_harga['diskon']);
 }else{
     $descDp = "DP KE ".$dp['transaksi'];
+    $total_kwitansi = $dp['nominal'];
 }
 ?>
 <style>
@@ -62,7 +64,7 @@ if($dp['transaksi'] == 4 ){
         </tr>  
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">Jumlah Rp : </td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo formatrp($dp['nominal']); ?>,00</td>
+            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo formatrp($total_kwitansi); ?>,00</td>
         </tr>
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;border-bottom:2px solid;">Nomor Mesin : </td>

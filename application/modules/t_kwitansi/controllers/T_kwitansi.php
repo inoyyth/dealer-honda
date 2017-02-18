@@ -127,7 +127,7 @@ class T_kwitansi extends MX_Controller {
     
     public function print_kwt($id){
         $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
-        $data['dp'] = $this->db->get_where($this->table, array('id' => $this->encrypt->decode($id)))->row_array();
+        $data['dp'] = $this->db->get_where($this->table, array('id' => decode_url($id)))->row_array();
         $data['detail_penjualan'] = $this->db->get_where('t_penjualan', array('noso' => $data['dp']['noso']))->row_array();
         $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['dp']['noso']))->row_array();
         $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();

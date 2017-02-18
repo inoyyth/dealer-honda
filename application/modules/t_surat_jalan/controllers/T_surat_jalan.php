@@ -26,7 +26,7 @@ class T_surat_jalan extends MX_Controller {
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->pagination->initialize($config);
         $data['paging'] = $this->pagination->create_links();
-        $data['data'] = $this->t_pdi->getdata($this->table_pdi, $limit, $config['per_page'], $like = $data_session, $where = array('m_status' => '1'));
+        $data['data'] = $this->t_pdi->getdata($this->table_pdi, $limit, $config['per_page'], $like = $data_session, $where = array('t_pdi.m_status' => '1'));
         $data['sr_data'] = $data_session;
         $data['view'] = 't_surat_jalan/main';
         $this->load->view('default', $data);
@@ -36,18 +36,18 @@ class T_surat_jalan extends MX_Controller {
         if ($_POST) {
             return $data = array(
                 'page' => set_session_table_search('page', $this->input->get_post('page', TRUE)),
-                'nosj' => set_session_table_search('nosj', $this->input->get_post('nosj', TRUE)),
+                't_pdi.nosj' => set_session_table_search('nosj', $this->input->get_post('nosj', TRUE)),
                 'kdpdi' => set_session_table_search('kdpdi', $this->input->get_post('kdpdi', TRUE)),
-                'noso' => set_session_table_search('noso', $this->input->get_post('noso', TRUE)),
+                't_pdi.noso' => set_session_table_search('noso', $this->input->get_post('noso', TRUE)),
                 'tgl_pdi' => set_session_table_search('tgl_pdi', $this->input->get_post('tgl_pdi', TRUE))
             );
         } else {
             return $data = array(
                 'page' => $this->session->userdata('page'),
                 'kdpdi' => $this->session->userdata('kdpdi'),
-                'noso' => $this->session->userdata('noso'),
+                't_pdi.noso' => $this->session->userdata('noso'),
                 'tgl_pdi' => $this->session->userdata('tgl_pdi'),
-                'nosj' => $this->session->userdata('nosj')
+                't_pdi.nosj' => $this->session->userdata('nosj')
             );
         }
     }
