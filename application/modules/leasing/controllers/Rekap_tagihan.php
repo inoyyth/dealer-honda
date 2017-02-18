@@ -81,11 +81,77 @@ class Rekap_tagihan extends MX_Controller {
         $this->breadcrumbs->push('Edit', '/rekap-tagihan-edit-' . $id);
 
         $data['rkwitansi'] = $this->main_model->getMaster($this->table, $like = array(), $where = array('id' => $id));
-        $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('status_leasing' => '1'));
+        $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('kd_leasing' => $data['rkwitansi'][0]['kdleasing'], 'status_leasing' => '1'));
 
-        $data['view'] = "leasing/rekap_tagihan/print-form";
+        $data['rekap_detail'] = $this->main_model->getMaster('t_rekap_tagihan_detail', $like = array(), $where = array('nomor_tagihan' => $data['rkwitansi'][0]['no_tagihan']));
+
+        $data['view'] = "leasing/rekap_tagihan/print-form-edit";
 
         $this->load->view('default', $data);
+    }
+
+    public function get_drekap_edit() {
+        $no_tagihan = $this->input->post('no_tagihan');
+
+        $tanggal_start = $this->input->get('tanggal_start');
+        $tanggal_end = $this->input->get('tanggal_end');
+        $kdleasing = $this->input->get('kdleasing');
+
+        $table = 't_rekap_tagihan_detail';
+
+        $column_search = array('t_rekap_tagihan_detail.id_kwitansi', 't_rekap_tagihan_detail.nomor_tagihan', 't_rekap_tagihan_detail.status_rekap', 't_kwitansi_leasing.nokwitansi', 't_kwitansi_leasing.noso', 't_kwitansi_leasing.dp_system', 't_kwitansi_leasing.tagih', 't_kwitansi_leasing.subsidi1', 't_kwitansi_leasing.subsidi2', 't_penjualan.nosj', 't_penjualan.nokonsumen', 't_penjualan.ktp', 't_penjualan.tanggal', 't_penjualan.nomsn', 't_penjualan.warna_motor', 't_penjualan.harga_otr', 't_penjualan.status_kwitansi', 'penerimaan_motor.nopolisi', 'penerimaan_motor.norangka', 'penerimaan_motor.tipe', 'penerimaan_motor.warna', 'penerimaan_motor.tahun', 'penerimaan_motor.kdgudang', 'penerimaan_motor.tglupload', 'penerimaan_motor.status_jual', 't_harga_motor.cara_pembelian', 't_harga_motor.marketing', 't_harga_motor.leasing', 't_harga_motor.dp_system', 't_harga_motor.diskon', 't_harga_motor.tagih', 't_harga_motor.dp', 't_harga_motor.sisa_hutang', 't_harga_motor.dp_lunas', 't_harga_motor.fee', 'm_customer.nama_customer', 'm_customer.tempat_lahir_customer', 'm_customer.tanggal_lahir_customer', 'm_customer.kelamin_customer', 'm_customer.alamat_customer', 'm_customer.telepon_customer', 'm_customer.handphone_customer', 'm_customer.rt', 'm_customer.rw', 'm_customer.wilayah', 'm_customer.kelurahan', 'm_customer.kecamatan', 'm_motor.nama_motor', 'm_motor.varian', 'm_motor.merk', 'm_motor.harga_otr', 'm_motor.nama_foto', 'm_motor.url_foto');
+
+        $column_filter = array('t_rekap_tagihan_detail.id_kwitansi', 't_rekap_tagihan_detail.nomor_tagihan', 't_kwitansi_leasing.nokwitansi', 't_kwitansi_leasing.noso', 't_kwitansi_leasing.dp_system', 't_kwitansi_leasing.tagih', 't_kwitansi_leasing.subsidi1', 't_kwitansi_leasing.subsidi2', 't_penjualan.nosj', 't_penjualan.nokonsumen', 't_penjualan.ktp', 't_penjualan.tanggal', 't_penjualan.nomsn', 't_penjualan.warna_motor', 't_penjualan.harga_otr', 't_penjualan.status_kwitansi', 'penerimaan_motor.nopolisi', 'penerimaan_motor.norangka', 'penerimaan_motor.tipe', 'penerimaan_motor.warna', 'penerimaan_motor.tahun', 'penerimaan_motor.kdgudang', 'penerimaan_motor.tglupload', 'penerimaan_motor.status_jual', 't_harga_motor.cara_pembelian', 't_harga_motor.marketing', 't_harga_motor.leasing', 't_harga_motor.dp_system', 't_harga_motor.diskon', 't_harga_motor.tagih', 't_harga_motor.dp', 't_harga_motor.sisa_hutang', 't_harga_motor.dp_lunas', 't_harga_motor.fee', 'm_customer.nama_customer', 'm_customer.tempat_lahir_customer', 'm_customer.tanggal_lahir_customer', 'm_customer.kelamin_customer', 'm_customer.alamat_customer', 'm_customer.telepon_customer', 'm_customer.handphone_customer', 'm_customer.rt', 'm_customer.rw', 'm_customer.wilayah', 'm_customer.kelurahan', 'm_customer.kecamatan', 'm_motor.nama_motor', 'm_motor.varian', 'm_motor.merk', 'm_motor.harga_otr', 'm_motor.nama_foto', 'm_motor.url_foto');
+
+        $column_order = array(null, 't_rekap_tagihan_detail.id_kwitansi', 't_rekap_tagihan_detail.nomor_tagihan', 't_kwitansi_leasing.nokwitansi');
+
+        $filter['join'] = array("t_kwitansi_leasing" => "t_kwitansi_leasing.id = t_rekap_tagihan_detail.id_kwitansi",
+            "t_penjualan" => "t_penjualan.noso = t_kwitansi_leasing.noso",
+            "penerimaan_motor" => "penerimaan_motor.nomesin = t_penjualan.nomsn",
+            "t_harga_motor" => "t_harga_motor.noso = t_penjualan.noso",
+            "m_customer" => "m_customer.no_ktp=t_penjualan.ktp",
+            "m_motor" => "m_motor.tipe_motor=penerimaan_motor.tipe");
+        $filter['where'] = array('t_rekap_tagihan_detail.nomor_tagihan' => $no_tagihan);
+
+        @$list = $this->t_rekap->get_dt_tables($table, $column_search, $column_filter, $filter);
+
+        $no = isset($_POST['start']) ? $_POST['start'] : 0;
+        $data = array();
+        foreach ($list as $result) {
+            $no++;
+            $row = array();
+
+            if ($result->status_rekap > 0) {
+                $row[] = "<span align='center'><input type='checkbox' class='idkwitansileasing' value='" . $result->id_kwitansi . "' checked='true' /></span>";
+            } else {
+                $row[] = "<span align='center'><input type='checkbox' class='idkwitansileasing' value='" . $result->id_kwitansi . "' /></span>";
+            }
+
+            //$row[] = "";
+            $row[] = $no;
+            $row[] = date("d F Y", strtotime($result->tanggal));
+            $row[] = $result->nokwitansi;
+            $row[] = $result->nama_customer;
+            $row[] = $result->tipe;
+            $row[] = $result->nomsn;
+            $row[] = $result->norangka;
+            $row[] = formatrp($result->harga_otr);
+            $row[] = formatrp($result->dp);
+            $row[] = formatrp($result->subsidi1 + $result->subsidi2);
+            $row[] = formatrp(($result->harga_otr - $result->dp) + ($result->subsidi1 + $result->subsidi2));
+            $row[] = $result->varian;
+
+            $data[] = $row;
+        }
+
+        $output = array(
+            "draw" => isset($_POST['draw']) ? $_POST['draw'] : 0,
+            "recordsTotal" => $this->t_rekap->count_all($table, $where = array($table . '.m_status' => 1)),
+            "recordsFiltered" => $this->t_rekap->count_filtered($table, $column_search, $column_filter, $filter),
+            "data" => $data,
+        );
+        //output to json format
+        echo json_encode($output);
     }
 
     function delete($id) {
@@ -100,7 +166,12 @@ class Rekap_tagihan extends MX_Controller {
             $dtsession = $this->session->userdata('logged_in_admin');
             $input = [];
             foreach ($post['rtagihan'] as $rtagihan) {
-                $input[$rtagihan['name']] = $rtagihan['value'];
+                if ($rtagihan['name'] == "sisa_tagihan" || $rtagihan['name'] == "tot_tagihan") {
+                    $value = explode(".", $rtagihan['value']);
+                    $input[$rtagihan['name']] = (double) implode("", $value);
+                } else {
+                    $input[$rtagihan['name']] = $rtagihan['value'];
+                }
             }
             $input['sys_create_user'] = $dtsession['id'];
             $input['sys_create_date'] = date('Y-m-d H:i:s');
@@ -127,6 +198,59 @@ class Rekap_tagihan extends MX_Controller {
                 $pesan = "Data fail added !";
             }
 
+            echo json_encode(array('status' => $status, 'pesan' => $pesan));
+        } else {
+            echo json_encode(array('status' => 'error', 'pesan' => 'Data still empty !'));
+        }
+    }
+
+    function update() {
+        if ($this->input->post()) {
+            $post = $this->input->post();
+
+            $dtsession = $this->session->userdata('logged_in_admin');
+            $input = [];
+            foreach ($post['rtagihan'] as $rtagihan) {
+                if ($rtagihan['name'] == "sisa_tagihan" || $rtagihan['name'] == "tot_tagihan") {
+                    $value = explode(".", $rtagihan['value']);
+                    $input[$rtagihan['name']] = (double) implode("", $value);
+                }
+            }
+            $input['sys_update_user'] = $dtsession['id'];
+            $input['sys_update_date'] = date('Y-m-d H:i:s');
+
+            $result = $this->t_rekap->update_trekapan($input, $post['rtagihan'][0]['value']);
+
+            if ($result) {
+
+                if (isset($post['kleasing'])) {
+                    foreach ($post['kleasing'] as $kleasing) {
+                        $ileasing['sys_update_user'] = $dtsession['id'];
+                        $ileasing['sys_update_date'] = date('Y-m-d H:i:s');
+                        $ileasing['status_rekap'] = 1;
+
+                        $result_detail = $this->t_rekap->update_trekapan_detail($ileasing, $kleasing);
+                    }
+                }
+
+                if (isset($post['kleasinguncheck'])) {
+                    foreach ($post['kleasinguncheck'] as $kleasinguncheck) {
+                        $ileasinguncheck['sys_update_user'] = $dtsession['id'];
+                        $ileasinguncheck['sys_update_date'] = date('Y-m-d H:i:s');
+                        $ileasinguncheck['status_rekap'] = 0;
+
+                        $result_detail_uncheck = $this->t_rekap->update_trekapan_detail($ileasinguncheck, $kleasinguncheck);
+                    }
+                }
+
+                if ($result_detail || $result_detail_uncheck) {
+                    $status = "success";
+                    $pesan = "Data success modified !";
+                } else {
+                    $status = "error";
+                    $pesan = "Data fail modified !";
+                }
+            }
             echo json_encode(array('status' => $status, 'pesan' => $pesan));
         } else {
             echo json_encode(array('status' => 'error', 'pesan' => 'Data still empty !'));
@@ -252,6 +376,66 @@ class Rekap_tagihan extends MX_Controller {
         );
         //output to json format
         echo json_encode($output);
+    }
+
+    function get_rekap_tagihan_edit() {
+        $idkwitansi_leasing = explode(",", $this->input->get('dt'));
+        $idkwitansi_leasing_uncheck = explode(",", $this->input->get('dtuncheck'));
+
+        $table = 't_kwitansi_leasing';
+        $column_search = array('t_kwitansi_leasing.id', 't_kwitansi_leasing.nokwitansi', 't_kwitansi_leasing.noso', 't_kwitansi_leasing.dp_system', 't_kwitansi_leasing.tagih', 't_kwitansi_leasing.subsidi1', 't_kwitansi_leasing.subsidi2', 't_kwitansi_leasing.m_status', 't_kwitansi_leasing.sys_create_user', 't_kwitansi_leasing.sys_create_date', 't_kwitansi_leasing.status_rekap', 't_penjualan.nosj', 't_penjualan.nokonsumen', 't_penjualan.ktp', 't_penjualan.tanggal', 't_penjualan.nomsn', 't_penjualan.warna_motor', 't_penjualan.harga_otr', 'penerimaan_motor.norangka', 'penerimaan_motor.tipe', 'penerimaan_motor.warna', 'penerimaan_motor.tahun', 'penerimaan_motor.kdgudang', 'penerimaan_motor.tglupload', 't_harga_motor.cara_pembelian', 't_harga_motor.marketing', 't_harga_motor.leasing', 't_harga_motor.dp_system', 't_harga_motor.diskon', 't_harga_motor.tagih', 't_harga_motor.dp', 't_harga_motor.sisa_hutang', 't_harga_motor.dp_lunas', 't_harga_motor.fee', 'm_customer.nama_customer', 'm_customer.tempat_lahir_customer', 'm_customer.tanggal_lahir_customer', 'm_customer.kelamin_customer', 'm_customer.alamat_customer', 'm_customer.telepon_customer', 'm_customer.handphone_customer', 'm_customer.rt', 'm_customer.rw', 'm_customer.wilayah', 'm_customer.kelurahan', 'm_customer.kecamatan', 'm_motor.nama_motor', 'm_motor.varian', 'm_motor.merk', 'm_motor.url_foto');
+        $column_order = array(null, 't_kwitansi_leasing.id', 't_kwitansi_leasing.nokwitansi', 't_kwitansi_leasing.noso');
+
+        $column_filter = array('t_kwitansi_leasing.sys_create_date', 't_kwitansi_leasing.nokwitansi', 'm_customer.nama_customer', 'penerimaan_motor.tipe', 't_penjualan.nomsn', 'penerimaan_motor.norangka', 't_penjualan.harga_otr', 't_harga_motor.dp', 'm_motor.varian');
+
+        $filter['join'] = array("t_penjualan" => "t_penjualan.noso=t_kwitansi_leasing.noso",
+            "penerimaan_motor" => "penerimaan_motor.nomesin=t_penjualan.nomsn",
+            "t_harga_motor" => "t_harga_motor.noso=t_kwitansi_leasing.noso",
+            "m_customer" => "m_customer.no_ktp=t_penjualan.ktp",
+            "m_motor" => "m_motor.tipe_motor=penerimaan_motor.tipe");
+        $filter['where_in'] = array($table . '.id' => $idkwitansi_leasing);
+
+        @$list = $this->t_rekap->get_dt_tables($table, $column_search, $column_filter, $filter);
+
+        $no = isset($_POST['start']) ? $_POST['start'] : 0;
+        $data = array();
+        foreach ($list as $result) {
+            $no++;
+            $row = array();
+
+            $row[] = "<span align='center'><input type='checkbox' checked='true' class='idkwitansileasing' value='" . $result->id . "'  /></span>";
+            $row[] = $no;
+            $row[] = date("d F Y", strtotime($result->sys_create_date));
+            $row[] = $result->nokwitansi;
+            $row[] = $result->nama_customer;
+            $row[] = $result->tipe;
+            $row[] = $result->nomsn;
+            $row[] = $result->norangka;
+            $row[] = formatrp($result->harga_otr);
+            $row[] = formatrp($result->dp);
+            $row[] = formatrp($result->subsidi1 + $result->subsidi2);
+            $row[] = formatrp(($result->harga_otr - $result->dp) + ($result->subsidi1 + $result->subsidi2));
+            $row[] = $result->varian;
+
+            $data[] = $row;
+        }
+
+        $rkwitansi_leasing_uncheck = $this->t_rekap->get_rkwitansi_detail($idkwitansi_leasing_uncheck)->result_array();
+
+        $output = array(
+            "draw" => isset($_POST['draw']) ? $_POST['draw'] : 0,
+            "recordsTotal" => $this->t_rekap->count_all($table, $where = array($table . '.m_status' => 1)),
+            "recordsFiltered" => $this->t_rekap->count_filtered($table, $column_search, $column_filter, $filter),
+            "data" => $data,
+            "data_uncheck" => $rkwitansi_leasing_uncheck
+        );
+        //output to json format
+        echo json_encode($output);
+    }
+    
+    public function print_rekap_tagihan() {
+        $notagihan = $this->input->get('notagihan');
+        echo $notagihan;
     }
 
     public function __getSession() {
