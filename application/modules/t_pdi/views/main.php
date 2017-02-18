@@ -38,12 +38,21 @@
                                         <td><?php echo $v['noso']; ?></td>
                                         <td><?php echo $v['tgl_pdi']; ?></td>
                                         <td><?php echo $v['pic']; ?></td>
+                                        <?php 
+                                            if($v['penjualan_status']==1){
+                                        ?>
                                         <td class="text-center">
                                             <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'pdi-edit-' . $v['id'], 'text' => 'Edit')); ?>
                                             <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'pdi-delete-' . $v['id'], 'text' => 'Delete')); ?>
                                         </td>
+                                        <?php 
+                                            }else{
+                                                echo "<td>".status_transaksi($v['penjualan_status'])."</td>";
+                                            }
+                                        ?>
                                     </tr>
-                                <?php }
+                                <?php
+                                }
                             }
                             ?>
                         </tbody>
@@ -60,7 +69,7 @@
                                             ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="noso" value="<?php echo (isset($sr_data['noso']) ? $sr_data['noso'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="noso" value="<?php echo (isset($sr_data['t_pdi.noso']) ? $sr_data['t_pdi.noso'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;
