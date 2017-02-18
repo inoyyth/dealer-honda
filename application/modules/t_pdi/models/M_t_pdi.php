@@ -17,9 +17,10 @@ class M_t_pdi extends CI_Model {
 
     public function getdata($table, $limit, $pg, $like = array(), $where = array()) {
         unset($like['page']);
-        $this->db->select($this->table_pdi . ".*,account.nama_lengkap");
+        $this->db->select($this->table_pdi . ".*,account.nama_lengkap,t_penjualan.m_status AS penjualan_status");
         $this->db->from($table);
         $this->db->join('account', 'account.id=' . $this->table_pdi . '.sj_print_user_id', 'LEFT');
+        $this->db->join('t_penjualan', 't_penjualan.noso=' . $this->table_pdi . '.noso', 'LEFT');
         $this->db->like($like);
         $this->db->where($where);
         $this->db->order_by('id', 'desc');
