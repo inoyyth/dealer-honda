@@ -154,7 +154,7 @@
     <div class="col-md-6">
         <div class="block-web">
             <div class="form-group">
-                <a href="<?php echo base_url('kwitansi-dp-print-' . $this->encrypt->encode($detail['id']));?>" class="btn btn-default kwtPrtBtn" target="_blank"><i class="fa fa-print"></i> Print</a>
+                <a href="<?php echo base_url('kwitansi-dp-print-' . encode_url($detail['id']));?>" class="btn btn-default kwtPrtBtn" target="_blank"><i class="fa fa-print"></i> Print</a>
                 <a href="<?php echo base_url('kwitansi-dp');?>" name="cancel" id="cancel" class="btn btn-danger">Back</a>
             </div>
         </div>
