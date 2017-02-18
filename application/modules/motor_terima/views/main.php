@@ -8,33 +8,6 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <!--<div class="col-lg-6">
-                        <section class="panel default red_border vertical_border h1">
-                            <div class="block-web">
-                                <div class="header">
-                                    <h3>Information</h3>
-                                </div>
-                                <div class="porlets-content">
-                                    <div class="form-group">
-                                        <label>Tanggal Import</label>
-                                        <input type="text" class="form-control datepicker">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Gudang</label>
-                                        <select name="kdgudang" id="kdgudang" class="form-control">
-                                            <?php foreach ($list_gudang as $kGudang => $vGudang) { ?>
-                                                <option value="<?php echo $vGudang['id']; ?>"><?php echo $vGudang['kd_gudang'] . " - " . $vGudang['gudang']; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <button class="btn btn-primary btn-sm">Save</button> 
-                                        <button class="btn btn-danger btn-sm">Discard</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>-->
                     <div class="col-lg-6">
                         <section class="panel default red_border vertical_border h1">
                             <div class="block-web">

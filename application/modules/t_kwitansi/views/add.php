@@ -64,7 +64,7 @@
                         <label class="col-sm-3 control-label">DP Ke</label>
                         <div class="col-sm-9">
                             <select name="transaksi" id="transaksi" class="form-control" parsley-trigger="change" required="true">
-                                
+
                             </select>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
             <div class="block-web">
                 <div class="form-group">
                     <button name="submit" id="simpan" class="btn btn-primary">Save</button>
-                    <a href="<?php echo base_url('kwitansi-dp');?>" name="cancel" id="cancel" class="btn btn-danger">Cancel</a>
+                    <a href="<?php echo base_url('kwitansi-dp'); ?>" name="cancel" id="cancel" class="btn btn-danger">Cancel</a>
                 </div>
             </div>
         </div>
@@ -144,7 +144,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        
+
         var bestPictures = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -164,40 +164,41 @@
             $('#noso').val(datum.noso);
             getDetailInfo(datum.id);
         });
-        
+
         $("#nominal").keyup(function () {
             if ($(this).val().trim().length == 0) {
                 $(this).val(0);
             }
             var nominal = $("#nominal").val().match(/\d/g);
             var sending = parseInt(nominal.join(""));
-        
+
             $.post("t_kwitansi/terbilang/", {nominal: sending}).done(function (data) {
                 $("#terbilang").text(data);
             });
-            
+
             var sisa_hutang = $("#sisa_hutang").val().match(/\d/g);
-            
+
             if ($(this).val().trim().length == 0) {
-                   $(this).val(0);
+                $(this).val(0);
             }
-            
+
             var sisa = parseInt(sisa_hutang.join("")) - parseInt(nominal.join(""));
             console.log(nominal);
             $("#sisa").val(sisa.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
         });
+
     });
-    
-    function getDetailInfo(id){
+
+    function getDetailInfo(id) {
         $.ajax({
             type: "POST",
             url: "<?php echo base_url('t_kwitansi/get_detail_so'); ?>",
             dataType: "json",
             data: {id: id},
             success: function (result) {
-                if(result.master_harga_motor[0].cara_pembelian === "Cash"){
+                if (result.master_harga_motor[0].cara_pembelian === "Cash") {
                     var sisaHutang = ((parseInt(result.master_motor[0].harga_otr) - parseInt(result.total_bayar.total)) - parseInt(result.master_harga_motor[0].diskon));
-                }else{
+                } else {
                     var sisaHutang = (parseInt(result.master_harga_motor[0].dp_system) - parseInt(result.total_bayar.total));
                 }
                 $('#harga_otr').val(numeral(result.master_motor[0].harga_otr).format('0,0'));

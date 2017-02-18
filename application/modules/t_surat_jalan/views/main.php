@@ -60,7 +60,7 @@
                             <tr>
                                 <td>#</td>
                                 <td>
-                                    <input class="form-control input-sm" name="nosj" class="form-control" value="<?php echo (isset($sr_data['nosj']) ? $sr_data['nosj'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="nosj" class="form-control" value="<?php echo (isset($sr_data['t_pdi.nosj']) ? $sr_data['t_pdi.nosj'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                     submit_search('form1');
                                                 } else {
                                                     return false;
@@ -76,7 +76,7 @@
                                                 ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="noso" value="<?php echo (isset($sr_data['noso']) ? $sr_data['noso'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="noso" value="<?php echo (isset($sr_data['t_pdi.noso']) ? $sr_data['t_pdi.noso'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                     submit_search('form1');
                                                 } else {
                                                     return false;
