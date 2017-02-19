@@ -34,14 +34,14 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Tanggal PDI</label>
                             <div class="col-sm-9">
-                                <input type="text" name="tgl_pdi" id="tgl_pdi" parsley-trigger="change" value="<?php echo date('Y-m-d'); ?>"   placeholder="Tanggal PDI" class="form-control datepicker">
+                                <input type="text" name="tgl_pdi" required="true" id="tgl_pdi" parsley-trigger="change" value="<?php echo date('Y-m-d'); ?>"   placeholder="Tanggal PDI" class="form-control datepicker">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-sm-3 control-label">PIC</label>
                             <div class="col-sm-9">
-                                <input type="text" name="pic" id="pic" parsley-trigger="change"     placeholder="Input PIC" class="form-control">
+                                <input type="text" name="pic" id="pic" parsley-trigger="change" required="true" placeholder="Input PIC" class="form-control">
                             </div>
                         </div>
                     </div>
