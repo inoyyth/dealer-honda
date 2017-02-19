@@ -56,12 +56,14 @@ class Rekap_tagihan extends MX_Controller {
         echo json_encode($data);
     }
 
-    public function detail($id) {
-        $this->breadcrumbs->push('Detail', '/kwitansi-fee-detail');
-        $data['detail'] = $this->t_kwitansi->get_detail_fee($id);
-        $data['view'] = 't_kwitansi/kwitansi_fee/detail';
-        $this->load->view('default', $data);
-    }
+    /*
+      public function detail($id) {
+      $this->breadcrumbs->push('Detail', '/kwitansi-fee-detail');
+      $data['detail'] = $this->t_kwitansi->get_detail_fee($id);
+      $data['view'] = 't_kwitansi/kwitansi_fee/detail';
+      $this->load->view('default', $data);
+      }
+     */
 
     public function printout() {
         //var_dump($_POST);
@@ -83,7 +85,7 @@ class Rekap_tagihan extends MX_Controller {
         $data['rkwitansi'] = $this->main_model->getMaster($this->table, $like = array(), $where = array('id' => $id));
         $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('kd_leasing' => $data['rkwitansi'][0]['kdleasing'], 'status_leasing' => '1'));
 
-        $data['rekap_detail'] = $this->main_model->getMaster('t_rekap_tagihan_detail', $like = array(), $where = array('nomor_tagihan' => $data['rkwitansi'][0]['no_tagihan']));
+        $data['rekap_detail'] = $this->main_model->getMaster('t_rekap_tagihan_detail', $like = array(), $where = array('nomor_tagihan' => $data['rkwitansi'][0]['no_tagihan'], 'status_rekap' => 1));
 
         $data['view'] = "leasing/rekap_tagihan/print-form-edit";
 
@@ -432,10 +434,32 @@ class Rekap_tagihan extends MX_Controller {
         //output to json format
         echo json_encode($output);
     }
-    
+
     public function print_rekap_tagihan() {
         $notagihan = $this->input->get('notagihan');
-        echo $notagihan;
+
+        $data['rkwitansi'] = $this->main_model->getMaster($this->table, $like = array(), $where = array('no_tagihan' => $notagihan));
+        $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('kd_leasing' => $data['rkwitansi'][0]['kdleasing'], 'status_leasing' => '1'));
+
+        $data['rekap_detail'] = $this->main_model->getMaster('t_rekap_tagihan_detail', $like = array(), $where = array('nomor_tagihan' => $data['rkwitansi'][0]['no_tagihan'], 'status_rekap' => 1));
+
+        $data['list_rekapan'] = $this->t_rekap->get_rekap_kwitansi_leasing($data['rkwitansi'][0]['no_tagihan'])->result_array();
+
+        $this->load->view('leasing/rekap_tagihan/print_rekap_tagihan', $data);
+    }
+
+    public function detail($id) {
+        $data['notagihan'] = '';
+        $this->breadcrumbs->push('Edit', '/rekap-tagihan-edit-' . $id);
+
+        $data['rkwitansi'] = $this->main_model->getMaster($this->table, $like = array(), $where = array('id' => $id));
+        $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('kd_leasing' => $data['rkwitansi'][0]['kdleasing'], 'status_leasing' => '1'));
+
+        $data['rekap_detail'] = $this->main_model->getMaster('t_rekap_tagihan_detail', $like = array(), $where = array('nomor_tagihan' => $data['rkwitansi'][0]['no_tagihan'], 'status_rekap' => 1));
+
+        $data['view'] = "leasing/" . $this->router->fetch_class() . "/print-form-edit";
+
+        $this->load->view('default', $data);
     }
 
     public function __getSession() {
