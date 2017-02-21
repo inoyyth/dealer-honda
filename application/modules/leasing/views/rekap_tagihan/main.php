@@ -21,7 +21,8 @@
                                 <th>Tgl. Tagihan</th>
                                 <th>Total Tagihan</th>
                                 <th>Leasing</th>
-                                <th class="text-center" style="width: 270px;">Action</th>
+                                <th>Cabang</th>
+                                <th class="text-center" style="width: 150px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,6 +38,7 @@
                                         <td><?php echo $v['tgl_tagihan']; ?></td>
                                         <td><?php echo formatrp($v['tot_tagihan']); ?></td>
                                         <td><?php echo $v['kdleasing']; ?></td>
+                                        <td><?php echo $v['cabang_leasing']; ?></td>
                                         <td class="text-center">
                                             <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'rekap-tagihan-edit-' . $v['id'], 'text' => 'Edit')); ?>
                                             <a href="<?php echo base_url('rekap-tagihan-detail-' . $v['id']); ?>" class="btn btn-success btn-sm"><i class="fa fa-info-circle"></i> Detail</a>

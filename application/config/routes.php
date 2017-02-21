@@ -414,6 +414,17 @@ $route['owner'] = 'md_owner_info';
 $route['owner-save'] = 'md_owner_info/save';
 /* End Owner Info*/
 
+/*
+ *  Pencairan Leasing Modules "leasing->Pencairan_leasing"
+ */
+$route['pencairan-leasing'] = 'leasing/pencairan_leasing/index';
+$route['pencairan-leasing-tambah'] = 'leasing/pencairan_leasing/form';
+$route['pencairan-leasing-edit-(:num)'] = 'leasing/pencairan_leasing/edit/$1';
+$route['pencairan-leasing-detail-(:num)'] = 'leasing/pencairan_leasing/detail/$1';
+/*
+ * End Pencairan Leasing
+ */
+
 /* Surat Pernyataan (covernote)*/
 $route['surat-pernyataan'] = 'leasing_covernote';
 $route['surat-pernyataan-save'] = 'leasing_covernote/save';

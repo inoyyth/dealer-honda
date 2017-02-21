@@ -78,30 +78,34 @@
                             </div>
 
                             <div class="col-sm-6">
-                                <label class="col-sm-12 control-label">Leasing</label>
-                                <div class="col-sm-12">
-                                    <input type="text" name="leasing" id="leasing" class="form-control" disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">Dealer</label>
                                 <div class="col-sm-12">
                                     <input type="text" name="nmdealer" id="nmdealer" class="form-control" value="PT. Mandala Kekar Abadi" disabled />
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="form-group">
                             <div class="col-sm-6">
-                                <label class="col-sm-12 control-label">Tanggal Tagihan</label>
+                                <label class="col-sm-12 control-label">Leasing</label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="tgl_tagihan" id="tgl_tagihan" parsley-trigger="change" class="form-control datepicker rtagihan">
+                                    <input type="text" name="leasing" id="leasing" class="form-control" disabled>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="col-sm-12 control-label">Tanggal Tagihan <sup style="color:red">(*)</sup></label>
+                                <div class="col-sm-12">
+                                    <input type="text" name="tgl_tagihan" id="tgl_tagihan" parsley-trigger="change" class="form-control datepicker rtagihan" required>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-6">
-                                <label class="col-sm-12 control-label"></label>
-                                <div class="col-sm-12"></div>
+                                <label class="col-sm-12 control-label">Cabang Leasing <sup style="color:red">(*)</sup></label>
+                                <div class="col-sm-12">
+                                    <input type="text" name="cabang_leasing" id="cabang_leasing" class="form-control" required />
+                                </div>
                             </div>
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">Sisa Tagihan</label>
@@ -158,7 +162,6 @@
     $(document).ready(function () {
         $("#listTagihan").click(function () {
             var dt = $(".frmrekap").serialize();
-
             $.ajax({
                 type: 'post',
                 url: 'leasing/rekap_tagihan/dt_leasing_json',
@@ -166,7 +169,6 @@
                 dataType: 'json',
                 success: function (hsl) {
                     $("#leasing").val(hsl.leasing.leasing);
-
                     $.getJSON("<?php echo base_url('leasing/rekap_tagihan/get_list_kwitansi?'); ?>" + dt, function (dtL) {
                         var gsisa = [];
                         gsisa = $.map(dtL.data, function (val, i) {
@@ -181,7 +183,6 @@
                             $("#sisa_tagihan").val(0);
                         }
                     });
-
                     table = $('#tblRekapTagihan').DataTable({
                         buttons: [
                             'selectAll',
@@ -229,13 +230,11 @@
             //console.log(data);
             //$(".idkwitansileasing").prop('checked', this.checked);
         });
-
         $("#generateTagihan").click(function () {
             var idkwitansi_leasing = $('.idkwitansileasing:checked').map(function () {
                 return this.value;
             }).get();
             var dtkwitansi = idkwitansi_leasing.join(",");
-
             $.ajax({
                 type: "get",
                 url: "<?php echo base_url('leasing/rekap_tagihan/get_rekap_tagihan?dt='); ?>",
@@ -248,14 +247,11 @@
                         var sisa = ss.split('.').join("");
                         return parseInt(sisa);
                     });
-
                     if (gsisa.length > 0) {
                         var tot_tagihan = gsisa.reduce((x, y) => x + y);
-
                         var sisa_tagihan = $("#sisa_tagihan").val();
                         sisa_tagihan = sisa_tagihan.split('.').join("");
                         var stagihan = parseInt(sisa_tagihan) - parseInt(tot_tagihan);
-
                         $("#tot_tagihan").val(formatCurrency(tot_tagihan));
                         $("#sisa_tagihan").val(formatCurrency(stagihan));
                     } else {
@@ -285,37 +281,46 @@
                     });
                 }
             });
-
             return false;
         });
-
         $(".cnokwitansi").change(function () {
             $(".idkwitansileasing").prop('checked', this.checked);
         })
 
         $("#saveTagihan").click(function () {
-            var saveTagihan = $(".rtagihan").serializeArray();
-            var kwitansileasing = [];
-            $.each($(".idkwitansileasing:checked"), function () {
-                kwitansileasing.push($(this).val());
-            });
-
-            var dt = {rtagihan: saveTagihan, kleasing: kwitansileasing}
-            $.ajax({
-                type: "POST",
-                url: "<?php echo base_url('leasing/rekap_tagihan/save'); ?>",
-                data: dt,
-                dataType: "json",
-                success: function (hsl) {
-                    if (hsl.status == "success") {
-                        alert(hsl.pesan)
-                        $("#saveTagihan, #generateTagihan, #listTagihan").attr('disabled', true);
-                    } else {
-                        alert(hsl.pesan);
+            var tgl_tagihan = $("#tgl_tagihan").val();
+            var cleasing = $("#cabang_leasing").val();
+            if (tgl_tagihan != "" && cleasing != "") {
+                var saveTagihan = $(".rtagihan").serializeArray();
+                var kwitansileasing = [];
+                $.each($(".idkwitansileasing:checked"), function () {
+                    kwitansileasing.push($(this).val());
+                });
+                var dt = {rtagihan: saveTagihan, kleasing: kwitansileasing}
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url('leasing/rekap_tagihan/save'); ?>",
+                    data: dt,
+                    dataType: "json",
+                    success: function (hsl) {
+                        if (hsl.status == "success") {
+                            alert(hsl.pesan)
+                            $("#saveTagihan, #generateTagihan, #listTagihan").attr('disabled', true);
+                        } else {
+                            alert(hsl.pesan);
+                        }
                     }
+                });
+
+                return false;
+            } else {
+                alert("Need fill data !");
+                if(cleasing == ""){
+                    $("#cabang_leasing").focus();
+                }else{
+                    $("#tgl_tagihan").focus();
                 }
-            });
-            return false;
+            }
         });
     })
 </script>
