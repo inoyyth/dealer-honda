@@ -25,8 +25,12 @@ class M_t_pleasing extends CI_Model {
     }
 
     public function get_leasing() {
-        $this->db->where('status_leasing', 1);
-        $query = $this->db->get('m_leasing');
+        $this->db->select("COUNT(t_rekap_tagihan.id) AS count_rekap, m_leasing.kd_leasing, m_leasing.leasing", false);
+        $this->db->from("m_leasing");
+        $this->db->join("t_rekap_tagihan", "t_rekap_tagihan.kdleasing=m_leasing.kd_leasing", "left outer");
+        $this->db->where('m_leasing.status_leasing', 1);
+        $this->db->group_by("m_leasing.kd_leasing");
+        $query = $this->db->get();
         return $query;
     }
 

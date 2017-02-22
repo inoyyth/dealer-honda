@@ -12,6 +12,7 @@
  * @author Langit-Biru
  */
 class Pencairan_leasing extends MX_Controller {
+
     //put your code here
     var $table = "t_rekap_tagihan";
 
@@ -23,33 +24,94 @@ class Pencairan_leasing extends MX_Controller {
         //set breadcrumb
         $this->breadcrumbs->push('Pencairan Leasing', '/pencairan-leasing');
     }
-    
-    public function index(){
+
+    public function index() {
         $data_session = $this->__getSession();
 
         $config['base_url'] = base_url() . 'pencairan-leasing';
         $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
         $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
         $config['uri_segment'] = 2;
-        
+
         $data['mleasing'] = $this->t_pleasing->get_leasing()->result();
-        
+
         $data['view'] = "leasing/pencairan_leasing/main";
         $this->load->view('default', $data);
     }
-    
-    public function form(){
+
+    function json_rlist() {
+        $searchField = isset($_GET['field']) ? $_GET['field'] : NULL;
+        $searchValue = isset($_GET['value']) ? $_GET['value'] : NULL;
+        $sort = $this->input->post('sort');
+
+        $kdleasing = $this->uri->segment(4);
+
+        if ($this->input->get('climit')) {
+            if ($this->input->get('climit') > 0) {
+                $lmt = $this->input->get('climit');
+            } else {
+                $lmt = 0;
+            }
+        } else {
+            $lmt = 10;
+        }
+
+        $boot['current'] = isset($_GET['cOffset']) > 0 ? $_GET['cOffset'] : 0;
+        $boot['rowCount'] = $lmt;
+
+        // Offset didapat setelah mendapat nilai dari $boot['current'] dan $lmt
+        $offset = ((int) $boot['current']);
+
+        $this->db->select('m_leasing.kd_leasing, m_leasing.leasing, COUNT(t_rekap_tagihan_detail.nomor_tagihan) AS jml_motor, t_rekap_tagihan.*, (t_rekap_tagihan.tot_tagihan + t_rekap_tagihan.sisa_tagihan) as total_tagihan', false);
+        $this->db->from('m_leasing');
+        $this->db->join('t_rekap_tagihan', 't_rekap_tagihan.kdleasing = m_leasing.kd_leasing', 'left outer');
+        $this->db->join('t_rekap_tagihan_detail', 't_rekap_tagihan_detail.nomor_tagihan=t_rekap_tagihan.no_tagihan', 'left outer');
+        $this->db->where('m_leasing.status_leasing', 1);
+        $this->db->where('t_rekap_tagihan.kdleasing', $kdleasing);
+
+        if ($searchField <> NULL and $searchField <> "" and $searchField <> "all") {
+            switch ($searchField) {
+                case 'total_tagihan':
+                    $this->db->having('total_tagihan', $searchValue);
+                    break;
+                case 'jml_motor':
+                    $this->db->having('jml_motor', $searchValue);
+                    break;
+                default:
+                    $this->db->like('t_rekap_tagihan.' . $searchField, $searchValue);
+                    break;
+            }
+        }
+
+        $this->db->limit($lmt);
+        $this->db->offset($offset);
+
+        if ($sort <> NULL) {
+            $this->db->order_by($sort);
+        } else {
+            $this->db->order_by('t_rekap_tagihan.id', 'desc');
+        }
+
+        $query = $this->db->get();
+
+        $boot['rows'] = $query->result();
+        $boot['total'] = $query->num_rows();
+
+        echo json_encode($boot);
+    }
+
+    public function form() {
         
     }
-    
-    public function edit(){
+
+    public function edit() {
         
     }
-    
-    public function detail(){
+
+    public function detail() {
         
     }
-    
+
     public function __getSession() {
         if ($_POST) {
             return $data = array(
@@ -94,4 +156,5 @@ class Pencairan_leasing extends MX_Controller {
         $data['list'] = $this->rekap_tagihan->getdata($this->table, 0, 1000, $like = array(), $where = array('status_gudang!=' => '3'));
         $this->load->view('template_excel', $data);
     }
+
 }

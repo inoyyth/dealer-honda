@@ -16,6 +16,7 @@
     <script src="<?php echo base_url();?>themes/js/jquery-2.1.0.js"></script>
     <script src="<?php echo base_url();?>themes/js/jquery.form.js"></script>
     
+    <script src="<?php echo base_url();?>assets/js/saptable.0.3.js" type="text/javascript"></script>
     <script src="<?php echo base_url();?>assets/js/jstools.js"></script>
     
 </head>
