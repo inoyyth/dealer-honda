@@ -100,16 +100,114 @@ class Pencairan_leasing extends MX_Controller {
         echo json_encode($boot);
     }
 
-    public function form() {
-        
+    public function lists($id) {
+        $data['notagihan'] = '';
+        $this->breadcrumbs->push('List', '/pencairan-leasing-list-' . $id);
+
+        $data['rekap_tagihan'] = $this->main_model->getMaster($this->table, $like = array(), $where = array('id' => $id));
+
+        $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('kd_leasing' => $data['rekap_tagihan'][0]['kdleasing'], 'status_leasing' => '1'));
+
+        $data['rekap_detail'] = $this->main_model->getMaster('t_rekap_tagihan_detail', $like = array(), $where = array('nomor_tagihan' => $data['rekap_tagihan'][0]['no_tagihan'], 'status_rekap' => 1));
+
+        $data['view'] = "leasing/pencairan_leasing/list";
+        $this->load->view('default', $data);
     }
 
-    public function edit() {
-        
+    public function jlist() {
+        $searchField = isset($_GET['field']) ? $_GET['field'] : NULL;
+        $searchValue = isset($_GET['value']) ? $_GET['value'] : NULL;
+        $sort = $this->input->post('sort');
+
+        $no_tagihan = $this->uri->segment(4);
+        $no_tagihan = str_replace("_", "/", $no_tagihan);
+
+        if ($this->input->get('climit')) {
+            if ($this->input->get('climit') > 0) {
+                $lmt = $this->input->get('climit');
+            } else {
+                $lmt = 0;
+            }
+        } else {
+            $lmt = 10;
+        }
+
+        $boot['current'] = isset($_GET['cOffset']) > 0 ? $_GET['cOffset'] : 0;
+        $boot['rowCount'] = $lmt;
+
+        // Offset didapat setelah mendapat nilai dari $boot['current'] dan $lmt
+        $offset = ((int) $boot['current']);
+
+        $this->db->select('t_rekap_tagihan_detail.id_kwitansi,t_rekap_tagihan_detail.nomor_tagihan,t_rekap_tagihan_detail.status_rekap,t_kwitansi_leasing.nokwitansi,t_kwitansi_leasing.noso,t_kwitansi_leasing.dp_system,t_kwitansi_leasing.tagih,t_kwitansi_leasing.subsidi1,t_kwitansi_leasing.subsidi2,t_penjualan.nosj,t_penjualan.nokonsumen,t_penjualan.ktp,t_penjualan.tanggal,t_penjualan.nomsn,t_penjualan.warna_motor,t_penjualan.harga_otr,t_penjualan.status_kwitansi,penerimaan_motor.nopolisi,penerimaan_motor.norangka,penerimaan_motor.tipe,penerimaan_motor.warna,penerimaan_motor.tahun,penerimaan_motor.kdgudang,penerimaan_motor.tglupload,penerimaan_motor.status_jual,t_harga_motor.cara_pembelian,t_harga_motor.marketing,t_harga_motor.leasing,t_harga_motor.dp_system,t_harga_motor.diskon,t_harga_motor.tagih,t_harga_motor.dp,t_harga_motor.sisa_hutang,t_harga_motor.dp_lunas,t_harga_motor.fee,m_customer.nama_customer,m_customer.tempat_lahir_customer,m_customer.tanggal_lahir_customer,m_customer.kelamin_customer,m_customer.alamat_customer,m_customer.telepon_customer,m_customer.handphone_customer,m_customer.rt,m_customer.rw,m_customer.wilayah,m_customer.kelurahan,m_customer.kecamatan,m_motor.nama_motor,m_motor.varian,m_motor.merk,m_motor.harga_otr,m_motor.nama_foto,m_motor.url_foto', false);
+        $this->db->from('t_rekap_tagihan_detail');
+        $this->db->join('t_kwitansi_leasing', 't_kwitansi_leasing.id = t_rekap_tagihan_detail.id_kwitansi', 'left');
+        $this->db->join('t_penjualan', 't_penjualan.noso = t_kwitansi_leasing.noso', 'left');
+        $this->db->join('penerimaan_motor', 'penerimaan_motor.nomesin = t_penjualan.nomsn', 'left');
+        $this->db->join('t_harga_motor', 't_harga_motor.noso = t_penjualan.noso', 'left');
+        $this->db->join('m_customer', 'm_customer.no_ktp=t_penjualan.ktp', 'left');
+        $this->db->join('m_motor', 'm_motor.tipe_motor=penerimaan_motor.tipe', 'left');
+
+        $this->db->where('t_rekap_tagihan_detail.nomor_tagihan', $no_tagihan);
+
+        if ($searchField <> NULL and $searchField <> "" and $searchField <> "all") {
+            switch ($searchField) {
+                case 'tanggal':
+                case 'nomsn':
+                    if ($searchValue <> NULL || $searchValue <> "")
+                        $this->db->like('t_penjualan.' . $searchField, $searchValue);
+                    break;
+                case 'nokwitansi':
+                    if ($searchValue <> NULL || $searchValue <> "")
+                        $this->db->like('t_kwitansi_leasing.' . $searchField, $searchValue);
+                    break;
+                case 'nama_customer':
+                    if ($searchValue <> NULL || $searchValue <> "")
+                        $this->db->like('m_customer.' . $searchField, $searchValue);
+                    break;
+                case 'tipe':
+                case 'norangka':
+                    if ($searchValue <> NULL || $searchValue <> "")
+                        $this->db->like('penerimaan_motor.' . $searchField, $searchValue);
+                    break;
+                case 'harga_otr':
+                    if ($searchValue <> NULL || $searchValue <> "")
+                        $this->db->like('m_motor.' . $searchField, $searchValue);
+                    break;
+                case 'dp':
+                    if ($searchValue <> NULL || $searchValue <> "")
+                        $this->db->like('t_harga_motor.' . $searchField, $searchValue);
+                    break;
+                case 'subsidi':
+                    if ($searchValue <> NULL || $searchValue <> "")
+                        $this->db->like('t_kwitansi_leasing.subsidi1 + t_kwitansi_leasing.subsidi2', $searchValue);
+                    break;
+                case 'sisa':
+                    if ($searchValue <> NULL || $searchValue <> "")
+                        $this->db->like('(m_motor.harga_otr - t_harga_motor.dp) + (t_kwitansi_leasing.subsidi1 + t_kwitansi_leasing.subsidi2)', $searchValue);
+                    break;
+            }
+        }
+
+        $this->db->limit($lmt);
+        $this->db->offset($offset);
+
+        if ($sort <> NULL) {
+            $this->db->order_by($sort);
+        } else {
+            $this->db->order_by('t_rekap_tagihan_detail.id', 'desc');
+        }
+
+        $query = $this->db->get();
+
+        $boot['rows'] = $query->result();
+        $boot['total'] = $query->num_rows();
+
+        echo json_encode($boot);
     }
 
-    public function detail() {
-        
+    public function view() {
+        $id = $this->uri->segment(4);
+        echo $id;
     }
 
     public function __getSession() {

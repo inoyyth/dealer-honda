@@ -33,5 +33,7 @@ class M_t_pleasing extends CI_Model {
         $query = $this->db->get();
         return $query;
     }
+    
+    
 
 }

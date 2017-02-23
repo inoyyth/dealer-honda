@@ -13,18 +13,18 @@
         options = $.extend({}, $.fn.sapTable.defaultOptions, options);
 
         $(this).each(function (nmr, vle) {
-//console.log(vle.id);
+
             idElement = ($(this).attr('id'));
             var url = options.url;
             formatters = options.formatters;
             cSearch = options.cSearch;
-            //console.log(idElement);
+
             var table = $("#" + idElement).addClass('sapTable');
             var tbody = $('#' + idElement + ' tbody');
             var row = '';
             var kolom = $("#" + idElement).getColumn(idElement);
             $.getJSON(url, function (data) {
-                //console.log(data);
+
                 for (index = 0; index < data.rows.length; ++index) {
                     rows = data.rows[index];
                     row = $('<tr></tr>');
@@ -298,10 +298,12 @@
     };
     $.fn.showPagination = function (allRows, idElem, url) {
         $("." + idElem + "_paging").remove();
+        
         var pagHtml = '<div class="col-md-6 col-xs-12 pull-right text-right ' + idElem + '_paging">';
         pagHtml += '</div>';
         $(pagHtml).insertAfter("#" + idElem);
-        $.fn.pagination({
+        
+        this.pagination({
             itemsPerPage: allRows.rowCount,
             itemsToPaginate: allRows.total,
             paginationContainer: '.' + idElem + '_paging',
@@ -309,19 +311,20 @@
             url: url
         });
     };
-    $.fn.pagination = function (options) {
+    $.fn.pagination = function (optionsPaginate) {
         var paginationContainer;
         var itemsToPaginate = this;
         var defaults = {
             itemsPerPage: 5
         };
+
         var options = {};
-        $.extend(options, defaults, options);
+        $.extend(options, defaults, optionsPaginate);
         var itemsPerPage = options.itemsPerPage;
         paginationContainer = $(options.paginationContainer);
         itemsToPaginate = $(options.itemsToPaginate);
         var numberOfPaginationLinks = Math.ceil(parseInt(itemsToPaginate[0]) / parseInt(itemsPerPage));
-        //console.log(itemsPerPage);
+        //console.log(options);
 
         $("<ul class='pagination'></ul>").prependTo(paginationContainer);
         for (var index = 0; index < numberOfPaginationLinks; index++) {
