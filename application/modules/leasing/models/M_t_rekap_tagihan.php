@@ -146,7 +146,7 @@ class M_t_rekap_tagihan extends CI_Model {
     }
 
     function get_rkwitansi_detail($idkwitansi) {
-        $this->db->select('a.id, a.id_kwitansi, a.nomor_tagihan, b.nokwitansi,b.noso, c.harga_otr,((c.harga_otr - d.dp) + (b.subsidi1 + b.subsidi2)) as sisa_tagihan', false);
+        $this->db->select('a.id, a.id_kwitansi, a.nomor_tagihan, b.nokwitansi,b.noso, c.harga_otr,((c.harga_otr) - (d.dp + b.subsidi1 + b.subsidi2)) as sisa_tagihan', false);
         $this->db->from('t_rekap_tagihan_detail a');
         $this->db->join('t_kwitansi_leasing b', 'b.id=a.id_kwitansi', 'left');
         $this->db->join('t_penjualan c', 'c.noso=b.noso', 'left');

@@ -179,11 +179,11 @@ class Pencairan_leasing extends MX_Controller {
                     break;
                 case 'subsidi':
                     if ($searchValue <> NULL || $searchValue <> "")
-                        $this->db->like('t_kwitansi_leasing.subsidi1 + t_kwitansi_leasing.subsidi2', $searchValue);
+                        $this->db->like('(t_kwitansi_leasing.subsidi1 + t_kwitansi_leasing.subsidi2)', $searchValue);
                     break;
                 case 'sisa':
                     if ($searchValue <> NULL || $searchValue <> "")
-                        $this->db->like('(m_motor.harga_otr - t_harga_motor.dp) + (t_kwitansi_leasing.subsidi1 + t_kwitansi_leasing.subsidi2)', $searchValue);
+                        $this->db->like('((m_motor.harga_otr) - (t_harga_motor.dp + t_kwitansi_leasing.subsidi1 + t_kwitansi_leasing.subsidi2))', $searchValue);
                     break;
             }
         }
@@ -203,6 +203,12 @@ class Pencairan_leasing extends MX_Controller {
         $boot['total'] = $query->num_rows();
 
         echo json_encode($boot);
+    }
+
+    public function save() {
+        $post = $this->input->post();
+
+        echo json_encode(array('status' => 'success', 'pesan' => $post));
     }
 
     public function view() {

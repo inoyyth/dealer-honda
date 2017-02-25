@@ -140,7 +140,7 @@ class Rekap_tagihan extends MX_Controller {
             $row[] = formatrp($result->harga_otr);
             $row[] = formatrp($result->dp);
             $row[] = formatrp($result->subsidi1 + $result->subsidi2);
-            $row[] = formatrp(($result->harga_otr - $result->dp) + ($result->subsidi1 + $result->subsidi2));
+            $row[] = formatrp(($result->harga_otr) - ($result->dp + $result->subsidi1 + $result->subsidi2));
             $row[] = $result->varian;
 
             $data[] = $row;
@@ -216,6 +216,10 @@ class Rekap_tagihan extends MX_Controller {
                 if ($rtagihan['name'] == "sisa_tagihan" || $rtagihan['name'] == "tot_tagihan") {
                     $value = explode(".", $rtagihan['value']);
                     $input[$rtagihan['name']] = (double) implode("", $value);
+                }else{
+                    if($rtagihan['name'] == "cabang_leasing"){
+                        $input[$rtagihan['name']] = $rtagihan['value'];
+                    }
                 }
             }
             $input['sys_update_user'] = $dtsession['id'];
@@ -416,7 +420,7 @@ class Rekap_tagihan extends MX_Controller {
             $row[] = formatrp($result->harga_otr);
             $row[] = formatrp($result->dp);
             $row[] = formatrp($result->subsidi1 + $result->subsidi2);
-            $row[] = formatrp(($result->harga_otr - $result->dp) + ($result->subsidi1 + $result->subsidi2));
+            $row[] = formatrp(($result->harga_otr) - ($result->dp + $result->subsidi1 + $result->subsidi2));
             $row[] = $result->varian;
 
             $data[] = $row;

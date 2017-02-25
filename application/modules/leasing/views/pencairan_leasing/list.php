@@ -22,9 +22,9 @@
                                 if ($this->router->fetch_method() <> "detail") {
                                     ?>
                                     <button type="button" name="generate" id="generateTagihan" class="btn btn-danger">  Generate </button>
-                                    <button type="button" name="save" id="saveTagihan" class="btn btn-primary"> Save </button>
+                                    <button type="button" name="save" id="saveTagihan" class="btn btn-primary" disabled> Save </button>
                                 <?php } ?>
-                                <button type="button" name="print" id="printTagihan" class="btn btn-default">
+                                <button type="button" name="print" id="printTagihan" class="btn btn-default" disabled>
                                     <i class="glyphicon glyphicon-print"></i> Print 
                                 </button>
 
@@ -52,13 +52,13 @@
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">Tanggal Tagihan</label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="tgl_tagihan" id="tgl_tagihan" parsley-trigger="change" class="form-control pleasing" value="<?= date('Y-m-d', strtotime($rekap_tagihan[0]['tgl_tagihan'])); ?>" readonly />
+                                    <input type="text" name="tgl_tagihan" id="tgl_tagihan" parsley-trigger="change" class="form-control pleasing rtagihan" value="<?= date('Y-m-d', strtotime($rekap_tagihan[0]['tgl_tagihan'])); ?>" readonly />
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">Tanggal Pencairan</label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="tgl_pencairan" id="tgl_pencairan" parsley-trigger="change" class="form-control pleasing">
+                                    <input type="text" name="tgl_pencairan" id="tgl_pencairan" parsley-trigger="change" class="form-control pleasing datepicker rtagihan">
                                 </div>
                             </div>
                         </div>
@@ -66,13 +66,13 @@
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">Cabang Leasing <sup style="color:red">(*)</sup></label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="cabang_leasing" id="cabang_leasing" class="form-control pleasing" value="<?= $rekap_tagihan[0]['cabang_leasing']; ?>" readonly />
+                                    <input type="text" name="cabang_leasing" id="cabang_leasing" class="form-control pleasing rtagihan" value="<?= $rekap_tagihan[0]['cabang_leasing']; ?>" readonly />
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">No. Bukti Potongan</label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="no_bukti_potong" id="no_bukti_potong" value="" class="form-control pleasing" value="0" />
+                                    <input type="text" name="no_bukti_potong" id="no_bukti_potong" value="" class="form-control pleasing rtagihan" value="0" />
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                                     <th data-options="tdp">DP</th>
                                     <th data-options="subsidi">Subsidi</th>
                                     <th data-options="sisa">Sisa</th>
-                                    <th data-options="tgl_cair">Tanggal Pencairan</th>
+                                    <th data-options="tgl_cair">Tanggal Pencairan <sup style="color:red">(*)</sup></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -161,27 +161,27 @@
                 },
                 formatters: {
                     "tdp": function () {
-                        var dp = formatCurrency(rows.dp);
+                        var dp = formatCurrency(parseInt(rows.dp));
                         return dp;
                     },
                     "tharga_otr": function () {
-                        var harga_otr = formatCurrency(rows.harga_otr);
+                        var harga_otr = formatCurrency(parseInt(rows.harga_otr));
                         return harga_otr;
                     },
                     "subsidi": function () {
-                        var subsidiHarga = rows.subsidi1 + rows.subsidi2
+                        var subsidiHarga = parseInt(rows.subsidi1) + parseInt(rows.subsidi2);
                         return formatCurrency(subsidiHarga);
                     },
                     "sisa": function () {
-                        var sisaTagihan = (parseInt(rows.harga_otr) - parseInt(rows.dp)) + (parseInt(rows.subsidi1) + parseInt(rows.subsidi2));
+                        var sisaTagihan = (parseInt(rows.harga_otr)) - (parseInt(rows.dp) + parseInt(rows.subsidi1) + parseInt(rows.subsidi2));
                         return formatCurrency(sisaTagihan);
                     },
                     "checkbok": function () {
-                        var checkb = "<span align='center'><input type='checkbox' class='idkwitansileasing' value='" + rows.id_kwitansi + "' /></span>";
+                        var checkb = "<span align='center'><input type='checkbox' id='idkwitansi_" + rows.id_kwitansi + "' class='idkwitansileasing dkwitansi' value='" + rows.id_kwitansi + "' /></span>";
                         return checkb;
                     },
                     "tgl_cair": function () {
-                        var tglCair = "<input type='text' name='tglcair_" + rows.id_kwitansi + "' id='tglcair_" + rows.id_kwitansi + "' class='form-control' />";
+                        var tglCair = "<input type='text' name='tglcair_" + rows.id_kwitansi + "' id='tglcair_" + rows.id_kwitansi + "' parsley-trigger='change' class='form-control datepicker dkwitansi' placeholder='yyyy-mm-dd' />";
                         return tglCair;
                     }
                 }
@@ -195,17 +195,18 @@
                 return this.value;
             }).get();
             var dtkwitansi = idkwitansi_leasing.join(",");
+
             var idkwitansi_leasing_uncheck = $('.idkwitansileasing:not(:checked)').map(function () {
                 return this.value;
             }).get();
             var dtkwitansi_uncheck = idkwitansi_leasing_uncheck.join(",");
+
             $.ajax({
                 type: "get",
                 url: "<?php echo base_url('leasing/rekap_tagihan/get_rekap_tagihan_edit'); ?>",
                 data: {dt: dtkwitansi, dtuncheck: dtkwitansi_uncheck},
                 dataType: "json",
                 success: function (hsl) {
-
                     var gsisa = [];
                     gsisa = $.map(hsl.data, function (val, i) {
                         var ss = val[11];
@@ -217,19 +218,27 @@
                         return parseInt(val.sisa_tagihan);
                     })
 
+                    var sisaTagihan = 0;
                     if (sisa.length > 0) {
-                        var sisaTagihan = sisa.reduce((x, y) => x + y);
+                        sisaTagihan = sisa.reduce((x, y) => x + y);
                         $("#sisa_tagihan").val(formatCurrency(sisaTagihan));
                     } else {
                         $("#sisa_tagihan").val(0);
                     }
 
+                    var tot_pencairan = 0;
                     if (gsisa.length > 0) {
-                        var tot_tagihan = gsisa.reduce((x, y) => x + y);
-                        $("#tot_tagihan").val(formatCurrency(tot_tagihan));
+                        tot_pencairan = gsisa.reduce((x, y) => x + y);
+                        $("#tot_pencairan").val(formatCurrency(tot_pencairan));
                     } else {
-                        $("#tot_tagihan").val(0);
+                        $("#tot_pencairan").val(0);
                     }
+
+                    var tot_tagihan = sisaTagihan + tot_pencairan;
+                    $("#tot_tagihan").val(formatCurrency(tot_tagihan));
+                    
+                    $("#saveTagihan").removeAttr('disabled');
+                    $("#generateTagihan").attr('disabled',true);
                 }
             });
             return false;
@@ -239,37 +248,44 @@
             $(".idkwitansileasing").prop('checked', this.checked);
         })
 
-        $(".idkwitansileasing").change(function () {
-            var id = $(this + ":checked").val();
-            alert(id);
-        });
-
         $("#saveTagihan").click(function () {
             var saveTagihan = $(".rtagihan").serializeArray();
+
             var kwitansileasing = [];
             $.each($(".idkwitansileasing:checked"), function () {
-                kwitansileasing.push($(this).val());
+                var data = [
+                    {
+                        name: "id_kwitansi",
+                        value: $(this).val()
+                    },
+                    {
+                        name: "tgl_pencairan",
+                        value: $("#tglcair_" + $(this).val()).val()
+                    }
+                ];
+                kwitansileasing.push(data);
             });
-            var kwitansileasinguncheck = [];
-            $.each($(".idkwitansileasing:not(:checked)"), function () {
-                kwitansileasinguncheck.push($(this).val());
-            });
-            var dt = {rtagihan: saveTagihan, kleasinguncheck: kwitansileasinguncheck, kleasing: kwitansileasing}
+
+            var dt = {rtagihan: saveTagihan, kleasing: kwitansileasing}
+
             $.ajax({
                 type: "POST",
-                url: "<?php echo base_url('leasing/rekap_tagihan/update'); ?>",
+                url: "<?php echo base_url('leasing/pencairan_leasing/save'); ?>",
                 data: dt,
                 dataType: "json",
                 success: function (hsl) {
                     if (hsl.status == "success") {
-                        alert(hsl.pesan)
-                        $("#saveTagihan, #generateTagihan").attr('disabled', true);
+                        console.log(hsl.pesan)
+                        //$("#saveTagihan, #generateTagihan").attr('disabled', true);
+                        $("#printTagihan").removeAttr('disabled');
+                        $("#generateTagihan").attr('disabled',true);
                     } else {
                         alert(hsl.pesan);
                     }
                 }
             });
             return false;
+            
         });
 
         $("#printTagihan").click(function () {
