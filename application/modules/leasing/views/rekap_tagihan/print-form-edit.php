@@ -68,7 +68,7 @@
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">Cabang Leasing <sup style="color:red">(*)</sup></label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="cabang_leasing" id="cabang_leasing" class="form-control" required />
+                                    <input type="text" name="cabang_leasing" id="cabang_leasing" class="form-control rtagihan" required />
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -244,7 +244,7 @@
             $.each($(".idkwitansileasing:not(:checked)"), function () {
                 kwitansileasinguncheck.push($(this).val());
             });
-
+            
             var dt = {rtagihan: saveTagihan, kleasinguncheck: kwitansileasinguncheck, kleasing: kwitansileasing}
             $.ajax({
                 type: "POST",
@@ -261,6 +261,7 @@
                 }
             });
             return false;
+            
         });
 
 

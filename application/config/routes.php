@@ -418,8 +418,8 @@ $route['owner-save'] = 'md_owner_info/save';
  *  Pencairan Leasing Modules "leasing->Pencairan_leasing"
  */
 $route['pencairan-leasing'] = 'leasing/pencairan_leasing/index';
-$route['pencairan-leasing-tambah'] = 'leasing/pencairan_leasing/form';
-$route['pencairan-leasing-edit-(:num)'] = 'leasing/pencairan_leasing/edit/$1';
+$route['pencairan-leasing-list-(:num)'] = 'leasing/pencairan_leasing/lists/$1';
+$route['pencairan-leasing-view-(:num)'] = 'leasing/pencairan_leasing/view/$1';
 $route['pencairan-leasing-detail-(:num)'] = 'leasing/pencairan_leasing/detail/$1';
 /*
  * End Pencairan Leasing

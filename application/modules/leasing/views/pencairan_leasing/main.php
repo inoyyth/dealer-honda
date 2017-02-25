@@ -35,11 +35,11 @@
                                             <table class="display table table-bordered table-striped table-responsive cf" id="rlist_' . $no . '">
                                                 <thead class="cf">
                                                     <tr>
-                                                        <th data-options="no_tagihan" style="width:10%;">No. Rekapan</th>
+                                                        <th data-options="no_tagihan" style="width:10%;">No. Tagihan</th>
                                                         <th data-options="jml_motor" style="width:10%;">Jumlah Motor</th>
-                                                        <th data-options="total_tagihan" style="width:10%;">Jumlah Tagihan</th>
-                                                        <th data-options="tot_tagihan" style="width:10%;">Jumlah Sudah Dibayar</th>
-                                                        <th data-options="sisa_tagihan" style="width:10%;">Jumlah Outstanding</th>
+                                                        <th data-options="total_ptagihan" style="width:10%;">Jumlah Tagihan</th>
+                                                        <th data-options="tot_ptagihan" style="width:10%;">Jumlah Sudah Dibayar</th>
+                                                        <th data-options="sisa_ptagihan" style="width:10%;">Jumlah Outstanding</th>
                                                         <th data-options="aksi" style="width:10%;">Action</th>
                                                     </tr>
                                                 </thead>
@@ -66,9 +66,21 @@
                 \'sisa_tagihan\': \'Jumlah Outstanding\'
             },
             formatters: {
+                "total_ptagihan" : function(){
+                    var total_tagihan = formatCurrency(rows.total_tagihan);
+                    return total_tagihan;
+                },
+                "tot_ptagihan" : function(){
+                    var total_tagihan = formatCurrency(rows.tot_tagihan);
+                    return total_tagihan;
+                },
+                "sisa_ptagihan" : function(){
+                    var sisa_tagihan = formatCurrency(rows.sisa_tagihan);
+                    return sisa_tagihan;
+                },
                 "aksi": function () {
-                    var buton = "<a href=\'" + base_url + "pencairan_leasing/list_pencairan_leasing/" + rows . id + "\' class=\'btn btn-info btn-xs\' title=\'List Tagihan\'><i class=\'fa fa-bars\'></i> </a>";
-                    buton += " <a href=\'" + base_url + "pencairan_leasing/view_pencairan_leasing/" + rows . id + "\' class=\'btn btn-danger btn-xs\' title=\'View Tagihan\'><i class=\'fa fa-eye\'></i> </a>";
+                    var buton = "<a href=\'" + base_url + "pencairan-leasing-list-" + rows . id + "\' class=\'btn btn-info btn-xs\' title=\'List Tagihan\'><i class=\'fa fa-bars\'></i> </a>";
+                    buton += " <a href=\'" + base_url + "pencairan-leasing-view-" + rows . id + "\' class=\'btn btn-danger btn-xs\' title=\'View Tagihan\'><i class=\'fa fa-eye\'></i> </a>";
                     return buton;
                 }
             }
