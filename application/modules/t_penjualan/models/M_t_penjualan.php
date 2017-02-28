@@ -117,9 +117,10 @@ Class M_t_penjualan extends CI_Model {
 
     public function getdata($table, $limit, $pg, $like = array(), $where = array()) {
         unset($like['page']);
-        $this->db->select($table.".*,penerimaan_motor.tipe");
+        $this->db->select($table.".*,penerimaan_motor.tipe,t_harga_motor.cara_pembelian");
         $this->db->from($table);
         $this->db->join('penerimaan_motor',$table.".nomsn=penerimaan_motor.nomesin");
+        $this->db->join('t_harga_motor',$table.".noso=t_harga_motor.noso");
         $this->db->like($like);
         $this->db->where($where);
         $this->db->limit($pg, $limit);

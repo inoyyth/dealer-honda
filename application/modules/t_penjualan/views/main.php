@@ -60,7 +60,7 @@
                                         <td class="text-center">
                                             <?php if($v['m_status']==1) { ?>
                                                 <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'penjualan-edit-' . $v['id'], 'text' => 'Edit')); ?>
-                                                <a href="<?php echo base_url('penjualan-edit-' . $v['id']); ?>" class="btn btn-success btn-sm"><i class="fa fa-info-circle"></i> Detail</a>
+                                                <a href="<?php echo base_url('penjualan-detail-' . $v['id']); ?>" class="btn btn-success btn-sm"><i class="fa fa-info-circle"></i> Detail</a>
                                                 <a href="<?php echo base_url('penjualan-fee-' . $v['id']); ?>" class="btn btn-default btn-sm feeBtn" target="_blank"><i class="fa fa-print"></i> Fee</a> 
                                                 <a href="<?php echo base_url('penjualan-diskon-' . $v['id']); ?>" class="btn btn-default btn-sm diskonBtn" target="_blank"><i class="fa fa-print"></i> Disc</a>
                                             <?php } ?>

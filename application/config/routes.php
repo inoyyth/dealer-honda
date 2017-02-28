@@ -190,6 +190,7 @@ $route['penjualan-excel'] = 't_penjualan/print_excel';
 $route['penjualan-excel/(:any)'] = 't_penjualan/print_excel/$1';
 $route['penjualan-fee-(:any)'] = 't_penjualan/print_fee/$1';
 $route['penjualan-diskon-(:any)'] = 't_penjualan/print_diskon/$1';
+$route['penjualan-detail-print-(:any)'] = 't_penjualan/detail_print/$1';
 
 /* Start Kwitansi */
 $route['kwitansi-dp'] = 't_kwitansi';

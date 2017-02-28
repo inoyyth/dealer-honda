@@ -51,6 +51,20 @@ class T_penjualan extends MX_Controller {
         $data['view'] = 't_penjualan/edit';
         $this->load->view('default', $data);
     }
+    
+    public function detail($id) {
+        $this->breadcrumbs->push('Detail', '/penjualan-detail');
+        $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
+        $data['detail_penjualan'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
+        $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
+        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();
+        $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
+        $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
+        $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
+        //dump($data,true);
+        $data['view'] = 't_penjualan/detail';
+        $this->load->view('default', $data);
+    }
 
     function delete($id) {
         $this->main_model->delete('t_penjualan', array('id' => $id), array('status_gudang' => '3'));
@@ -92,14 +106,14 @@ class T_penjualan extends MX_Controller {
 
     public function print_pdf() {
         $data['template'] = array("template" => "t_penjualan/" . $_GET['template'], "filename" => $_GET['name']);
-        $data['list'] = $this->t_penjualan->getdata($this->table, 0, 1000, $like = array(), $where = array('status_gudang!=' => '3'));
+        $data['list'] = $this->t_penjualan->getdata($this->table, 0, 1000, $like = array(), $where = array());
         $this->printpdf->create_pdf($data);
     }
 
     public function print_excel() {
         $data['template_excel'] = "t_penjualan/" . $_GET['template'];
         $data['file_name'] = $_GET['name'];
-        $data['list'] = $this->t_penjualan->getdata($this->table, 0, 1000, $like = array(), $where = array('status_gudang!=' => '3'));
+        $data['list'] = $this->t_penjualan->getdata($this->table, 0, 1000, $like = array(), $where = array());
         $this->load->view('template_excel', $data);
     }
 
@@ -220,6 +234,10 @@ class T_penjualan extends MX_Controller {
         $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
         //$this->printpdf->create_pdf($data);
         $this->load->view('t_penjualan/print_diskon',$data);
+    }
+    
+    public function detail_print($noso){
+        echo"ada";
     }
 
 }
