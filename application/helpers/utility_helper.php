@@ -332,3 +332,71 @@ if (!function_exists('validate_date')) {
     }
 
 }
+
+// CHeck array from post
+if (!function_exists('array_from_post')) {
+
+    function array_from_post($fields, $prefix = "") {
+        $ci = & get_instance();
+        $data = array();
+        foreach ($fields as $field) {
+            $data[$prefix . "" . $field] = $ci->input->post($field);
+        }
+        return $data;
+    }
+
+}
+
+// CHeck array from post
+if (!function_exists('assoc_from_post')) {
+
+    function assoc_from_post($fields, $prefix = "") {
+        $data = array();
+        foreach ($fields as $key => $value) {
+            if ($key <> 'id')
+                $data[$prefix . "" . $key] = $value;
+        }
+        return $data;
+    }
+
+}
+
+// check object from post
+if (!function_exists('object_for_save')) {
+
+    function object_for_save($data) {
+        $result = array();
+        foreach ($data as $dt) {
+            if ($dt['name'] <> 'id')
+                $result[$dt['name']] = $dt['value'];
+        }
+        return $result;
+    }
+
+}
+
+// CHeck array from post
+if (!function_exists('object_to_array')) {
+
+    function object_to_array($fields, $prefix = "") {
+        $data = array();
+        foreach ($fields as $key => $value) {
+            $data[$prefix . "" . $key] = $value;
+        }
+        return $data;
+    }
+
+}
+
+// check object from post
+if (!function_exists('object_from_post')) {
+
+    function object_from_post($data) {
+        $result = array();
+        foreach ($data as $dt) {
+            $result[$dt['name']] = $dt['value'];
+        }
+        return $result;
+    }
+
+}

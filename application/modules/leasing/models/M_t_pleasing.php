@@ -33,7 +33,50 @@ class M_t_pleasing extends CI_Model {
         $query = $this->db->get();
         return $query;
     }
-    
-    
+
+    public function save_pleasing($data, $no_tagihan = "") {
+        if ($no_tagihan <> "") {
+            $data['sys_update_user'] = $this->session->userdata('logged_in_admin')['id'];
+            $data['sys_update_date'] = date('Y-m-d H:i:s');
+            $data['m_status'] = 1;
+            $this->db->where('no_tagihan', $no_tagihan);
+            $query = $this->db->update('t_pencairan_leasing', $data);
+        } else {
+            $data['sys_create_user'] = $this->session->userdata('logged_in_admin')['id'];
+            $data['sys_create_date'] = date('Y-m-d H:i:s');
+            $data['m_status'] = 1;
+            $query = $this->db->insert('t_pencairan_leasing', $data);
+        }
+
+        return $query;
+    }
+
+    public function save_pleasing_detail($data, $id = 0) {
+        if ($id > 0) {
+            $data['sys_update_user'] = $this->session->userdata('logged_in_admin')['id'];
+            $data['sys_update_date'] = date('Y-m-d H:i:s');
+            $data['m_status'] = 1;
+            $this->db->where('id_kwitansi', $id);
+            $query = $this->db->update('t_pencairan_leasing_detail', $data);
+        } else {
+            $data['sys_create_user'] = $this->session->userdata('logged_in_admin')['id'];
+            $data['sys_create_date'] = date('Y-m-d H:i:s');
+            $data['m_status'] = 1;
+            $query = $this->db->insert('t_pencairan_leasing_detail', $data);
+        }
+
+        return $query;
+    }
+
+    public function get_pleasing($no_tagihan) {
+        $this->db->where('no_tagihan', $no_tagihan);
+        $query = $this->db->get('t_pencairan_leasing');
+        return $query;
+    }
+
+    public function get_pleasing_detail($idkwitansi) {
+        $this->db->where('id_kwitansi', $idkwitansi);
+        return $this->db->get('t_pencairan_leasing_detail');
+    }
 
 }
