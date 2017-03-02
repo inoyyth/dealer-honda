@@ -18,6 +18,7 @@ class Pencairan_leasing extends MX_Controller {
 
     public function __construct() {
         parent::__construct();
+
         $this->load->model(array('M_t_pleasing' => 't_pleasing', 'Datatable_model' => 'm_datatable'));
         $this->load->library(array('upload', 'encrypt', 'Printpdf', 'Auth_log'));
 
@@ -208,7 +209,34 @@ class Pencairan_leasing extends MX_Controller {
     public function save() {
         $post = $this->input->post();
 
-        echo json_encode(array('status' => 'success', 'pesan' => $post));
+        $rtagihan = object_for_save($post['rtagihan']);
+        $kleasing = object_to_array($post['kleasing']);
+
+        $rtagihan['tot_tagihan'] = floatval(str_replace(".", "", $rtagihan['tot_tagihan']));
+        $rtagihan['tot_pencairan'] = floatval(str_replace(".", "", $rtagihan['tot_pencairan']));
+        $rtagihan['sisa_tagihan'] = floatval(str_replace(".", "", $rtagihan['sisa_tagihan']));
+
+        $get_pleasing = $this->t_pleasing->get_pleasing($rtagihan['no_tagihan'])->row();
+        
+        if($get_pleasing <> false){
+            $result_pleasing = $this->t_pleasing->save_pleasing($rtagihan, $rtagihan['no_tagihan']);
+        }else{
+            $result_pleasing = $this->t_pleasing->save_pleasing($rtagihan);
+        }
+        
+        if ($result_pleasing) {
+            
+            $ins_detail = array();
+            foreach ($kleasing as $det_kleasing) {
+                $ins_detail = object_for_save($det_kleasing);
+                $ins_detail['no_tagihan'] = $rtagihan['no_tagihan'];
+
+                $result_dleasing = $this->t_pleasing->save_pleasing_detail($ins_detail);
+            }
+            echo json_encode(array('status' => 'success', 'pesan' => "Data berhasil disimpan !", 'post' => $ins_detail));
+        } else {
+            echo json_encode(array('status' => 'false', 'pesan' => "Data gagal disimpan !", 'post' => $rtagihan));
+        }
     }
 
     public function view() {

@@ -1,3 +1,5 @@
+
+
 <div class="row">
     <div class="col-lg-12">
         <section class="panel default blue_title h4">
@@ -72,7 +74,7 @@
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">No. Bukti Potongan</label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="no_bukti_potong" id="no_bukti_potong" value="" class="form-control pleasing rtagihan" value="0" />
+                                    <input type="text" name="no_bukti_potongan" id="no_bukti_potongan" value="" class="form-control pleasing rtagihan" value="0" />
                                 </div>
                             </div>
                         </div>
@@ -144,6 +146,7 @@
                 url: base_url + "leasing/pencairan_leasing/jlist/" + nmr_tagihan
             });
         } else {
+
             $("#tblPencairanLeasing").sapTable({
                 url: base_url + "leasing/pencairan_leasing/jlist/" + nmr_tagihan,
                 showSearch: true,
@@ -181,14 +184,18 @@
                         return checkb;
                     },
                     "tgl_cair": function () {
-                        var tglCair = "<input type='text' name='tglcair_" + rows.id_kwitansi + "' id='tglcair_" + rows.id_kwitansi + "' parsley-trigger='change' class='form-control datepicker dkwitansi' placeholder='yyyy-mm-dd' />";
+                        $(".dtpicker").datepicker({
+                            format: 'yyyy-mm-dd',
+                            startDate: '-3d'
+                        });
+                        var tglCair = "<input type='text' name='tglcair_" + rows.id_kwitansi + "' id='tglcair_" + rows.id_kwitansi + "' parsley-trigger='change' class='form-control dtpicker dkwitansi' placeholder='yyyy-mm-dd' />";
+
                         return tglCair;
                     }
+
                 }
             });
         }
-
-
 
         $("#generateTagihan").click(function () {
             var idkwitansi_leasing = $('.idkwitansileasing:checked').map(function () {
@@ -236,9 +243,9 @@
 
                     var tot_tagihan = sisaTagihan + tot_pencairan;
                     $("#tot_tagihan").val(formatCurrency(tot_tagihan));
-                    
+
                     $("#saveTagihan").removeAttr('disabled');
-                    $("#generateTagihan").attr('disabled',true);
+                    $("#generateTagihan").attr('disabled', true);
                 }
             });
             return false;
@@ -252,8 +259,9 @@
             var saveTagihan = $(".rtagihan").serializeArray();
 
             var kwitansileasing = [];
+            var data = [];
             $.each($(".idkwitansileasing:checked"), function () {
-                var data = [
+                data = [
                     {
                         name: "id_kwitansi",
                         value: $(this).val()
@@ -275,17 +283,18 @@
                 dataType: "json",
                 success: function (hsl) {
                     if (hsl.status == "success") {
-                        console.log(hsl.pesan)
-                        //$("#saveTagihan, #generateTagihan").attr('disabled', true);
+                        //console.log(hsl);
+                        alert(hsl.pesan);
+                        $("#saveTagihan, #generateTagihan").attr('disabled', true);
                         $("#printTagihan").removeAttr('disabled');
-                        $("#generateTagihan").attr('disabled',true);
+                        $("#generateTagihan").attr('disabled', true);
                     } else {
                         alert(hsl.pesan);
                     }
                 }
             });
             return false;
-            
+
         });
 
         $("#printTagihan").click(function () {
