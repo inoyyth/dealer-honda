@@ -2,7 +2,7 @@
     <div class="block-web">
         <div class="form-group">
             <a href="<?php echo base_url('penjualan');;?>" class="btn btn-danger">Back</a> 
-            <button class="btn btn-default" onclick="window.open('<?php echo base_url('penjualan-detail-print-'.encode_url($detail_penjualan['noso']));?>', 'popupWindow', 'width=900,height=auto,scrollbars=yes'); return false;"><i class="fa fa-print"></i> Print</button>
+            <button class="btn btn-default" onclick="window.open('<?php echo base_url('penjualan-detail-print-'.encode_url($detail_penjualan['noso']));?>', 'popupWindow', 'width=650,height=700,scrollbars=yes'); return false;"><i class="fa fa-print"></i> Print</button>
         </div>
     </div>
 </div>
