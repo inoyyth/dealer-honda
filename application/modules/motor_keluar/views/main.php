@@ -41,7 +41,7 @@
                                         <td><?php echo $v['kode_do_motor_keluar']; ?></td>
                                         <td class="text-center" style="width: 230px;">
                                             <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'motor-keluar-edit-' . $v['id_motor_keluar'], 'text' => 'Edit')); ?>
-                                            <a href="<?php echo base_url('motor-keluar-sj-' . $this->encrypt->encode($v['id_motor_keluar']));?>" class="btn btn-default btn-sm sjBtn" target="_blank"><i class="fa fa-print"></i> Print</a> 
+                                            <a href="<?php echo base_url('motor-keluar-sj-' . encode_url($v['id_motor_keluar']));?>" class="btn btn-default btn-sm sjBtn" target="_blank"><i class="fa fa-print"></i> Print</a> 
                                             <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'motor-keluar-delete-' . $v['id_motor_keluar'], 'text' => 'Delete')); ?>
                                         </td>
                                     </tr>

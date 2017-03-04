@@ -15,7 +15,7 @@ class Aksesoris_terima extends MX_Controller {
     public function index() {
         $data_session = $this->__getSession();
         $config['base_url'] = base_url() . 'input-penerimaan-aksesoris-page';
-        $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
+        $config['total_rows'] = $this->m_aksesoris_terima->countdata($this->table, $where = array('aksesoris_status!=' => '3'));
         $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
         $config['uri_segment'] = 2;
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;

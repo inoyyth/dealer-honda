@@ -7,8 +7,8 @@
                     </div>
                     <div class="col-md-6 pull-right text-right">
                         <?php //echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'pdi-tambah', 'text' => 'Tambah')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'surat-jalan-pdf/?template=table_pdf&name=master_jabatan', 'text' => 'Print')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'surat-jalan-excel/?template=table_excel&name=master_jabatan', 'text' => 'Excel')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'surat-jalan-pdf/?template=table_pdf&name=t_surat_jalan', 'text' => 'Print')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'surat-jalan-excel/?template=table_excel&name=t_surat_jalan', 'text' => 'Excel')); ?>
                     </div> 
                 </div>
             </div>

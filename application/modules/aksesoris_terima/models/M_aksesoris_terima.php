@@ -44,4 +44,14 @@ Class M_aksesoris_terima extends CI_Model {
         $this->db->where($this->table.'.id',$id);
         return $this->db->get();
     }
+    
+    public function countdata($table, $where) {
+        $this->db->select($this->table.".*,sum(case status_add_or_min when '1' then jumlah when '2' then jumlah * -1 end) as total,m_aksesoris.kd_aksesoris,m_aksesoris.aksesoris,m_gudang.gudang");
+        $this->db->from($table);
+        $this->db->join('m_aksesoris', $this->table.'.aksesoris_id=m_aksesoris.id', 'left');
+        $this->db->join('m_gudang', $this->table.'.gudang_id=m_gudang.id', 'left');
+        $this->db->where($where);
+        $this->db->group_by(array('gudang_id','aksesoris_id'));
+        return $this->db->count_all_results();
+    }
 }

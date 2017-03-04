@@ -7,8 +7,8 @@
                     </div>
                     <div class="col-md-6 pull-right text-right">
                         <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'terima-stnk-tambah', 'text' => 'Tambah')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'terima-stnk-pdf/?template=table_pdf&name=master_jabatan', 'text' => 'Print')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'terima-stnk-excel/?template=table_excel&name=master_jabatan', 'text' => 'Excel')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'terima-stnk-pdf/?template=table_pdf&name=t_terima_stnk', 'text' => 'Print')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'terima-stnk-excel/?template=table_excel&name=t_terima_stnk', 'text' => 'Excel')); ?>
                     </div> 
                 </div>
             </div>

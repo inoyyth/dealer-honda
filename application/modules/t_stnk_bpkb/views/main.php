@@ -7,8 +7,8 @@
                     </div>
                     <div class="col-md-6 pull-right text-right">
                         <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'stnk-tambah', 'text' => 'Tambah')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'stnk-pdf/?template=table_pdf&name=master_jabatan', 'text' => 'Print')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'stnk-excel/?template=table_excel&name=master_jabatan', 'text' => 'Excel')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'stnk-pdf/?template=table_pdf&name=t_stnk_bpkp', 'text' => 'Print')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'stnk-excel/?template=table_excel&name=t_stnk_bpkp', 'text' => 'Excel')); ?>
                     </div> 
                 </div>
             </div>
