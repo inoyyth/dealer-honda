@@ -1,18 +1,18 @@
 <table border="1" cellpadding="2">
     <tr>
-        <td align="center">Kode</td>
-        <td align="center">Nama</td>
-        <td align="center">Alamat</td>
-        <td align="center">Telepon</td>
-        <td align="center">Status</td>
+        <td align="center">No.Process</td>
+        <td align="center">Birojasa</td>
+        <td align="center">No.Polisi</td>
+        <td align="center">No.STNK</td>
+        <td align="center">No.BPKB</td>
     </tr>
-    <?php foreach($list as $kList=>$vList){ ?>
+    <?php foreach ($list as $kList => $vList) { ?>
         <tr>
-            <td><?php echo $vList['kd_gudang'];?></td>
-            <td><?php echo $vList['gudang'];?></td>
-            <td><?php echo $vList['alamat'];?></td>
-            <td><?php echo $vList['telepon'];?></td>
-            <td><?php echo get_status($vList['status_gudang']);?></td>
+            <td><?php echo $vList['no_process']; ?></td>
+            <td><?php echo $vList['nama_birojasa']; ?></td>
+            <td><?php echo $vList['t_terima_no_polisi']; ?></td>
+            <td><?php echo $vList['t_terima_no_stnk']; ?></td>
+            <td><?php echo $vList['t_terima_no_bpkb']; ?></td>
         </tr>
     <?php } ?>
 </table>

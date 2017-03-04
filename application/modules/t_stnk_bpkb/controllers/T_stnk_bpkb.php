@@ -120,5 +120,17 @@ class T_stnk_bpkb extends MX_Controller {
         $data['master_harga_motor'] = $this->main_model->getMaster('t_harga_motor', $like = array(), $where = array('noso' => $data['penjualan'][0]['noso']));
         echo json_encode($data);
     }
+    
+    public function print_pdf() {
+        $data['template'] = array("template" => "t_stnk_bpkb/" . $_GET['template'], "filename" => $_GET['name']);
+        $data['list'] = $this->t_stnk_bpkb->getdata($this->table, 0, 1000, $like = array(), $where = array('stnk_status!=' => '3'));
+        $this->printpdf->create_pdf($data);
+    }
 
+    public function print_excel() {
+        $data['template_excel'] = "t_stnk_bpkb/" . $_GET['template'];
+        $data['file_name'] = $_GET['name'];
+        $data['list'] = $this->t_stnk_bpkb->getdata($this->table, 0, 1000, $like = array(), $where = array('stnk_status!=' => '3'));
+        $this->load->view('template_excel', $data);
+    }
 }

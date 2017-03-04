@@ -107,4 +107,17 @@ class T_terima_stnk extends MX_Controller {
         $data['master_harga_motor'] = $this->main_model->getMaster('t_harga_motor', $like = array(), $where = array('noso' => $data['penjualan'][0]['noso']));
         echo json_encode($data);
     }
+    
+    public function print_pdf() {
+        $data['template'] = array("template" => "t_terima_stnk/" . $_GET['template'], "filename" => $_GET['name']);
+        $data['list'] = $this->t_terima_stnk->getdata($this->table, 0, 1000, $like = array(), $where = array('t_terima_status' => '1'));
+        $this->printpdf->create_pdf($data);
+    }
+
+    public function print_excel() {
+        $data['template_excel'] = "t_terima_stnk/" . $_GET['template'];
+        $data['file_name'] = $_GET['name'];
+        $data['list'] = $this->t_terima_stnk->getdata($this->table, 0, 1000, $like = array(), $where = array('t_terima_status' => '1'));
+        $this->load->view('template_excel', $data);
+    }
 }

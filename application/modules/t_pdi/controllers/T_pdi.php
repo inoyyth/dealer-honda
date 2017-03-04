@@ -203,5 +203,17 @@ class t_pdi extends MX_Controller {
     public function __getAksesoris($aksesoris,$gudang){
         return $this->t_pdi->get_master_aksesoris($aksesoris,$gudang);
     }
-}
+    
+    public function print_pdf() {
+        $data['template'] = array("template" => "t_pdi/" . $_GET['template'], "filename" => $_GET['name']);
+        $data['list'] = $this->t_pdi->getdata($this->table, 0, 1000, $like = array(), $where = array('t_pdi.m_status' => '1'));
+        $this->printpdf->create_pdf($data);
+    }
 
+    public function print_excel() {
+        $data['template_excel'] = "t_pdi/" . $_GET['template'];
+        $data['file_name'] = $_GET['name'];
+        $data['list'] = $this->t_pdi->getdata($this->table, 0, 1000, $like = array(), $where = array('t_pdi.m_status' => '1'));
+        $this->load->view('template_excel', $data);
+    }
+}
