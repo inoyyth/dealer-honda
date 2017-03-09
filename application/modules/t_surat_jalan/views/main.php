@@ -39,11 +39,13 @@
                                         <td><?php echo $v['nosj']; ?></td>
                                         <td><?php echo $v['kdpdi']; ?></td>
                                         <td><?php echo $v['noso']; ?></td>
-                                        <td><?php echo $v['tgl_pdi']; ?></td>
+                                        <td><?php echo $v['tgl_pdi'].$this->sessionGlobal['super_admin']; ?></td>
                                         <td><?php echo $v['sj_print_date']; ?></td>
                                         <td><?php echo $v['nama_lengkap']; ?></td>
                                         <td class="text-center">
-                                            <?php if ($v['sj_print_status'] == "1") { ?>
+                                            <?php if ($v['sj_print_status'] == "1" && $this->sessionGlobal['super_admin'] == "1") { ?>
+                                                <a href="<?php echo base_url('surat-jalan-printsj-' . encode_url($v['noso'])); ?>" class="btn btn-default btn-sm sjBtn" target="_blank"><i class="fa fa-print"></i> Print SJ</a> 
+                                            <?php } else if ($this->sessionGlobal['super_admin'] == "2") { ?>
                                                 <a href="<?php echo base_url('surat-jalan-printsj-' . encode_url($v['noso'])); ?>" class="btn btn-default btn-sm sjBtn" target="_blank"><i class="fa fa-print"></i> Print SJ</a> 
                                             <?php } else { ?>
                                                 PRINTED

@@ -27,6 +27,10 @@
                                 <input type="text" name="nama_lengkap" parsley-trigger="change" required placeholder="Isi Nama Lengkap" class="form-control">
                             </div>
                             <div class="form-group">
+                                <label>As SuperAdmin</label>
+                                <input type="checkbox" name="super_admin"class="form-control" value="2">
+                            </div>
+                            <div class="form-group">
                                 <label>Telepon</label>
                                 <input type="text" name="no_telp" parsley-trigger="change" parsley-type="digits" required placeholder="Isi No Telepon" class="form-control">
                             </div>

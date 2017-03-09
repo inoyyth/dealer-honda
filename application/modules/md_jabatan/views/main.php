@@ -35,8 +35,10 @@
                                         <td><?php echo $v['jabatan']; ?></td>
                                         <td><?php echo $v['keterangan']; ?></td>
                                         <td class="text-center">
-                                            <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'master-jabatan-edit-' . $v['id'], 'text' => 'Edit')); ?>
-                                            <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'master-jabatan-delete-' . $v['id'], 'text' => 'Delete')); ?>
+                                            <?php if ($v['super_admin']=="1") { ?>
+                                                <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'master-jabatan-edit-' . $v['id'], 'text' => 'Edit')); ?>
+                                                <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'master-jabatan-delete-' . $v['id'], 'text' => 'Delete')); ?>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                 <?php }
