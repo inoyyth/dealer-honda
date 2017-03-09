@@ -41,7 +41,8 @@ class Login extends MX_Controller {
                         'no_telp' => $row->no_telp,
                         'email' => $row->email,
                         'path_foto' => $row->path_foto,
-                        'access_menu'=>$row->access_menu
+                        'access_menu'=>$row->access_menu,
+                        'super_admin'=>$row->super_admin
                     );
                     //set session with value from database
                     $this->session->set_userdata('logged_in_admin', $sess_arrayx);
