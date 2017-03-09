@@ -1,3 +1,24 @@
+<style>
+    @media screen {
+        #printSection {
+            display: none;
+        }
+    }
+
+    @media print {
+        body > *:not(#printSection) {
+            display: none;
+        }
+        #printSection, #printSection * {
+            visibility: visible;
+        }
+        #printSection {
+            position:absolute;
+            left:0;
+            top:0;
+        }
+    }
+</style>
 <div class="row">
     <div class="col-lg-12">
         <section class="panel default blue_title h4">
@@ -17,51 +38,26 @@
 
                         <div id="printRekap">
                             <h2 align='center'> REKAPAN TAGIHAN </h2>
-
-                            <div class="form-group">
-                                <div class="col-sm-6">
-                                    <label class="col-sm-12 control-label">No. Tagihan</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" name="no_tagihan" id="no_tagihan" value="<?= $rkwitansi[0]['no_tagihan']; ?>" class="form-control rtagihan" readonly/>
-                                    </div>
+                            <div class="col-sm-6">
+                                <div>
+                                    No Tagihan : <?php echo $rkwitansi[0]['no_tagihan']; ?>
                                 </div>
-
+                                <div>
+                                    Dealer : PT. Mandala Kekar Abadi
+                                </div>
+                                <div>
+                                    Leasing : <?php echo $rkwitansi[0]['kdleasing']; ?>
+                                </div>
+                                <div>
+                                    Tanggal Tagihan :<?php echo date("Y-m-d", strtotime($rkwitansi[0]['tgl_tagihan'])); ?>
+                                </div>
+                                <div>
+                                    Sisa Tagihan : <?php echo formatrp($rkwitansi[0]['sisa_tagihan']); ?>
+                                </div>
                                 <div class="col-sm-6">
-                                    <label class="col-sm-12 control-label">Leasing</label>
-                                    <div class="col-sm-12">
-                                        <input type="hidden" name="kdleasing" id="kdleasing" value="<?= $rkwitansi[0]['kdleasing']; ?>" class="form-control">
-                                        <input type="text" name="leasing" id="leasing" value="<?= $dtleasing[0]['leasing']; ?>" class="form-control" disabled>
-                                    </div>
+
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-6">
-                                    <label class="col-sm-12 control-label">Dealer</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" name="nmdealer" id="nmdealer" class="form-control" value="PT. Mandala Kekar Abadi" disabled />
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label class="col-sm-12 control-label">Tanggal Tagihan</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" name="tgl_tagihan" id="tgl_tagihan" value="<?= date("Y-m-d", strtotime($rkwitansi[0]['tgl_tagihan'])); ?>" parsley-trigger="change" class="form-control rtagihan" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-6">
-                                    <label class="col-sm-12 control-label"></label>
-                                    <div class="col-sm-12"></div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label class="col-sm-12 control-label">Sisa Tagihan</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" name="sisa_tagihan" id="sisa_tagihan" value="<?= formatrp($rkwitansi[0]['sisa_tagihan']); ?>" class="form-control rtagihan" value="0" readonly />
-                                    </div>
-                                </div>
-                            </div>
-
-
                             <div style="clear: both;margin-bottom: 10px;"></div>
                             <div class="col-md-12">
                                 <table class="table table-bordered" id="tblRekapTagihan" width="95%">
