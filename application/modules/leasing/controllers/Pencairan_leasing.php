@@ -217,13 +217,13 @@ class Pencairan_leasing extends MX_Controller {
         $rtagihan['sisa_tagihan'] = floatval(str_replace(".", "", $rtagihan['sisa_tagihan']));
 
         $get_pleasing = $this->t_pleasing->get_pleasing($rtagihan['no_tagihan'])->row();
-        
-        if($get_pleasing <> false){
+
+        if ($get_pleasing <> false) {
             $result_pleasing = $this->t_pleasing->save_pleasing($rtagihan, $rtagihan['no_tagihan']);
-        }else{
+        } else {
             $result_pleasing = $this->t_pleasing->save_pleasing($rtagihan);
         }
-        
+
         if ($result_pleasing) {
             
             $ins_detail = array();
