@@ -29,7 +29,7 @@
                             </div>
                             <div class="form-group">
                                 <label>As SuperAdmin</label>
-                                <input type="checkbox" name="super_admin"class="form-control" value="2" <?php echo ($detail['super_admin']=="2"?"checked":"");?>>
+                                <input type="checkbox" name="super_admin"class="form-control" value="2" <?php echo ($detail['super_admin'] == "2" ? "checked" : ""); ?>>
                             </div>
                             <div class="form-group">
                                 <label>Telepon</label>
@@ -76,50 +76,56 @@
                             <tbody>
                                 <?php
                                 $mn = unserialize($detail['access_menu']);
-                                $result = array(); 
-                                foreach ($mn as $k=>$inner) { 
-                                   $result[] = $inner['menu'];  
-                                } 
+                                $result = array();
+                                foreach ($mn as $k => $inner) {
+                                    $result[] = $inner['menu'];
+                                }
+                                dump($result, false);
+                                dump($list_menu,false);
                                 foreach ($list_menu as $kMenu => $vMenu) {
                                     //var_dump($mn[$kMenu]['child']['add']);die;
                                     if (in_array($vMenu['id'], $result)) {
-                                        $cek = "checked";
+                                        $cek = "checked='true'";
                                         $act = "";
+                                        if (isset($mn[$kMenu]['child']['add']) && $mn[$kMenu]['child']['add'] == "1") {
+                                            $addChk = "checked='true'";
+                                        } else {
+                                            $addChk = "";
+                                        }
+                                        if (isset($mn[$kMenu]['child']['upd']) && $mn[$kMenu]['child']['upd'] == "1") {
+                                            $updChk = "checked='true'";
+                                        } else {
+                                            $updChk = "";
+                                        }
+                                        if (isset($mn[$kMenu]['child']['del']) && $mn[$kMenu]['child']['del'] == "1") {
+                                            $delChk = "checked='true'";
+                                        } else {
+                                            $delChk = "";
+                                        }
+                                        if (isset($mn[$kMenu]['child']['prt']) && $mn[$kMenu]['child']['prt'] == "1") {
+                                            $prtChk = "checked='true'";
+                                        } else {
+                                            $prtChk = "";
+                                        }
                                     } else {
                                         $cek = "";
                                         $act = "disabled='true'";
-                                    }
-                                    if(isset($mn[$kMenu]['child']['add']) && $mn[$kMenu]['child']['add']=="1"){
-                                        $addChk = "checked";
-                                    }else{
                                         $addChk = "";
-                                    }
-                                    if(isset($mn[$kMenu]['child']['upd']) && $mn[$kMenu]['child']['upd']=="1"){
-                                        $updChk = "checked";
-                                    }else{
                                         $updChk = "";
-                                    }
-                                    if(isset($mn[$kMenu]['child']['del']) && $mn[$kMenu]['child']['del']=="1"){
-                                        $delChk = "checked";
-                                    }else{
                                         $delChk = "";
-                                    }
-                                    if(isset($mn[$kMenu]['child']['prt']) && $mn[$kMenu]['child']['prt']=="1"){
-                                        $prtChk = "checked";
-                                    }else{
                                         $prtChk = "";
                                     }
-                                ?>
+                                    ?>
                                     <tr>
-                                        <td><input type="checkbox" id="parent<?php echo $vMenu['id']; ?>" <?php echo $cek; ?> name="menu[]" value="<?php echo $vMenu['id']."|".$vMenu['slug']; ?>" onclick="checkParent(<?php echo $vMenu['id']; ?>);"></td>
+                                        <td><input type="checkbox" id="parent<?php echo $vMenu['id']; ?>" <?php echo $cek; ?> name="menu[]" value="<?php echo $vMenu['id'] . "|" . $vMenu['slug']; ?>" onclick="checkParent(<?php echo $vMenu['id']; ?>);"></td>
                                         <td><?php echo $vMenu['name']; ?></td>
                                         <td><?php echo get_status($vMenu['status']); ?></td>
-                                        <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_add<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $addChk." ".$act;?>></td>
-                                        <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_upd<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $updChk." ".$act;?>></td>
-                                        <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_del<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $delChk." ".$act;?>></td>
-                                        <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_prt<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $prtChk." ".$act;?>></td>
+                                        <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_add<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $addChk . " " . $act; ?>></td>
+                                        <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_upd<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $updChk . " " . $act; ?>></td>
+                                        <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_del<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $delChk . " " . $act; ?>></td>
+                                        <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_prt<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $prtChk . " " . $act; ?>></td>
                                     </tr>
-                                <?php } ?>
+                                <?php continue; } ?>
                             </tbody>
                         </table>
                     </div>
@@ -129,8 +135,8 @@
     </form>
 </div>
 <script>
-    $(document).ready(function(){
-        
+    $(document).ready(function () {
+
     });
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -142,24 +148,24 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
-    
-    function cekCheckboxes(checkbox){
-        if (checkbox.checked){
+
+    function cekCheckboxes(checkbox) {
+        if (checkbox.checked) {
             checkbox.value = '1';
-        }else{
+        } else {
             checkbox.value = '0';
         }
     }
-    
-    function checkParent(id){
-        if(document.getElementById('parent'+id).checked) {
-            $('.child'+id).prop('checked', true);
-            $('.child'+id).attr('value', 1);
-            $('.child'+id).removeAttr('disabled');
-        }else{
-            $('.child'+id).prop('checked', false);
-            $('.child'+id).attr('value', 0);
-            $('.child'+id).attr('disabled','true');
+
+    function checkParent(id) {
+        if (document.getElementById('parent' + id).checked) {
+            $('.child' + id).prop('checked', true);
+            $('.child' + id).attr('value', 1);
+            $('.child' + id).removeAttr('disabled');
+        } else {
+            $('.child' + id).prop('checked', false);
+            $('.child' + id).attr('value', 0);
+            $('.child' + id).attr('disabled', 'true');
         }
     }
 </script>
