@@ -224,8 +224,8 @@ class Motor_keluar extends MX_Controller {
     }
     
     public function print_sj($id){
-        $data['motor_keluar'] = $this->m_motor_keluar->get_motor_keluar($this->encrypt->decode($id))->row_array();
-        $data['motor_keluar_list'] = $this->m_motor_keluar->get_motor_list($this->encrypt->decode($id))->result_array();
+        $data['motor_keluar'] = $this->m_motor_keluar->get_motor_keluar(decode_url($id))->row_array();
+        $data['motor_keluar_list'] = $this->m_motor_keluar->get_motor_list(decode_url($id))->result_array();
 
         $this->load->view('motor_keluar/print_sj',$data);
     }
