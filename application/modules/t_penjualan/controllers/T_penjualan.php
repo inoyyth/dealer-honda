@@ -6,7 +6,7 @@ class T_penjualan extends MX_Controller {
 
     public function __construct() {
         parent::__construct();
-        
+
         $this->load->model(array('M_t_penjualan' => 't_penjualan', 'Datatable_model' => 'm_datatable'));
         $this->load->library(array('upload', 'encrypt', 'Printpdf', 'Auth_log'));
         //set breadcrumb
@@ -30,11 +30,11 @@ class T_penjualan extends MX_Controller {
 
     public function add() {
         $this->breadcrumbs->push('Add', '/penjualan-tambah');
-        $data['codeso'] = $this->main_model->generate_code($this->table, 'SO/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true,'id','noso');
-        
-        
+        $data['codeso'] = $this->main_model->generate_code($this->table, 'SO/MKA-' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true, 'id', 'noso');
+
+
         $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
-        
+
         $data['view'] = "t_penjualan/add";
         $this->load->view('default', $data);
     }
@@ -43,24 +43,24 @@ class T_penjualan extends MX_Controller {
         $this->breadcrumbs->push('Edit', '/penjualan-edit');
         $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
         $data['detail_penjualan'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
-        $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
-        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();
-        $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
-        $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
+        $data['detail_harga'] = $this->db->get_where('t_harga_motor', array('noso' => $data['detail_penjualan']['noso']))->row_array();
+        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor', array('nomesin' => $data['detail_penjualan']['nomsn']))->row_array();
+        $data['detail_motor'] = $this->db->get_where('m_motor', array('tipe_motor' => $data['detail_penerimaan_motor']['tipe']))->row_array();
+        $data['detail_customer'] = $this->db->get_where('m_customer', array('no_ktp' => $data['detail_penjualan']['ktp']))->row_array();
         //dump($data,true);
         $data['view'] = 't_penjualan/edit';
         $this->load->view('default', $data);
     }
-    
+
     public function detail($id) {
         $this->breadcrumbs->push('Detail', '/penjualan-detail');
         $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
         $data['detail_penjualan'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
-        $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
-        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();
-        $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
-        $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
-        $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
+        $data['detail_harga'] = $this->db->get_where('t_harga_motor', array('noso' => $data['detail_penjualan']['noso']))->row_array();
+        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor', array('nomesin' => $data['detail_penjualan']['nomsn']))->row_array();
+        $data['detail_motor'] = $this->db->get_where('m_motor', array('tipe_motor' => $data['detail_penerimaan_motor']['tipe']))->row_array();
+        $data['detail_customer'] = $this->db->get_where('m_customer', array('no_ktp' => $data['detail_penjualan']['ktp']))->row_array();
+        $data['detail_leasing'] = $this->db->get_where('m_leasing', array('kd_leasing' => $data['detail_harga']['leasing']))->row_array();
         //dump($data,true);
         $data['view'] = 't_penjualan/detail';
         $this->load->view('default', $data);
@@ -119,13 +119,13 @@ class T_penjualan extends MX_Controller {
 
     public function get_list_motor() {
         $table = 'penerimaan_motor';
-        $where = array('penerimaan_motor.status_jual'=>'1');
+        $where = array('penerimaan_motor.status_jual' => '1');
         $join = array(
             array('table' => 'm_motor', 'where' => 'm_motor.tipe_motor=penerimaan_motor.tipe', 'join' => 'INNER')
         );
-        $column_order = array(null, 'penerimaan_motor.id','no_sj','tgl_sj','nomesin','penerimaan_motor.norangka','tipe','penerimaan_motor.warna','penerimaan_motor.tahun','varian','harga_otr');
-        $column_search = array('penerimaan_motor.id','no_sj','tgl_sj','nomesin','penerimaan_motor.norangka','tipe','penerimaan_motor.warna','penerimaan_motor.tahun','varian','harga_otr');
-        $list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('penerimaan_motor.id'=>'ASC'), $where, $join, $group=array());
+        $column_order = array(null, 'penerimaan_motor.id', 'no_sj', 'tgl_sj', 'nomesin', 'penerimaan_motor.norangka', 'tipe', 'penerimaan_motor.warna', 'penerimaan_motor.tahun', 'varian', 'harga_otr');
+        $column_search = array('penerimaan_motor.id', 'no_sj', 'tgl_sj', 'nomesin', 'penerimaan_motor.norangka', 'tipe', 'penerimaan_motor.warna', 'penerimaan_motor.tahun', 'varian', 'harga_otr');
+        $list = $this->m_datatable->get_datatables($table, $column_order, $column_search, $order = array('penerimaan_motor.id' => 'ASC'), $where, $join, $group = array());
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $result) {
@@ -146,7 +146,7 @@ class T_penjualan extends MX_Controller {
         $output = array(
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->m_datatable->count_all($table),
-            "recordsFiltered" => $this->m_datatable->count_filtered($table, $column_order, $column_search, $order = array('penerimaan_motor.id'=>'ASC'), $where, $join, $group=array()),
+            "recordsFiltered" => $this->m_datatable->count_filtered($table, $column_order, $column_search, $order = array('penerimaan_motor.id' => 'ASC'), $where, $join, $group = array()),
             "data" => $data,
         );
         //output to json format
@@ -167,19 +167,19 @@ class T_penjualan extends MX_Controller {
                 break;
         }
     }
-    
-    function load_cpembelian_edit($cpembelian = "",$kode_so) {
-        $data['price_list'] = $this->db->get_where('t_harga_motor',array('noso'=>decode_url($kode_so)))->row_array();
+
+    function load_cpembelian_edit($cpembelian = "", $kode_so) {
+        $data['price_list'] = $this->db->get_where('t_harga_motor', array('noso' => decode_url($kode_so)))->row_array();
         switch ($cpembelian) {
             case "Cash":
-                $this->load->view('t_penjualan/pembelian_cash',$data);
+                $this->load->view('t_penjualan/pembelian_cash', $data);
                 break;
             case "Kredit":
                 $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('status_leasing' => '1'));
                 $this->load->view('t_penjualan/pembelian_kredit', $data);
                 break;
             default:
-                $this->load->view('t_penjualan/pembelian_cash',$data);
+                $this->load->view('t_penjualan/pembelian_cash', $data);
                 break;
         }
     }
@@ -187,68 +187,75 @@ class T_penjualan extends MX_Controller {
     function load_customer_by_ktp() {
         $ktp = $this->input->post('no_ktp');
         $dtcustomer = $this->main_model->getMaster('m_customer', $like = array(), $where = array('no_ktp' => $ktp));
-        foreach($dtcustomer as $row){
+        foreach ($dtcustomer as $row) {
             $data = $row;
         }
         echo json_encode($data);
     }
-    
-    function load_transaction_by_noso(){
+
+    function load_transaction_by_noso() {
         $noso = $this->input->post('noso');
         $result = $this->t_penjualan->getdata_transaction_by_noso($noso);
         echo json_encode($result);
     }
-    
-    function load_transaction_price_by_noso()
-    {
+
+    function load_transaction_price_by_noso() {
         $noso = $this->input->post('noso');
         $result = $this->t_penjualan->getdata_transaction_price_by_noso($noso);
         echo json_encode($result);
     }
-    
-    public function load_modal_confirm(){
+
+    public function load_modal_confirm() {
         $this->load->view('t_penjualan/modal_confirm');
     }
-    
-    public function print_fee($id){
+
+    public function print_fee($id) {
         //$data['template'] = array("template" => "t_penjualan/print_fee", "filename" => "Fee Marketing");
         $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
         $data['detail_penjualan'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
-        $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
-        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();
-        $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
-        $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
-        $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
+        $data['detail_harga'] = $this->db->get_where('t_harga_motor', array('noso' => $data['detail_penjualan']['noso']))->row_array();
+        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor', array('nomesin' => $data['detail_penjualan']['nomsn']))->row_array();
+        $data['detail_motor'] = $this->db->get_where('m_motor', array('tipe_motor' => $data['detail_penerimaan_motor']['tipe']))->row_array();
+        $data['detail_customer'] = $this->db->get_where('m_customer', array('no_ktp' => $data['detail_penjualan']['ktp']))->row_array();
+        $data['detail_leasing'] = $this->db->get_where('m_leasing', array('kd_leasing' => $data['detail_harga']['leasing']))->row_array();
         //$this->printpdf->create_pdf($data);
-        $this->load->view('t_penjualan/print_fee',$data);
+        $this->load->view('t_penjualan/print_fee', $data);
     }
-    
-    public function print_diskon($id){
+
+    public function print_diskon($id) {
         //$data['template'] = array("template" => "t_penjualan/print_diskon", "filename" => "Fee Marketing");
         $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
         $data['detail_penjualan'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
-        $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
-        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();
-        $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
-        $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
-        $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
+        $data['detail_harga'] = $this->db->get_where('t_harga_motor', array('noso' => $data['detail_penjualan']['noso']))->row_array();
+        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor', array('nomesin' => $data['detail_penjualan']['nomsn']))->row_array();
+        $data['detail_motor'] = $this->db->get_where('m_motor', array('tipe_motor' => $data['detail_penerimaan_motor']['tipe']))->row_array();
+        $data['detail_customer'] = $this->db->get_where('m_customer', array('no_ktp' => $data['detail_penjualan']['ktp']))->row_array();
+        $data['detail_leasing'] = $this->db->get_where('m_leasing', array('kd_leasing' => $data['detail_harga']['leasing']))->row_array();
         //$this->printpdf->create_pdf($data);
-        $this->load->view('t_penjualan/print_diskon',$data);
+        $this->load->view('t_penjualan/print_diskon', $data);
     }
-    
-    public function detail_print($noso){
+
+    public function detail_print($noso) {
         $id = decode_url($noso);
         $this->breadcrumbs->push('Detail', '/penjualan-detail');
         $data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
         $data['detail_penjualan'] = $this->db->get_where($this->table, array('noso' => $id))->row_array();
-        $data['detail_harga'] = $this->db->get_where('t_harga_motor',array('noso'=>$data['detail_penjualan']['noso']))->row_array();
-        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor',array('nomesin'=>$data['detail_penjualan']['nomsn']))->row_array();
-        $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
-        $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
-        $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
+        $data['detail_harga'] = $this->db->get_where('t_harga_motor', array('noso' => $data['detail_penjualan']['noso']))->row_array();
+        $data['detail_penerimaan_motor'] = $this->db->get_where('penerimaan_motor', array('nomesin' => $data['detail_penjualan']['nomsn']))->row_array();
+        $data['detail_motor'] = $this->db->get_where('m_motor', array('tipe_motor' => $data['detail_penerimaan_motor']['tipe']))->row_array();
+        $data['detail_customer'] = $this->db->get_where('m_customer', array('no_ktp' => $data['detail_penjualan']['ktp']))->row_array();
+        $data['detail_leasing'] = $this->db->get_where('m_leasing', array('kd_leasing' => $data['detail_harga']['leasing']))->row_array();
         //dump($data,true);
         //$data['view'] = 't_penjualan/print_detail';
         $this->load->view('print_detail', $data);
+    }
+
+    public function update_print() {
+        $data = array(
+            'noso'=> $this->input->post('noso'),
+            'type' => $this->input->post('type')
+        );
+        $this->t_penjualan->update_print($data);
     }
 
 }

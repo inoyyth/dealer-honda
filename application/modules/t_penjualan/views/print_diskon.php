@@ -93,8 +93,16 @@ $kwt_explode = explode("/", $detail_harga['noso']);
         </div>
     </center>
 </body>
+<script src="<?php echo base_url();?>themes/js/jquery-2.1.0.js"></script>
 <script>
     function printPage() {
-        window.print();
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url('t_penjualan/update_print'); ?>",
+            data: {noso: '<?php echo $detail_harga['noso'];?>', type: 'discount'},
+            success: function (result) {
+                window.print();
+            }
+        });
     }
 </script>

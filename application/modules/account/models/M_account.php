@@ -58,7 +58,7 @@ Class M_account extends CI_Model {
             'path_foto' => $image_name,
             'status' => $this->input->post('status'),
             'access_menu' => serialize($menu),
-            'super_admin'=> $this->input->post('super_admin')
+            'super_admin'=> ($this->input->post('super_admin') != null ? $this->input->post('super_admin') : '1')
         );
         if (empty($id)) {
             $this->db->insert($this->table, $this->main_model->create_sys($data));

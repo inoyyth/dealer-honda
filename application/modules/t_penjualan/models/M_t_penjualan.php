@@ -26,13 +26,13 @@ Class M_t_penjualan extends CI_Model {
 
         switch ($this->input->post('cara_pembelian')) {
             case 'Kredit':
-                if((currency_to_normal($this->input->post('dp_system')) - currency_to_normal($this->input->post('diskon'))) <= currency_to_normal($this->input->post('dp'))){
+                if ((currency_to_normal($this->input->post('dp_system')) - currency_to_normal($this->input->post('diskon'))) <= currency_to_normal($this->input->post('dp'))) {
                     $dplunas = "2";
-                }else{
+                } else {
                     $dplunas = "1";
                 }
                 $data_harga_motor = array(
-                    'noso'=>$this->input->post('noso'),
+                    'noso' => $this->input->post('noso'),
                     'cara_pembelian' => $this->input->post('cara_pembelian'),
                     'marketing' => $this->input->post('marketing'),
                     'leasing' => $this->input->post('leasing'),
@@ -41,21 +41,21 @@ Class M_t_penjualan extends CI_Model {
                     'tagih' => currency_to_normal($this->input->post('tagih')),
                     'dp' => currency_to_normal($this->input->post('dp')),
                     'sisa_hutang' => currency_to_normal($this->input->post('sisa_hutang')),
-                    'dp_lunas'=>$dplunas,
+                    'dp_lunas' => $dplunas,
                     'fee' => currency_to_normal($this->input->post('fee')),
                     'm_status' => "1"
                 );
                 break;
             default:
-                if((currency_to_normal($this->input->post('harga_otr')) - currency_to_normal($this->input->post('diskon'))) <= currency_to_normal($this->input->post('dp'))){
+                if ((currency_to_normal($this->input->post('harga_otr')) - currency_to_normal($this->input->post('diskon'))) <= currency_to_normal($this->input->post('dp'))) {
                     $dplunas = "2";
                     $status_motor = "2";
-                }else{
+                } else {
                     $dplunas = "1";
                     $status_motor = "4";
                 }
                 $data_harga_motor = array(
-                    'noso'=>$this->input->post('noso'),
+                    'noso' => $this->input->post('noso'),
                     'cara_pembelian' => $this->input->post('cara_pembelian'),
                     'marketing' => $this->input->post('marketing'),
                     'leasing' => '',
@@ -64,21 +64,21 @@ Class M_t_penjualan extends CI_Model {
                     'tagih' => currency_to_normal($this->input->post('tagih')),
                     'dp' => currency_to_normal($this->input->post('dp')),
                     'sisa_hutang' => currency_to_normal($this->input->post('sisa_hutang')),
-                    'dp_lunas'=>$dplunas,
+                    'dp_lunas' => $dplunas,
                     'fee' => currency_to_normal($this->input->post('fee')),
                     'm_status' => "1"
                 );
                 break;
         }
-        
+
         $dataDp1 = array(
-            'nokwitansi'=>$this->main_model->generate_code("t_pembayaran", 'KWT/KD/' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true, 'id', 'nokwitansi'),
-            'noso'=> $this->input->post('noso'),
-            'tgl_dp'=> $this->input->post('tanggal'),
-            'nominal'=> currency_to_normal($this->input->post('dp')),
-            'transaksi'=> ($dplunas=="2"?4:1)
+            'nokwitansi' => $this->main_model->generate_code("t_pembayaran", 'KWT/KD/' . date('Y') . '/' . romanic_number(date('m')), '/', 6, $date = false, $loop = true, 'id', 'nokwitansi'),
+            'noso' => $this->input->post('noso'),
+            'tgl_dp' => $this->input->post('tanggal'),
+            'nominal' => currency_to_normal($this->input->post('dp')),
+            'transaksi' => ($dplunas == "2" ? 4 : 1)
         );
-        
+
         $data_customer = array(
             'no_ktp' => $this->input->post('no_ktp'),
             'nama_customer' => $this->input->post('nama_customer'),
@@ -95,32 +95,31 @@ Class M_t_penjualan extends CI_Model {
             'kecamatan' => $this->input->post('kecamatan'),
             'm_status' => "1",
         );
-        
+
         if (empty($id)) {
-            $this->__insert_customer($data_customer,$this->input->post('no_ktp'));
+            $this->__insert_customer($data_customer, $this->input->post('no_ktp'));
             $this->db->insert($this->table_tpenjualan, $this->main_model->create_sys($data_penjualan));
             $this->db->insert($this->table_thargamotor, $this->main_model->create_sys($data_harga_motor));
             $this->db->insert("t_pembayaran", $this->main_model->create_sys($dataDp1));
-            $this->db->update('penerimaan_motor',$this->main_model->update_sys(array('status_jual'=>$status_motor)),array('nomesin' => $this->input->post('nomsn')));
+            $this->db->update('penerimaan_motor', $this->main_model->update_sys(array('status_jual' => $status_motor)), array('nomesin' => $this->input->post('nomsn')));
             return true;
-            
         } else {
-            $this->__insert_customer($data_customer,$this->input->post('no_ktp'));
+            $this->__insert_customer($data_customer, $this->input->post('no_ktp'));
             $this->db->update($this->table_tpenjualan, $this->main_model->update_sys($data_penjualan), array('noso' => $this->input->post('noso')));
             $this->db->update($this->table_thargamotor, $this->main_model->update_sys($data_harga_motor), array('noso' => $this->input->post('noso')));
-            $this->db->update("t_pembayaran", $this->main_model->update_sys($dataDp1), array('noso' => $this->input->post('noso'),'transaksi'=>1));
+            $this->db->update("t_pembayaran", $this->main_model->update_sys($dataDp1), array('noso' => $this->input->post('noso'), 'transaksi' => 1));
             return true;
         }
-        
+
         return false;
     }
 
     public function getdata($table, $limit, $pg, $like = array(), $where = array()) {
         unset($like['page']);
-        $this->db->select($table.".*,penerimaan_motor.tipe,t_harga_motor.cara_pembelian");
+        $this->db->select($table . ".*,penerimaan_motor.tipe,t_harga_motor.cara_pembelian");
         $this->db->from($table);
-        $this->db->join('penerimaan_motor',$table.".nomsn=penerimaan_motor.nomesin");
-        $this->db->join('t_harga_motor',$table.".noso=t_harga_motor.noso");
+        $this->db->join('penerimaan_motor', $table . ".nomsn=penerimaan_motor.nomesin");
+        $this->db->join('t_harga_motor', $table . ".noso=t_harga_motor.noso");
         $this->db->like($like);
         $this->db->where($where);
         $this->db->limit($pg, $limit);
@@ -150,14 +149,25 @@ Class M_t_penjualan extends CI_Model {
         $query = $this->db->get($this->table_thargamotor);
         return $query->row();
     }
-    
-    public function __insert_customer($data,$ktp){
-        $getExisting = $this->db->get_where("m_customer",array('no_ktp'=>$ktp));
-        if($getExisting->num_rows() > 0 ){
-            $this->db->update('m_customer',$data,array('no_ktp'=>$ktp));
-        }else{
-            $this->db->insert('m_customer',$data);
+
+    public function __insert_customer($data, $ktp) {
+        $getExisting = $this->db->get_where("m_customer", array('no_ktp' => $ktp));
+        if ($getExisting->num_rows() > 0) {
+            $this->db->update('m_customer', $data, array('no_ktp' => $ktp));
+        } else {
+            $this->db->insert('m_customer', $data);
         }
+    }
+
+    public function update_print($data) {
+        $session = $this->session->userdata('logged_in_admin');
+        $upd_data = array(
+            $data['type'] . '_print' => '2',
+            $data['type'] . '_print_user' => $session['id'],
+            $data['type'] . '_print_date' => date('Y-m-d H:i:s')
+        );
+        $this->db->update('t_penjualan', $upd_data, array('noso' => $data['noso']));
+        return true;
     }
 
 }
