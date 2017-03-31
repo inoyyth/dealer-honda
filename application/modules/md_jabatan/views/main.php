@@ -29,13 +29,14 @@
                                 echo"<tr><td class='text-center' colspan='10'>-No Data Found-</td></tr>";
                             } else {
                                 foreach ($data as $k => $v) {
+                                    
                                     ?>
                                     <tr>
                                         <td><?php echo intval($this->uri->segment(2) + ($k + 1)); ?></td>
                                         <td><?php echo $v['jabatan']; ?></td>
                                         <td><?php echo $v['keterangan']; ?></td>
                                         <td class="text-center">
-                                            <?php if ($v['super_admin']=="1") { ?>
+                                            <?php if ($this->session->userdata('logged_in_admin')['super_admin']=="2") { ?>
                                                 <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'master-jabatan-edit-' . $v['id'], 'text' => 'Edit')); ?>
                                                 <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'master-jabatan-delete-' . $v['id'], 'text' => 'Delete')); ?>
                                             <?php } ?>

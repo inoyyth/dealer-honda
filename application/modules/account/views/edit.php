@@ -29,7 +29,7 @@
                             </div>
                             <div class="form-group">
                                 <label>As SuperAdmin</label>
-                                <input type="checkbox" name="super_admin"class="form-control" value="2" <?php echo ($detail['super_admin'] == "2" ? "checked" : ""); ?>>
+                                <input type="checkbox" name="super_admin"class="form-control" value="2" <?php echo (@$detail['super_admin'] == "2" ? "checked" : ""); ?>>
                             </div>
                             <div class="form-group">
                                 <label>Telepon</label>
@@ -80,10 +80,8 @@
                                 foreach ($mn as $k => $inner) {
                                     $result[] = $inner['menu'];
                                 }
-                                //dump($mn, false);
-                                //dump($list_menu,false);
+
                                 foreach ($list_menu as $kMenu => $vMenu) {
-                                    //var_dump($mn[$kMenu]['child']['add']);die;
                                     if (in_array($vMenu['id'], $result)) {
                                         $cek = "checked='true'";
                                         $act = "";
