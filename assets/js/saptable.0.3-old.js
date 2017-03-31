@@ -8,25 +8,19 @@
  * Jakarta Timur
  */
 (function ($) {
-    var dinamic_options = new Array();
-    
+
     $.fn.sapTable = function (options) {
-        dinamic_options[$(this).attr('id')] = options;
-        
         options = $.extend({}, $.fn.sapTable.defaultOptions, options);
 
         $(this).each(function (nmr, vle) {
 
             idElement = ($(this).attr('id'));
-            
             var url = options.url;
             formatters = options.formatters;
             cSearch = options.cSearch;
 
             var table = $("#" + idElement).addClass('sapTable');
             var tbody = $('#' + idElement + ' tbody');
-            tbody.empty();
-            
             var row = '';
             var kolom = $("#" + idElement).getColumn(idElement);
             $.getJSON(url, function (data) {
@@ -104,18 +98,16 @@
         showPagination: false,
         showSearch: false
     };
-    $.fn.refresh_sapTable = function (options) {
-        var idElem = $(this).attr('id');
+    $.fn.refresh_sapTable = function (idElem) {
+        var table = $("#" + idElem).addClass('sapTable');
         var tbody = $('#' + idElem + ' tbody');
-        
         var kolom = $("#" + idElem).getColumn(idElem);
         tbody.empty();
         var row = '';
-        $.getJSON(options.url, function (data) {
+        $.getJSON(url, function (data) {
             //rows = data.rows;
             for (index = 0; index < data.rows.length; ++index) {
                 rows = data.rows[index];
-                //console.log(rows);
                 // Add row here
                 row = $('<tr></tr>');
                 // Mapping columns
@@ -157,12 +149,13 @@
                 });
                 tbody.append(row);
             }
+
+            var recordTbl = $.fn.recordTable(data, idElem);
+            $(recordTbl).insertAfter("#" + idElem);
+
+            $.fn.showPagination(data, idElem, url);
+
         });
-    };
-    $.fn.sapTable_refresh = function () {
-        // dinamic_options[$(this).attr('id')]
-        this.refresh_sapTable(dinamic_options[$(this).attr('id')]);
-        //console.log(dinamic_options[$(this).attr('id')]);
     };
     $.fn.getRecord = function (data) {
         return data;
@@ -305,11 +298,11 @@
     };
     $.fn.showPagination = function (allRows, idElem, url) {
         $("." + idElem + "_paging").remove();
-
+        
         var pagHtml = '<div class="col-md-6 col-xs-12 pull-right text-right ' + idElem + '_paging">';
         pagHtml += '</div>';
         $(pagHtml).insertAfter("#" + idElem);
-
+        
         this.pagination({
             itemsPerPage: allRows.rowCount,
             itemsToPaginate: allRows.total,

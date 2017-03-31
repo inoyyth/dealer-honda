@@ -131,6 +131,25 @@
 
         </section>
     </div>
+
+    <div class="col-lg-12">
+        <section class="panel default blue_title h4">
+
+            <div class="panel-body">
+                <div class="block-web" style="color: red;">
+                    <h2>Note :</h2>
+                    <ul>
+                        <li>Sisa : OTR - (DP + Subsidi)</li>
+                        <li>Total Tagihan : Total semua tagihan</li>
+                        <li>Total Pencairan : Otomatis berdasarkan checklist</li>
+                        <li>Sisa Tagihan : Total Tagihan -  Total Pencairan</li>
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
 </div>
 
 
@@ -184,10 +203,12 @@
                         return checkb;
                     },
                     "tgl_cair": function () {
+
                         $(".dtpicker").datepicker({
                             format: 'yyyy-mm-dd',
                             startDate: '-3d'
                         });
+
                         var tglCair = "<input type='text' name='tglcair_" + rows.id_kwitansi + "' id='tglcair_" + rows.id_kwitansi + "' parsley-trigger='change' class='form-control dtpicker dkwitansi' placeholder='yyyy-mm-dd' />";
 
                         return tglCair;
@@ -283,9 +304,9 @@
                 dataType: "json",
                 success: function (hsl) {
                     if (hsl.status == "success") {
-                        //console.log(hsl);
+                        console.log(hsl);
                         alert(hsl.pesan);
-                        $("#saveTagihan, #generateTagihan").attr('disabled', true);
+                        //$("#saveTagihan, #generateTagihan").attr('disabled', true);
                         $("#printTagihan").removeAttr('disabled');
                         $("#generateTagihan").attr('disabled', true);
                     } else {
