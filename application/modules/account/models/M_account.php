@@ -20,8 +20,7 @@ Class M_account extends CI_Model {
                         )
                 ); 
         }
-        //echo "<pre>";
-        //die(print_r(serialize($menu), TRUE));
+        dump($menu, TRUE);
         $id = $this->input->post('id');
         $image_hidden = $this->input->post('image_hidden');
         $folder = "account";
