@@ -80,8 +80,8 @@
                                 foreach ($mn as $k => $inner) {
                                     $result[] = $inner['menu'];
                                 }
-                                dump($result, false);
-                                dump($list_menu,false);
+                                //dump($mn, false);
+                                //dump($list_menu,false);
                                 foreach ($list_menu as $kMenu => $vMenu) {
                                     //var_dump($mn[$kMenu]['child']['add']);die;
                                     if (in_array($vMenu['id'], $result)) {
