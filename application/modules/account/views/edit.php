@@ -76,31 +76,37 @@
                             <tbody>
                                 <?php
                                 $mn = unserialize($detail['access_menu']);
+
                                 $result = array();
                                 foreach ($mn as $k => $inner) {
                                     $result[] = $inner['menu'];
                                 }
+                                //dump($mn);
 
                                 foreach ($list_menu as $kMenu => $vMenu) {
                                     if (in_array($vMenu['id'], $result)) {
+                                        
+                                        // Get Index Array from Value Array
+                                        $resNum = array_search($vMenu['id'], $result);
+                                        
                                         $cek = "checked='true'";
                                         $act = "";
-                                        if (isset($mn[$kMenu]['child']['add']) && $mn[$kMenu]['child']['add'] == "1") {
+                                        if (isset($mn[$resNum]['child']['add']) && $mn[$resNum]['child']['add'] === 1) {
                                             $addChk = "checked='true'";
                                         } else {
                                             $addChk = "";
                                         }
-                                        if (isset($mn[$kMenu]['child']['upd']) && $mn[$kMenu]['child']['upd'] == "1") {
+                                        if (isset($mn[$resNum]['child']['upd']) && $mn[$resNum]['child']['upd'] === 1) {
                                             $updChk = "checked='true'";
                                         } else {
                                             $updChk = "";
                                         }
-                                        if (isset($mn[$kMenu]['child']['del']) && $mn[$kMenu]['child']['del'] == "1") {
+                                        if (isset($mn[$resNum]['child']['del']) && $mn[$resNum]['child']['del'] === 1) {
                                             $delChk = "checked='true'";
                                         } else {
                                             $delChk = "";
                                         }
-                                        if (isset($mn[$kMenu]['child']['prt']) && $mn[$kMenu]['child']['prt'] == "1") {
+                                        if (isset($mn[$resNum]['child']['prt']) && $mn[$resNum]['child']['prt'] === 1) {
                                             $prtChk = "checked='true'";
                                         } else {
                                             $prtChk = "";
@@ -116,14 +122,15 @@
                                     ?>
                                     <tr>
                                         <td><input type="checkbox" id="parent<?php echo $vMenu['id']; ?>" <?php echo $cek; ?> name="menu[]" value="<?php echo $vMenu['id'] . "|" . $vMenu['slug']; ?>" onclick="checkParent(<?php echo $vMenu['id']; ?>);"></td>
-                                        <td><?php echo $vMenu['name']; ?></td>
-                                        <td><?php echo get_status($vMenu['status']); ?></td>
+                                        <td><?php echo $vMenu['name']; ?> </td>
+                                        <td><?php echo get_status($vMenu['status']); ?> </td>
                                         <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_add<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $addChk . " " . $act; ?>></td>
                                         <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_upd<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $updChk . " " . $act; ?>></td>
                                         <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_del<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $delChk . " " . $act; ?>></td>
                                         <td><input type="checkbox" class="child<?php echo $vMenu['id']; ?>" name="sub_prt<?php echo $vMenu['id']; ?>" onclick="cekCheckboxes(this);" <?php echo $prtChk . " " . $act; ?>></td>
                                     </tr>
-                                <?php continue; } ?>
+                                    <?php continue;
+                                } ?>
                             </tbody>
                         </table>
                     </div>
