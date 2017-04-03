@@ -37,29 +37,37 @@
                         </div>
 
                         <div id="printRekap">
-                            <h2 align='center'> REKAPAN TAGIHAN </h2>
+                            <h2 align='center' style="font-size:16px;"> REKAPAN TAGIHAN </h2>
                             <div class="col-sm-6">
-                                <div>
-                                    No Tagihan : <?php echo $rkwitansi[0]['no_tagihan']; ?>
-                                </div>
-                                <div>
-                                    Dealer : PT. Mandala Kekar Abadi
-                                </div>
-                                <div>
-                                    Leasing : <?php echo $rkwitansi[0]['kdleasing']; ?>
-                                </div>
-                                <div>
-                                    Tanggal Tagihan :<?php echo date("Y-m-d", strtotime($rkwitansi[0]['tgl_tagihan'])); ?>
-                                </div>
-                                <div>
-                                    Sisa Tagihan : <?php echo formatrp($rkwitansi[0]['sisa_tagihan']); ?>
-                                </div>
+                                <table width="100%" style="font-size:12px;">
+                                    <tr>
+                                        <td>No Tagihan </td>
+                                        <td>: <?php echo $rkwitansi[0]['no_tagihan']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dealer </td>
+                                        <td>: PT. Mandala Kekar Abadi</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Leasing </td>
+                                        <td>: <?php echo $rkwitansi[0]['kdleasing']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tanggal Tagihan </td>
+                                        <td>: <?php echo date("Y-m-d", strtotime($rkwitansi[0]['tgl_tagihan'])); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sisa Tagihan </td>
+                                        <td>: <?php echo formatrp($rkwitansi[0]['sisa_tagihan']); ?></td>
+                                    </tr>
+                                </table>
+                                
                                 <div class="col-sm-6">
 
                                 </div>
                             </div>
                             <div style="clear: both;margin-bottom: 10px;"></div>
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="font-size:10px;">
                                 <table class="table table-bordered" id="tblRekapTagihan" width="95%">
                                     <thead>
                                         <tr>
@@ -109,7 +117,7 @@
                             <div style="clear: both;margin-bottom: 10px;"></div>
 
                             <div class="col-md-12 col-xs-12">
-                                <label class="col-sm-12 control-label">Total Tagihan :</label>
+                                <label class="col-sm-12 control-label" style="text-align:right;">Total Tagihan :</label>
                                 <div class="col-sm-12">
                                     <input type="text" name="tot_tagihan" id="tot_tagihan" class="form-control rtagihan" placeholder="Total Tagihan" style="text-align: right;" value="<?= formatrp($rkwitansi[0]['tot_tagihan']); ?>" readonly>
                                 </div>
