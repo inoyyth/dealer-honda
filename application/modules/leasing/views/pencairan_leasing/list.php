@@ -20,6 +20,7 @@
 
                         <div class="form-group">
                             <div class="col-sm-12">
+                                
                                 <?php
                                 if ($this->router->fetch_method() <> "detail") {
                                     ?>
@@ -60,7 +61,7 @@
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">Tanggal Pencairan</label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="tgl_pencairan" id="tgl_pencairan" parsley-trigger="change" class="form-control pleasing datepicker rtagihan">
+                                    <input type="text" name="tgl_pencairan" id="tgl_pencairan" parsley-trigger="change" class="form-control pleasing datepicker rtagihan" value="<?=date('Y-m-d',strtotime($pencairan_leasing[0]['tgl_pencairan']));?>">
                                 </div>
                             </div>
                         </div>
@@ -74,7 +75,7 @@
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">No. Bukti Potongan</label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="no_bukti_potongan" id="no_bukti_potongan" value="" class="form-control pleasing rtagihan" value="0" />
+                                    <input type="text" name="no_bukti_potongan" id="no_bukti_potongan" class="form-control pleasing rtagihan" value="<?=$pencairan_leasing[0]['no_bukti_potongan'];?>" />
                                 </div>
                             </div>
                         </div>
@@ -109,19 +110,19 @@
                         <div class="col-md-12 col-xs-12">
                             <label class="col-sm-12 control-label">Total Tagihan :</label>
                             <div class="col-sm-12">
-                                <input type="text" name="tot_tagihan" id="tot_tagihan" class="form-control rtagihan" placeholder="Total Tagihan" style="text-align: right;" value="0" readonly>
+                                <input type="text" name="tot_tagihan" id="tot_tagihan" class="form-control rtagihan" placeholder="Total Tagihan" style="text-align: right;" value="<?=formatrp($pencairan_leasing[0]['tot_tagihan']);?>" readonly>
                             </div>
                         </div>
                         <div class="col-md-12 col-xs-12">
                             <label class="col-sm-12 control-label">Total Pencairan :</label>
                             <div class="col-sm-12">
-                                <input type="text" name="tot_pencairan" id="tot_pencairan" class="form-control rtagihan" placeholder="Total Pencairan" style="text-align: right;" value="0" readonly>
+                                <input type="text" name="tot_pencairan" id="tot_pencairan" class="form-control rtagihan" placeholder="Total Pencairan" style="text-align: right;" value="<?=formatrp($pencairan_leasing[0]['tot_pencairan']);?>" readonly>
                             </div>
                         </div>
                         <div class="col-md-12 col-xs-12">
                             <label class="col-sm-12 control-label">Sisa Tagihan :</label>
                             <div class="col-sm-12">
-                                <input type="text" name="sisa_tagihan" id="sisa_tagihan" class="form-control rtagihan" placeholder="Sisa Tagihan" style="text-align: right;" value="0" readonly>
+                                <input type="text" name="sisa_tagihan" id="sisa_tagihan" class="form-control rtagihan" placeholder="Sisa Tagihan" style="text-align: right;" value="<?=formatrp($pencairan_leasing[0]['tot_tagihan']-$pencairan_leasing[0]['tot_pencairan']);?>" readonly>
                             </div>
                         </div>
                     </div>
@@ -199,7 +200,13 @@
                         return formatCurrency(sisaTagihan);
                     },
                     "checkbok": function () {
-                        var checkb = "<span align='center'><input type='checkbox' id='idkwitansi_" + rows.id_kwitansi + "' class='idkwitansileasing dkwitansi' value='" + rows.id_kwitansi + "' /></span>";
+                        //console.log(rows);
+                        if(rows.tgl_pencairan != '' || typeof(rows.tgl_pencairan) != 'undefined'){
+                            var checkb = "<span align='center'><input type='checkbox' id='idkwitansi_" + rows.id_kwitansi + "' class='idkwitansileasing dkwitansi' value='" + rows.id_kwitansi + "' checked='true' /></span>";
+                        }else{
+                            var checkb = "<span align='center'><input type='checkbox' id='idkwitansi_" + rows.id_kwitansi + "' class='idkwitansileasing dkwitansi' value='" + rows.id_kwitansi + "' /></span>";
+                        }
+                        
                         return checkb;
                     },
                     "tgl_cair": function () {
@@ -294,7 +301,9 @@
                 ];
                 kwitansileasing.push(data);
             });
-
+            
+            //console.log(kwitansileasing);return false;
+            
             var dt = {rtagihan: saveTagihan, kleasing: kwitansileasing}
 
             $.ajax({
@@ -304,7 +313,7 @@
                 dataType: "json",
                 success: function (hsl) {
                     if (hsl.status == "success") {
-                        console.log(hsl);
+                        
                         alert(hsl.pesan);
                         //$("#saveTagihan, #generateTagihan").attr('disabled', true);
                         $("#printTagihan").removeAttr('disabled');
