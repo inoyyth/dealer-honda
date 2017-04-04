@@ -49,6 +49,33 @@
 
                         </div>
 
+                        <div style="clear: both;margin-bottom: 10px;"></div>
+
+                        <table class="table table-bordered" id="tblKwitansiLeasing">
+                            <thead>
+                                <tr>
+
+                                    <td><input type="checkbox" name="cnokwitansi" class="cnokwitansi"></td>
+
+                                    <td>No</td>
+                                    <td>Tgl Kwitansi</td>
+                                    <td>Nmr Kwitansi</td>
+                                    <td>Nama</td>
+                                    <td>Type</td>
+                                    <td>No.Mesin</td>
+                                    <td>No.Rangka</td>
+                                    <td>OTR</td>
+                                    <td>DP</td>
+                                    <td>Subsidi</td>
+                                    <td>Sisa</td>
+                                    <td>Price List</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+
+                        <div style="clear: both;margin-bottom: 10px;"></div>
 
                         <br>
                         &nbsp;
@@ -158,8 +185,36 @@
     </div>
 </div>
 
+<style>
+    .modal-dialog {
+        width: 90%;
+    }
+</style>
+
+<div class="modal fade bs-example-modal-lg" id="modalCovernote" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div id="covernoteContent"></div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
+    var base_url = "<?= base_url(); ?>";
+
     $(document).ready(function () {
+
+        $("#printTagihan").click(function () {
+            var no_tagihan = $("#no_tagihan").val();
+            $("#covernoteContent").load(base_url + "leasing/rekap_tagihan/print_rekap_tagihan?notagihan=" + no_tagihan);
+            $('#modalCovernote').modal('show');
+
+            return false;
+        })
+
         $("#listTagihan").click(function () {
             var dt = $(".frmrekap").serialize();
             $.ajax({
@@ -168,6 +223,7 @@
                 data: dt,
                 dataType: 'json',
                 success: function (hsl) {
+                    
                     $("#leasing").val(hsl.leasing.leasing);
                     $.getJSON("<?php echo base_url('leasing/rekap_tagihan/get_list_kwitansi?'); ?>" + dt, function (dtL) {
                         var gsisa = [];
@@ -183,7 +239,7 @@
                             $("#sisa_tagihan").val(0);
                         }
                     });
-                    table = $('#tblRekapTagihan').DataTable({
+                    table = $('#tblKwitansiLeasing').DataTable({
                         buttons: [
                             'selectAll',
                             'selectNone'
@@ -230,8 +286,25 @@
             //console.log(data);
             //$(".idkwitansileasing").prop('checked', this.checked);
         });
+        
         $("#generateTagihan").click(function () {
-            var idkwitansi_leasing = $('.idkwitansileasing:checked').map(function () {
+            var dtList = $(".frmrekap").serialize();
+            $.getJSON("<?php echo base_url('leasing/rekap_tagihan/get_list_kwitansi?'); ?>" + dtList, function (dtL) {
+                var gsisa = [];
+                gsisa = $.map(dtL.data, function (val, i) {
+                    var ss = val[11];
+                    var sisa = ss.split('.').join("");
+                    return parseInt(sisa);
+                });
+                if (gsisa.length > 0) {
+                    var totCalc = gsisa.reduce((x, y) => x + y);
+                    $("#sisa_tagihan").val(formatCurrency(totCalc));
+                } else {
+                    $("#sisa_tagihan").val(0);
+                }
+            });
+            
+            var idkwitansi_leasing = $('#tblKwitansiLeasing .idkwitansileasing:checked').map(function () {
                 return this.value;
             }).get();
             var dtkwitansi = idkwitansi_leasing.join(",");
@@ -290,10 +363,11 @@
         $("#saveTagihan").click(function () {
             var tgl_tagihan = $("#tgl_tagihan").val();
             var cleasing = $("#cabang_leasing").val();
+            
             if (tgl_tagihan != "" && cleasing != "") {
                 var saveTagihan = $(".rtagihan").serializeArray();
                 var kwitansileasing = [];
-                $.each($(".idkwitansileasing:checked"), function () {
+                $.each($("#tblRekapTagihan .idkwitansileasing:checked"), function () {
                     kwitansileasing.push($(this).val());
                 });
                 var dt = {rtagihan: saveTagihan, kleasing: kwitansileasing}
@@ -304,7 +378,7 @@
                     dataType: "json",
                     success: function (hsl) {
                         if (hsl.status == "success") {
-                            alert(hsl.pesan)
+                            alert(hsl.pesan);
                             $("#saveTagihan, #generateTagihan, #listTagihan").attr('disabled', true);
                         } else {
                             alert(hsl.pesan);
@@ -315,9 +389,9 @@
                 return false;
             } else {
                 alert("Need fill data !");
-                if(cleasing == ""){
+                if (cleasing == "") {
                     $("#cabang_leasing").focus();
-                }else{
+                } else {
                     $("#tgl_tagihan").focus();
                 }
             }

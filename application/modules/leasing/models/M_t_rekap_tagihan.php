@@ -81,6 +81,7 @@ class M_t_rekap_tagihan extends CI_Model {
                         break;
                     case "limit":
                     case "offset":
+                    case "group_by":
                         $this->db->$key($dtfilter);
                         break;
                     default:
@@ -168,11 +169,32 @@ class M_t_rekap_tagihan extends CI_Model {
         $this->db->join('m_motor', 'm_motor.tipe_motor=penerimaan_motor.tipe', 'left');
 
         $this->db->where('t_rekap_tagihan_detail.nomor_tagihan', $notagihan);
-        $this->db->where('t_rekap_tagihan_detail.status_rekap', 1);
-        
+        //$this->db->where('t_rekap_tagihan_detail.status_rekap', 1);
+        $this->db->group_by('t_kwitansi_leasing.nokwitansi');
+
         $query = $this->db->get();
-        
+
         return $query;
+    }
+
+    function delete($tablenm, $id) {
+        $this->db->where('id_kwitansi', $id);
+        $query = $this->db->delete($tablenm);
+        return $query;
+    }
+
+    function update_status_kwitansi($id, $status) {
+        $this->db->where('id', $id);
+        $data['status_rekap'] = $status;
+        $query = $this->db->update('t_kwitansi_leasing', $data);
+        return $query;
+    }
+    
+    function get_kwitansi_rekap($idkwitansi){
+        $this->db->where_in('id',$idkwitansi);
+        $query = $this->db->get('t_kwitansi_leasing');
+        
+        return $query->result();
     }
 
 }
