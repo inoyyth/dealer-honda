@@ -82,6 +82,7 @@
                 "aksi": function () {
                     var buton = "<a href=\'" + base_url + "pencairan-leasing-list-" + rows . id + "\' class=\'btn btn-info btn-xs\' title=\'List Tagihan\'><i class=\'fa fa-bars\'></i> </a>";
                     buton += " <a href=\'" + base_url + "pencairan-leasing-view-" + rows . id + "\' class=\'btn btn-danger btn-xs\' title=\'View Tagihan\'><i class=\'fa fa-eye\'></i> </a>";
+                    buton += " <a href=\'javascript:void(0);\' onclick=\'printPleasing(" + rows.id + ");\' class=\'btn btn-success btn-xs\' title=\'Print Tagihan\'><i class=\'glyphicon glyphicon-print\'></i> </a>";
                     return buton;
                 }
             }
@@ -110,3 +111,25 @@
 
 </div>
 </div>
+
+<div class="modal fade bs-example-modal-lg" id="modalCovernote" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div id="covernoteContent"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var base_url = "<?= base_url(); ?>";
+    
+    function printPleasing(id) {
+        $("#covernoteContent").load(base_url + "leasing/pencairan_leasing/print_rekap_pleasing?idrekap=" + id);
+        $('#modalCovernote').modal('show');
+
+        return false;
+    }
+</script>

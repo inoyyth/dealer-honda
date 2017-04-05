@@ -200,8 +200,7 @@
                         return formatCurrency(sisaTagihan);
                     },
                     "checkbok": function () {
-                        //console.log(rows);
-                        if(rows.tgl_pencairan != '' || typeof(rows.tgl_pencairan) != 'undefined'){
+                        if(rows.tgl_pencairan !== null && typeof(rows.tgl_pencairan) != 'undefined'){
                             var checkb = "<span align='center'><input type='checkbox' id='idkwitansi_" + rows.id_kwitansi + "' class='idkwitansileasing dkwitansi' value='" + rows.id_kwitansi + "' checked='true' /></span>";
                         }else{
                             var checkb = "<span align='center'><input type='checkbox' id='idkwitansi_" + rows.id_kwitansi + "' class='idkwitansileasing dkwitansi' value='" + rows.id_kwitansi + "' /></span>";
@@ -210,13 +209,15 @@
                         return checkb;
                     },
                     "tgl_cair": function () {
-
+                        
                         $(".dtpicker").datepicker({
                             format: 'yyyy-mm-dd',
                             startDate: '-3d'
                         });
+                        
+                        var tglpencairan = (rows.tgl_pencairan!==null && typeof(rows.tgl_pencairan)!=='undefined') ? rows.tgl_pencairan : '';
 
-                        var tglCair = "<input type='text' name='tglcair_" + rows.id_kwitansi + "' id='tglcair_" + rows.id_kwitansi + "' parsley-trigger='change' class='form-control dtpicker dkwitansi' placeholder='yyyy-mm-dd' />";
+                        var tglCair = "<input type='text' name='tglcair_" + rows.id_kwitansi + "' id='tglcair_" + rows.id_kwitansi + "' parsley-trigger='change' class='form-control dtpicker dkwitansi' placeholder='yyyy-mm-dd' value='" + tglpencairan + "' />";
 
                         return tglCair;
                     }
@@ -238,7 +239,7 @@
 
             $.ajax({
                 type: "get",
-                url: "<?php echo base_url('leasing/rekap_tagihan/get_rekap_tagihan_edit'); ?>",
+                url: "<?php echo base_url('leasing/pencairan_leasing/get_rekap_tagihan_edit'); ?>",
                 data: {dt: dtkwitansi, dtuncheck: dtkwitansi_uncheck},
                 dataType: "json",
                 success: function (hsl) {
@@ -302,9 +303,14 @@
                 kwitansileasing.push(data);
             });
             
+            var idkwitansi_leasing_uncheck = $('.idkwitansileasing:not(:checked)').map(function () {
+                return this.value;
+            }).get();
+            var dtkwitansi_uncheck = idkwitansi_leasing_uncheck.join(",");
+            
             //console.log(kwitansileasing);return false;
             
-            var dt = {rtagihan: saveTagihan, kleasing: kwitansileasing}
+            var dt = {rtagihan: saveTagihan, kleasing: kwitansileasing, uncheck:dtkwitansi_uncheck}
 
             $.ajax({
                 type: "POST",

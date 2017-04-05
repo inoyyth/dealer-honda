@@ -78,5 +78,11 @@ class M_t_pleasing extends CI_Model {
         $this->db->where('id_kwitansi', $idkwitansi);
         return $this->db->get('t_pencairan_leasing_detail');
     }
+    
+    function delete_pleasing_detail($idkwitansi){
+        $this->db->where_in('id_kwitansi', $idkwitansi);
+        $query = $this->db->delete('t_pencairan_leasing_detail');
+        return $query;
+    }
 
 }
