@@ -20,14 +20,14 @@
 
                         <div class="form-group">
                             <div class="col-sm-12">
-                                
+
                                 <?php
                                 if ($this->router->fetch_method() <> "detail") {
                                     ?>
                                     <button type="button" name="generate" id="generateTagihan" class="btn btn-danger">  Generate </button>
                                     <button type="button" name="save" id="saveTagihan" class="btn btn-primary" disabled> Save </button>
                                 <?php } ?>
-                                <button type="button" name="print" id="printTagihan" class="btn btn-default" disabled>
+                                <button type="button" name="print" id="printTagihan" onclick="printTag();" class="btn btn-default" disabled>
                                     <i class="glyphicon glyphicon-print"></i> Print 
                                 </button>
 
@@ -61,7 +61,7 @@
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">Tanggal Pencairan</label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="tgl_pencairan" id="tgl_pencairan" parsley-trigger="change" class="form-control pleasing datepicker rtagihan" value="<?=date('Y-m-d',strtotime($pencairan_leasing[0]['tgl_pencairan']));?>">
+                                    <input type="text" name="tgl_pencairan" id="tgl_pencairan" parsley-trigger="change" class="form-control pleasing datepicker rtagihan" value="<?= date('Y-m-d', strtotime($pencairan_leasing[0]['tgl_pencairan'])); ?>">
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">No. Bukti Potongan</label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="no_bukti_potongan" id="no_bukti_potongan" class="form-control pleasing rtagihan" value="<?=$pencairan_leasing[0]['no_bukti_potongan'];?>" />
+                                    <input type="text" name="no_bukti_potongan" id="no_bukti_potongan" class="form-control pleasing rtagihan" value="<?= $pencairan_leasing[0]['no_bukti_potongan']; ?>" />
                                 </div>
                             </div>
                         </div>
@@ -110,19 +110,19 @@
                         <div class="col-md-12 col-xs-12">
                             <label class="col-sm-12 control-label">Total Tagihan :</label>
                             <div class="col-sm-12">
-                                <input type="text" name="tot_tagihan" id="tot_tagihan" class="form-control rtagihan" placeholder="Total Tagihan" style="text-align: right;" value="<?=formatrp($pencairan_leasing[0]['tot_tagihan']);?>" readonly>
+                                <input type="text" name="tot_tagihan" id="tot_tagihan" class="form-control rtagihan" placeholder="Total Tagihan" style="text-align: right;" value="<?= formatrp($pencairan_leasing[0]['tot_tagihan']); ?>" readonly>
                             </div>
                         </div>
                         <div class="col-md-12 col-xs-12">
                             <label class="col-sm-12 control-label">Total Pencairan :</label>
                             <div class="col-sm-12">
-                                <input type="text" name="tot_pencairan" id="tot_pencairan" class="form-control rtagihan" placeholder="Total Pencairan" style="text-align: right;" value="<?=formatrp($pencairan_leasing[0]['tot_pencairan']);?>" readonly>
+                                <input type="text" name="tot_pencairan" id="tot_pencairan" class="form-control rtagihan" placeholder="Total Pencairan" style="text-align: right;" value="<?= formatrp($pencairan_leasing[0]['tot_pencairan']); ?>" readonly>
                             </div>
                         </div>
                         <div class="col-md-12 col-xs-12">
                             <label class="col-sm-12 control-label">Sisa Tagihan :</label>
                             <div class="col-sm-12">
-                                <input type="text" name="sisa_tagihan" id="sisa_tagihan" class="form-control rtagihan" placeholder="Sisa Tagihan" style="text-align: right;" value="<?=formatrp($pencairan_leasing[0]['tot_tagihan']-$pencairan_leasing[0]['tot_pencairan']);?>" readonly>
+                                <input type="text" name="sisa_tagihan" id="sisa_tagihan" class="form-control rtagihan" placeholder="Sisa Tagihan" style="text-align: right;" value="<?= formatrp($pencairan_leasing[0]['tot_tagihan'] - $pencairan_leasing[0]['tot_pencairan']); ?>" readonly>
                             </div>
                         </div>
                     </div>
@@ -153,6 +153,16 @@
 
 </div>
 
+<div class="modal fade bs-example-modal-lg" id="modalCovernote" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div id="covernoteContent"></div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
     var base_url = "<?= base_url(); ?>";
@@ -200,22 +210,22 @@
                         return formatCurrency(sisaTagihan);
                     },
                     "checkbok": function () {
-                        if(rows.tgl_pencairan !== null && typeof(rows.tgl_pencairan) != 'undefined'){
+                        if (rows.tgl_pencairan !== null && typeof (rows.tgl_pencairan) != 'undefined') {
                             var checkb = "<span align='center'><input type='checkbox' id='idkwitansi_" + rows.id_kwitansi + "' class='idkwitansileasing dkwitansi' value='" + rows.id_kwitansi + "' checked='true' /></span>";
-                        }else{
+                        } else {
                             var checkb = "<span align='center'><input type='checkbox' id='idkwitansi_" + rows.id_kwitansi + "' class='idkwitansileasing dkwitansi' value='" + rows.id_kwitansi + "' /></span>";
                         }
-                        
+
                         return checkb;
                     },
                     "tgl_cair": function () {
-                        
+
                         $(".dtpicker").datepicker({
                             format: 'yyyy-mm-dd',
                             startDate: '-3d'
                         });
-                        
-                        var tglpencairan = (rows.tgl_pencairan!==null && typeof(rows.tgl_pencairan)!=='undefined') ? rows.tgl_pencairan : '';
+
+                        var tglpencairan = (rows.tgl_pencairan !== null && typeof (rows.tgl_pencairan) !== 'undefined') ? rows.tgl_pencairan : '';
 
                         var tglCair = "<input type='text' name='tglcair_" + rows.id_kwitansi + "' id='tglcair_" + rows.id_kwitansi + "' parsley-trigger='change' class='form-control dtpicker dkwitansi' placeholder='yyyy-mm-dd' value='" + tglpencairan + "' />";
 
@@ -302,15 +312,15 @@
                 ];
                 kwitansileasing.push(data);
             });
-            
+
             var idkwitansi_leasing_uncheck = $('.idkwitansileasing:not(:checked)').map(function () {
                 return this.value;
             }).get();
             var dtkwitansi_uncheck = idkwitansi_leasing_uncheck.join(",");
-            
+
             //console.log(kwitansileasing);return false;
-            
-            var dt = {rtagihan: saveTagihan, kleasing: kwitansileasing, uncheck:dtkwitansi_uncheck}
+
+            var dt = {rtagihan: saveTagihan, kleasing: kwitansileasing, uncheck: dtkwitansi_uncheck}
 
             $.ajax({
                 type: "POST",
@@ -319,7 +329,7 @@
                 dataType: "json",
                 success: function (hsl) {
                     if (hsl.status == "success") {
-                        
+
                         alert(hsl.pesan);
                         //$("#saveTagihan, #generateTagihan").attr('disabled', true);
                         $("#printTagihan").removeAttr('disabled');
@@ -333,15 +343,14 @@
 
         });
 
-        $("#printTagihan").click(function () {
-            //printDiv('printRekap');
-            var no_tagihan = $("#no_tagihan").val();
-            //no_tagihan = no_tagihan.split('/').join("_");
-            $("#covernoteContent").load(base_url + "leasing/rekap_tagihan/print_rekap_tagihan?notagihan=" + no_tagihan);
-            $('#modalCovernote').modal('show');
-            return false;
-        })
 
     })
+
+    function printTag() {
+        var id = "<?= $idrekap; ?>";
+        $("#covernoteContent").load(base_url + "leasing/pencairan_leasing/print_rekap_pleasing?idrekap=" + id);
+        $('#modalCovernote').modal('show');
+        return false;
+    }
 
 </script>    

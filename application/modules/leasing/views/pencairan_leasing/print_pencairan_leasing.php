@@ -42,7 +42,7 @@
                                 <table width="100%" style="font-size:12px;">
                                     <tr>
                                         <td>No Tagihan </td>
-                                        <td>: <?php echo $rkwitansi[0]['no_tagihan']; ?></td>
+                                        <td>: <?php echo $head_pleasing['no_tagihan']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Dealer </td>
@@ -50,18 +50,18 @@
                                     </tr>
                                     <tr>
                                         <td>Leasing </td>
-                                        <td>: <?php echo $rkwitansi[0]['kdleasing']; ?></td>
+                                        <td>: <?php echo $head_pleasing['leasing']; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Tanggal Tagihan </td>
-                                        <td>: <?php echo date("Y-m-d", strtotime($rkwitansi[0]['tgl_tagihan'])); ?></td>
+                                        <td>: <?php echo date("d F Y", strtotime($head_pleasing['tgl_tagihan'])); ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Sisa Tagihan </td>
-                                        <td>: <?php echo formatrp($rkwitansi[0]['sisa_tagihan']); ?></td>
+                                        <td>No. Bukti Potongan </td>
+                                        <td>: <?php echo $head_pleasing['no_bukti_potongan']; ?></td>
                                     </tr>
                                 </table>
-                                
+
                                 <div class="col-sm-6">
 
                                 </div>
@@ -88,15 +88,15 @@
                                     <tbody>
                                         <?php
                                         $no = 0;
-
-                                        foreach ($list_rekapan as $lrekapan) {
+                                        $tot_sudahbayar = 0;
+                                        foreach ($detail_pleasing as $lrekapan) {
                                             $no++;
 
-                                            $sisaTagihan = formatrp(($lrekapan['harga_otr'] - $lrekapan['dp']) + ($lrekapan['subsidi1'] + $lrekapan['subsidi2']));
+                                            $sisaTagihan = $lrekapan['harga_otr'] - ($lrekapan['dp'] + $lrekapan['subsidi1'] + $lrekapan['subsidi2']);
                                             $subsidi = formatrp($lrekapan['subsidi1'] + $lrekapan['subsidi2']);
                                             echo "<tr>
                                                 <td>{$no}</td>
-                                                <td>" . date('d F Y', strtotime($lrekapan['sys_create_date'])) . "</td>
+                                                <td>" . date('d F Y', strtotime(@$lrekapan['sys_create_date'])) . "</td>
                                                 <td>{$lrekapan['nokwitansi']}</td>
                                                 <td>{$lrekapan['nama_customer']}</td>
                                                 <td>{$lrekapan['tipe']}</td>
@@ -105,9 +105,11 @@
                                                 <td>" . formatrp($lrekapan['harga_otr']) . "</td>
                                                 <td>" . formatrp($lrekapan['dp']) . "</td>
                                                 <td>" . $subsidi . "</td>
-                                                <td>" . $sisaTagihan . "</td>
+                                                <td>" . formatrp($sisaTagihan) . "</td>
                                                 <td>" . $lrekapan['varian'] . "</td>
                                             </tr>";
+
+                                            $tot_sudahbayar += $sisaTagihan;
                                         }
                                         ?>
                                     </tbody>
@@ -117,9 +119,9 @@
                             <div style="clear: both;margin-bottom: 10px;"></div>
 
                             <div class="col-md-12 col-xs-12">
-                                <label class="col-sm-12 control-label" style="text-align:right;">Total Tagihan :</label>
+                                <label class="col-sm-12 control-label" style="text-align:right;">Total Sudah Dibayar :</label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="tot_tagihan" id="tot_tagihan" class="form-control rtagihan" placeholder="Total Tagihan" style="text-align: right;" value="<?= formatrp($rkwitansi[0]['tot_tagihan']); ?>" readonly>
+                                    <input type="text" name="tot_tagihan" id="tot_tagihan" class="form-control rtagihan" placeholder="Total Tagihan" style="text-align: right;" value="<?= formatrp($tot_sudahbayar); ?>" readonly>
                                 </div>
                             </div>
                         </div>

@@ -113,6 +113,8 @@ GROUP BY a.no_tagihan) AS terbayar
     public function lists($id) {
         $data['notagihan'] = '';
         $this->breadcrumbs->push('List', '/pencairan-leasing-list-' . $id);
+        
+        $data['idrekap'] = $id;
 
         $data['rekap_tagihan'] = $this->main_model->getMaster($this->table, $like = array(), $where = array('id' => $id));
 
@@ -344,6 +346,8 @@ GROUP BY a.no_tagihan) AS terbayar
     public function print_rekap_pleasing(){
         $idrekap = $this->input->get('idrekap');
         
+        $data['head_pleasing'] = $this->t_pleasing->get_head_pleasing($idrekap)->row_array();
+        $data['detail_pleasing'] = $this->t_pleasing->get_item_pleasing($idrekap)->result_array();
         $this->load->view('leasing/pencairan_leasing/print_pencairan_leasing', $data);
     }
     
