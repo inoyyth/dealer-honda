@@ -422,6 +422,7 @@ $route['pencairan-leasing'] = 'leasing/pencairan_leasing/index';
 $route['pencairan-leasing-list-(:num)'] = 'leasing/pencairan_leasing/lists/$1';
 $route['pencairan-leasing-view-(:num)'] = 'leasing/pencairan_leasing/view/$1';
 $route['pencairan-leasing-detail-(:num)'] = 'leasing/pencairan_leasing/detail/$1';
+$route['pencairan-leasing-print-(:num)'] = 'leasing/pencairan_leasing/cetak/$1';
 /*
  * End Pencairan Leasing
  */

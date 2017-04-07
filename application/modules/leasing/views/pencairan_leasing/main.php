@@ -37,8 +37,8 @@
                                                     <tr>
                                                         <th data-options="no_tagihan" style="width:10%;">No. Tagihan</th>
                                                         <th data-options="jml_motor" style="width:10%;">Jumlah Motor</th>
-                                                        <th data-options="total_ptagihan" style="width:10%;">Jumlah Tagihan</th>
-                                                        <th data-options="tot_ptagihan" style="width:10%;">Jumlah Sudah Dibayar</th>
+                                                        <th data-options="tot_ptagihan" style="width:10%;">Jumlah Tagihan</th>
+                                                        <th data-options="sdhbayar" style="width:10%;">Jumlah Sudah Dibayar</th>
                                                         <th data-options="sisa_ptagihan" style="width:10%;">Jumlah Outstanding</th>
                                                         <th data-options="aksi" style="width:10%;">Action</th>
                                                     </tr>
@@ -61,26 +61,28 @@
             cSearch: {
                 \'no_tagihan\': \'No. Tagihan\',
                 \'jml_motor\': \'Jumlah Motor\',
-                \'total_tagihan\': \'Jumlah Tagihan\',
-                \'tot_tagihan\': \'Jumlah Sudah Bayar\',
+                \'tot_tagihan\': \'Jumlah Tagihan\',
+                \'sdhbayar\': \'Jumlah Sudah Bayar\',
                 \'sisa_tagihan\': \'Jumlah Outstanding\'
             },
             formatters: {
-                "total_ptagihan" : function(){
-                    var total_tagihan = formatCurrency(rows.total_tagihan);
-                    return total_tagihan;
+                "sdhbayar" : function(){
+                    var sdhbayar = formatCurrency(parseInt(rows.terbayar));
+                    return sdhbayar;
                 },
                 "tot_ptagihan" : function(){
                     var total_tagihan = formatCurrency(rows.tot_tagihan);
                     return total_tagihan;
                 },
                 "sisa_ptagihan" : function(){
-                    var sisa_tagihan = formatCurrency(rows.sisa_tagihan);
-                    return sisa_tagihan;
+                    var sisa_tagihan = (parseFloat(rows.tot_tagihan) - parseFloat(rows.terbayar));
+                    //formatCurrency(rows.sisa_tagihan);
+                    return formatCurrency(sisa_tagihan);
                 },
                 "aksi": function () {
                     var buton = "<a href=\'" + base_url + "pencairan-leasing-list-" + rows . id + "\' class=\'btn btn-info btn-xs\' title=\'List Tagihan\'><i class=\'fa fa-bars\'></i> </a>";
                     buton += " <a href=\'" + base_url + "pencairan-leasing-view-" + rows . id + "\' class=\'btn btn-danger btn-xs\' title=\'View Tagihan\'><i class=\'fa fa-eye\'></i> </a>";
+                    buton += " <a href=\'javascript:void(0);\' onclick=\'printPleasing(" + rows.id + ");\' class=\'btn btn-success btn-xs\' title=\'Print Tagihan\'><i class=\'glyphicon glyphicon-print\'></i> </a>";
                     return buton;
                 }
             }
@@ -109,3 +111,25 @@
 
 </div>
 </div>
+
+<div class="modal fade bs-example-modal-lg" id="modalCovernote" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div id="covernoteContent"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var base_url = "<?= base_url(); ?>";
+    
+    function printPleasing(id) {
+        $("#covernoteContent").load(base_url + "leasing/pencairan_leasing/print_rekap_pleasing?idrekap=" + id);
+        $('#modalCovernote').modal('show');
+
+        return false;
+    }
+</script>
