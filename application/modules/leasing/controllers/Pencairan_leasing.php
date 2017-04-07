@@ -318,9 +318,22 @@ GROUP BY a.no_tagihan) AS terbayar
         }
     }
 
-    public function view() {
-        $id = $this->uri->segment(4);
-        echo $id;
+    public function view($id) {
+        $data['notagihan'] = '';
+        $this->breadcrumbs->push('List', '/pencairan-leasing-list-' . $id);
+        
+        $data['idrekap'] = $id;
+
+        $data['rekap_tagihan'] = $this->main_model->getMaster($this->table, $like = array(), $where = array('id' => $id));
+
+        $data['dtleasing'] = $this->main_model->getMaster('m_leasing', $like = array(), $where = array('kd_leasing' => $data['rekap_tagihan'][0]['kdleasing'], 'status_leasing' => '1'));
+
+        $data['rekap_detail'] = $this->main_model->getMaster('t_rekap_tagihan_detail', $like = array(), $where = array('nomor_tagihan' => $data['rekap_tagihan'][0]['no_tagihan'], 'status_rekap' => 1));
+
+        $data['pencairan_leasing'] = $this->main_model->getMaster('t_pencairan_leasing', $like = array(), $where = array('no_tagihan' => $data['rekap_tagihan'][0]['no_tagihan']));
+
+        $data['view'] = "leasing/pencairan_leasing/view";
+        $this->load->view('default', $data);
     }
 
     public function __getSession() {
