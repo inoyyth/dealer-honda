@@ -26,7 +26,7 @@ class Rp_penjualan extends MX_Controller {
         $data['view'] = 'rp_penjualan/main';
         $this->load->view('default', $data);
     }
-    
+
     public function __getSession() {
         if ($_POST) {
             return $data = array(
@@ -48,7 +48,7 @@ class Rp_penjualan extends MX_Controller {
             );
         }
     }
-    
+
     public function transaksi_detail($noso) {
         $data['detail_penjualan'] = $this->db->get_where('t_penjualan', array('noso' => decode_url($noso)))->row_array();
         $data['detail_penerimaan_motor'] = $this->m_report_penjualan->getPenerimaanMotor($data['detail_penjualan']['nomsn'])->row_array();
@@ -62,8 +62,9 @@ class Rp_penjualan extends MX_Controller {
         $data['view'] = 'rp_penjualan/transaksi_detail';
         $this->load->view('default', $data);
     }
-    
-    public function print_transaksi_detail($noso){
+
+    public function print_transaksi_detail($noso) {
+        
         $data['detail_penjualan'] = $this->db->get_where('t_penjualan', array('noso' => decode_url($noso)))->row_array();
         $data['detail_penerimaan_motor'] = $this->m_report_penjualan->getPenerimaanMotor($data['detail_penjualan']['nomsn'])->row_array();
         $data['detail_motor'] = $this->db->get_where('m_motor', array('tipe_motor' => $data['detail_penerimaan_motor']['tipe']))->row_array();
@@ -75,7 +76,6 @@ class Rp_penjualan extends MX_Controller {
         $data['list_dp'] = $this->db->get_where('t_pembayaran', array('noso' => $data['detail_penjualan']['noso']))->result_array();
         $this->load->view('rp_penjualan/print_transaksi_detail', $data);
     }
-
 
     public function print_pdf() {
         $data['template'] = array("template" => "rp_penjualan/" . $_GET['template'], "filename" => $_GET['name']);

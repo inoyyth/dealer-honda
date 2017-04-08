@@ -10,30 +10,30 @@ Class M_rp_penjualan extends CI_Model {
         unset($like['end']);
         $dateStart = $this->input->post('start');
         $dateEnd = $this->input->post('end');
-        if($dateStart != null && $dateEnd != null){
+        if ($dateStart != null && $dateEnd != null) {
             $where = [
                 't_penjualan.tanggal >=' => $dateStart,
                 't_penjualan.tanggal <=' => $dateEnd
             ];
-        }else if($dateStart == null && $dateEnd != null){
+        } else if ($dateStart == null && $dateEnd != null) {
             $where = [
                 't_penjualan.tanggal <=' => $dateEnd
             ];
-        }else if($dateStart != null && $dateEnd == null){
+        } else if ($dateStart != null && $dateEnd == null) {
             $where = [
                 't_penjualan.tanggal >=' => $dateStart
             ];
         }
-        $this->db->select($table.".*,penerimaan_motor.tipe");
+        $this->db->select($table . ".*,penerimaan_motor.tipe");
         $this->db->from($table);
-        $this->db->join('penerimaan_motor',$table.".nomsn=penerimaan_motor.nomesin");
-        $this->db->join('t_harga_motor',$table.".noso=t_harga_motor.noso");
+        $this->db->join('penerimaan_motor', $table . ".nomsn=penerimaan_motor.nomesin");
+        $this->db->join('t_harga_motor', $table . ".noso=t_harga_motor.noso");
         $this->db->like($like);
         $this->db->where($where);
         $this->db->limit($pg, $limit);
         return $this->db->get()->result_array();
     }
-    
+
     public function getAksesoris($pdi_id) {
         $this->db->select('global_data.value as katagori_aksesoris,m_aksesoris.aksesoris');
         $this->db->from('t_pdi_detail');
@@ -50,4 +50,5 @@ Class M_rp_penjualan extends CI_Model {
         $this->db->join("m_gudang", "m_gudang.id=penerimaan_motor.kdgudang", "INNER");
         return $this->db->get();
     }
+
 }

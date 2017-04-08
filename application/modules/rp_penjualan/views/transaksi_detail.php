@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="block-web">
         <div class="form-group">
-            <a href="<?php echo base_url('laporan-penjualan');?>" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back</a> 
+            <a href="<?php echo base_url('laporan-penjualan'); ?>" class="btn btn-danger"><i class="fa fa-arrow-left"></i> Back</a> 
             <button id="printTransaksi" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
         </div>
     </div>
@@ -145,7 +145,7 @@
                             </tr>
                             <tr style="font-weight: bolder;">
                                 <td>Status Transaksi</td>
-                                <td>: <?php echo status_transaksi($detail_penjualan['m_status']);?></td>
+                                <td>: <?php echo status_transaksi($detail_penjualan['m_status']); ?></td>
                             </tr>
                         </table>
                     </div>
@@ -221,23 +221,23 @@
 <script>
     $(document).ready(function () {
         $('#VoidTransaction').click(function () {
-            var noso = '<?php echo $detail_harga['noso'];?>';
+            var noso = '<?php echo $detail_harga['noso']; ?>';
             var alasan = $("#alasan").val();
             $.ajax({
                 type: "POST",
                 url: "<?php echo base_url('t_void/void_transaction'); ?>",
-                data: {noso: noso,alasan:alasan},
+                data: {noso: noso, alasan: alasan},
                 success: function (result) {
-                    location.replace('<?php echo base_url('void');?>');
+                    location.replace('<?php echo base_url('void'); ?>');
                 },
                 async: false
             });
         });
-        
+
         $("#printTransaksi").click(function (event) {
             event.preventDefault();
             var baseUrl = '<?php echo base_url('laporan-penjualan-print-transaksi'); ?>';
-            $("#covernoteContent").load(baseUrl + "-" + $("#noso").val()); 
+            $("#covernoteContent").load(baseUrl + "-" + $("#noso").val());
             $('#modalCovernote').modal('show');
         });
     });
