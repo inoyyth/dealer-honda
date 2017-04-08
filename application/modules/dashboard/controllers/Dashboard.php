@@ -153,5 +153,71 @@ class Dashboard extends MX_Controller {
 
         echo json_encode($boot);
     }
+    
+    function list_konsumen_nunggak(){
+        $this->load->view('dashboard/list_konsumen');
+    }
+    
+    function jlist_konsumen() {
+        $searchField = isset($_GET['field']) ? $_GET['field'] : NULL;
+        $searchValue = isset($_GET['value']) ? $_GET['value'] : NULL;
+        $sort = $this->input->post('sort');
+
+        $kdleasing = $this->uri->segment(4);
+
+        if ($this->input->get('climit')) {
+            if ($this->input->get('climit') > 0) {
+                $lmt = $this->input->get('climit');
+            } else {
+                $lmt = 0;
+            }
+        } else {
+            $lmt = 10;
+        }
+
+        $boot['current'] = isset($_GET['cOffset']) > 0 ? $_GET['cOffset'] : 0;
+        $boot['rowCount'] = $lmt;
+
+        // Offset didapat setelah mendapat nilai dari $boot['current'] dan $lmt
+        $offset = ((int) $boot['current']);
+
+        $this->db->select('MAX(a.id) AS id, a.noso, a.cara_pembelian,a.marketing, b.ktp, c.nama_customer, c.telepon_customer', false);
+        $this->db->from('t_harga_motor a');
+        $this->db->join('t_penjualan b', 'b.noso = a.noso', 'left');
+        $this->db->join('m_customer c', 'b.noso = a.noso', 'left');
+
+        $this->db->where('a.cara_pembelian', 'Cash');
+        $this->db->where('a.dp_lunas', 1);
+
+        if ($searchField <> NULL and $searchField <> "" and $searchField <> "all") {
+            switch ($searchField) {
+                case 't_stnk_ktp':
+                case 't_stnk_nama':
+                    $this->db->like('b.' . $searchField, $searchValue);
+                    break;
+                default:
+                    $this->db->like('a.' . $searchField, $searchValue);
+                    break;
+            }
+        }
+
+        $this->db->limit($lmt);
+        $this->db->offset($offset);
+
+        if ($sort <> NULL) {
+            $this->db->order_by($sort);
+        } else {
+            $this->db->order_by('a.id', 'desc');
+        }
+        
+        $this->db->group_by('a.noso');
+
+        $query = $this->db->get();
+
+        $boot['rows'] = $query->result();
+        $boot['total'] = $query->num_rows();
+
+        echo json_encode($boot);
+    }
 
 }

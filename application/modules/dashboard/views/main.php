@@ -97,7 +97,8 @@
 
     function konTunggak(jml) {
         $("#showDetailmain").empty();
-        $("#showDetailmain").html("Tagihan Ke Konsumen " + jml);
+        $("#showDetailmain").load(base_url + "dashboard/list_konsumen_nunggak");
+        //$("#showDetailmain").html("Tagihan Ke Konsumen " + jml);
     }
 
     function tagihanLeasing(jml) {
