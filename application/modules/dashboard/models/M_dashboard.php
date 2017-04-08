@@ -14,7 +14,6 @@
 class M_dashboard extends CI_Model {
 
     //put your code here
-
     // var $table = "t_stnk";
     // var $table_customer = "t_stnk_customer";
 
@@ -28,7 +27,7 @@ class M_dashboard extends CI_Model {
         $this->db->select('*');
         $this->db->from('t_stnk');
         $date = date('Y-m-d');
-        $this->db->where('stnk_estimate_date <', $date);
+        $this->db->where('stnk_estimate_date', $date);
         return $this->db->get()->result_array();
     }
 
@@ -36,20 +35,20 @@ class M_dashboard extends CI_Model {
         $this->db->select('*');
         $this->db->from('t_stnk');
         $date = date('Y-m-d');
-        $this->db->where('bpkb_estimate_date <', $date);
+        $this->db->where('bpkb_estimate_date', $date);
         return $this->db->get()->result_array();
     }
 
-    public function pembayaran_konsumen()
-    {
-        $this->db->select('*');
+    public function pembayaran_konsumen() {
+        $this->db->select('max(id)');
         $this->db->from('t_harga_motor');
         $this->db->where(array('cara_pembelian' => 'Cash', 'dp_lunas' => 1));
+        $this->db->group_by('noso');
         return $this->db->get()->result_array();
     }
 
-    public function tagihan_leasing()
-    {
+    public function tagihan_leasing() {
         # code...
     }
+
 }
