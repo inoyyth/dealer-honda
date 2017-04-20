@@ -72,18 +72,22 @@
                                     <input type="text" name="cabang_leasing" id="cabang_leasing" class="form-control pleasing rtagihan" value="<?= $rekap_tagihan[0]['cabang_leasing']; ?>" readonly />
                                 </div>
                             </div>
+                            
+                            <!--
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">No. Bukti Potongan</label>
                                 <div class="col-sm-12">
                                     <input type="text" name="no_bukti_potongan" id="no_bukti_potongan" class="form-control pleasing rtagihan" value="<?= $pencairan_leasing[0]['no_bukti_potongan']; ?>" />
                                 </div>
                             </div>
+                            //-->
+                            
                         </div>
 
 
                         <div style="clear: both;margin-bottom: 10px;"></div>
 
-                        <table class="table table-bordered" id="tblPencairanLeasing" width="100%">
+                        <table class="table table-bordered" id="tblPencairanLeasing" width="100%" style="font-size: 12px;">
                             <thead>
                                 <tr>
                                     <th data-options="checkbok"><input type="checkbox" name="cnokwitansi" class="cnokwitansi"></th>
@@ -97,6 +101,7 @@
                                     <th data-options="tdp">DP</th>
                                     <th data-options="subsidi">Subsidi</th>
                                     <th data-options="sisa">Sisa</th>
+                                    <th data-options="nobuktipotongan">No. Bukti Potongan</th>
                                     <th data-options="tgl_cair">Tanggal Pencairan <sup style="color:red">(*)</sup></th>
                                 </tr>
                             </thead>
@@ -190,7 +195,8 @@
                     'harga_otr': 'Harga OTR', // m_motor
                     'dp': 'DP', // t_harga_motor
                     'subsidi': 'Subsidi', // t_kwitansi_leasing
-                    'sisa': 'Sisa' // m_motor + t_harga_motor + t_kwitansi_leasing
+                    'sisa': 'Sisa', // m_motor + t_harga_motor + t_kwitansi_leasing
+                    'no_bukti_potongan': 'No. Bukti Potongan'
                 },
                 formatters: {
                     "tdp": function () {
@@ -217,6 +223,15 @@
                         }
 
                         return checkb;
+                    },
+                    "nobuktipotongan": function () {
+                        if(rows.no_bukti_potongan === null){
+                            var nobuktipotongan="";
+                        }else{
+                            var nobuktipotongan=rows.no_bukti_potongan;
+                        }
+                        var inputPotongan = "<input type='text' name='buktipotongan_" + rows.id_kwitansi + "' id='buktipotongan_" + rows.id_kwitansi + "' class='form-control' placeholder='No. Bukti Potongan' value='" + nobuktipotongan + "' />";
+                        return inputPotongan;
                     },
                     "tgl_cair": function () {
 
@@ -306,6 +321,10 @@
                         value: $(this).val()
                     },
                     {
+                        name: 'no_bukti_potongan',
+                        value: $("#buktipotongan_" + $(this).val()).val()
+                    },
+                    {
                         name: "tgl_pencairan",
                         value: $("#tglcair_" + $(this).val()).val()
                     }
@@ -339,7 +358,7 @@
                     }
                 }
             });
-            return false;
+            //return false;
 
         });
 

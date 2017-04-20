@@ -56,10 +56,12 @@
                                         <td>Tanggal Tagihan </td>
                                         <td>: <?php echo date("d F Y", strtotime($head_pleasing['tgl_tagihan'])); ?></td>
                                     </tr>
+                                    <!--
                                     <tr>
                                         <td>No. Bukti Potongan </td>
                                         <td>: <?php echo $head_pleasing['no_bukti_potongan']; ?></td>
                                     </tr>
+                                    //-->
                                 </table>
 
                                 <div class="col-sm-6">
@@ -83,6 +85,7 @@
                                             <td>Subsidi</td>
                                             <td>Sisa</td>
                                             <td>Price List</td>
+                                            <td>No. Bukti Potongan</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -107,6 +110,7 @@
                                                 <td>" . $subsidi . "</td>
                                                 <td>" . formatrp($sisaTagihan) . "</td>
                                                 <td>" . $lrekapan['varian'] . "</td>
+                                                <td>" . $lrekapan['no_bukti_potongan'] . "</td>
                                             </tr>";
 
                                             $tot_sudahbayar += $sisaTagihan;

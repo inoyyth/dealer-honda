@@ -113,7 +113,7 @@ GROUP BY a.no_tagihan) AS terbayar
     public function lists($id) {
         $data['notagihan'] = '';
         $this->breadcrumbs->push('List', '/pencairan-leasing-list-' . $id);
-        
+
         $data['idrekap'] = $id;
 
         $data['rekap_tagihan'] = $this->main_model->getMaster($this->table, $like = array(), $where = array('id' => $id));
@@ -152,7 +152,7 @@ GROUP BY a.no_tagihan) AS terbayar
         // Offset didapat setelah mendapat nilai dari $boot['current'] dan $lmt
         $offset = ((int) $boot['current']);
 
-        $this->db->select('t_rekap_tagihan_detail.id_kwitansi,t_rekap_tagihan_detail.nomor_tagihan,t_rekap_tagihan_detail.status_rekap,t_kwitansi_leasing.nokwitansi,t_kwitansi_leasing.noso,t_kwitansi_leasing.dp_system,t_kwitansi_leasing.tagih,t_kwitansi_leasing.subsidi1,t_kwitansi_leasing.subsidi2,t_penjualan.nosj,t_penjualan.nokonsumen,t_penjualan.ktp,t_penjualan.tanggal,t_penjualan.nomsn,t_penjualan.warna_motor,t_penjualan.harga_otr,t_penjualan.status_kwitansi,penerimaan_motor.nopolisi,penerimaan_motor.norangka,penerimaan_motor.tipe,penerimaan_motor.warna,penerimaan_motor.tahun,penerimaan_motor.kdgudang,penerimaan_motor.tglupload,penerimaan_motor.status_jual,t_harga_motor.cara_pembelian,t_harga_motor.marketing,t_harga_motor.leasing,t_harga_motor.dp_system,t_harga_motor.diskon,t_harga_motor.tagih,t_harga_motor.dp,t_harga_motor.sisa_hutang,t_harga_motor.dp_lunas,t_harga_motor.fee,m_customer.nama_customer,m_customer.tempat_lahir_customer,m_customer.tanggal_lahir_customer,m_customer.kelamin_customer,m_customer.alamat_customer,m_customer.telepon_customer,m_customer.handphone_customer,m_customer.rt,m_customer.rw,m_customer.wilayah,m_customer.kelurahan,m_customer.kecamatan,m_motor.nama_motor,m_motor.varian,m_motor.merk,m_motor.harga_otr,m_motor.nama_foto,m_motor.url_foto, t_pencairan_leasing_detail.tgl_pencairan', false);
+        $this->db->select('t_rekap_tagihan_detail.id_kwitansi,t_rekap_tagihan_detail.nomor_tagihan,t_rekap_tagihan_detail.status_rekap,t_kwitansi_leasing.nokwitansi,t_kwitansi_leasing.noso,t_kwitansi_leasing.dp_system,t_kwitansi_leasing.tagih,t_kwitansi_leasing.subsidi1,t_kwitansi_leasing.subsidi2,t_penjualan.nosj,t_penjualan.nokonsumen,t_penjualan.ktp,t_penjualan.tanggal,t_penjualan.nomsn,t_penjualan.warna_motor,t_penjualan.harga_otr,t_penjualan.status_kwitansi,penerimaan_motor.nopolisi,penerimaan_motor.norangka,penerimaan_motor.tipe,penerimaan_motor.warna,penerimaan_motor.tahun,penerimaan_motor.kdgudang,penerimaan_motor.tglupload,penerimaan_motor.status_jual,t_harga_motor.cara_pembelian,t_harga_motor.marketing,t_harga_motor.leasing,t_harga_motor.dp_system,t_harga_motor.diskon,t_harga_motor.tagih,t_harga_motor.dp,t_harga_motor.sisa_hutang,t_harga_motor.dp_lunas,t_harga_motor.fee,m_customer.nama_customer,m_customer.tempat_lahir_customer,m_customer.tanggal_lahir_customer,m_customer.kelamin_customer,m_customer.alamat_customer,m_customer.telepon_customer,m_customer.handphone_customer,m_customer.rt,m_customer.rw,m_customer.wilayah,m_customer.kelurahan,m_customer.kecamatan,m_motor.nama_motor,m_motor.varian,m_motor.merk,m_motor.harga_otr,m_motor.nama_foto,m_motor.url_foto, t_pencairan_leasing_detail.no_bukti_potongan, t_pencairan_leasing_detail.tgl_pencairan', false);
         $this->db->from('t_rekap_tagihan_detail');
         $this->db->join('t_kwitansi_leasing', 't_kwitansi_leasing.id = t_rekap_tagihan_detail.id_kwitansi', 'left');
         $this->db->join('t_penjualan', 't_penjualan.noso = t_kwitansi_leasing.noso', 'left');
@@ -199,6 +199,10 @@ GROUP BY a.no_tagihan) AS terbayar
                 case 'sisa':
                     if ($searchValue <> NULL || $searchValue <> "")
                         $this->db->like('((m_motor.harga_otr) - (t_harga_motor.dp + t_kwitansi_leasing.subsidi1 + t_kwitansi_leasing.subsidi2))', $searchValue);
+                    break;
+                case 'no_bukti_potongan':
+                    if ($searchValue <> NULL || $searchValue <> "")
+                        $this->db->like('t_pencairan_leasing_detail.no_bukti_potongan', $searchValue);
                     break;
             }
         }
@@ -321,7 +325,7 @@ GROUP BY a.no_tagihan) AS terbayar
     public function view($id) {
         $data['notagihan'] = '';
         $this->breadcrumbs->push('List', '/pencairan-leasing-list-' . $id);
-        
+
         $data['idrekap'] = $id;
 
         $data['rekap_tagihan'] = $this->main_model->getMaster($this->table, $like = array(), $where = array('id' => $id));
@@ -355,16 +359,16 @@ GROUP BY a.no_tagihan) AS terbayar
             );
         }
     }
-    
-    public function print_rekap_pleasing(){
+
+    public function print_rekap_pleasing() {
         $idrekap = $this->input->get('idrekap');
-        
+
         $data['head_pleasing'] = $this->t_pleasing->get_head_pleasing($idrekap)->row_array();
         $data['detail_pleasing'] = $this->t_pleasing->get_item_pleasing($idrekap)->result_array();
         $this->load->view('leasing/pencairan_leasing/print_pencairan_leasing', $data);
     }
-    
-    public function cetak($id){
+
+    public function cetak($id) {
         $notagihan = $this->input->get('notagihan');
 
         $data['rkwitansi'] = $this->main_model->getMaster($this->table, $like = array(), $where = array('no_tagihan' => $notagihan));
