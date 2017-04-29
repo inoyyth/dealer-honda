@@ -129,7 +129,7 @@
                             <select name="kelamin_customer" id="kelamin_customer" parsley-trigger="change" class="form-control">
                                 <option label="" value="">Jenis Kelamin</option>
                                 <option label="Pria" value="P" <?php echo ($detail_customer["kelamin_customer"]=="P"?"selected":"");?>>Pria</option>
-                                <option label="Wanita" value="W" <?php echo ($detail_customer['kelaim_customer']=="W"?"selected":"");?>>Wanita</option>
+                                <option label="Wanita" value="W" <?php echo ($detail_customer['kelamin_customer']=="W"?"selected":"");?>>Wanita</option>
                             </select>
                         </div>
                     </div>

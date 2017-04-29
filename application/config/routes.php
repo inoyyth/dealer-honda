@@ -401,6 +401,7 @@ $route['terima-stnk-tambah'] = 't_terima_stnk/add';
 $route['terima-stnk-edit-(:num)'] = 't_terima_stnk/edit/$1';
 $route['terima-stnk-detail-(:num)'] = 't_terima_stnk/detail/$1';
 $route['terima-stnk-delete-(:num)'] = 't_terima_stnk/delete/$1';
+$route['terima-stnk-print-detail-(:num)'] = 't_terima_stnk/print_detail/$1';
 $route['terima-stnk-save'] = 't_terima_stnk/save';
 $route['terima-stnk-page'] = 't_terima_stnk/index';
 $route['terima-stnk-page/(:any)'] = 't_terima_stnk/index/$1';

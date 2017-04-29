@@ -130,7 +130,7 @@
                                 </tr>
                                 <tr>
                                     <td>Jenis Kelamin </td>
-                                    <td>: <?php echo ($detail_customer['tanggal_lahir_customer']=="P"?"Pria":"Wanita");?></td>
+                                    <td>: <?php echo ($detail_customer['kelamin_customer']=="P"?"Pria":"Wanita");?></td>
                                 </tr>
                                 <tr>
                                     <td>Alamat </td>
