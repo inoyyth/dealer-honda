@@ -53,7 +53,7 @@ if($dp['transaksi'] == 4 ){
         </tr>
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">Terbilang : </td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo ucwords(terbilang($dp['nominal'])); ?></td>
+            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo ucwords(terbilang($total_kwitansi)); ?></td>
         </tr>  
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">Untuk Pembayaran : </td>

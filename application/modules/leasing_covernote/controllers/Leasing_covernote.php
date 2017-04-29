@@ -87,7 +87,7 @@ class Leasing_covernote extends MX_Controller {
         $data['detail_motor'] = $this->db->get_where('m_motor', array('tipe_motor' => $data['detail_penerimaan_motor']['tipe']))->row_array();
         $data['detail_owner'] = $this->db->get_where('m_owner', array('id' => 1))->row_array();
         $data['stnk_bpkb'] = $this->db->get_where('t_stnk', array('no_so' => decode_url($so)))->row_array();
-        $data['stnk_bpkb_customer'] = $this->db->get_where('t_stnk_customer', array('t_stnk_id' => $data['stnk_bpkb']['id']))->row_array();
+        $data['stnk_bpkb_customer'] = $this->db->get_where('t_stnk_customer', array('t_stnk_id' => $data['stnk_bpkb']['id']))->row_array(); var_dump(decode_url($so));
         
         $this->load->view('leasing_covernote/covernote_print_'.$type,$data);
     }
