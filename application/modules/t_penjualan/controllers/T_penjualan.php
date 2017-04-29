@@ -88,7 +88,7 @@ class T_penjualan extends MX_Controller {
         if ($_POST) {
             return $data = array(
                 'page' => set_session_table_search('page', $this->input->get_post('page', TRUE)),
-                'noso' => set_session_table_search('noso', $this->input->get_post('noso', TRUE)),
+                't_penjualan.noso' => set_session_table_search('noso', $this->input->get_post('noso', TRUE)),
                 'nomsn' => set_session_table_search('nomsn', $this->input->get_post('nomsn', TRUE)),
                 'harga_otr' => set_session_table_search('harga_otr', $this->input->get_post('harga_otr', TRUE)),
                 'tipe' => set_session_table_search('tipe', $this->input->get_post('tipe', TRUE))
@@ -96,7 +96,7 @@ class T_penjualan extends MX_Controller {
         } else {
             return $data = array(
                 'page' => $this->session->userdata('page'),
-                'no_so' => $this->session->userdata('noso'),
+                't_penjualan.noso' => $this->session->userdata('noso'),
                 'nomsn' => $this->session->userdata('nomsn'),
                 'harga_otr' => $this->session->userdata('harga_otr'),
                 'tipe' => $this->session->userdata('tipe')
