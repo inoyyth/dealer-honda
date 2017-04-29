@@ -29,7 +29,7 @@ Class M_rp_penjualan extends CI_Model {
         $this->db->join('penerimaan_motor', $table . ".nomsn=penerimaan_motor.nomesin");
         $this->db->join('t_harga_motor', $table . ".noso=t_harga_motor.noso");
         $this->db->like($like);
-        $this->db->where($where);
+        $this->db->where(array_filter($where));
         $this->db->limit($pg, $limit);
         return $this->db->get()->result_array();
     }
