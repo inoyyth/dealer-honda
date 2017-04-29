@@ -236,7 +236,7 @@ class Motor_terima extends MX_Controller {
         $headerMulai = "A";
         foreach ($HeaderTitle as $headerTitleV) {
             $objPHPExcel->getActiveSheet()->SetCellValue($headerMulai . "1", $headerTitleV);
-            $headerMulai ++;
+            $headerMulai++;
         }
         $objPHPExcel->getActiveSheet()->SetCellValue('L1', 'ID Gudang');
         $objPHPExcel->getActiveSheet()->SetCellValue('M1', 'Gudang');

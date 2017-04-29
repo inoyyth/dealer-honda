@@ -47,7 +47,7 @@ $kwt_explode = explode("/", $detail_harga['noso']);
         </tr>
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">Terbilang : </td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo ucwords(terbilang($detail_harga['fee'])); ?></td>
+            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo ucwords(terbilang($detail_harga['diskon'])); ?></td>
         </tr>  
         <tr>
             <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">Untuk Pembayaran : </td>
