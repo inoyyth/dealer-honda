@@ -10,12 +10,13 @@
             <link href="<?php echo base_url(); ?>themes/css/admin.css" rel="stylesheet" type="text/css" />
     </head>
     <body class="light_theme  fixed_header left_nav_fixed">
+        <?php //echo $this->encrypt->encode('admin'); ?>
         <div class="wrapper">
             <!--\\\\\\\ wrapper Start \\\\\\-->
             <div class="login_page">
                 <div class="login_content">
                     <div class="panel-heading border login_heading">sign in now</div>	
-                    <form role="form" class="form-horizontal" method="post" action="<?php echo base_url()."login/verivy_login";?>">
+                    <form role="form" class="form-horizontal" method="post" action="<?php echo base_url() . "login/verivy_login"; ?>">
                         <div class="form-group">
                             <div class="col-sm-10">
                                 <input type="email" name="username" placeholder="Email/Username" id="username" class="form-control" required>
@@ -31,7 +32,7 @@
                                 <div class="checkbox checkbox_margin">
                                     <label class="lable_margin">
                                         <input type="checkbox"><p class="pull-left"> Remember me</p></label>
-                                        <button class="btn btn-default pull-right" type="submit">Sign in</button>
+                                    <button class="btn btn-default pull-right" type="submit">Sign in</button>
                                 </div>
                             </div>
                         </div>
@@ -39,9 +40,9 @@
                 </div>
             </div>
         </div>
-        <script src="<?php echo base_url();?>themes/js/jquery-2.1.0.js"></script>
-        <script src="<?php echo base_url();?>themes/js/bootstrap.min.js"></script>
-        <script src="<?php echo base_url();?>themes/js/common-script.js"></script>
-        <script src="<?php echo base_url();?>themes/js/jquery.slimscroll.min.js"></script>
+        <script src="<?php echo base_url(); ?>themes/js/jquery-2.1.0.js"></script>
+        <script src="<?php echo base_url(); ?>themes/js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url(); ?>themes/js/common-script.js"></script>
+        <script src="<?php echo base_url(); ?>themes/js/jquery.slimscroll.min.js"></script>
     </body>
 </html>
