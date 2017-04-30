@@ -23,7 +23,7 @@
                                 <th>No.Polisi</th>
                                 <th>No.STNK</th>
                                 <th>No.BPKB</th>
-                                <th class="text-center" style="width: 150px;">Action</th>
+                                <th class="text-center" style="width: 220px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,6 +43,7 @@
                                         <td class="text-center">
                                             <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'terima-stnk-edit-' . $v['id'], 'text' => 'Edit')); ?>
                                             <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'terima-stnk-delete-' . $v['id'], 'text' => 'Delete')); ?>
+                                            <a class="btn btn-default btn-sm print-detail" href="<?php echo site_url('terima-stnk-print-detailnew-'.$v['id']);?>"><i class="fa fa-print"></i> Print</a>
                                         </td>
                                     </tr>
                                 <?php }
@@ -116,3 +117,25 @@
 <?php echo $paging; ?>
 </div>
 </div>
+<div class="modal fade bs-example-modal-lg" id="modalTstnkBpkb" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div id="TstnkBpkbContent"></div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".print-detail").click(function (event) {
+            event.preventDefault();
+            var dt = $(this);
+            var url = dt[0].href;
+            $("#TstnkBpkbContent").load(url); 
+            $('#modalTstnkBpkb').modal('show');
+            return false;
+        });
+    });
+</script>

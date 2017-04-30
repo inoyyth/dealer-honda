@@ -3,7 +3,7 @@
         <form action="<?php echo base_url("terima-stnk-save"); ?>" class="form-horizontal row-border" method="post" enctype="multipart/form-data" parsley-validate novalidate>
             <div class="header">
                 <div class="actions"> </div>
-                <h3 class="content-header">Add Tanda Terima STNK/BPKB</h3>
+                <h3 class="content-header">Edit Tanda Terima STNK/BPKB</h3>
             </div>
             <div class="porlets-content">
                 <div class="col-md-12">
