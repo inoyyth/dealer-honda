@@ -135,7 +135,7 @@
                                     <input type="text" name="cabang_leasing" id="cabang_leasing" class="form-control rtagihan" value="<?= $rkwitansi[0]['cabang_leasing']; ?>" required />
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" style="display: none;">
                                 <label class="col-sm-12 control-label">Sisa Tagihan</label>
                                 <div class="col-sm-12">
                                     <input type="text" name="sisa_tagihan" id="sisa_tagihan" value="<?= formatrp($rkwitansi[0]['sisa_tagihan']); ?>" class="form-control rtagihan" value="0" readonly />
@@ -313,6 +313,7 @@
             }).get();
             var dtkwitansi = idkwitansi_leasingnew.join(",");
             var saveTagihan = $(".rtagihan").serializeArray();
+            
             saveTagihan[6] = {name: 'id_kwitansi', value: dtkwitansi}
             //console.log(saveTagihan);
 
@@ -355,9 +356,9 @@
                 } else {
                     $("#sisa_tagihan").val(0);
                 }
-                
+
             });
-            
+
             var notagihan = $("#no_tagihan").val();
             var dt = {no_tagihan: notagihan}
 
@@ -401,8 +402,9 @@
 
         $("#saveTagihan").click(function () {
             var saveTagihan = $(".rtagihan").serializeArray();
-
-            var dt = {rtagihan: saveTagihan}
+            var plist = $(".price_list").serializeArray();
+            
+            var dt = {rtagihan: saveTagihan, price_list:plist}
             $.ajax({
                 type: "POST",
                 url: "<?php echo base_url('leasing/rekap_tagihan/update'); ?>",
