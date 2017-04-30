@@ -92,7 +92,8 @@ GROUP BY a.no_tagihan) AS terbayar
                     break;
             }
         }
-
+        
+        $this->db->group_by('t_rekap_tagihan.no_tagihan');
         $this->db->limit($lmt);
         $this->db->offset($offset);
 

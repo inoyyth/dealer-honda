@@ -86,8 +86,6 @@
                                     <th data-options="tanggal">Tgl Kwitansi</th>
                                     <th data-options="nokwitansi">Nmr Kwitansi</th>
                                     <th data-options="nama_customer">Nama</th>
-                                    <th data-options="tipe">Type</th>
-                                    <th data-options="nomsn">No.Mesin</th>
                                     <th data-options="norangka">No.Rangka</th>
                                     <th data-options="tharga_otr">OTR</th>
                                     <th data-options="tdp">DP</th>
