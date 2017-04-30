@@ -61,8 +61,6 @@
                                     <td>Tgl Kwitansi</td>
                                     <td>Nmr Kwitansi</td>
                                     <td>Nama</td>
-                                    <td>Type</td>
-                                    <td>No.Mesin</td>
                                     <td>No.Rangka</td>
                                     <td>OTR</td>
                                     <td>DP</td>
@@ -155,8 +153,6 @@
                                     <td>Tgl Kwitansi</td>
                                     <td>Nmr Kwitansi</td>
                                     <td>Nama</td>
-                                    <td>Type</td>
-                                    <td>No.Mesin</td>
                                     <td>No.Rangka</td>
                                     <td>OTR</td>
                                     <td>DP</td>
