@@ -13,7 +13,7 @@
                                 <label class="col-sm-3 control-label">No Sales Order</label>
                                 <div class="col-sm-9">
                                     <input type="hidden" name="id" value="<?php echo $detail['id'];?>"/>
-                                    <input style="text-transform: uppercase;" class="typeahead form-control" parsley-trigger="change" required name="noso" id="noso" value="<?php echo $detail['no_so'];?>" type="text" placeholder="Type No Sales Order">
+                                    <input readonly="true" style="text-transform: uppercase;" class="typeahead form-control" parsley-trigger="change" required name="noso" id="noso" value="<?php echo $detail['no_so'];?>" type="text" placeholder="Type No Sales Order">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -44,6 +44,12 @@
                                 <label class="col-sm-3 control-label">Tahun</label>
                                 <div class="col-sm-9">
                                     <input type="text" readonly="true" name="tahun" id="tahun" parsley-trigger="change"     placeholder="Tahun" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Cara Pembelian</label>
+                                <div class="col-sm-9">
+                                    <input type="text" readonly="true" name="cara_pembelian" id="cara_pembelian" parsley-trigger="change"     placeholder="Cara Pembelian" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -223,7 +229,7 @@
                 success: function (result) {
                     //console.log(result.master_motor[0].nama_motor);
                     $('#harga_otr').val(result.master_motor.harga_otr);
-                    $('#nama').val(result.customer[0].nama_customer);
+                    //$('#nama').val(result.customer[0].nama_customer);
                     $('#tanggal').val(result.penjualan[0].tanggal);
                     $('#type').val(result.terima_motor[0].tipe);
                     $('#no_mesin').val(result.terima_motor[0].nomesin);
@@ -231,18 +237,18 @@
                     $('#warna').val(result.terima_motor[0].warna);
                     $('#tahun').val(result.terima_motor[0].tahun);
                     $('#leasing').val(result.master_harga_motor[0].leasing);
-                    $('#no_ktp').val(result.customer[0].no_ktp);
-                    $('#tempat_lahir_customer').val(result.customer[0].tempat_lahir_customer);
-                    $('#tanggal_lahir_customer').val(result.customer[0].tanggal_lahir_customer);
-                    $('#kelamin_customer').val(result.customer[0].kelamin_customer);
-                    $('#alamat_customer').val(result.customer[0].alamat_customer);
-                    $('#rt').val(result.customer[0].rt);
-                    $('#rw').val(result.customer[0].rw);
-                    $('#wilayah').val(result.customer[0].wilayah);
-                    $('#kelurahan').val(result.customer[0].kelurahan);
-                    $('#kecamatan').val(result.customer[0].kecamatan);
-                    $('#telepon_customer').val(result.customer[0].telepon_customer);
-                    $('#handphone_customer').val(result.customer[0].handphone_customer);
+                    //$('#no_ktp').val(result.customer[0].no_ktp);
+                    //$('#tempat_lahir_customer').val(result.customer[0].tempat_lahir_customer);
+                    //$('#tanggal_lahir_customer').val(result.customer[0].tanggal_lahir_customer);
+                    //$('#kelamin_customer').val(result.customer[0].kelamin_customer);
+                    //$('#alamat_customer').val(result.customer[0].alamat_customer);
+                    //$('#rt').val(result.customer[0].rt);
+                    //$('#rw').val(result.customer[0].rw);
+                    //$('#wilayah').val(result.customer[0].wilayah);
+                    //$('#kelurahan').val(result.customer[0].kelurahan);
+                    //$('#kecamatan').val(result.customer[0].kecamatan);
+                    //$('#telepon_customer').val(result.customer[0].telepon_customer);
+                    //$('#handphone_customer').val(result.customer[0].handphone_customer);
                 },
                 async: false
             });
@@ -277,9 +283,9 @@
             dataType: "json",
             data: {id: <?php echo $t_penjualan_id['id'];?>},
             success: function (result) {
-                //console.log(result.master_motor[0].nama_motor);
+                console.log(result);
                 $('#harga_otr').val(result.master_motor.harga_otr);
-                $('#nama').val(result.customer[0].nama_customer);
+                //$('#nama').val(result.customer[0].nama_customer);
                 $('#tanggal').val(result.penjualan[0].tanggal);
                 $('#type').val(result.terima_motor[0].tipe);
                 $('#no_mesin').val(result.terima_motor[0].nomesin);
@@ -287,18 +293,19 @@
                 $('#warna').val(result.terima_motor[0].warna);
                 $('#tahun').val(result.terima_motor[0].tahun);
                 $('#leasing').val(result.master_harga_motor[0].leasing);
-                $('#no_ktp').val(result.customer[0].no_ktp);
-                $('#tempat_lahir_customer').val(result.customer[0].tempat_lahir_customer);
-                $('#tanggal_lahir_customer').val(result.customer[0].tanggal_lahir_customer);
-                $('#kelamin_customer').val(result.customer[0].kelamin_customer);
-                $('#alamat_customer').val(result.customer[0].alamat_customer);
-                $('#rt').val(result.customer[0].rt);
-                $('#rw').val(result.customer[0].rw);
-                $('#wilayah').val(result.customer[0].wilayah);
-                $('#kelurahan').val(result.customer[0].kelurahan);
-                $('#kecamatan').val(result.customer[0].kecamatan);
-                $('#telepon_customer').val(result.customer[0].telepon_customer);
-                $('#handphone_customer').val(result.customer[0].handphone_customer);
+                $('#cara_pembelian').val(result.master_harga_motor[0].cara_pembelian);
+               // $('#no_ktp').val(result.customer[0].no_ktp);
+                //$('#tempat_lahir_customer').val(result.customer[0].tempat_lahir_customer);
+                //$('#tanggal_lahir_customer').val(result.customer[0].tanggal_lahir_customer);
+                //$('#kelamin_customer').val(result.customer[0].kelamin_customer);
+                //$('#alamat_customer').val(result.customer[0].alamat_customer);
+                //$('#rt').val(result.customer[0].rt);
+                //$('#rw').val(result.customer[0].rw);
+                //$('#wilayah').val(result.customer[0].wilayah);
+                //$('#kelurahan').val(result.customer[0].kelurahan);
+                //$('#kecamatan').val(result.customer[0].kecamatan);
+                //$('#telepon_customer').val(result.customer[0].telepon_customer);
+                //$('#handphone_customer').val(result.customer[0].handphone_customer);
             },
             async: false
         });

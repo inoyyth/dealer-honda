@@ -37,7 +37,7 @@ class Leasing_covernote extends MX_Controller {
             array('table' => 't_harga_motor', 'where' => 't_penjualan.noso=t_harga_motor.noso', 'join' => 'left')
         );
 
-        $where = array('t_penjualan.m_status' => '1', 't_harga_motor.dp_lunas' => '1');
+        $where = array('t_penjualan.m_status' => '1');
 
         $column_search = array(null, 't_penjualan.id', 't_penjualan.noso', 't_pdi.kdpdi', 't_pdi.nosj', 't_penjualan.nomsn', 'penerimaan_motor.norangka');
         $column_order = array('id', 'noso', 'kdpdi', 'nosj', 'nomsn', 'norangka');
@@ -88,7 +88,7 @@ class Leasing_covernote extends MX_Controller {
         $data['detail_owner'] = $this->db->get_where('m_owner', array('id' => 1))->row_array();
         $data['stnk_bpkb'] = $this->db->get_where('t_stnk', array('no_so' => decode_url($so)))->row_array();
         $data['stnk_bpkb_customer'] = $this->db->get_where('t_stnk_customer', array('t_stnk_id' => $data['stnk_bpkb']['id']))->row_array();
-        
+        //log_message('debug',print_r($data['stnk_bpkb_customer'],TRUE));
         $this->load->view('leasing_covernote/covernote_print_'.$type,$data);
     }
 

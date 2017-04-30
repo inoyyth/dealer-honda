@@ -14,15 +14,17 @@ class Rp_penjualan extends MX_Controller {
 
     public function index() {
         $data_session = $this->__getSession();
+        $data_session_where = $this->__getSessionWhere();
         $config['base_url'] = base_url() . 'penjualan-page';
-        $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
+        $config['total_rows'] = $this->main_model->countdata($this->table, $where = $data_session_where);
         $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
         $config['uri_segment'] = 2;
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->pagination->initialize($config);
         $data['paging'] = $this->pagination->create_links();
-        $data['data'] = $this->m_report_penjualan->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array());
-        $data['sr_data'] = $data_session;
+        $data['data'] = $this->m_report_penjualan->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = $data_session_where);
+        $data['leasing'] = $this->db->get_where('m_leasing',array('status_leasing'=>'1'))->result_array();
+        $data['sr_data'] = array_merge($data_session,$data_session_where);
         $data['view'] = 'rp_penjualan/main';
         $this->load->view('default', $data);
     }
@@ -45,6 +47,18 @@ class Rp_penjualan extends MX_Controller {
                 't_penjualan.m_status' => $this->session->userdata('proses_transaksi'),
                 'tipe' => $this->session->userdata('tipe'),
                 'cara_pembelian' => $this->session->userdata('cara_pembelian')
+            );
+        }
+    }
+    
+    private function __getSessionWhere() {
+        if($_POST) {
+            return $data = array(
+               't_harga_motor.leasing' => set_session_table_search('leasing', $this->input->get_post('leasing', TRUE))
+            );
+        } else {
+            return $data = array(
+                't_harga_motor.leasing' => $this->session->userdata('leasing')
             );
         }
     }

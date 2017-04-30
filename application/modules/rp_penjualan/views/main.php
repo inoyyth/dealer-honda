@@ -56,6 +56,15 @@
                                                         <option value="Cash" <?php echo ($sr_data['cara_pembelian'] == "Cash" ? "selected" : ""); ?>>Cash</option>
                                                     </select>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label>Leasing</label>
+                                                    <select style="height: 33px;" class="form-control" name="leasing" id="leasing">
+                                                        <option value="" selected="true"> </option>
+                                                        <?php log_message('debug',print_r($sr_data,TRUE)); foreach($leasing as $kLeasing=>$vLeasing) { ?>
+                                                        <option value="<?php echo $vLeasing['kd_leasing'];?>" <?php echo ($sr_data['t_harga_motor.leasing']==$vLeasing['kd_leasing']?"selected":""); ?>><?php echo $vLeasing['leasing'];?></option>
+                                                        <?php  } ?>
+                                                    </select>
+                                                </div>
                                                 <div>
                                                     <input type="submit" class="btn btn-sm btn-primary" id="submit-btn" value="Search">
                                                     <!--<input type="reset" class="btn btn-sm btn-warning" onClick="this.form.reset()" value="Reset">-->

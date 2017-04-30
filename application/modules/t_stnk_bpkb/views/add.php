@@ -45,6 +45,12 @@
                                     <input type="text" readonly="true" name="tahun" id="tahun" parsley-trigger="change"     placeholder="Tahun" class="form-control">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Cara Pembelian</label>
+                                <div class="col-sm-9">
+                                    <input type="text" readonly="true" name="cara_pembelian" id="cara_pembelian" parsley-trigger="change"     placeholder="Cara Pembelian" class="form-control">
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -230,6 +236,7 @@
                     $('#warna').val(result.terima_motor[0].warna);
                     $('#tahun').val(result.terima_motor[0].tahun);
                     $('#leasing').val(result.master_harga_motor[0].leasing);
+                    $('#cara_pembelian').val(result.master_harga_motor[0].cara_pembelian);
                     $('#no_ktp').val(result.customer[0].no_ktp);
                     $('#tempat_lahir_customer').val(result.customer[0].tempat_lahir_customer);
                     $('#tanggal_lahir_customer').val(result.customer[0].tanggal_lahir_customer);
