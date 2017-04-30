@@ -86,8 +86,6 @@
                                     <th data-options="tanggal">Tgl Kwitansi</th>
                                     <th data-options="nokwitansi">Nmr Kwitansi</th>
                                     <th data-options="nama_customer">Nama</th>
-                                    <th data-options="tipe">Type</th>
-                                    <th data-options="nomsn">No.Mesin</th>
                                     <th data-options="norangka">No.Rangka</th>
                                     <th data-options="tharga_otr">OTR</th>
                                     <th data-options="tdp">DP</th>
@@ -192,7 +190,7 @@
                 },
                 formatters: {
                     "tdp": function () {
-                        var dp = formatCurrency(parseInt(rows.dp));
+                        var dp = formatCurrency(parseInt(rows.dp_system));
                         return dp;
                     },
                     "tharga_otr": function () {
@@ -204,7 +202,7 @@
                         return formatCurrency(subsidiHarga);
                     },
                     "sisa": function () {
-                        var sisaTagihan = (parseInt(rows.harga_otr)) - (parseInt(rows.dp) + parseInt(rows.subsidi1) + parseInt(rows.subsidi2));
+                        var sisaTagihan = (parseInt(rows.harga_otr)) - (parseInt(rows.dp_system) + parseInt(rows.subsidi1) + parseInt(rows.subsidi2));
                         return formatCurrency(sisaTagihan);
                     },
                     "checkbok": function () {

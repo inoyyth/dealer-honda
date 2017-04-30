@@ -95,7 +95,7 @@
                                         foreach ($detail_pleasing as $lrekapan) {
                                             $no++;
 
-                                            $sisaTagihan = $lrekapan['harga_otr'] - ($lrekapan['dp'] + $lrekapan['subsidi1'] + $lrekapan['subsidi2']);
+                                            $sisaTagihan = $lrekapan['harga_otr'] - ($lrekapan['dp_system'] + $lrekapan['subsidi1'] + $lrekapan['subsidi2']);
                                             $subsidi = formatrp($lrekapan['subsidi1'] + $lrekapan['subsidi2']);
                                             echo "<tr>
                                                 <td>{$no}</td>
@@ -106,7 +106,7 @@
                                                 <td>{$lrekapan['nomsn']}</td>
                                                 <td>{$lrekapan['norangka']}</td>
                                                 <td>" . formatrp($lrekapan['harga_otr']) . "</td>
-                                                <td>" . formatrp($lrekapan['dp']) . "</td>
+                                                <td>" . formatrp($lrekapan['dp_system']) . "</td>
                                                 <td>" . $subsidi . "</td>
                                                 <td>" . formatrp($sisaTagihan) . "</td>
                                                 <td>" . $lrekapan['varian'] . "</td>

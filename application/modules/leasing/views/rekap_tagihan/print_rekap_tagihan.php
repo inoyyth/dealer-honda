@@ -56,7 +56,7 @@
                                         <td>Tanggal Tagihan </td>
                                         <td>: <?php echo date("Y-m-d", strtotime($rkwitansi[0]['tgl_tagihan'])); ?></td>
                                     </tr>
-                                    <tr>
+                                    <tr style="display:none;">
                                         <td>Sisa Tagihan </td>
                                         <td>: <?php echo formatrp($rkwitansi[0]['sisa_tagihan']); ?></td>
                                     </tr>
@@ -92,7 +92,7 @@
                                         foreach ($list_rekapan as $lrekapan) {
                                             $no++;
 
-                                            $sisaTagihan = formatrp(($lrekapan['harga_otr'] - $lrekapan['dp']) + ($lrekapan['subsidi1'] + $lrekapan['subsidi2']));
+                                            $sisaTagihan = formatrp(($lrekapan['harga_otr'] - $lrekapan['dp_system']) + ($lrekapan['subsidi1'] + $lrekapan['subsidi2']));
                                             $subsidi = formatrp($lrekapan['subsidi1'] + $lrekapan['subsidi2']);
                                             echo "<tr>
                                                 <td>{$no}</td>
@@ -103,10 +103,10 @@
                                                 <td>{$lrekapan['nomsn']}</td>
                                                 <td>{$lrekapan['norangka']}</td>
                                                 <td>" . formatrp($lrekapan['harga_otr']) . "</td>
-                                                <td>" . formatrp($lrekapan['dp']) . "</td>
+                                                <td>" . formatrp($lrekapan['dp_system']) . "</td>
                                                 <td>" . $subsidi . "</td>
                                                 <td>" . $sisaTagihan . "</td>
-                                                <td>" . $lrekapan['varian'] . "</td>
+                                                <td>" . formatrp($lrekapan['price_list']) . "</td>
                                             </tr>";
                                         }
                                         ?>

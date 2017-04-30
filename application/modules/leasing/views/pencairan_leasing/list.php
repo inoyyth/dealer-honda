@@ -61,7 +61,7 @@
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">Tanggal Pencairan</label>
                                 <div class="col-sm-12">
-                                    <input type="text" name="tgl_pencairan" id="tgl_pencairan" parsley-trigger="change" class="form-control pleasing datepicker rtagihan" value="<?= date('Y-m-d', strtotime($pencairan_leasing[0]['tgl_pencairan'])); ?>">
+                                    <input type="text" name="tgl_pencairan" id="tgl_pencairan" parsley-trigger="change" class="form-control pleasing datepicker rtagihan" value="<?= date('Y-m-d', strtotime(@$pencairan_leasing[0]['tgl_pencairan'])); ?>">
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                     <input type="text" name="cabang_leasing" id="cabang_leasing" class="form-control pleasing rtagihan" value="<?= $rekap_tagihan[0]['cabang_leasing']; ?>" readonly />
                                 </div>
                             </div>
-                            
+
                             <!--
                             <div class="col-sm-6">
                                 <label class="col-sm-12 control-label">No. Bukti Potongan</label>
@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                             //-->
-                            
+
                         </div>
 
 
@@ -94,8 +94,7 @@
                                     <th data-options="tanggal">Tgl Kwitansi</th>
                                     <th data-options="nokwitansi">Nmr Kwitansi</th>
                                     <th data-options="nama_customer">Nama</th>
-                                    <th data-options="tipe">Type</th>
-                                    <th data-options="nomsn">No.Mesin</th>
+                                    
                                     <th data-options="norangka">No.Rangka</th>
                                     <th data-options="tharga_otr">OTR</th>
                                     <th data-options="tdp">DP</th>
@@ -115,19 +114,19 @@
                         <div class="col-md-12 col-xs-12">
                             <label class="col-sm-12 control-label">Total Tagihan :</label>
                             <div class="col-sm-12">
-                                <input type="text" name="tot_tagihan" id="tot_tagihan" class="form-control rtagihan" placeholder="Total Tagihan" style="text-align: right;" value="<?= formatrp($pencairan_leasing[0]['tot_tagihan']); ?>" readonly>
+                                <input type="text" name="tot_tagihan" id="tot_tagihan" class="form-control rtagihan" placeholder="Total Tagihan" style="text-align: right;" value="<?= formatrp(@$pencairan_leasing[0]['tot_tagihan']); ?>" readonly>
                             </div>
                         </div>
                         <div class="col-md-12 col-xs-12">
                             <label class="col-sm-12 control-label">Total Pencairan :</label>
                             <div class="col-sm-12">
-                                <input type="text" name="tot_pencairan" id="tot_pencairan" class="form-control rtagihan" placeholder="Total Pencairan" style="text-align: right;" value="<?= formatrp($pencairan_leasing[0]['tot_pencairan']); ?>" readonly>
+                                <input type="text" name="tot_pencairan" id="tot_pencairan" class="form-control rtagihan" placeholder="Total Pencairan" style="text-align: right;" value="<?= formatrp(@$pencairan_leasing[0]['tot_pencairan']); ?>" readonly>
                             </div>
                         </div>
                         <div class="col-md-12 col-xs-12">
                             <label class="col-sm-12 control-label">Sisa Tagihan :</label>
                             <div class="col-sm-12">
-                                <input type="text" name="sisa_tagihan" id="sisa_tagihan" class="form-control rtagihan" placeholder="Sisa Tagihan" style="text-align: right;" value="<?= formatrp($pencairan_leasing[0]['tot_tagihan'] - $pencairan_leasing[0]['tot_pencairan']); ?>" readonly>
+                                <input type="text" name="sisa_tagihan" id="sisa_tagihan" class="form-control rtagihan" placeholder="Sisa Tagihan" style="text-align: right;" value="<?= formatrp(@$pencairan_leasing[0]['tot_tagihan'] - @$pencairan_leasing[0]['tot_pencairan']); ?>" readonly>
                             </div>
                         </div>
                     </div>
@@ -200,7 +199,7 @@
                 },
                 formatters: {
                     "tdp": function () {
-                        var dp = formatCurrency(parseInt(rows.dp));
+                        var dp = formatCurrency(parseInt(rows.dp_system));
                         return dp;
                     },
                     "tharga_otr": function () {
@@ -212,7 +211,7 @@
                         return formatCurrency(subsidiHarga);
                     },
                     "sisa": function () {
-                        var sisaTagihan = (parseInt(rows.harga_otr)) - (parseInt(rows.dp) + parseInt(rows.subsidi1) + parseInt(rows.subsidi2));
+                        var sisaTagihan = (parseInt(rows.harga_otr)) - (parseInt(rows.dp_system) + parseInt(rows.subsidi1) + parseInt(rows.subsidi2));
                         return formatCurrency(sisaTagihan);
                     },
                     "checkbok": function () {
@@ -225,10 +224,10 @@
                         return checkb;
                     },
                     "nobuktipotongan": function () {
-                        if(rows.no_bukti_potongan === null){
-                            var nobuktipotongan="";
-                        }else{
-                            var nobuktipotongan=rows.no_bukti_potongan;
+                        if (rows.no_bukti_potongan === null) {
+                            var nobuktipotongan = "";
+                        } else {
+                            var nobuktipotongan = rows.no_bukti_potongan;
                         }
                         var inputPotongan = "<input type='text' name='buktipotongan_" + rows.id_kwitansi + "' id='buktipotongan_" + rows.id_kwitansi + "' class='form-control' placeholder='No. Bukti Potongan' value='" + nobuktipotongan + "' />";
                         return inputPotongan;
