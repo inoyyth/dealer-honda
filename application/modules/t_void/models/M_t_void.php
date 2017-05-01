@@ -29,6 +29,7 @@ class M_t_void extends CI_Model {
     public function getPenerimaanMotor($nomesin) {
         $this->db->select("penerimaan_motor.*,m_gudang.gudang");
         $this->db->from("penerimaan_motor");
+        $this->db->where("nomesin",$nomesin);
         $this->db->join("m_gudang", "m_gudang.id=penerimaan_motor.kdgudang", "INNER");
         return $this->db->get();
     }
