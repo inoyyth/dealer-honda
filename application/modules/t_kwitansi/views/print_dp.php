@@ -31,7 +31,7 @@ if($dp['transaksi'] == 4 ){
         == KWITANSI ==
     </div>
     <br>
-    <table style="width: 100%;" style="font-size:15px;" cellspacing="0" cellpadding="3">
+    <table style="width: 100%;" style="font-size:12px;" cellspacing="0" cellpadding="1">
         <tr>
             <td style="font-size:15px;width: 25%;border-top:2px solid;border-left:2px solid;border-right:2px solid;">No Kwitansi : </td>
             <td style="font-size:15px;width: 75%;border-top:2px solid;border-right:2px solid;"> <?php echo $dp['nokwitansi']; ?></td>
@@ -42,7 +42,7 @@ if($dp['transaksi'] == 4 ){
         </tr>
     </table>
     <br>
-    <table style="width: 100%;" style="font-size: 10px;" cellspacing="0" cellpadding="3">
+    <table style="width: 100%;" style="font-size: 10px;" cellspacing="0" cellpadding="1">
         <tr>
             <td style="font-size:15px;width: 25%;border-top:2px solid;border-left:2px solid;border-right:2px solid;">Telah Terima Dari : </td>
             <td style="font-size:15px;width: 75%;border-top:2px solid;border-right:2px solid;"> <?php echo $detail_customer['nama_customer'];?></td>
@@ -76,7 +76,7 @@ if($dp['transaksi'] == 4 ){
     </div>
     <br/>
     <center>
-        <table style="font-size: 15px;" cellpadding="3">
+        <table style="font-size: 15px;" cellpadding="1">
             <tr>
                 <td style="font-size:15px;width: 30%;text-align: center;">Kasir</td>
                 <td style="font-size:15px;width: 30%;text-align: center;">Mengetahui</td>

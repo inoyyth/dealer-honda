@@ -37,51 +37,51 @@ $noKwitansi = str_replace("/", "-", $list->nokwitansi);
     <br>
 
     <br>
-    <table style="width: 100%;" style="font-size: 10px;" cellspacing="0" cellpadding="3">
+    <table style="width: 100%;" style="font-size: 10px;" cellspacing="0" cellpadding="1">
         <tr>
-            <td style="font-size:15px;width: 25%;border-top:2px solid;border-left:2px solid;border-right:2px solid;">No Kwitansi : </td>
-            <td style="font-size:15px;width: 75%;border-top:2px solid;border-right:2px solid;">  <?php echo $noKwitansi; ?><b>A</b> </td>
+            <td style="font-size:12px;width: 25%;border-top:2px solid;border-left:2px solid;border-right:2px solid;">No Kwitansi : </td>
+            <td style="font-size:12px;width: 75%;border-top:2px solid;border-right:2px solid;">  <?php echo $noKwitansi; ?><b>A</b> </td>
         </tr>
         <tr>
-            <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">Telah Terima Dari : </td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;"> <?php echo $list->leasing; ?> 
+            <td style="font-size:12px;width: 25%;border-left:2px solid;border-right:2px solid;">Telah Terima Dari : </td>
+            <td style="font-size:12px;width: 75%;border-right:2px solid;"> <?php echo $list->leasing; ?> 
                 <u> </u> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
                 QQ  : <?= $list->nama_customer; ?>
             </td>
         </tr>  
 
         <tr>
-            <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">Uang Sejumlah : </td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;background-color: #ccc;font-weight: bold;"> <?php echo terbilang($list->tagihan); ?></td>
+            <td style="font-size:12px;width: 25%;border-left:2px solid;border-right:2px solid;">Uang Sejumlah : </td>
+            <td style="font-size:12px;width: 75%;border-right:2px solid;background-color: #ccc;font-weight: bold;"> <?php echo terbilang($list->tagihan); ?></td>
         </tr>  
 
 
         <tr>
-            <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">Untuk Pembayaran : </td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;"> 
+            <td style="font-size:12px;width: 25%;border-left:2px solid;border-right:2px solid;">Untuk Pembayaran : </td>
+            <td style="font-size:12px;width: 75%;border-right:2px solid;"> 
                 <u>PELUNASAN</u> PEMBELIAN SATU UNIT SEPEDA MOTOR HONDA
             </td>
         </tr>
         <tr>
-            <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;"></td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;"> 
+            <td style="font-size:12px;width: 25%;border-left:2px solid;border-right:2px solid;"></td>
+            <td style="font-size:12px;width: 75%;border-right:2px solid;"> 
                 TIPE : <?= $list->nama_motor; ?>  <?php echo $list->tipe; ?> SECARA <u> KREDIT </u>
             </td>
         </tr>
 
         <tr>
-            <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">No.Rangka : </td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;">   <?php echo $list->norangka; ?>    </td>
+            <td style="font-size:12px;width: 25%;border-left:2px solid;border-right:2px solid;">No.Rangka : </td>
+            <td style="font-size:12px;width: 75%;border-right:2px solid;">   <?php echo $list->norangka; ?>    </td>
         </tr> 
 
         <tr>
-            <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;">No.Mesin : </td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;">   <?php echo $list->nomesin; ?>    </td>
+            <td style="font-size:12px;width: 25%;border-left:2px solid;border-right:2px solid;">No.Mesin : </td>
+            <td style="font-size:12px;width: 75%;border-right:2px solid;">   <?php echo $list->nomesin; ?>    </td>
         </tr> 
 
         <tr>
-            <td style="font-size:15px;width: 25%;border-left:2px solid;border-right:2px solid;border-bottom:2px solid;">Jumlah : </td>
-            <td style="font-size:15px;width: 75%;border-right:2px solid;border-bottom:2px solid;">Rp. <?php echo formatrp($list->tagihan); ?></td>
+            <td style="font-size:12px;width: 25%;border-left:2px solid;border-right:2px solid;border-bottom:2px solid;">Jumlah : </td>
+            <td style="font-size:12px;width: 75%;border-right:2px solid;border-bottom:2px solid;">Rp. <?php echo formatrp($list->tagihan); ?></td>
         </tr>
         
     </table>
