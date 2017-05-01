@@ -199,7 +199,7 @@
                 },
                 formatters: {
                     "tdp": function () {
-                        var dp = formatCurrency(parseInt(rows.dp));
+                        var dp = formatCurrency(parseInt(rows.dp_system));
                         return dp;
                     },
                     "tharga_otr": function () {
@@ -211,7 +211,7 @@
                         return formatCurrency(subsidiHarga);
                     },
                     "sisa": function () {
-                        var sisaTagihan = (parseInt(rows.harga_otr)) - (parseInt(rows.dp) + parseInt(rows.subsidi1) + parseInt(rows.subsidi2));
+                        var sisaTagihan = (parseInt(rows.harga_otr)) - (parseInt(rows.dp_system) + parseInt(rows.subsidi1) + parseInt(rows.subsidi2));
                         return formatCurrency(sisaTagihan);
                     },
                     "checkbok": function () {
