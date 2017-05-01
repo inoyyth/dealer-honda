@@ -88,7 +88,7 @@ class Leasing_covernote extends MX_Controller {
         $data['detail_owner'] = $this->db->get_where('m_owner', array('id' => 1))->row_array();
         $data['stnk_bpkb'] = $this->db->get_where('t_stnk', array('no_so' => decode_url($so)))->row_array();
         $data['stnk_bpkb_customer'] = $this->db->get_where('t_stnk_customer', array('t_stnk_id' => $data['stnk_bpkb']['id']))->row_array();
-        //log_message('debug',print_r($data['stnk_bpkb_customer'],TRUE));
+        log_message('debug',print_r($type,TRUE));
         $this->load->view('leasing_covernote/covernote_print_'.$type,$data);
     }
 
