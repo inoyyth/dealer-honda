@@ -1,4 +1,4 @@
-<?php
+ <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
@@ -401,7 +401,8 @@ $route['terima-stnk-tambah'] = 't_terima_stnk/add';
 $route['terima-stnk-edit-(:num)'] = 't_terima_stnk/edit/$1';
 $route['terima-stnk-detail-(:num)'] = 't_terima_stnk/detail/$1';
 $route['terima-stnk-delete-(:num)'] = 't_terima_stnk/delete/$1';
-$route['terima-stnk-print-detailnew-(:num)'] = 't_terima_stnk/print_detail_new/$1';
+$route['terima-stnk-print-detail-stnk-(:num)'] = 't_terima_stnk/print_stnk/$1';
+$route['terima-stnk-print-detail-bpkb-(:num)'] = 't_terima_stnk/print_bpkb/$1';
 $route['terima-stnk-print-detail-(:num)'] = 't_terima_stnk/print_detail/$1';
 $route['terima-stnk-save'] = 't_terima_stnk/save';
 $route['terima-stnk-page'] = 't_terima_stnk/index';

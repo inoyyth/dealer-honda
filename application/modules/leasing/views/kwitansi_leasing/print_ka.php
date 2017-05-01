@@ -27,7 +27,7 @@ $noKwitansi = str_replace("/", "-", $list->nokwitansi);
     <div style="font-weight:bold;">PT. Mandala Kekar Abadi</div>
     <div>Dealer Resmi Sepeda Motor Honda</div>
     <div>Jl. Raya Bekasi Timur No. 158 Cipinang Jakarta Timur</div>
-    <div>Telp.(021)6198464,8517484,8517620 Fax.:(021)8514855</div>
+    <div>Telp.(021)8198484,8517484,8517620 Fax.(021)8514855</div>
     <br>
     <div style="text-align: center;">
         == TANDA TERIMA (KWITANSI A) ==
