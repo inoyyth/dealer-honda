@@ -270,7 +270,7 @@
     $(document).ready(function () {
         $("#printCovernote").click(function (event) {
             event.preventDefault();
-            var baseUrl = '<?php echo base_url('surat-pernyataan-print'); ?>';
+            var baseUrl = '<?php echo base_url('leasing_covernote/print_covernotex'); ?>';
             $("#covernoteContent").load(baseUrl + "/" + parseInt($("#form-type").val()) + "/" + $("#nosoCovernote").val()); 
             $('#modalCovernote').modal('show');
         });
