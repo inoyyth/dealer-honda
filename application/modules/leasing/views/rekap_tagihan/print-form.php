@@ -310,6 +310,7 @@
                 data: {dt: dtkwitansi},
                 dataType: "json",
                 success: function (hsl) {
+                    //console.log(hsl.data);
                     var gsisa = [];
                     gsisa = $.map(hsl.data, function (val, i) {
                         var ss = val[11];

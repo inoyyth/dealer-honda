@@ -202,7 +202,7 @@
                         return formatCurrency(subsidiHarga);
                     },
                     "sisa": function () {
-                        var sisaTagihan = (parseInt(rows.harga_otr)) - (parseInt(rows.dp_system) + parseInt(rows.subsidi1) + parseInt(rows.subsidi2));
+                        var sisaTagihan = (parseInt(rows.harga_otr) - parseInt(rows.dp_system)) + (parseInt(rows.subsidi1) + parseInt(rows.subsidi2));
                         return formatCurrency(sisaTagihan);
                     },
                     "checkbok": function () {
