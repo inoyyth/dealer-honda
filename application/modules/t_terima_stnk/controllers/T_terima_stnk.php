@@ -121,7 +121,7 @@ class T_terima_stnk extends MX_Controller {
         $this->load->view('template_excel', $data);
     }
     
-    public function print_detail_new($id) {
+    public function print_stnk($id) {
         $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
         $data['stnk'] = $this->main_model->getMaster('t_stnk', $like = array(), $where = array('id' => $data['detail']['t_stnk_id']));
         $data['birojasa'] = $this->main_model->getMaster('m_biro_jasa', $like = array(), $where = array('id' => $data['detail']['birojasa_id']));
@@ -130,7 +130,22 @@ class T_terima_stnk extends MX_Controller {
         $data['terima_motor'] = $this->main_model->getMaster('penerimaan_motor', $like = array(), $where = array('nomesin' => $data['penjualan'][0]['nomsn']));
         $data['master_motor'] = $this->main_model->getMaster('m_motor', $like = array(), $where = array('tipe_motor' => $data['terima_motor'][0]['tipe']));
         $data['master_harga_motor'] = $this->main_model->getMaster('t_harga_motor', $like = array(), $where = array('noso' => $data['penjualan'][0]['noso']));
+        $data['stnk_bpkb_customer'] = $this->db->get_where('t_stnk_customer', array('t_stnk_id' => $data['stnk'][0]['id']))->row_array();
         log_message('debug',print_r($data,TRUE));
-        $this->load->view('t_terima_stnk/print_detail',$data);
+        $this->load->view('t_terima_stnk/print_stnk',$data);
+    }
+    
+    public function print_bpkb($id) {
+        $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
+        $data['stnk'] = $this->main_model->getMaster('t_stnk', $like = array(), $where = array('id' => $data['detail']['t_stnk_id']));
+        $data['birojasa'] = $this->main_model->getMaster('m_biro_jasa', $like = array(), $where = array('id' => $data['detail']['birojasa_id']));
+        $data['penjualan'] = $this->main_model->getMaster('t_penjualan', $like = array(), $where = array('noso' => $data['stnk'][0]['no_so']));
+        $data['customer'] = $this->main_model->getMaster('m_customer', $like = array(), $where = array('no_ktp' => $data['penjualan'][0]['ktp']));
+        $data['terima_motor'] = $this->main_model->getMaster('penerimaan_motor', $like = array(), $where = array('nomesin' => $data['penjualan'][0]['nomsn']));
+        $data['master_motor'] = $this->main_model->getMaster('m_motor', $like = array(), $where = array('tipe_motor' => $data['terima_motor'][0]['tipe']));
+        $data['master_harga_motor'] = $this->main_model->getMaster('t_harga_motor', $like = array(), $where = array('noso' => $data['penjualan'][0]['noso']));
+        $data['stnk_bpkb_customer'] = $this->db->get_where('t_stnk_customer', array('t_stnk_id' => $data['stnk'][0]['id']))->row_array();
+        log_message('debug',print_r($data,TRUE));
+        $this->load->view('t_terima_stnk/print_bpkb',$data);
     }
 }

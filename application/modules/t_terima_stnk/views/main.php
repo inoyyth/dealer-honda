@@ -23,7 +23,7 @@
                                 <th>No.Polisi</th>
                                 <th>No.STNK</th>
                                 <th>No.BPKB</th>
-                                <th class="text-center" style="width: 220px;">Action</th>
+                                <th class="text-center" style="width: 280px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,7 +43,8 @@
                                         <td class="text-center">
                                             <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'terima-stnk-edit-' . $v['id'], 'text' => 'Edit')); ?>
                                             <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'terima-stnk-delete-' . $v['id'], 'text' => 'Delete')); ?>
-                                            <a class="btn btn-default btn-sm print-detail" href="<?php echo site_url('terima-stnk-print-detailnew-'.$v['id']);?>"><i class="fa fa-print"></i> Print</a>
+                                            <a class="btn btn-default btn-sm print-stnk" href="<?php echo site_url('terima-stnk-print-detail-stnk-'.$v['id']);?>"><i class="fa fa-print"></i> TDT</a> 
+                                            <a class="btn btn-default btn-sm print-bpkb" href="<?php echo site_url('terima-stnk-print-detail-bpkb-'.$v['id']);?>"><i class="fa fa-print"></i> BST</a>
                                         </td>
                                     </tr>
                                 <?php }
@@ -129,13 +130,14 @@
 </div>
 <script>
     $(document).ready(function () {
-        $(".print-detail").click(function (event) {
+        $(".print-stnk").click(function (event) {
             event.preventDefault();
-            var dt = $(this);
-            var url = dt[0].href;
-            $("#TstnkBpkbContent").load(url); 
-            $('#modalTstnkBpkb').modal('show');
-            return false;
+            window.open($(this).attr("href"), "popupWindow", "width=950,height=550,scrollbars=yes");
+        });
+        
+        $(".print-bpkb").click(function (event) {
+            event.preventDefault();
+            window.open($(this).attr("href"), "popupWindow", "width=950,height=550,scrollbars=yes");
         });
     });
 </script>
