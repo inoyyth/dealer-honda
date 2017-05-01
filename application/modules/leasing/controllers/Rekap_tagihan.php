@@ -338,8 +338,8 @@ class Rekap_tagihan extends MX_Controller {
             $row[] = formatrp($result->harga_otr);
             $row[] = formatrp($result->dp_system);
             $row[] = formatrp($result->subsidi1 + $result->subsidi2);
-            $row[] = formatrp(($result->harga_otr - $result->dp_system) - ($result->subsidi1 + $result->subsidi2));
-            $row[] = $result->varian;
+            $row[] = formatrp(($result->harga_otr - $result->dp_system) + ($result->subsidi1 + $result->subsidi2));
+            //$row[] = "<input type='text' name='price_list_" . $result->id_kwitansi . "' class='price_list' id='price_list_" . $result->id_kwitansi . "' value='".$result->price_list."'/>"; //$result->varian;
 
             $data[] = $row;
         }
@@ -401,10 +401,10 @@ class Rekap_tagihan extends MX_Controller {
             $row[] = $result->nomsn;
             $row[] = $result->norangka;
             $row[] = formatrp($result->harga_otr);
-            $row[] = formatrp($result->dp);
+            $row[] = formatrp($result->dp_system);
             $row[] = formatrp($result->subsidi1 + $result->subsidi2);
-            $row[] = formatrp(($result->harga_otr - $result->dp) - ($result->subsidi1 + $result->subsidi2));
-            $row[] = $result->varian;
+            $row[] = formatrp(($result->harga_otr - $result->dp_system) + ($result->subsidi1 + $result->subsidi2));
+            $row[] = "<input type='text' name='price_list_" . $result->id_kwitansi . "' class='price_list' id='price_list_" . $result->id_kwitansi . "' value='".$result->price_list."'/>"; //$result->varian;
 
             $data[] = $row;
         }
@@ -454,8 +454,8 @@ class Rekap_tagihan extends MX_Controller {
             $row[] = formatrp($result->harga_otr);
             $row[] = formatrp($result->dp_system);
             $row[] = formatrp($result->subsidi1 + $result->subsidi2);
-            $row[] = formatrp(($result->harga_otr) - ($result->dp_system + $result->subsidi1 + $result->subsidi2));
-            $row[] = $result->varian;
+            $row[] = formatrp(($result->harga_otr - $result->dp_system) + ($result->subsidi1 + $result->subsidi2));
+            $row[] = "<input type='text' name='price_list_" . $result->id_kwitansi . "' class='price_list' id='price_list_" . $result->id_kwitansi . "' value='".$result->price_list."'/>"; //$result->varian;
 
             $data[] = $row;
         }
@@ -504,10 +504,10 @@ class Rekap_tagihan extends MX_Controller {
             $row[] = $result->nomsn;
             $row[] = $result->norangka;
             $row[] = formatrp($result->harga_otr);
-            $row[] = formatrp($result->dp);
+            $row[] = formatrp($result->dp_system);
             $row[] = formatrp($result->subsidi1 + $result->subsidi2);
-            $row[] = formatrp(($result->harga_otr) - ($result->dp + $result->subsidi1 + $result->subsidi2));
-            $row[] = $result->varian;
+            $row[] = formatrp(($result->harga_otr - $result->dp_system) + ($result->subsidi1 + $result->subsidi2));
+            $row[] = "<input type='text' name='price_list_" . $result->id_kwitansi . "' class='price_list' id='price_list_" . $result->id_kwitansi . "' value='".$result->price_list."'/>"; //$result->varian;
 
             $data[] = $row;
         }
