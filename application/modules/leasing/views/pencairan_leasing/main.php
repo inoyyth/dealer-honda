@@ -75,7 +75,7 @@
                     return total_tagihan;
                 },
                 "sisa_ptagihan" : function(){
-                    var sisa_tagihan = (parseFloat(rows.tot_tagihan) - parseFloat(rows.terbayar));
+                    var sisa_tagihan = (parseFloat(rows.terbayar) - parseFloat(rows.tot_tagihan));
                     //formatCurrency(rows.sisa_tagihan);
                     return formatCurrency(sisa_tagihan);
                 },

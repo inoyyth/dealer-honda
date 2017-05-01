@@ -65,7 +65,7 @@ class Pencairan_leasing extends MX_Controller {
         $offset = ((int) $boot['current']);
 
         $this->db->select('m_leasing.kd_leasing, m_leasing.leasing, COUNT(t_rekap_tagihan_detail.nomor_tagihan) AS jml_motor, t_rekap_tagihan.*, (t_rekap_tagihan.tot_tagihan + t_rekap_tagihan.sisa_tagihan) as total_tagihan,
-                (SELECT (SUM(c.harga_otr) - (SUM(d.dp) + SUM(b.subsidi1) + SUM(b.subsidi2))) AS SISA FROM
+                (SELECT ((SUM(c.harga_otr) - (SUM(d.dp_system)) + (SUM(b.subsidi1) + SUM(b.subsidi2)))) AS SISA FROM
 t_pencairan_leasing_detail a
 LEFT JOIN t_kwitansi_leasing b ON b.id = a.id_kwitansi
 LEFT JOIN t_penjualan c ON c.noso = b.noso
@@ -230,7 +230,7 @@ GROUP BY a.no_tagihan) AS terbayar
         $idkwitansi_leasing_uncheck = explode(",", $this->input->get('dtuncheck'));
 
         $table = 't_kwitansi_leasing';
-        $column_search = array('t_kwitansi_leasing.id', 't_kwitansi_leasing.nokwitansi', 't_kwitansi_leasing.noso', 't_kwitansi_leasing.dp_system', 't_kwitansi_leasing.tagih', 't_kwitansi_leasing.subsidi1', 't_kwitansi_leasing.subsidi2', 't_kwitansi_leasing.m_status', 't_kwitansi_leasing.sys_create_user', 't_kwitansi_leasing.sys_create_date', 't_kwitansi_leasing.status_rekap', 't_penjualan.nosj', 't_penjualan.nokonsumen', 't_penjualan.ktp', 't_penjualan.tanggal', 't_penjualan.nomsn', 't_penjualan.warna_motor', 't_penjualan.harga_otr', 'penerimaan_motor.norangka', 'penerimaan_motor.tipe', 'penerimaan_motor.warna', 'penerimaan_motor.tahun', 'penerimaan_motor.kdgudang', 'penerimaan_motor.tglupload', 't_harga_motor.cara_pembelian', 't_harga_motor.marketing', 't_harga_motor.leasing', 't_harga_motor.dp_system', 't_harga_motor.diskon', 't_harga_motor.tagih', 't_harga_motor.dp', 't_harga_motor.dp_system', 't_harga_motor.sisa_hutang', 't_harga_motor.dp_lunas', 't_harga_motor.fee', 'm_customer.nama_customer', 'm_customer.tempat_lahir_customer', 'm_customer.tanggal_lahir_customer', 'm_customer.kelamin_customer', 'm_customer.alamat_customer', 'm_customer.telepon_customer', 'm_customer.handphone_customer', 'm_customer.rt', 'm_customer.rw', 'm_customer.wilayah', 'm_customer.kelurahan', 'm_customer.kecamatan', 'm_motor.nama_motor', 'm_motor.varian', 'm_motor.merk', 'm_motor.url_foto');
+        $column_search = array('t_kwitansi_leasing.id', 't_kwitansi_leasing.nokwitansi', 't_kwitansi_leasing.noso', 't_kwitansi_leasing.dp_system', 't_kwitansi_leasing.tagih', 't_kwitansi_leasing.subsidi1', 't_kwitansi_leasing.subsidi2', 't_kwitansi_leasing.m_status', 't_kwitansi_leasing.sys_create_user', 't_kwitansi_leasing.sys_create_date', 't_kwitansi_leasing.status_rekap', 't_penjualan.nosj', 't_penjualan.nokonsumen', 't_penjualan.ktp', 't_penjualan.tanggal', 't_penjualan.nomsn', 't_penjualan.warna_motor', 't_penjualan.harga_otr', 'penerimaan_motor.norangka', 'penerimaan_motor.tipe', 'penerimaan_motor.warna', 'penerimaan_motor.tahun', 'penerimaan_motor.kdgudang', 'penerimaan_motor.tglupload', 't_harga_motor.cara_pembelian', 't_harga_motor.marketing', 't_harga_motor.leasing', 't_harga_motor.dp_system', 't_harga_motor.diskon', 't_harga_motor.tagih', 't_harga_motor.dp', 't_harga_motor.dp_system', 't_harga_motor.sisa_hutang', 't_harga_motor.dp_lunas', 't_harga_motor.fee', 'm_customer.nama_customer', 'm_customer.tempat_lahir_customer', 'm_customer.tanggal_lahir_customer', 'm_customer.kelamin_customer', 'm_customer.alamat_customer', 'm_customer.telepon_customer', 'm_customer.handphone_customer', 'm_customer.rt', 'm_customer.rw', 'm_customer.wilayah', 'm_customer.kelurahan', 'm_customer.kecamatan', 'm_motor.nama_motor', 'm_motor.varian', 'm_motor.merk', 'm_motor.url_foto, t_kwitansi_leasing.id as id_kwitansi, t_rekap_tagihan_detail.price_list');
         $column_order = array(null, 't_kwitansi_leasing.id', 't_kwitansi_leasing.nokwitansi', 't_kwitansi_leasing.noso');
 
         $column_filter = array('t_kwitansi_leasing.sys_create_date', 't_kwitansi_leasing.nokwitansi', 'm_customer.nama_customer', 'penerimaan_motor.tipe', 't_penjualan.nomsn', 'penerimaan_motor.norangka', 't_penjualan.harga_otr', 't_harga_motor.dp', 'm_motor.varian');
@@ -239,7 +239,8 @@ GROUP BY a.no_tagihan) AS terbayar
             "penerimaan_motor" => "penerimaan_motor.nomesin=t_penjualan.nomsn",
             "t_harga_motor" => "t_harga_motor.noso=t_kwitansi_leasing.noso",
             "m_customer" => "m_customer.no_ktp=t_penjualan.ktp",
-            "m_motor" => "m_motor.tipe_motor=penerimaan_motor.tipe");
+            "m_motor" => "m_motor.tipe_motor=penerimaan_motor.tipe",
+            "t_rekap_tagihan_detail" => "t_rekap_tagihan_detail.id_kwitansi=t_kwitansi_leasing.id");
         $filter['where_in'] = array($table . '.id' => $idkwitansi_leasing);
 
         @$list = $this->t_rekap->get_dt_tables($table, $column_search, $column_filter, $filter);
@@ -261,8 +262,8 @@ GROUP BY a.no_tagihan) AS terbayar
             $row[] = formatrp($result->harga_otr);
             $row[] = formatrp($result->dp_system);
             $row[] = formatrp($result->subsidi1 + $result->subsidi2);
-            $row[] = formatrp(($result->harga_otr) - ($result->dp_system + $result->subsidi1 + $result->subsidi2));
-            $row[] = $result->varian;
+            $row[] = formatrp(($result->harga_otr - $result->dp_system) + ($result->subsidi1 + $result->subsidi2));
+            $row[] = $result->price_list;
 
             $data[] = $row;
         }
