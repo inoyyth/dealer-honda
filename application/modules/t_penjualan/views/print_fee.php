@@ -24,7 +24,7 @@ $kwt_explode = explode("/", $detail_harga['noso']);
         == TANDA TERIMA ==
     </div>
     <br>
-    <table style="width: 100%;" style="font-size:15px;" cellspacing="0" cellpadding="3">
+    <table style="width: 100%;" style="font-size:12px;" cellspacing="0" cellpadding="1">
         <tr>
             <td style="font-size:15px;width: 25%;border-top:2px solid;border-left:2px solid;border-right:2px solid;">No Kwitansi : </td>
             <td style="font-size:15px;width: 75%;border-top:2px solid;border-right:2px solid;"> <?php echo "KWT-" . $kwt_explode[1] . "-" . $kwt_explode[2] . "-" . $kwt_explode[3]; ?></td>
@@ -35,7 +35,7 @@ $kwt_explode = explode("/", $detail_harga['noso']);
         </tr>
     </table>
     <br>
-    <table style="width: 100%;" style="font-size: 10px;" cellspacing="0" cellpadding="3">
+    <table style="width: 100%;" style="font-size: 10px;" cellspacing="0" cellpadding="1">
         <tr>
             <td style="font-size:15px;width: 25%;border-top:2px solid;border-left:2px solid;border-right:2px solid;">Telah Terima Dari : </td>
             <td style="font-size:15px;width: 75%;border-top:2px solid;border-right:2px solid;"> Mandala Kekar Abadi</td>
@@ -69,7 +69,7 @@ $kwt_explode = explode("/", $detail_harga['noso']);
     </div>
     <br/>
     <center>
-        <table style="font-size: 10px;" cellpadding="3">
+        <table style="font-size: 10px;" cellpadding="1">
             <tr>
                 <td style="width: 30%;text-align: center;">Kasir</td>
                 <td style="width: 30%;text-align: center;">Mengetahui</td>
