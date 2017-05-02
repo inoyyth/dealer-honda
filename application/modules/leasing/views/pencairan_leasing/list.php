@@ -277,7 +277,7 @@
                     sisa = $.map(hsl.data_uncheck, function (val, i) {
                         return parseInt(val.sisa_tagihan);
                     })
-
+                    
                     var sisaTagihan = 0;
                     if (sisa.length > 0) {
                         sisaTagihan = sisa.reduce((x, y) => x + y);
@@ -298,7 +298,8 @@
                     $("#tot_tagihan").val(formatCurrency(tot_tagihan));
 
                     $("#saveTagihan").removeAttr('disabled');
-                    $("#generateTagihan").attr('disabled', true);
+                    //$("#generateTagihan").attr('disabled', true);
+                    alert("Data telah digenerate !");
                 }
             });
             return false;

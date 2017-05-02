@@ -217,7 +217,7 @@
                     $.getJSON("<?php echo base_url('leasing/rekap_tagihan/get_list_kwitansi?'); ?>" + dt, function (dtL) {
                         var gsisa = [];
                         gsisa = $.map(dtL.data, function (val, i) {
-                            var ss = val[11];
+                            var ss = val[9];//val[11];
                             var sisa = ss.split('.').join("");
                             return parseInt(sisa);
                         });
@@ -346,7 +346,7 @@
             $.getJSON("<?php echo base_url('leasing/rekap_tagihan/get_list_kwitansi_leasing?'); ?>" + dtList, function (dtL) {
                 var gsisa = [];
                 gsisa = $.map(dtL.data, function (val, i) {
-                    var ss = val[11];
+                    var ss = val[9];//val[11];
                     var sisa = ss.split('.').join("");
                     return parseInt(sisa);
                 });
@@ -372,7 +372,7 @@
                     setTimeout(function () {
                         var gsisa = [];
                         gsisa = $.map(hsl.data, function (val, i) {
-                            var ss = val[11];
+                            var ss = val[9];//val[11];
                             var sisa = ss.split('.').join("");
                             return parseInt(sisa);
                         });

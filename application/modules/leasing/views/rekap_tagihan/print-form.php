@@ -66,7 +66,9 @@
                                     <td>DP</td>
                                     <td>Subsidi</td>
                                     <td>Sisa</td>
+                                    <!--
                                     <td>Price List</td>
+                                    //-->
                                 </tr>
                             </thead>
                             <tbody>
@@ -222,9 +224,10 @@
                     
                     $("#leasing").val(hsl.leasing.leasing);
                     $.getJSON("<?php echo base_url('leasing/rekap_tagihan/get_list_kwitansi?'); ?>" + dt, function (dtL) {
+                        
                         var gsisa = [];
                         gsisa = $.map(dtL.data, function (val, i) {
-                            var ss = val[11];
+                            var ss = val[9];//val[11];
                             var sisa = ss.split('.').join("");
                             return parseInt(sisa);
                         });
@@ -288,7 +291,7 @@
             $.getJSON("<?php echo base_url('leasing/rekap_tagihan/get_list_kwitansi?'); ?>" + dtList, function (dtL) {
                 var gsisa = [];
                 gsisa = $.map(dtL.data, function (val, i) {
-                    var ss = val[11];
+                    var ss = val[9];//val[11];
                     var sisa = ss.split('.').join("");
                     return parseInt(sisa);
                 });
@@ -313,7 +316,7 @@
                     //console.log(hsl.data);
                     var gsisa = [];
                     gsisa = $.map(hsl.data, function (val, i) {
-                        var ss = val[11];
+                        var ss = val[9];//val[11];
                         var sisa = ss.split('.').join("");
                         return parseInt(sisa);
                     });
@@ -349,6 +352,7 @@
                             }
                         ]
                     });
+                    alert("Data telah di generated !");
                 }
             });
             return false;
@@ -360,6 +364,8 @@
         $("#saveTagihan").click(function () {
             var tgl_tagihan = $("#tgl_tagihan").val();
             var cleasing = $("#cabang_leasing").val();
+            var plist = $(".price_list").serializeArray();
+            //console.log(plist);return false;
             
             if (tgl_tagihan != "" && cleasing != "") {
                 var saveTagihan = $(".rtagihan").serializeArray();
@@ -367,7 +373,7 @@
                 $.each($("#tblRekapTagihan .idkwitansileasing:checked"), function () {
                     kwitansileasing.push($(this).val());
                 });
-                var dt = {rtagihan: saveTagihan, kleasing: kwitansileasing}
+                var dt = {rtagihan: saveTagihan, kleasing: kwitansileasing, price_list:plist}
                 $.ajax({
                     type: "POST",
                     url: "<?php echo base_url('leasing/rekap_tagihan/save'); ?>",
