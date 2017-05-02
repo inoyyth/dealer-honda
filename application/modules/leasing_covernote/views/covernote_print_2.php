@@ -16,11 +16,16 @@
             position:absolute;
             left:0;
             top:0;
+			font-size: 10px;
         }
         #footer {
-    position:fixed;
-    bottom:0;
-}
+		   position:fixed;
+		   left:0px;
+		   bottom:0px;
+		   height:100px;
+		   width:100%;
+		   background:#999;
+		}
     }
 </style>
 <div id="printThis" style="padding: 10px;text-align: justify;">
@@ -101,15 +106,15 @@
         <br>
         <br>
         <div id="footer">
-            <div class="head-covernote">
+            <div class="head-covernote" style="float:left;">
                 <b style="font-size: 22px;">PT.MANDALA KEKAR ABADI</b><br>
                 <b style="font-size: 18px;">DEALER RESMI SEPEDA MOTOR HONDA</b><br>
                 <b style="font-size: 9px;">Jl.Raya Bekasi Timur No.158 Cipinang Jakarta Timur Telp.8198484, 8517620 Fax.(021)8514855</b>
             </div>
-            <!--<div style="text-align: right;">
+            <div style="text-align: right;">
                 <img src="<?php echo base_url('assets/images/mandala-kekar-abadi-logo.jpg'); ?>" height="75px;">
-            </div>-->
-            <hr style="border: 2px solid #000000;">
+            </div>
+			<hr style="border: 2px solid #000000;margin-top: -1px;">
         </div>
 
     </div>

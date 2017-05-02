@@ -16,7 +16,16 @@
             position:absolute;
             left:0;
             top:0;
+			font-size: 10px;
         }
+		#footer {
+		   position:fixed;
+		   left:0px;
+		   bottom:0px;
+		   height:100px;
+		   width:100%;
+		   background:#999;
+		}
     }
 </style>
 <div id="printThis" style="padding: 10px;text-align: justify;">
@@ -116,7 +125,7 @@
         </div>
         <br>
         <br>
-        <div>
+        <div id="footer">
             <div class="head-covernote" style="float:left;">
                 <b style="font-size: 22px;">PT.MANDALA KEKAR ABADI</b><br>
                 <b style="font-size: 18px;">DEALER RESMI SEPEDA MOTOR HONDA</b><br>
@@ -125,8 +134,8 @@
             <div style="text-align: right;">
                 <img src="<?php echo base_url('assets/images/mandala-kekar-abadi-logo.jpg'); ?>" height="75px;">
             </div>
+			<hr style="border: 2px solid #000000;margin-top: -1px;">
         </div>
-        <hr style="border: 2px solid #000000;margin-top: -1px;">
     </div>
 </div>
 <center><button id="btnPrint">Print</button></center>
