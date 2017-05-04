@@ -106,6 +106,7 @@
                     <td>: <?php echo $stnk_bpkb_customer['t_stnk_telepon'] . " / " . $stnk_bpkb_customer['t_stnk_handphone']; ?></td>
                 </tr>
             </table>
+            <br>
             <p>Selanjutnya disebut <b>"Kendaraan"</b></p>
             <p style="text-align: justify;">
                 Bahwa <b>Buku Pemilikan Kendaraan Kendaraan Bermotor ("BPKB")</b> dan faktur atas Kendaraan Tersebut saat ini sedang dalam proses pengurusan pada instansi terkait : 
