@@ -9,7 +9,7 @@
                 <div class="porlets-content">
                     <div class="form-group">
                         <label>Company Name</label>
-                        <input type="text" name="company_name" value="<?php echo $detail['company_name'];?>" parsley-trigger="change" parsley-type="digits" required placeholder="Isi Company Name" class="form-control">
+                        <input type="text" name="company_name" value="<?php echo $detail['company_name'];?>" parsley-trigger="change" required placeholder="Isi Company Name" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Owner Name</label>
