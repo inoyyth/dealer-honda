@@ -1,7 +1,7 @@
 <?php
 if($dp['transaksi'] == 4 ){
     $descDp = "PELUNASAN";
-    $total_kwitansi = ($dp['nominal'] + $detail_harga['diskon']);
+    $total_kwitansi = $dp['nominal'];
 }else{
     $descDp = "DP KE ".$dp['transaksi'];
     $total_kwitansi = $dp['nominal'];
