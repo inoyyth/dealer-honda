@@ -46,7 +46,7 @@
                     <textarea name="kalimat_kw_1" parsley-trigger="change" required placeholder="Isi Kalimat KW 1" class="form-control"><?php echo $detail['kalimat_kw_1']; ?></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Kalimat KW 21</label>
+                    <label>Kalimat KW 2</label>
                     <textarea name="kalimat_kw_2" parsley-trigger="change" required placeholder="Isi Kalimat KW 2" class="form-control"><?php echo $detail['kalimat_kw_2']; ?></textarea>
                 </div>
                 <div class="form-group">
