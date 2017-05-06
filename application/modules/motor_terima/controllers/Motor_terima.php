@@ -185,7 +185,7 @@ class Motor_terima extends MX_Controller {
                 //dump(validate_date($rowData[0][2]),true);
                 $data = array(
                     "nopolisi" => $rowData[0][0],
-                    "tgl_sj" => $rowData[0][2],
+                    "tgl_sj" => PHPExcel_Style_NumberFormat::toFormattedString($rowData[0][2],'YYYY-MM-DD' ),
                     "no_sj" => $rowData[0][1],
                     "no_so" => $rowData[0][3],
                     "nomesin" => $rowData[0][4],
@@ -197,6 +197,7 @@ class Motor_terima extends MX_Controller {
                     "sys_create_user" => $this->sessionGlobal['id'],
                     "namafile" => $media['file_name']
                 );
+				//log_message('debug',print_r($data,true));
                 //$this->db->insert("penerimaan_motor_temp", $data); 
                 $sql = $this->db->insert_string('penerimaan_motor_temp', $data) . ' ON DUPLICATE KEY UPDATE nomesin=nomesin,norangka=norangka';
                 $this->db->query($sql);
