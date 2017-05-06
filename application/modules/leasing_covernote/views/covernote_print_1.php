@@ -150,8 +150,6 @@
             <br>
 			<br>
 			<br>
-			<br>
-			<br>
             <p>
                 <?php echo ucwords($detail_owner['owner_name']); ?><br>
                 <?php echo ucwords($detail_owner['owner_jabatan']); ?>
