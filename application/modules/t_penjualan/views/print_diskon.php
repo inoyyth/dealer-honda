@@ -6,11 +6,10 @@ $kwt_explode = explode("/", $detail_harga['noso']);
         font-family: "Calibri";
         letter-spacing: 4px;
         font-size: 12px;
-		font-family: "OCRAExtendedRegular";
     }
     @media print {
         .no-print, .no-print * { display: none !important; }
-        font-family: "OCRAExtendedRegular";
+        font-family: "Calibri";
         letter-spacing: 4px;
         font-size: 12px;
         size: 5.5in 8.5in;
