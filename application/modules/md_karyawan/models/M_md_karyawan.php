@@ -42,7 +42,7 @@ Class M_md_karyawan extends CI_Model {
             'tgl_masuk' => $this->input->post('tgl_masuk'),
             'tgl_keluar' => $this->input->post('tgl_keluar'),
             'foto' => $image_name,
-            'status_karyawan' => (strtotime($this->input->post('tgl_keluar')) < $date?"2":$this->input->post('status_karyawan'))
+            'status_karyawan' => $this->input->post('status_karyawan')
         );
         if (empty($id)) {
             $this->db->insert($this->table, $this->main_model->create_sys($data));
