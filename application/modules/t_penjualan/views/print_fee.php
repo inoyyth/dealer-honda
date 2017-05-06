@@ -4,14 +4,13 @@ $kwt_explode = explode("/", $detail_harga['noso']);
 <style>
     body {
         font-family: "Times New Roman", Times, serif;
-        letter-spacing: 6px;
+        letter-spacing: 4px;
         font-size: 12px;
-        font-family: Sans-Serif;
     }
     @media print {
         .no-print, .no-print * { display: none !important; }
-        font-family: Sans-Serif;
-        letter-spacing: 6px;
+        font-family: "Times New Roman", Times, serif;
+        letter-spacing: 4px;
         font-size: 12px;
     }
 </style>
@@ -62,7 +61,7 @@ $kwt_explode = explode("/", $detail_harga['noso']);
         </tr>
         <tr>
             <td style="font-size:12px;width: 25%;border-left:2px solid;border-right:2px solid;border-bottom:2px solid;">Nomor Mesin : </td>
-            <td style="font-size:12px;width: 75%;border-right:2px solid;border-bottom:2px solid;"> <?php echo $detail_penerimaan_motor['nomesin']; ?></td>
+            <td style="font-size:12px;width: 75%;border-right:2px solid;border-bottom:2px solid;letter-spacing: 6px;"> <?php echo $detail_penerimaan_motor['nomesin']; ?></td>
         </tr>
     </table>
     <div style="text-align: right;padding-right: 30px;">
