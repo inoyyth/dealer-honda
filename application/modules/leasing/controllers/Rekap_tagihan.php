@@ -580,12 +580,13 @@ class Rekap_tagihan extends MX_Controller {
         }
     }
 
-    public function print_pdf($id) {
+    public function print_pdf() {
         //echo $id;
         //die();
 
-        $data['template'] = array("template" => "t_kwitansi/kwitansi_fee/print_out_fee", "filename" => "Kwitansi PDF");
-        $data['parsing'] = $this->t_kwitansi->get_print_fee($id);
+        $data['template'] = array("template" => "leasing/rekap_tagihan/table_pdf", "filename" => "Rekap Kwitansi Leasing PDF");
+        $data['list'] = $this->t_rekap->getdata($this->table, 0, 1000, $like = array(), $where = array('m_status!=' => '3'));
+        //$data['parsing'] = $this->t_kwitansi->get_print_fee($id);
         //var_dump($data['parsing']);
         //die();
         //$data['cpembelian'] = $this->main_model->get_global_data('cpembelian');
@@ -601,7 +602,7 @@ class Rekap_tagihan extends MX_Controller {
     public function print_excel() {
         $data['template_excel'] = "rekap_tagihan/" . $_GET['template'];
         $data['file_name'] = $_GET['name'];
-        $data['list'] = $this->rekap_tagihan->getdata($this->table, 0, 1000, $like = array(), $where = array('status_gudang!=' => '3'));
+        $data['list'] = $this->t_rekap->getdata($this->table, 0, 1000, $like = array(), $where = array('m_status!=' => '3'));
         $this->load->view('template_excel', $data);
     }
 

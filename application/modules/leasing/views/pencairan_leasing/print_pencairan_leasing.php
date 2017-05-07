@@ -99,7 +99,7 @@
                                             $subsidi = formatrp($lrekapan['subsidi1'] + $lrekapan['subsidi2']);
                                             echo "<tr>
                                                 <td>{$no}</td>
-                                                <td>" . date('d F Y', strtotime(@$lrekapan['sys_create_date'])) . "</td>
+                                                <td>" . date('d F Y', strtotime(@$lrekapan['tgl_tagihan'])) . "</td>
                                                 <td>{$lrekapan['nokwitansi']}</td>
                                                 <td>{$lrekapan['nama_customer']}</td>
                                                 <td>{$lrekapan['tipe']}</td>
