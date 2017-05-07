@@ -53,6 +53,7 @@
                 </div>
             </div>
         </div>
+		<?php if($this->sessionGlobal['super_admin']=="2") { ?>
         <div class="col-md-6">
             <div class="block-web">
                 <div class="header">
@@ -137,6 +138,7 @@
                 </div>
             </div>
         </div>
+		<?php } ?>
     </form>
 </div>
 <script>

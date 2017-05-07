@@ -3,23 +3,28 @@
 Class M_account extends CI_Model {
 
     var $table = "account";
-
+	private $sessionGlobal;
+	
     public function save() {
+		$this->sessionGlobal = $this->session->userdata('logged_in_admin');
+		//var_dump($this->sessionGlobal['super_admin']);die;
         //var_dump($this->input->post('menu'));die;
-        $menu = array();
-        foreach($this->input->post('menu') as $k=>$v){
-            $explodeMenu = explode("|", $v);
-            $menu[] = array(
-                        'menu'=>$explodeMenu[0],
-                        'slug'=>$explodeMenu[1],
-                        'child'=>array(
-                            'add'=>($this->input->post('sub_add'.$explodeMenu[0])==""?0:1),
-                            'upd'=>($this->input->post('sub_upd'.$explodeMenu[0])==""?0:1),
-                            'del'=>($this->input->post('sub_del'.$explodeMenu[0])==""?0:1),
-                            'prt'=>($this->input->post('sub_prt'.$explodeMenu[0])==""?0:1)
-                        )
-                ); 
-        }
+		if ($this->sessionGlobal['super_admin'] == "2") { 
+			$menu = array();
+			foreach($this->input->post('menu') as $k=>$v){
+				$explodeMenu = explode("|", $v);
+				$menu[] = array(
+							'menu'=>$explodeMenu[0],
+							'slug'=>$explodeMenu[1],
+							'child'=>array(
+								'add'=>($this->input->post('sub_add'.$explodeMenu[0])==""?0:1),
+								'upd'=>($this->input->post('sub_upd'.$explodeMenu[0])==""?0:1),
+								'del'=>($this->input->post('sub_del'.$explodeMenu[0])==""?0:1),
+								'prt'=>($this->input->post('sub_prt'.$explodeMenu[0])==""?0:1)
+							)
+					); 
+			}
+		}
         //dump($menu, TRUE);
         $id = $this->input->post('id');
         $image_hidden = $this->input->post('image_hidden');
@@ -49,16 +54,28 @@ Class M_account extends CI_Model {
                 }
             }
         }
-        $data = array('username' => $this->input->post('username'),
-            'nama_lengkap' => $this->input->post('nama_lengkap'),
-            'password' => $this->encrypt->encode($this->input->post('password')),
-            'no_telp' => $this->input->post('no_telp'),
-            'email' => $this->input->post('email'),
-            'path_foto' => $image_name,
-            'status' => $this->input->post('status'),
-            'access_menu' => serialize($menu),
-            'super_admin'=> ($this->input->post('super_admin') != null ? $this->input->post('super_admin') : '1')
-        );
+		if ($this->sessionGlobal['super_admin'] == "2") { 
+			$data = array('username' => $this->input->post('username'),
+				'nama_lengkap' => $this->input->post('nama_lengkap'),
+				'password' => $this->encrypt->encode($this->input->post('password')),
+				'no_telp' => $this->input->post('no_telp'),
+				'email' => $this->input->post('email'),
+				'path_foto' => $image_name,
+				'status' => $this->input->post('status'),
+				'access_menu' => serialize($menu),
+				'super_admin'=> ($this->input->post('super_admin') != null ? $this->input->post('super_admin') : '1')
+			);
+		} else {
+			$data = array('username' => $this->input->post('username'),
+				'nama_lengkap' => $this->input->post('nama_lengkap'),
+				'password' => $this->encrypt->encode($this->input->post('password')),
+				'no_telp' => $this->input->post('no_telp'),
+				'email' => $this->input->post('email'),
+				'path_foto' => $image_name,
+				'status' => $this->input->post('status'),
+				'super_admin'=> ($this->input->post('super_admin') != null ? $this->input->post('super_admin') : '1')
+			);
+		}
         if (empty($id)) {
             $this->db->insert($this->table, $this->main_model->create_sys($data));
             return true;
