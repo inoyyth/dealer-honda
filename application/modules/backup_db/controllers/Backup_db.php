@@ -8,42 +8,73 @@ class Backup_db extends MX_Controller {
         parent::__construct();
         $this->load->model(array('M_backup_db' => 'm_backup_db'));
         $this->load->library(array('upload', 'Auth_log'));
-        //set breadcrumb
-        $this->breadcrumbs->push('Backup Management', '/backup-db');
+//set breadcrumb
+        $this->breadcrumbs->push('Backup Management', '/backup-database');
     }
 
     public function index() {
         $data_session = $this->__getSession();
-        $config['base_url'] = base_url() . 'backup-db-page';
+        $config['base_url'] = base_url() . 'backup-database-page';
         $config['total_rows'] = $this->main_model->countdata($this->table, $where = array());
         $config['per_page'] = (!empty($data_session['page']) ? $data_session['page'] : 10);
         $config['uri_segment'] = 2;
         $limit = ($this->uri->segment(2)) ? $this->uri->segment(2) : 0;
         $this->pagination->initialize($config);
         $data['paging'] = $this->pagination->create_links();
-        $data['data'] = $this->m_backup_db->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array('status_gudang!=' => '3'));
+        $data['data'] = $this->m_backup_db->getdata($this->table, $limit, $config['per_page'], $like = $data_session, $where = array());
         $data['sr_data'] = $data_session;
-        $data['view'] = 'md_gudang/main';
+        $data['view'] = 'backup_db/main';
         $this->load->view('default', $data);
     }
 
     public function add() {
-        $this->breadcrumbs->push('Add', '/backup-db-tambah');
-        $data['code'] = $this->main_model->generate_code($this->table, 'WRH', '-', 4, false, false, 'id', 'kd_gudang');
-        $data['view'] = "md_gudang/add";
-        $this->load->view('default', $data);
+        $this->load->dbutil();
+
+        $prefs = array(
+            'format' => 'zip',
+            'filename' => 'my_db_backup.sql'
+        );
+
+        $backup = & $this->dbutil->backup($prefs);
+
+        $db_name = 'backup-on-' . date("Y-m-d-H-i-s") . '.zip';
+        $folder = "backupdb";
+        if (!is_dir('./assets/' . $folder)) {
+            mkdir('./assets/' . $folder, 0777, TRUE);
+        }
+        $save = 'assets/' . $folder . '/' . $db_name;
+        chmod($save,777);
+        
+        $this->load->helper('file');
+
+        try {
+            write_file($save, $backup);
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
+        } finally {
+            try {
+                $this->db->insert('m_backup_db',$this->main_model->create_sys(array('backup_file'=>$db_name)));
+            } catch (Exception $e) {
+                echo 'Caught exception: ', $e->getMessage(), "\n";
+            } finally {
+                $this->load->helper('download');
+                force_download($db_name, $backup);
+            }
+        }
     }
 
     public function edit($id) {
-        $this->breadcrumbs->push('Edit', '/backup-db-edit');
+        $this->breadcrumbs->push('Edit', '/backup-database-edit');
         $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
-        $data['view'] = 'md_gudang/edit';
+        $data['view'] = 'backup_db/edit';
         $this->load->view('default', $data);
     }
 
     function delete($id) {
-        $this->main_model->delete('m_backup_db', array('id' => $id), array('status_gudang' => '3'));
-        redirect("backup-db");
+        $db = $this->db->get_where('m_backup_db',array('id'=>$id))->row_array();
+        delete_files('/assets/backupdb/'.$db['backup_file']);
+        $this->db->delete('m_backup_db', array('id' => $id));
+        redirect("backup-database");
     }
 
     function save() {
@@ -53,7 +84,7 @@ class Backup_db extends MX_Controller {
             } else {
                 $this->session->set_flashdata('error', 'Data Gagal Di Simpan !');
             }
-            redirect("backup-db");
+            redirect("backup-database");
         } else {
             show_404();
         }
@@ -63,32 +94,26 @@ class Backup_db extends MX_Controller {
         if ($_POST) {
             return $data = array(
                 'page' => set_session_table_search('page', $this->input->get_post('page', TRUE)),
-                'kd_gudang' => set_session_table_search('kd_gudang', $this->input->get_post('kd_gudang', TRUE)),
-                'gudang' => set_session_table_search('gudang', $this->input->get_post('gudang', TRUE)),
-                'alamat' => set_session_table_search('alamat', $this->input->get_post('alamat', TRUE)),
-                'telepon' => set_session_table_search('telepon', $this->input->get_post('telepon', TRUE)),
-                'status_gudang' => set_session_table_search('status_gudang', $this->input->get_post('status_gudang', TRUE))
+                'backup_file' => set_session_table_search('backup_file', $this->input->get_post('backup_file', TRUE)),
+                'sys_create_date' => set_session_table_search('sys_create_date', $this->input->get_post('sys_create_date', TRUE))
             );
         } else {
             return $data = array(
                 'page' => $this->session->userdata('page'),
-                'kd_gudang' => $this->session->userdata('kd_gudang'),
-                'gudang' => $this->session->userdata('gudang'),
-                'alamat' => $this->session->userdata('alamat'),
-                'telepon' => $this->session->userdata('telepon'),
-                'status_gudang' => $this->session->userdata('status_gudang')
+                'backup_file' => $this->session->userdata('backup_file'),
+                'sys_create_date' => $this->session->userdata('sys_create_date')
             );
         }
     }
 
     public function print_pdf() {
-        $data['template'] = array("template" => "md_gudang/" . $_GET['template'], "filename" => $_GET['name']);
+        $data['template'] = array("template" => "backup_db/" . $_GET['template'], "filename" => $_GET['name']);
         $data['list'] = $this->m_backup_db->getdata($this->table, 0, 1000, $like = array(), $where = array('status_gudang!=' => '3'));
         $this->printpdf->create_pdf($data);
     }
 
     public function print_excel() {
-        $data['template_excel'] = "md_gudang/" . $_GET['template'];
+        $data['template_excel'] = "backup_db/" . $_GET['template'];
         $data['file_name'] = $_GET['name'];
         $data['list'] = $this->m_backup_db->getdata($this->table, 0, 1000, $like = array(), $where = array('status_gudang!=' => '3'));
         $this->load->view('template_excel', $data);

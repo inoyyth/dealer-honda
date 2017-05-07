@@ -3,12 +3,10 @@
         <section class="panel default blue_title h4">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-md-6 pull-left">Master Gudang
+                    <div class="col-md-6 pull-left">Backup Management
                     </div>
                     <div class="col-md-6 pull-right text-right">
-                        <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'master-gudang-tambah', 'text' => 'Tambah')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'master-gudang-pdf/?template=table_pdf&name=master_gudang', 'text' => 'Print')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'master-gudang-excel/?template=table_excel&name=master_gudang', 'text' => 'Excel')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'backup-database-tambah', 'text' => 'Tambah')); ?>
                     </div> 
                 </div>
             </div>
@@ -18,9 +16,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Kode Gudang</th>
-                                <th>Nama Gudang</th>
-                                <th class="text-center" style="width: 150px;">Action</th>
+                                <th>Nama File</th>
+                                <th>Tanggal Backup</th>
+                                <th class="text-center" style="width: 180px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,23 +30,22 @@
                                     ?>
                                     <tr>
                                         <td><?php echo intval($this->uri->segment(2) + ($k + 1)); ?></td>
-                                        <td><?php echo $v['kd_gudang']; ?></td>
-                                        <td><?php echo $v['gudang']; ?></td>
+                                        <td><?php echo $v['backup_file']; ?></td>
+                                        <td><?php echo $v['sys_create_date']; ?></td>
                                         <td class="text-center">
-                                            <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'master-gudang-edit-' . $v['id'], 'text' => 'Edit')); ?>
-                                            <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'master-gudang-delete-' . $v['id'], 'text' => 'Delete')); ?> 
-                                            <!--<a href="<?php echo base_url('master-gudang-detail-'.$v['id']);?>" class="btn btn-sm btn-success"><i class="fa fa-info-circle"></i> Detail</a>-->
+                                            <?php echo $this->button_lib->render(array('anchor' => 'upd', 'url' => 'backup-database-edit-' . $v['id'], 'text' => 'Download')); ?>
+                                            <?php echo $this->button_lib->render(array('anchor' => 'del', 'url' => 'backup-database-delete-' . $v['id'], 'text' => 'Delete')); ?> 
                                         </td>
                                     </tr>
     <?php }
 } ?>
                         </tbody>
                         <tfoot>
-                        <form id="form1" method="post" action="<?php echo base_url('master-gudang'); ?>">
+                        <form id="form1" method="post" action="<?php echo base_url('backup-database'); ?>">
                             <tr>
                                 <td>#</td>
                                 <td>
-                                    <input class="form-control input-sm" name="kd_gudang" class="form-control" value="<?php echo (isset($sr_data['kd_gudang']) ? $sr_data['kd_gudang'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="backup_file" class="form-control" value="<?php echo (isset($sr_data['backup_file']) ? $sr_data['backup_file'] : ""); ?>" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;
@@ -56,7 +53,7 @@
                                             ;"/>
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" name="gudang" value="<?php echo (isset($sr_data['gudang']) ? $sr_data['gudang'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
+                                    <input class="form-control input-sm" name="sys_create_date" value="<?php echo (isset($sr_data['sys_create_date']) ? $sr_data['sys_create_date'] : ""); ?>" style="width: 100%;" type="text" onkeyup="javascript:if (event.keyCode == 13) {
                                                 submit_search('form1');
                                             } else {
                                                 return false;
