@@ -19,7 +19,7 @@ $kwt_explode = explode("/", $detail_harga['noso']);
     <div style="font-weight:bold;">PT. Mandala Kekar Abadi</div>
     <div>Dealer Resmi Sepeda Motor Honda</div>
     <div>Jl. Raya Bekasi Timur No. 158 Cipinang Jakarta Timur</div>
-    <div>Telp.(021)6198464,8517484,8517620 Fax.:(021)8514855</div>
+    <div>Telp.(021)8198484,8517484,8517620 Fax.(021)8514855</div>
     <br>
     <div style="text-align: center;">
         == TANDA TERIMA ==
@@ -62,7 +62,7 @@ $kwt_explode = explode("/", $detail_harga['noso']);
         </tr>
         <tr>
             <td style="font-size:12px;width: 25%;border-left:2px solid;border-right:2px solid;border-bottom:2px solid;">Nomor Mesin : </td>
-            <td style="font-size:12px;width: 75%;border-right:2px solid;border-bottom:2px solid;"> <?php echo $detail_penerimaan_motor['nomesin']; ?></td>
+            <td style="font-size:12px;width: 75%;border-right:2px solid;border-bottom:2px solid;letter-spacing: 6px;"> <?php echo $detail_penerimaan_motor['nomesin']; ?></td>
         </tr>
     </table>
     <div style="text-align: right;padding-right: 30px;">

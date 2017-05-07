@@ -3,23 +3,23 @@ $kwt_explode = explode("/", $detail_harga['noso']);
 ?>
 <style>
     body {
-        font-family: "Times New Roman", Times, serif;
-        letter-spacing: 5px;
+        font-family: "Calibri";
+        letter-spacing: 4px;
         font-size: 12px;
-        font-family: Sans-Serif;
     }
     @media print {
         .no-print, .no-print * { display: none !important; }
-        font-family: Sans-Serif;
-        letter-spacing: 5px;
+        font-family: "Calibri";
+        letter-spacing: 4px;
         font-size: 12px;
+        size: 5.5in 8.5in;
     }
 </style>
 <body>
     <div style="font-weight:bold;">PT. Mandala Kekar Abadi</div>
     <div>Dealer Resmi Sepeda Motor Honda</div>
     <div>Jl. Raya Bekasi Timur No. 158 Cipinang Jakarta Timur</div>
-    <div>Telp.(021)6198464,8517484,8517620 Fax.:(021)8514855</div>
+    <div>Telp.(021)8198484,8517484,8517620 Fax.(021)8514855</div>
     <br>
     <table style="width: 100%;">
         <tr>
@@ -70,7 +70,7 @@ $kwt_explode = explode("/", $detail_harga['noso']);
             <td style="border-top:2px solid;border-left:2px solid;">No.Rangka</td>
             <td style="border-top:2px solid;border-right:2px solid;border-left:2px solid;">No.Mesin</td>
         </tr>
-        <tr style="text-align:center;font-size:13px;">
+        <tr style="text-align:center;font-size:13px;letter-spacing: 6px;">
             <td style="border-top:2px solid;border-left:2px solid;border-bottom:2px solid;">1.</td>
             <td style="border-top:2px solid;border-left:2px solid;border-bottom:2px solid;"><?php echo $detail_penerimaan_motor['tipe'];?></td>
             <td style="border-top:2px solid;border-left:2px solid;border-bottom:2px solid;"><?php echo $detail_penerimaan_motor['warna'];?></td>

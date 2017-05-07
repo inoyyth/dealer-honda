@@ -16,7 +16,16 @@
             position:absolute;
             left:0;
             top:0;
+			font-size: 10px;
         }
+		#footer {
+		   position:fixed;
+		   left:0px;
+		   bottom:0px;
+		   height:100px;
+		   width:100%;
+		   background:#999;
+		}
     }
 </style>
 <div id="printThis" style="padding: 10px;text-align: justify;">
@@ -97,19 +106,20 @@
                     <td>: <?php echo $stnk_bpkb_customer['t_stnk_telepon'] . " / " . $stnk_bpkb_customer['t_stnk_handphone']; ?></td>
                 </tr>
             </table>
+            <br>
             <p>Selanjutnya disebut <b>"Kendaraan"</b></p>
             <p style="text-align: justify;">
                 Bahwa <b>Buku Pemilikan Kendaraan Kendaraan Bermotor ("BPKB")</b> dan faktur atas Kendaraan Tersebut saat ini sedang dalam proses pengurusan pada instansi terkait : 
             </p>
             <p style="text-align: justify;">
-                Bahwa deale akan menyerahkan BPKP dan Faktur atas kendaraan tersebut kepada PT.Wahana Ottomitra Multiartha Tbk. 
+                Bahwa dealer akan menyerahkan BPKP dan Faktur atas kendaraan tersebut kepada PT.Wahana Ottomitra Multiartha Tbk. 
                 Cabang ................., jalan ....................("WOM Cabang") selambat-lambatnya 3 (Tiga) Bulan terhitung 
                 sejak dikeluarkannya Surat Pernyataan ini atau tanggal ...............
             </p>
             <p style="text-align: justify;">
                 Apabila pada tanggal penyerahan dealer tidak dapat menyerahkan BPKB dan Faktur kendaraan tersebut, maka dengan ini dealer setuju sebagai berikut : 
             </p>
-            <p>
+            <p>s
             <ol type="I">
                 <li style="text-align: justify;">
                     Menyerahkan faktur berikut dokumen lainnya yang diperlukan untuk pengurusan BPKB atau tanda bukti kepengurusan BPKB dan instansi terkait; dan
@@ -138,12 +148,14 @@
             <br>
             <br>
             <br>
+			<br>
+			<br>
             <p>
                 <?php echo ucwords($detail_owner['owner_name']); ?><br>
                 <?php echo ucwords($detail_owner['owner_jabatan']); ?>
             </p>
         </div>
-        <div>
+        <div id="footer">
             <div class="head-covernote" style="float:left;">
                 <b style="font-size: 22px;">PT.MANDALA KEKAR ABADI</b><br>
                 <b style="font-size: 18px;">DEALER RESMI SEPEDA MOTOR HONDA</b><br>
@@ -152,8 +164,8 @@
             <div style="text-align: right;">
                 <img src="<?php echo base_url('assets/images/mandala-kekar-abadi-logo.jpg'); ?>" height="75px;">
             </div>
+			<hr style="border: 2px solid #000000;margin-top: -1px;">
         </div>
-        <hr style="border: 2px solid #000000;margin-top: -1px;">
     </div>
 </div>
 <center><button id="btnPrint">Print</button></center>
