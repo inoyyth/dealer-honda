@@ -18,7 +18,7 @@
                                 <th>#</th>
                                 <th>Nama File</th>
                                 <th>Tanggal Backup</th>
-                                <th class="text-center" style="width: 180px;">Action</th>
+                                <th class="text-center" style="width: 200px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>

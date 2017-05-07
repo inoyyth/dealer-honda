@@ -65,14 +65,18 @@ class Backup_db extends MX_Controller {
 
     public function edit($id) {
         $this->breadcrumbs->push('Edit', '/backup-database-edit');
-        $data['detail'] = $this->db->get_where($this->table, array('id' => $id))->row_array();
-        $data['view'] = 'backup_db/edit';
-        $this->load->view('default', $data);
+		$this->load->helper('download');
+		$db = $this->db->get_where('m_backup_db',array('id'=>$id))->row_array();
+		$data = $db['backup_file'];
+		$name = './assets/backupdb/'.$db['backup_file'];
+		force_download($name, null);
+		redirect("backup-database");
     }
 
     function delete($id) {
         $db = $this->db->get_where('m_backup_db',array('id'=>$id))->row_array();
-        delete_files('/assets/backupdb/'.$db['backup_file']);
+		//var_dump($db['backup_file']);die;
+        unlink('./assets/backupdb/'.$db['backup_file']);
         $this->db->delete('m_backup_db', array('id' => $id));
         redirect("backup-database");
     }
