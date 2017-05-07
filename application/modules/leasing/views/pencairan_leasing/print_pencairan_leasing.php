@@ -3,6 +3,9 @@
         #printSection {
             display: none;
         }
+        #bprint{
+            overflow: auto;
+        }
     }
 
     @media print {
@@ -69,7 +72,7 @@
                                 </div>
                             </div>
                             <div style="clear: both;margin-bottom: 10px;"></div>
-                            <div class="col-md-12" style="font-size:10px;">
+                            <div class="col-md-12" style="font-size:10px;" id="bprint">
                                 <table class="table table-bordered" id="tblRekapTagihan" width="95%">
                                     <thead>
                                         <tr>
