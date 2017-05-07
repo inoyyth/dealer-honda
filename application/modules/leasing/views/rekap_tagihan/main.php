@@ -6,8 +6,8 @@
                     <div class="col-md-6 pull-left">Rekap Kwitansi Leasing</div>
                     <div class="col-md-6 pull-right text-right">
                         <?php echo $this->button_lib->render(array('anchor' => 'add', 'url' => 'rekap-tagihan-tambah', 'text' => 'Tambah')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'rekap-tagihan-pdf/?template=table_pdf&name=kwitansi-leasing', 'text' => 'Print')); ?>
-                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'rekap-tagihan-excel/?template=table_excel&name=kwitansi-leasing', 'text' => 'Excel')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'rekap-tagihan-pdf/?template=table_pdf&name=rekap-tagihan-kwitansi-leasing', 'text' => 'Print')); ?>
+                        <?php echo $this->button_lib->render(array('anchor' => 'prt', 'url' => 'rekap-tagihan-excel/?template=table_excel&name=rekap-tagihan-kwitansi-leasing', 'text' => 'Excel')); ?>
                     </div> 
                 </div>
             </div>
