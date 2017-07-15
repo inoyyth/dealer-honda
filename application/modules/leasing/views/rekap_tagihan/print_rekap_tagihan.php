@@ -61,7 +61,7 @@
                                         <td>: <?php echo formatrp($rkwitansi[0]['sisa_tagihan']); ?></td>
                                     </tr>
                                 </table>
-                                
+
                                 <div class="col-sm-6">
 
                                 </div>
@@ -94,6 +94,8 @@
 
                                             $sisaTagihan = formatrp(($lrekapan['harga_otr'] - $lrekapan['dp_system']) + ($lrekapan['subsidi1'] + $lrekapan['subsidi2']));
                                             $subsidi = formatrp($lrekapan['subsidi1'] + $lrekapan['subsidi2']);
+
+                                            $pricelist = is_numeric($lrekapan['price_list']) ? formatrp($lrekapan['price_list']) : $lrekapan['price_list'];
                                             echo "<tr>
                                                 <td>{$no}</td>
                                                 <td>" . date('d F Y', strtotime($lrekapan['sys_create_date'])) . "</td>
@@ -106,7 +108,7 @@
                                                 <td>" . formatrp($lrekapan['dp_system']) . "</td>
                                                 <td>" . $subsidi . "</td>
                                                 <td>" . $sisaTagihan . "</td>
-                                                <td>" . formatrp($lrekapan['price_list']) . "</td>
+                                                <td>" . $pricelist . "</td>
                                             </tr>";
                                         }
                                         ?>
