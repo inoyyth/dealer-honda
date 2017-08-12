@@ -47,12 +47,16 @@ class Backup_db extends MX_Controller {
         
         $this->load->helper('file');
 
-        try {
-            write_file($save, $backup);
-        } catch (Exception $e) {
-            echo 'Caught exception: ', $e->getMessage(), "\n";
-        } finally {
-            try {
+        //try {
+            if (write_file($save, $backup)) {
+                $this->db->insert('m_backup_db',$this->main_model->create_sys(array('backup_file'=>$db_name)));
+                $this->load->helper('download');
+                force_download($db_name, $backup);
+            }
+        //} catch (Exception $e) {
+            //echo 'Caught exception: ', $e->getMessage(), "\n";
+        //} finally {
+            /*try {
                 $this->db->insert('m_backup_db',$this->main_model->create_sys(array('backup_file'=>$db_name)));
             } catch (Exception $e) {
                 echo 'Caught exception: ', $e->getMessage(), "\n";
@@ -60,7 +64,7 @@ class Backup_db extends MX_Controller {
                 $this->load->helper('download');
                 force_download($db_name, $backup);
             }
-        }
+        }*/
     }
 
     public function edit($id) {
