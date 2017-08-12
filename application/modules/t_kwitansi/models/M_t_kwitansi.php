@@ -63,4 +63,22 @@ class M_t_kwitansi extends CI_Model {
         return $this->db->get();
     }
 
+    public function cek_single_lunas($id) {
+        $this->db->select('*');
+        $this->db->from('t_pembayaran');
+        $this->db->where(array('id'=>$id));
+        $result = $this->db->get()->result_array();
+
+        $hl = array('status'=>'false','nominal'=>0);
+        if(count($result) == 1) {
+            if($result[0]['transaksi'] == 4) {
+                $dt = $this->db->get_where('t_harga_motor',array('noso'=>$result[0]['noso']))->row_array();
+                $hl = array('status'=>'true','nominal'=>$dt['dp_system']);
+            } else {
+                $hl = array('status'=>'false','nominal'=>0);
+            }
+        }
+        return $hl;
+    }
+
 }

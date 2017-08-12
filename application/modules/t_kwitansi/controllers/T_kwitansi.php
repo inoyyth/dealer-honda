@@ -134,6 +134,7 @@ class T_kwitansi extends MX_Controller {
         $data['detail_motor'] = $this->db->get_where('m_motor',array('tipe_motor'=>$data['detail_penerimaan_motor']['tipe']))->row_array();
         $data['detail_customer'] = $this->db->get_where('m_customer',array('no_ktp'=>$data['detail_penjualan']['ktp']))->row_array();
         $data['detail_leasing'] = $this->db->get_where('m_leasing',array('kd_leasing'=>$data['detail_harga']['leasing']))->row_array();
+        $data['cek_single_lunas'] = $this->mt_kwitansi->cek_single_lunas(decode_url($id));
         
         $this->load->view('t_kwitansi/print_dp',$data);
     }

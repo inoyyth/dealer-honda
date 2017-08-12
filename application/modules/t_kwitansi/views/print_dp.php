@@ -6,6 +6,13 @@ if($dp['transaksi'] == 4 ){
     $descDp = "DP KE ".$dp['transaksi'];
     $total_kwitansi = $dp['nominal'];
 }
+
+var_dump($cek_single_lunas);
+if($cek_single_lunas['status'] == 'true') {
+    $descDp = "PELUNASAN";
+    $total_kwitansi = $cek_single_lunas['nominal'];
+}
+
 ?>
 <style>
     body {
