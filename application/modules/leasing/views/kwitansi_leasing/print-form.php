@@ -153,7 +153,7 @@
             <div class="block-web">
                 <div class="porlets-content">
                     <div class="form-group">
-                        <button type="button" name="save_data" id="save_data" onclick="simpan_data();" class="btn btn-primary" <?= isset($btnedit) ? $btnedit : ''; ?>>Save</button>
+                        <button type="button" name="save_data" id="save_data" onclick="simpan_data();" class="btn btn-primary" <?= isset($btnedit) ? $btnedit : ''; ?> >Save</button>
                         <a href="cetak-kwitansi-leasing" class="btn btn-danger" name="cancel" id="cancel">Cancel</a>
 
                         <?php
@@ -362,8 +362,8 @@
                 //console.log(hsl);
                 alert('data successfully added!');
             },
-            error: function () {
-                console.log(data);
+            error: function (e) {
+                console.log(e);
             }
         })
 

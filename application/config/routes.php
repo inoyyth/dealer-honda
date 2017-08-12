@@ -394,6 +394,8 @@ $route['rekap-tagihan'] = 'leasing/rekap_tagihan/index';
 $route['rekap-tagihan-tambah'] = 'leasing/rekap_tagihan/form';
 $route['rekap-tagihan-edit-(:num)'] = 'leasing/rekap_tagihan/edit/$1';
 $route['rekap-tagihan-detail-(:num)'] = 'leasing/rekap_tagihan/detail/$1';
+$route['rekap-tagihan-pdf'] = 'leasing/rekap_tagihan/print_pdf';
+$route['rekap-tagihan-excel'] = 'leasing/rekap_tagihan/print_excel';
 //$route['cetak-kwitansi-leasing-save'] = 'leasing/cetak_kwitansi_leasing/save';
 /* Start Tanda Terima STNK BPKB */
 $route['terima-stnk'] = 't_terima_stnk/index';
@@ -447,3 +449,15 @@ $route['laporan-penjualan-excel'] = 'rp_penjualan/print_excel';
 $route['laporan-penjualan-excel/(:any)'] = 'rp_penjualan/print_excel/$1';
 $route['laporan-penjualan-print-transaksi-(:any)'] = 'rp_penjualan/print_transaksi_detail/$1';
 /* End laporan Penjualan */
+
+$route['backup-database'] = 'backup_db';
+$route['backup-database-tambah'] = 'backup_db/add';
+$route['backup-database-edit-(:num)'] = 'backup_db/edit/$1';
+$route['backup-database-delete-(:num)'] = 'backup_db/delete/$1';
+$route['backup-database-save'] = 'backup_db/save';
+$route['backup-database-page'] = 'backup_db/index';
+$route['backup-database-page/(:any)'] = 'backup_db/index/$1';
+$route['backup-database-pdf'] = 'backup_db/print_pdf';
+$route['backup-database-pdf/(:any)'] = 'backup_db/print_pdf/$1';
+$route['backup-database-excel'] = 'backup_db/print_excel';
+$route['backup-database-excel/(:any)'] = 'backup_db/print_excel/$1';

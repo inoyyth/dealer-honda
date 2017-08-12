@@ -9,7 +9,7 @@ class Md_aksesoris extends MX_Controller {
         $this->load->model(array('M_md_aksesoris' => 'm_aksesoris'));
         $this->load->library(array('upload', 'encrypt', 'Printpdf','Auth_log'));
         //set breadcrumb
-        $this->breadcrumbs->push('Master Karyawan', '/master-aksesoris');
+        $this->breadcrumbs->push('Master Aksesoris', '/master-aksesoris');
     }
 
     public function index() {

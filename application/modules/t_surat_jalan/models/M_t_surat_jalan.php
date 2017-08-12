@@ -30,7 +30,7 @@ class M_t_surat_jalan extends CI_Model {
         $this->db->join('global_data','global_data.id=m_aksesoris.kategori','INNER');
         $this->db->where(array('t_pdi_detail.pdi_id'=>$pdi_id));
         $query = $this->db->get()->result_array();
-        $newArr = array('Buku Panduan','Kertas Gesek Polda');
+        $newArr = array('Buku Panduan');
         foreach ($query as $tmp) {
           $newArr = array_merge($newArr, array_values($tmp));
         }
