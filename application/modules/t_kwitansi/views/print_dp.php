@@ -1,11 +1,18 @@
 <?php
 if($dp['transaksi'] == 4 ){
     $descDp = "PELUNASAN";
-    $total_kwitansi = ($dp['nominal'] + $detail_harga['diskon']);
+    $total_kwitansi = $dp['nominal'];
 }else{
     $descDp = "DP KE ".$dp['transaksi'];
     $total_kwitansi = $dp['nominal'];
 }
+
+var_dump($cek_single_lunas);
+if($cek_single_lunas['status'] == 'true') {
+    $descDp = "PELUNASAN";
+    $total_kwitansi = $cek_single_lunas['nominal'];
+}
+
 ?>
 <style>
     body {
@@ -68,7 +75,7 @@ if($dp['transaksi'] == 4 ){
         </tr>
         <tr>
             <td style="font-size:12px;width: 25%;border-left:2px solid;border-right:2px solid;border-bottom:2px solid;">Nomor Mesin : </td>
-            <td style="font-size:12px;width: 75%;border-right:2px solid;border-bottom:2px solid;"> <?php echo $detail_penerimaan_motor['nomesin']; ?></td>
+            <td style="font-size:12px;width: 75%;border-right:2px solid;border-bottom:2px solid;letter-spacing: 6px;"> <?php echo $detail_penerimaan_motor['nomesin']; ?></td>
         </tr>
     </table>
     <div style="text-align: right;padding-right: 30px;">

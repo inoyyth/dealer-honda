@@ -106,19 +106,20 @@
                     <td>: <?php echo $stnk_bpkb_customer['t_stnk_telepon'] . " / " . $stnk_bpkb_customer['t_stnk_handphone']; ?></td>
                 </tr>
             </table>
+            <br>
             <p>Selanjutnya disebut <b>"Kendaraan"</b></p>
             <p style="text-align: justify;">
                 Bahwa <b>Buku Pemilikan Kendaraan Kendaraan Bermotor ("BPKB")</b> dan faktur atas Kendaraan Tersebut saat ini sedang dalam proses pengurusan pada instansi terkait : 
             </p>
             <p style="text-align: justify;">
-                Bahwa deale akan menyerahkan BPKP dan Faktur atas kendaraan tersebut kepada PT.Wahana Ottomitra Multiartha Tbk. 
+                Bahwa dealer akan menyerahkan BPKP dan Faktur atas kendaraan tersebut kepada PT.Wahana Ottomitra Multiartha Tbk. 
                 Cabang ................., jalan ....................("WOM Cabang") selambat-lambatnya 3 (Tiga) Bulan terhitung 
                 sejak dikeluarkannya Surat Pernyataan ini atau tanggal ...............
             </p>
             <p style="text-align: justify;">
                 Apabila pada tanggal penyerahan dealer tidak dapat menyerahkan BPKB dan Faktur kendaraan tersebut, maka dengan ini dealer setuju sebagai berikut : 
             </p>
-            <p>
+            <p>s
             <ol type="I">
                 <li style="text-align: justify;">
                     Menyerahkan faktur berikut dokumen lainnya yang diperlukan untuk pengurusan BPKB atau tanda bukti kepengurusan BPKB dan instansi terkait; dan
